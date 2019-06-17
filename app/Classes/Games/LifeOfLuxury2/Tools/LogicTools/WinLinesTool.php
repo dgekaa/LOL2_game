@@ -62,17 +62,39 @@ class WinLinesTool extends BaseWinLinesTool
         return $payoffsForLines;
     }
 
+    /**
+     * Проверка наличия алмаза в выигрышной комбинации
+     *
+     * @param  array $table      [description]
+     * @param  array $lines      [description]
+     * @param  int   $lineNumber [description]
+     *
+     * @return bool              [description]
+     */
     protected function checkDiamondInWinCombination(
         array $table,
         array $lines,
         int $lineNumber
     ): bool
     {
+        // подсчет кол-ва выигрышных символов в комбинации
+        $countWinSymbols = 0;
+        $winSymbol = $table[$lines[$lineNumber][0]];
+        foreach ($lines[$lineNumber] as $key => $value) {
+            if ($table[$lines[$lineNumber][$key]] === $winSymbol) {
+                $countWinSymbols += 1;
+            }
+        }
+
         $check = false;
-        foreach ($lines[$lineNumber] as $symbol) {
+        foreach ($lines[$lineNumber] as $key => $symbol) {
+            // если в линии есть алмаз
             if ($table[$symbol] === 0) {
-                $check = true;
-                break;
+                // если алмаз стоит сразу после выигршных символов, либо между ними
+                if ($key <= $countWinSymbols) {
+                    $check = true;
+                    break;
+                }
             }
         }
 
