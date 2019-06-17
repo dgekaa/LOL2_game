@@ -1,0 +1,521 @@
+	<!DOCTYPE html>
+	<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>Slot</title>
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta name="viewport" content="user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, minimal-ui">
+		<link rel="stylesheet" href="preloader/main.css" />
+		<link rel="stylesheet" href="main.css" />
+		<link rel="stylesheet" href="../../css/menu.css" />
+		<link rel="stylesheet" href="../../fonts/stylesheet.css" />
+		<link rel="stylesheet" href="offline-theme-default.css" />
+		<link rel="stylesheet" href="offline-language-english.css" />
+		<link rel="stylesheet" href="offline-language-english-indicator.css" />
+		<script>
+    window.onbeforeunload = function() {
+      exitGame(false)
+    };
+		</script>
+		<script src="detect.js"></script>
+		<script src="phaser.min.js?v=0.2"></script>
+		<script src="jquery-3.0.0.js"></script>
+		<script src="offline.min.js"></script>
+		<script src="jquery.touchhold.js"></script>
+		<script src="desktop.game1.js?v=0.32"></script>
+		<script src="desktop.game2.js?v=0.06"></script>
+		<script src="functions.js?v=0.59"></script>
+		<script src="desktop.begin.js"></script>
+		<script src="desktop.end.js?v=0.33"></script>
+		<script src="../../js/autobahn.js"></script>
+		<script>
+			var iOS = !!navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform);
+			var resizeTimer;
+			function checkWidth() {
+				if (isMobile) {
+					if (iOS){
+						setTimeout(function() {
+							var realWidth = Math.max(
+								document.body.offsetWidth, document.documentElement.offsetWidth,
+								document.body.clientWidth, document.documentElement.clientWidth
+								);
+							var realHeight = document.documentElement.clientHeight;
+							if (realWidth < realHeight) {
+								document.getElementById('vertScreenWrapper').style.display = 'block';
+							} else {
+								document.getElementById('vertScreenWrapper').style.display = 'none';
+								if(!isFullscreen()){
+									$('.swipe-background').css({
+										display: 'flex'
+									});
+									$('.swipe-overlay').css({
+										display: 'block'
+									});
+								} else {
+									$('.swipe-background').css({
+										display: 'none'
+									});		
+									$('.swipe-overlay').css({
+										display: 'none'
+									});							
+								}		
+								function isFullscreen() {
+									var a = screen.width;
+									return a === window.innerHeight || (window.innerHeight / a) >= 0.9
+								}
+							}
+						}, 200);
+					} else {
+						var realWidth = Math.max(
+							document.body.offsetWidth, document.documentElement.offsetWidth,
+							document.body.clientWidth, document.documentElement.clientWidth
+							);
+						var realHeight = document.documentElement.clientHeight;
+						if (realWidth < realHeight) {
+							document.getElementById('vertScreenWrapper').style.display = 'block';
+						} else {
+							document.getElementById('vertScreenWrapper').style.display = 'none';
+						}
+					}
+				}
+				var halfrealWidth = realWidth/2;
+				var coefHW = 1024/785;
+				var halfCanvasWidth = realHeight*coefHW/2;
+				if((halfrealWidth-halfCanvasWidth) >= 90){
+					$('#spin').css({
+						right: 0,
+						left: halfrealWidth+halfCanvasWidth +'px'
+					});
+				} else {
+					$('#spin').css({
+						left: 'auto',
+						right: 0
+
+					});
+				}
+			}
+			window.addEventListener('resize', checkWidth);
+			window.addEventListener('orientationchange', checkWidth);
+			if (isMobile) {
+				window.addEventListener("touchend", touchUpdate);
+				function touchUpdate() {
+					if(document.documentElement.requestFullScreen) {
+						document.documentElement.requestFullScreen();
+					} else if(document.documentElement.mozRequestFullScreen) {
+						document.documentElement.mozRequestFullScreen();
+					} else if(document.documentElement.webkitRequestFullScreen) {
+						document.documentElement.webkitRequestFullScreen();
+					}
+				}
+			}
+		</script>
+		<link rel="stylesheet" href="fonts/stylesheet.css" />
+		<style type="text/css">
+			body{
+				margin: 0;
+				padding: 0;
+				background-color: #000;
+			}
+			.font1{
+				font-family: 'Digital-7 Mono';
+				position: absolute;
+				opacity: 0;
+				left: -9999px;
+			}
+			.font2{
+				font-family: 'swis721_hv_btheavy';
+				position: absolute;
+				opacity: 0;
+				left: -9999px;
+			}
+			.font3{
+				font-family: 'Fixedsys Excelsior 3.01';
+				position: absolute;
+				opacity: 0;
+				left: -9999px;
+			}
+			.font4{
+				font-family: 'Candara';
+				position: absolute;
+				opacity: 0;
+				left: -9999px;
+			}
+			.font5{
+				font-family: 'PF Agora Slab Pro';
+				position: absolute;
+				opacity: 0;
+				left: -9999px;
+			}
+      .font6{
+        font-family: 'Koblenz-Serial';
+        position: absolute;
+        opacity: 0;
+        left: -9999px;
+      }
+      .font7{
+        font-family: 'PragmaticaBoldCyrillic';
+        position: absolute;
+        opacity: 0;
+        left: -9999px;
+      }
+      .font8{
+        font-family: 'ArialMT-CondensedBold';
+        position: absolute;
+        opacity: 0;
+        left: -9999px;
+      }
+			.font9{
+				font-family: 'AmazoneBT-Regular';
+				position: absolute;
+				opacity: 0;
+				left: -9999px;
+			}
+			#spin{
+				display: none;
+			}
+			.swipe-background{
+				width: 100vw;
+				height: 100vh;
+				position: fixed;
+				z-index: 9998;
+				top: 0;
+				left: 0;
+				display: none;
+				background-color: black;
+				background-repeat: no-repeat;
+				background-image: url('images/swipe_up.gif');
+				background-position: 50% 0px;
+				-webkit-touch-callout: none;
+				-webkit-user-select: none;
+				-moz-user-select: none;
+				-ms-user-select: none;
+				user-select: none;
+				-ms-touch-action: none;
+				touch-action: none;
+			}
+			.swipe-overlay{
+				width: 100vw;
+				height: 120vh;
+				position: absolute;
+				z-index: 9997;
+				top: 0;
+				left: 0;
+				display: none;
+				-webkit-touch-callout: none;
+				-webkit-user-select: none;
+				-moz-user-select: none;
+				-ms-user-select: none;
+				user-select: none;
+				-ms-touch-action: none;
+				touch-action: none;
+			}
+			html, body {
+				/*overflow: hidden;*/
+				margin: 0;
+				width: 100%;
+				height: 100%;
+				background: black;
+				font-size: 10px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="preloader" id="preloader">
+			<div class="loading-text">
+				<span class="loading-text-words">L</span>
+				<span class="loading-text-words">O</span>
+				<span class="loading-text-words">A</span>
+				<span class="loading-text-words">D</span>
+				<span class="loading-text-words">I</span>
+				<span class="loading-text-words">N</span>
+				<span class="loading-text-words">G</span>
+			</div>
+		</div>
+		<div class="vertScreenWrapper" id="vertScreenWrapper">
+			<div class="vertScreen realHeight" id="realHeight">
+			</div>
+		</div>
+		<div id="spin"></div>
+		<div class="menu_wrap">
+			<div class="menu_elements">
+				<ul>
+					<li class="btn_1 active"></li>
+				</ul>
+			</div>
+		</div>
+		<div class="popup add_credits">
+			<div class="popup_inner">
+				<div class="header">
+					<img src="../../images/wallet.png" alt="">
+					<h2>ADD CREDIT</h2>
+				</div>
+				<div class="desc">
+					<span>Available credits: </span>
+					<span class="orange">$1,500</span>
+				</div>
+				<div class="input_wrap">
+					<input type="text" class="input_doll">
+				</div>
+				<div class="pick_dollars">
+					<ul>
+						<li data-value="5">+$5</li>
+						<li data-value="10">+$10</li>
+						<li data-value="25">+$25</li>
+						<li data-value="50">+$50</li>
+						<li data-value="100">+$100</li>
+					</ul>
+				</div>
+				<div class="checkbox_wrap">
+					<div class="checkbox_width">
+						<input type="checkbox" id="checkbox_1">
+						<label for="checkbox_1">Request for a bonus</label>
+					</div>
+				</div>
+				<div class="total_money">
+					<div>
+						<span>Amount: </span>
+						<span>$100</span>
+					</div>
+					<div>
+						<span>Bonus: </span>
+						<span>$50</span>
+					</div>
+					<div>
+						<span>Total: </span>
+						<span class="current_money">$150</span>
+					</div>
+				</div>
+				<div class="btn_wrap">
+					<button class="btn">CONFIRM</button>
+				</div>
+			</div>
+			<div class="close_popup"></div>
+		</div>
+		<div class="popup popup_exit">
+			<div class="popup_inner">
+				<p>Please choose what to do with the remaining credit?</p>
+				<div class="btn_wrap">
+					<button class="btn collect">Collect to my wallet</button>
+					<button class="btn exit">Save in Game Credits</button>
+				</div>
+			</div>
+			<div class="close_popup"></div>
+		</div>
+		<div class="popup popup_inactive">
+			<div class="popup_inner">
+				<div class="header">
+					<h2>Inactive</h2>
+				</div>
+				<p>You have been inactive for too long.</p>
+				<div class="btn_wrap">
+					<button class="btn keep">Keep Playing <span class="timer_btn"></span></button>
+				</div>
+			</div>
+		</div>
+		<div class="overlay"></div>		
+		<div class="swipe-background"></div>
+		<div class="swipe-overlay"></div>
+		<div class="font1">-</div>
+		<div class="font2">-</div>
+		<div class="font3">-</div>
+		<div class="font4">-</div>
+		<div class="font5">-</div>
+    <div class="font6">-</div>
+    <div class="font7">-</div>
+    <div class="font8">-</div>
+		<div class="font9">-</div>
+		<div class="fullscreen-background invis destroy"></div>
+		<div class="fullscreen-instructions invis destroy">
+			<svg class="fullscreen-instructions-swipe" viewBox="0 0 24 24">
+				<path d="M9 11.24V7.5C9 6.12 10.12 5 11.5 5S14 6.12 14 7.5v3.74c1.21-.81 2-2.18 2-3.74C16 5.01 13.99 3 11.5 3S7 5.01 7 7.5c0 1.56.79 2.93 2 3.74zm9.84 4.63l-4.54-2.26c-.17-.07-.35-.11-.54-.11H13v-6c0-.83-.67-1.5-1.5-1.5S10 6.67 10 7.5v10.74l-3.43-.72c-.08-.01-.15-.03-.24-.03-.31 0-.59.13-.79.33l-.79.8 4.94 4.94c.27.27.65.44 1.06.44h6.79c.75 0 1.33-.55 1.44-1.28l.75-5.27c.01-.07.02-.14.02-.2 0-.62-.38-1.16-.91-1.38z"></path>
+			</svg>
+		</div>
+		<div class="fullscreen-overlay invis destroy"></div>
+		<style>
+			.fullscreen-background {
+				width: 100vw;
+				height: 100vh;
+				position: fixed;
+				z-index: 10000;
+				top: 0;
+				left: 0;
+				background-color: rgba(0,0,0,.5);
+				display: block;
+			}
+			.fullscreen-instructions {
+				width: 100vw;
+				height: 100vh;
+				position: fixed;
+				z-index: 10002;
+				top: 0;
+				left: 0;
+				display: block;
+			}
+			.fullscreen-instructions-swipe {
+				width: 30vw;
+				height: 30vw;
+				-webkit-animation-duration: 2s;
+				animation-duration: 2s;
+			}
+			.fullscreen-instructions-swipe {
+				width: 30vw;
+				height: 30vw;
+				position: fixed;
+				top: 75vh;
+				left: 50vw;
+				color: #fff;
+				fill: #fff;
+				-webkit-transform: translate(-50%,-50%);
+				transform: translate(-50%,-50%);
+				-webkit-animation-duration: 2s;
+				animation-duration: 2s;
+				-webkit-animation-name: fullscreen-swipe;
+				animation-name: fullscreen-swipe;
+				-webkit-animation-iteration-count: infinite;
+				animation-iteration-count: infinite;
+			}
+			.fullscreen-overlay {
+				width: 100vw;
+				height: 120vh;
+				position: absolute;
+				z-index: 10001;
+				top: 0;
+				left: 0;
+				display: block;
+			}
+			.fullscreen-background.invis, .fullscreen-instructions.invis, .fullscreen-overlay.invis{
+				z-index: -1;
+				opacity: 0;
+			}
+			.fullscreen-background.destroy, .fullscreen-instructions.destroy, .fullscreen-overlay.destroy{
+				display: none;
+			}
+			@-webkit-keyframes fullscreen-swipe{from{top:90%}to{top:50%}}
+			@keyframes fullscreen-swipe{from{top:90%}to{top:50%}}
+		</style>
+		<style>
+			#spin{
+				font-size: 40px;
+				position: absolute;
+				right: 0px;
+				top: 50%;
+				width: 90px;
+				height: 90px;
+				margin-top: -45px;
+				background: transparent url('img/mobile/spin.png') 50% 50% no-repeat;
+				-webkit-background-size: cover;
+				background-size: cover;
+				cursor: pointer;
+			}
+			#spin:active{
+				background: transparent url('img/mobile/spin_p.png') 50% 50% no-repeat;
+				-webkit-background-size: cover;
+				background-size: cover;
+			}
+			#spin.auto{
+				font-size: 40px;
+				position: absolute;
+				right: 0px;
+				top: 50%;
+				width: 90px;
+				height: 90px;
+				margin-top: -45px;
+				background: transparent url('img/mobile/auto.png') 50% 50% no-repeat;
+				-webkit-background-size: cover;
+				background-size: cover;
+			}
+			#spin.auto:active{
+				background: transparent url('img/mobile/auto_p.png') 50% 50% no-repeat;
+				-webkit-background-size: cover;
+				background-size: cover;
+			}
+		</style>
+		<script>
+			$(document).ready(function() {
+		// console.log(document.documentElement.clientHeight)
+		// console.log(document.documentElement.offsetHeight)
+		$('.popup').show();
+		$('.popup').css({
+			opacity: 0
+		});
+		setTimeout(function() {
+			$('.popup').css({
+				opacity: 1
+			});
+			$('.popup').hide();
+		}, 300);
+	});
+</script>
+<script>
+	checkWidth();
+	$(document).ready(function() {
+		$('.pick_dollars li').click(function(event) {
+			$('.input_doll').val()
+			if ($('.input_doll').val() == "") {
+				$('.input_doll').val(+$(this).data('value'))
+			} else {
+				$('.input_doll').val(+$('.input_doll').val()+ +$(this).data('value'))
+			}
+		});
+		$('.input_doll').keyup(function(event) {
+			$(this).val($(this).val().replace (/\D/, ''));
+		});
+		$('.close_popup, .overlay, .keep').click(function(event) {
+			inactiveTimerActive = false;
+			$('.add_credits,.overlay, .popup').hide();
+		});
+		$('.popup_exit .collect').click(function(event) {
+			$('.add_credits,.overlay, .popup_exit').hide();
+			exitGame(true)
+		});
+		$('.popup_exit .exit').click(function(event) {
+			$('.add_credits,.overlay, .popup_exit').hide();
+			exitGame(false)
+		});
+		$('body').on('click', '#spin', function () {
+			if(autostart === false){
+				if(balanceUpdateStatus){
+					stopUB();
+					autoPlay.loadTexture('autoPlay');
+				} else{
+					startFunc();
+				}
+			} else {
+				autostart = false;
+				autoPlay.loadTexture('autoPlay');
+				$(this).removeClass('auto');
+				showButMob();
+				console.log(spinStatus)
+				if (spinStatus === true){
+					hideButMob();
+				}
+			}
+		});
+		$("#spin").touchhold(function() {
+			if(autostart === false){
+				if(balanceUpdateStatus){
+					stopUB();
+					autoPlay.loadTexture('autoPlay');
+				} else{
+					autoPlay.loadTexture('autoStop');
+					autostart = true;
+					$(this).addClass('auto');
+					startFunc();
+				}
+			} else {
+				autoPlay.loadTexture('autoPlay');
+				autostart = false;
+				$(this).removeClass('auto');
+				showButMob();
+
+				if (spinStatus === true){
+					hideButMob();
+				}
+			}
+		});
+	});
+</script>
+<script src="../../js/menu.js"></script>
+</body>
+</html>
