@@ -50,7 +50,7 @@ class BridgeController extends Controller
         // переадресация на игру
         if ($_GET['gameId'] === '2') {
             //header("Location: https://game.play777games.com/games/lifeOfLuxury/?{$getParams}");
-            header("Location: http://aviorgames/games/lifeOfLuxury2/?{$getParams}");
+            header("Location: http://play777games/games/lifeOfLuxury2/?{$getParams}");
             die();
         }
     }
