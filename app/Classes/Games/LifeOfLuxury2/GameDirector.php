@@ -25,6 +25,9 @@ class GameDirector extends BaseGameDirector
         $this->requestDataSetPool->addRequestData('spin', new \App\Classes\Games\LifeOfLuxury2\RequestDataSets\SpinRequestData);
         $this->requestDataSetPool->addRequestData('free_spin', new \App\Classes\Games\LifeOfLuxury2\RequestDataSets\FreeSpinRequestData);
 
+        // сбор рабочих
+        $this->workersPool->addWorker('responseWorker', new \App\Classes\Games\LifeOfLuxury2\Workers\ResponseWorker);
+
         // сбор инструменов
         $this->toolsPool->addTool('logicTools', 'tableTool', new \App\Classes\Games\LifeOfLuxury2\Tools\LogicTools\TableTool);
         $this->toolsPool->addTool('logicTools', 'winLinesTool', new \App\Classes\Games\LifeOfLuxury2\Tools\LogicTools\WinLinesTool);

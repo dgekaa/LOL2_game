@@ -23,6 +23,16 @@ class StartFeatureGameObserver extends BaseObserver
 
                 // Обнуление кол-ва возможных бесплатных спинов
                 $event->dataPool->logicData->countOfMovesInFeatureGame = $event->dataPool->logicData->startCountOfFreeSpinsInFeatureGame;
+
+                // запись данных которые есть при выпадении фриспинов для хранения до окончания фриспинов
+                $longData = new \stdClass;
+                $longData->stateData = new \stdClass;
+                $longData->stateData = $event->dataPool->stateData;
+                $longData->balanceData = new \stdClass;
+                $longData->balanceData = $event->dataPool->balanceData;
+                $longData->logicData = new \stdClass;
+                $longData->logicData = $event->dataPool->logicData;
+                $event->dataPool->longData->data = $longData;
             }
         }
 

@@ -15,7 +15,7 @@ class CreateV2RecoveryDatasTable extends Migration
         Schema::create('v2_recovery_data', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('session_id');
-            $table->text('recovery_data'); // json данные
+            $table->text('recovery_data'); // serialize данные
             $table->timestamps();
 
             $table->index('session_id');
@@ -29,6 +29,6 @@ class CreateV2RecoveryDatasTable extends Migration
      */
     public function down()
     {
-        Schema::drop('v2_recovery_datas');
+        Schema::drop('v2_recovery_data');
     }
 }
