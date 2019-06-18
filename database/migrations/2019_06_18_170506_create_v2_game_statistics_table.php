@@ -1,9 +1,10 @@
 <?php
 
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateV2RecoveryDatasTable extends Migration
+class CreateV2GameStatisticsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,13 +13,14 @@ class CreateV2RecoveryDatasTable extends Migration
      */
     public function up()
     {
-        Schema::create('v2_recovery_data', function (Blueprint $table) {
+        Schema::create('v2_game_statistics', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('session_id');
-            $table->text('recovery_data'); // json данные
+            $table->integer('game_id');
+            $table->string('mode');
+            $table->text('statistics'); // json
             $table->timestamps();
 
-            $table->index('session_id');
+            $table->index('game_id');
         });
     }
 
@@ -29,6 +31,6 @@ class CreateV2RecoveryDatasTable extends Migration
      */
     public function down()
     {
-        Schema::drop('v2_recovery_data');
+        Schema::dropIfExists('v2_game_statistics');
     }
 }

@@ -30,31 +30,28 @@ class StatisticsWorkerTest extends TestCase
 
         $dataPool = $workersPool->statisticsWorker->getResultOfSpin($dataPool, $toolsPool, true);
 
-        if ($dataPool->statisticsData->totalWinnings !== 0) {
+        if ($dataPool->statisticsData->winnings !== 0) {
             $check = false;
         }
-        if ($dataPool->statisticsData->totalWinningsOnMainGame !== 0) {
+        if ($dataPool->statisticsData->winningsOnMainGame !== 0) {
             $check = false;
         }
-        if ($dataPool->statisticsData->totalWinningsOnFeatureGame !== 0) {
+        if ($dataPool->statisticsData->winningsOnFeatureGame !== 0) {
             $check = false;
         }
-        if ($dataPool->statisticsData->totalLoss !== 15) {
+        if ($dataPool->statisticsData->loss !== 15) {
             $check = false;
         }
-        if ($dataPool->statisticsData->totalLossOnMainGame !== 15) {
+        if ($dataPool->statisticsData->lossOnMainGame !== 15) {
             $check = false;
         }
-        if ($dataPool->statisticsData->totalSpinCount !== 1) {
+        if ($dataPool->statisticsData->spinCount !== 1) {
             $check = false;
         }
-        if ($dataPool->statisticsData->totalSpinCountOnMainGame !== 1) {
+        if ($dataPool->statisticsData->spinCountInMainGame !== 1) {
             $check = false;
         }
-        if ($dataPool->statisticsData->totalSpinCountOnFeatureGame !== 0) {
-            $check = false;
-        }
-        if ($dataPool->statisticsData->totalJackpots !== 0) {
+        if ($dataPool->statisticsData->spinCountInFeatureGame !== 0) {
             $check = false;
         }
 
@@ -99,31 +96,28 @@ class StatisticsWorkerTest extends TestCase
         // выполнение операции
         $dataPool = $workersPool->statisticsWorker->getResultOfSpin($dataPool, $toolsPool, true);
 
-        if ($dataPool->statisticsData->totalWinnings !== 10) {
+        if ($dataPool->statisticsData->winnings !== 10) {
             $check = false;
         }
-        if ($dataPool->statisticsData->totalWinningsOnMainGame !== 10) {
+        if ($dataPool->statisticsData->winningsOnMainGame !== 10) {
             $check = false;
         }
-        if ($dataPool->statisticsData->totalWinningsOnFeatureGame !== 0) {
+        if ($dataPool->statisticsData->winningsOnFeatureGame !== 0) {
             $check = false;
         }
-        if ($dataPool->statisticsData->totalLoss !== 15) {
+        if ($dataPool->statisticsData->loss !== 15) {
             $check = false;
         }
-        if ($dataPool->statisticsData->totalLossOnMainGame !== 15) {
+        if ($dataPool->statisticsData->lossOnMainGame !== 15) {
             $check = false;
         }
-        if ($dataPool->statisticsData->totalSpinCount !== 1) {
+        if ($dataPool->statisticsData->spinCount !== 1) {
             $check = false;
         }
-        if ($dataPool->statisticsData->totalSpinCountOnMainGame !== 1) {
+        if ($dataPool->statisticsData->spinCountInMainGame !== 1) {
             $check = false;
         }
-        if ($dataPool->statisticsData->totalSpinCountOnFeatureGame !== 0) {
-            $check = false;
-        }
-        if ($dataPool->statisticsData->totalJackpots !== 0) {
+        if ($dataPool->statisticsData->spinCountInFeatureGame !== 0) {
             $check = false;
         }
 
@@ -168,31 +162,28 @@ class StatisticsWorkerTest extends TestCase
         // выполнение операции
         $dataPool = $workersPool->statisticsWorker->getResultOfSpin($dataPool, $toolsPool, true);
 
-        if ($dataPool->statisticsData->totalWinnings !== 225) {
+        if ($dataPool->statisticsData->winnings !== 225) {
             $check = false;
         }
-        if ($dataPool->statisticsData->totalWinningsOnMainGame !== 225) {
+        if ($dataPool->statisticsData->winningsOnMainGame !== 225) {
             $check = false;
         }
-        if ($dataPool->statisticsData->totalWinningsOnFeatureGame !== 0) {
+        if ($dataPool->statisticsData->winningsOnFeatureGame !== 0) {
             $check = false;
         }
-        if ($dataPool->statisticsData->totalLoss !== 15) {
+        if ($dataPool->statisticsData->loss !== 15) {
             $check = false;
         }
-        if ($dataPool->statisticsData->totalLossOnMainGame !== 15) {
+        if ($dataPool->statisticsData->lossOnMainGame !== 15) {
             $check = false;
         }
-        if ($dataPool->statisticsData->totalSpinCount !== 1) {
+        if ($dataPool->statisticsData->spinCount !== 1) {
             $check = false;
         }
-        if ($dataPool->statisticsData->totalSpinCountOnMainGame !== 1) {
+        if ($dataPool->statisticsData->spinCountInMainGame !== 1) {
             $check = false;
         }
-        if ($dataPool->statisticsData->totalSpinCountOnFeatureGame !== 0) {
-            $check = false;
-        }
-        if ($dataPool->statisticsData->totalJackpots !== 0) {
+        if ($dataPool->statisticsData->spinCountInFeatureGame !== 0) {
             $check = false;
         }
 
@@ -237,31 +228,28 @@ class StatisticsWorkerTest extends TestCase
         // выполнение операции
         $dataPool = $workersPool->statisticsWorker->getResultOfFreeSpin($dataPool, $toolsPool, true);
 
-        if ($dataPool->statisticsData->totalWinnings !== 0) {
+        if ($dataPool->statisticsData->winnings !== 0) {
             $check = false;
         }
-        if ($dataPool->statisticsData->totalWinningsOnMainGame !== 0) {
+        if ($dataPool->statisticsData->winningsOnMainGame !== 0) {
             $check = false;
         }
-        if ($dataPool->statisticsData->totalWinningsOnFeatureGame !== 0) {
+        if ($dataPool->statisticsData->winningsOnFeatureGame !== 0) {
             $check = false;
         }
-        if ($dataPool->statisticsData->totalLoss !== 0) {
+        if ($dataPool->statisticsData->loss !== 0) {
             $check = false;
         }
-        if ($dataPool->statisticsData->totalLossOnMainGame !== 0) {
+        if ($dataPool->statisticsData->lossOnMainGame !== 0) {
             $check = false;
         }
-        if ($dataPool->statisticsData->totalSpinCount !== 1) {
+        if ($dataPool->statisticsData->spinCount !== 1) {
             $check = false;
         }
-        if ($dataPool->statisticsData->totalSpinCountOnMainGame !== 0) {
+        if ($dataPool->statisticsData->spinCountInMainGame !== 0) {
             $check = false;
         }
-        if ($dataPool->statisticsData->totalSpinCountOnFeatureGame !== 1) {
-            $check = false;
-        }
-        if ($dataPool->statisticsData->totalJackpots !== 0) {
+        if ($dataPool->statisticsData->spinCountInFeatureGame !== 1) {
             $check = false;
         }
 
@@ -305,62 +293,56 @@ class StatisticsWorkerTest extends TestCase
         // выполнение операции
         $dataPool = $workersPool->statisticsWorker->getResultOfFreeSpin($dataPool, $toolsPool, true);
 
-        if ($dataPool->statisticsData->totalWinnings !== 10) {
+        if ($dataPool->statisticsData->winnings !== 10) {
             $check = false;
         }
-        if ($dataPool->statisticsData->totalWinningsOnMainGame !== 0) {
+        if ($dataPool->statisticsData->winningsOnMainGame !== 0) {
             $check = false;
         }
-        if ($dataPool->statisticsData->totalWinningsOnFeatureGame !== 10) {
+        if ($dataPool->statisticsData->winningsOnFeatureGame !== 10) {
             $check = false;
         }
-        if ($dataPool->statisticsData->totalLoss !== 0) {
+        if ($dataPool->statisticsData->loss !== 0) {
             $check = false;
         }
-        if ($dataPool->statisticsData->totalLossOnMainGame !== 0) {
+        if ($dataPool->statisticsData->lossOnMainGame !== 0) {
             $check = false;
         }
-        if ($dataPool->statisticsData->totalSpinCount !== 1) {
+        if ($dataPool->statisticsData->spinCount !== 1) {
             $check = false;
         }
-        if ($dataPool->statisticsData->totalSpinCountOnMainGame !== 0) {
+        if ($dataPool->statisticsData->spinCountInMainGame !== 0) {
             $check = false;
         }
-        if ($dataPool->statisticsData->totalSpinCountOnFeatureGame !== 1) {
-            $check = false;
-        }
-        if ($dataPool->statisticsData->totalJackpots !== 0) {
+        if ($dataPool->statisticsData->spinCountInFeatureGame !== 1) {
             $check = false;
         }
 
         // выполнение операции
         $dataPool = $workersPool->statisticsWorker->getResultOfFreeSpin($dataPool, $toolsPool, true);
 
-        if ($dataPool->statisticsData->totalWinnings !== 20) {
+        if ($dataPool->statisticsData->winnings !== 20) {
             $check = false;
         }
-        if ($dataPool->statisticsData->totalWinningsOnMainGame !== 0) {
+        if ($dataPool->statisticsData->winningsOnMainGame !== 0) {
             $check = false;
         }
-        if ($dataPool->statisticsData->totalWinningsOnFeatureGame !== 20) {
+        if ($dataPool->statisticsData->winningsOnFeatureGame !== 20) {
             $check = false;
         }
-        if ($dataPool->statisticsData->totalLoss !== 0) {
+        if ($dataPool->statisticsData->loss !== 0) {
             $check = false;
         }
-        if ($dataPool->statisticsData->totalLossOnMainGame !== 0) {
+        if ($dataPool->statisticsData->lossOnMainGame !== 0) {
             $check = false;
         }
-        if ($dataPool->statisticsData->totalSpinCount !== 2) {
+        if ($dataPool->statisticsData->spinCount !== 2) {
             $check = false;
         }
-        if ($dataPool->statisticsData->totalSpinCountOnMainGame !== 0) {
+        if ($dataPool->statisticsData->spinCountInMainGame !== 0) {
             $check = false;
         }
-        if ($dataPool->statisticsData->totalSpinCountOnFeatureGame !== 2) {
-            $check = false;
-        }
-        if ($dataPool->statisticsData->totalJackpots !== 0) {
+        if ($dataPool->statisticsData->spinCountInFeatureGame !== 2) {
             $check = false;
         }
 
@@ -405,31 +387,28 @@ class StatisticsWorkerTest extends TestCase
         // выполнение операции
         $dataPool = $workersPool->statisticsWorker->getResultOfFreeSpin($dataPool, $toolsPool, true);
 
-        if ($dataPool->statisticsData->totalWinnings !== 10) {
+        if ($dataPool->statisticsData->winnings !== 10) {
             $check = false;
         }
-        if ($dataPool->statisticsData->totalWinningsOnMainGame !== 0) {
+        if ($dataPool->statisticsData->winningsOnMainGame !== 0) {
             $check = false;
         }
-        if ($dataPool->statisticsData->totalWinningsOnFeatureGame !== 10) {
+        if ($dataPool->statisticsData->winningsOnFeatureGame !== 10) {
             $check = false;
         }
-        if ($dataPool->statisticsData->totalLoss !== 0) {
+        if ($dataPool->statisticsData->loss !== 0) {
             $check = false;
         }
-        if ($dataPool->statisticsData->totalLossOnMainGame !== 0) {
+        if ($dataPool->statisticsData->lossOnMainGame !== 0) {
             $check = false;
         }
-        if ($dataPool->statisticsData->totalSpinCount !== 1) {
+        if ($dataPool->statisticsData->spinCount !== 1) {
             $check = false;
         }
-        if ($dataPool->statisticsData->totalSpinCountOnMainGame !== 0) {
+        if ($dataPool->statisticsData->spinCountInMainGame !== 0) {
             $check = false;
         }
-        if ($dataPool->statisticsData->totalSpinCountOnFeatureGame !== 1) {
-            $check = false;
-        }
-        if ($dataPool->statisticsData->totalJackpots !== 0) {
+        if ($dataPool->statisticsData->spinCountInFeatureGame !== 1) {
             $check = false;
         }
 
@@ -449,31 +428,28 @@ class StatisticsWorkerTest extends TestCase
         // выполнение операции
         $dataPool = $workersPool->statisticsWorker->getResultOfSpin($dataPool, $toolsPool, true);
 
-        if ($dataPool->statisticsData->totalWinnings !== 20) {
+        if ($dataPool->statisticsData->winnings !== 20) {
             $check = false;
         }
-        if ($dataPool->statisticsData->totalWinningsOnMainGame !== 10) {
+        if ($dataPool->statisticsData->winningsOnMainGame !== 10) {
             $check = false;
         }
-        if ($dataPool->statisticsData->totalWinningsOnFeatureGame !== 10) {
+        if ($dataPool->statisticsData->winningsOnFeatureGame !== 10) {
             $check = false;
         }
-        if ($dataPool->statisticsData->totalLoss !== 15) {
+        if ($dataPool->statisticsData->loss !== 15) {
             $check = false;
         }
-        if ($dataPool->statisticsData->totalLossOnMainGame !== 15) {
+        if ($dataPool->statisticsData->lossOnMainGame !== 15) {
             $check = false;
         }
-        if ($dataPool->statisticsData->totalSpinCount !== 2) {
+        if ($dataPool->statisticsData->spinCount !== 2) {
             $check = false;
         }
-        if ($dataPool->statisticsData->totalSpinCountOnMainGame !== 1) {
+        if ($dataPool->statisticsData->spinCountInMainGame !== 1) {
             $check = false;
         }
-        if ($dataPool->statisticsData->totalSpinCountOnFeatureGame !== 1) {
-            $check = false;
-        }
-        if ($dataPool->statisticsData->totalJackpots !== 0) {
+        if ($dataPool->statisticsData->spinCountInFeatureGame !== 1) {
             $check = false;
         }
 

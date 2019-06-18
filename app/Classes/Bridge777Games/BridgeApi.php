@@ -27,7 +27,8 @@ class BridgeApi
         $dollarBalance = (float) json_decode($responseGetBalance)->balance;
 
         // получение баланса в центах
-        $centBalance = (int) floor($dollarBalance * 100);
+        //$centBalance = (int) floor($dollarBalance * 100);
+        $centBalance = $dollarBalance * 100;
 
         return $centBalance;
     }

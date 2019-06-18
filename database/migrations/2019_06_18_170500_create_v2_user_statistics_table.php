@@ -1,9 +1,10 @@
 <?php
 
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateV2StatisticsTable extends Migration
+class CreateV2UserStatisticsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,7 +13,7 @@ class CreateV2StatisticsTable extends Migration
      */
     public function up()
     {
-        Schema::create('v2_statistics', function (Blueprint $table) {
+        Schema::create('v2_user_statistics', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id');
             $table->integer('game_id');
@@ -32,6 +33,6 @@ class CreateV2StatisticsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('v2_statistics');
+        Schema::dropIfExists('v2_user_statistics');
     }
 }
