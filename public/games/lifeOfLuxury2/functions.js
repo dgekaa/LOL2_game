@@ -1020,12 +1020,6 @@ urlPath2.forEach(function(item) {
     // console.log(platformId)
     // console.log(nickname)
 });
-console.log(urlPath2)
-console.log(gameId)
-console.log(userId)
-console.log(demo)
-console.log(token)
-
 
 function requestInit() {
     var sessionID = location.href.substring(location.href.indexOf('/?') + 12);
@@ -1119,7 +1113,9 @@ var firstRequest = false;
 var preloaderStatus = false;
 var dataArray;
 var sessionUuid;
-
+var featureGameStatus = false;
+var freeSpinCountInit, mulFreespinInit, allWinOldInit, allFreeSpinCountInit;
+var wlValuesFS;
 function requestState(sessionName) {
     game1();
     game2();
@@ -1127,10 +1123,20 @@ function requestState(sessionName) {
         document.getElementById('preloader').style.display = 'none';
         game.state.start('game1');
     }
+    betline = sessionName.logicData.lineBet;
+    lines = sessionName.logicData.linesInGame;
+    bet = lines * betline;
     firstRequest = true;
-    balance = (sessionName.balanceData.balance).toFixed();
+    balance = (sessionName.balanceData.balance).toFixed() - sessionName.balanceData.totalWinningsInFeatureGame;
     info = sessionName.logicData.table;
-    sessionUuid = sessionName.sessionData.sessionUuid
+    sessionUuid = sessionName.sessionData.sessionUuid;
+    if (sessionName.stateData.screen === 'featureGame') {
+        featureGameStatus = true;
+    }
+    freeSpinCountInit = sessionName.logicData.countOfMovesInFeatureGame - sessionName.stateData.moveNumberInFeatureGame;
+    mulFreespinInit = sessionName.logicData.multiplier;
+    allWinOldInit = sessionName.balanceData.totalWinningsInFeatureGame;
+    allFreeSpinCountInit = sessionName.logicData.countOfMovesInFeatureGame;
 }
 
 
