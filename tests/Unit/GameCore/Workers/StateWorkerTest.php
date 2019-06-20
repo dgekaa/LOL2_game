@@ -19,6 +19,7 @@ class StateWorkerTest extends TestCase
         $dataPool = $game->dataPool;
         $workersPool = $game->workersPool;
         $toolsPool = $game->toolsPool;
+        $instructionsPool = $game->instructionsPool;
 
         $dataPool->balanceData->balance = 100;
         $dataPool->stateData->screen = 'mainGame';
@@ -27,6 +28,7 @@ class StateWorkerTest extends TestCase
         $dataPool->logicData->lineBet = 1;
         $dataPool->logicData->table = [1,2,3,4,5,6,7,8,9,1,2,3,4,5,6];
         $dataPool->logicData->featureGameRules = json_decode('[10, 3]');
+        $dataPool->systemData->isSimulation = true;
 
         $dataPool = $workersPool->stateWorker->getResultOfSpin($dataPool, $toolsPool, true);
 
@@ -71,13 +73,15 @@ class StateWorkerTest extends TestCase
         $dataPool = $game->dataPool;
         $workersPool = $game->workersPool;
         $toolsPool = $game->toolsPool;
+        $instructionsPool = $game->instructionsPool;
 
         // данные из запроса
         $dataPool->requestData->userId = 1;
         $dataPool->requestData->gameId = 1;
+        $dataPool->systemData->isSimulation = true;
 
         // загрузка стоковых данных
-        $dataPool = $this->loadStartData($dataPool, $workersPool, $toolsPool);
+        $dataPool = $this->loadStartData($dataPool, $workersPool, $toolsPool, $instructionsPool);
 
         // изменение данных под условия теста
         $dataPool->balanceData->balance = 100;
@@ -136,13 +140,15 @@ class StateWorkerTest extends TestCase
         $dataPool = $game->dataPool;
         $workersPool = $game->workersPool;
         $toolsPool = $game->toolsPool;
+        $instructionsPool = $game->instructionsPool;
 
         // данные из запроса
         $dataPool->requestData->userId = 1;
         $dataPool->requestData->gameId = 1;
+        $dataPool->systemData->isSimulation = true;
 
         // загрузка стоковых данных
-        $dataPool = $this->loadStartData($dataPool, $workersPool, $toolsPool);
+        $dataPool = $this->loadStartData($dataPool, $workersPool, $toolsPool, $instructionsPool);
 
         // изменение данных под условия теста
         $dataPool->balanceData->balance = 100;
@@ -201,13 +207,15 @@ class StateWorkerTest extends TestCase
         $dataPool = $game->dataPool;
         $workersPool = $game->workersPool;
         $toolsPool = $game->toolsPool;
+        $instructionsPool = $game->instructionsPool;
 
         // данные из запроса
         $dataPool->requestData->userId = 1;
         $dataPool->requestData->gameId = 1;
+        $dataPool->systemData->isSimulation = true;
 
         // загрузка стоковых данных
-        $dataPool = $this->loadStartData($dataPool, $workersPool, $toolsPool);
+        $dataPool = $this->loadStartData($dataPool, $workersPool, $toolsPool, $instructionsPool);
 
         // изменение данных под условия теста
         $dataPool->balanceData->balance = 100;
@@ -266,13 +274,16 @@ class StateWorkerTest extends TestCase
         $dataPool = $game->dataPool;
         $workersPool = $game->workersPool;
         $toolsPool = $game->toolsPool;
+        $instructionsPool = $game->instructionsPool;
 
         // данные из запроса
         $dataPool->requestData->userId = 1;
         $dataPool->requestData->gameId = 1;
+        $dataPool->stateData->mode = 'demo';
+        $dataPool->systemData->isSimulation = true;
 
         // загрузка стоковых данных
-        $dataPool = $this->loadStartData($dataPool, $workersPool, $toolsPool);
+        $dataPool = $this->loadStartData($dataPool, $workersPool, $toolsPool, $instructionsPool);
 
         // изменение данных под условия теста
         $dataPool->balanceData->balance = 100;

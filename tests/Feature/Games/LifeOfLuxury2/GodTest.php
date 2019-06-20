@@ -25,7 +25,7 @@ class GodTest extends TestCase
         $dataGame = json_decode($responseOpenGame->original);
         $prevBalance = $dataGame->balanceData->balance;
 
-        for ($i = 0; $i < 1000; $i++) {
+        for ($i = 0; $i < 10; $i++) {
             if ($dataGame->stateData->screen === 'mainGame') {
                 $action = 'spin';
                 $sessionUuid = $dataGame->sessionData->sessionUuid;

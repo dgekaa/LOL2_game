@@ -15,13 +15,17 @@ abstract class TestCase extends BaseTestCase
         return $game;
     }
 
-    protected function loadStartData($dataPool, $workersPool, $toolsPool)
+    protected function loadStartData($dataPool, $workersPool, $toolsPool, $instructionsPool)
     {
         $dataPool = $workersPool->sessionWorker->loadSessionData($dataPool, $toolsPool);
         // загрузка баланса
-        $dataPool = $workersPool->balanceWorker->loadBalanceData($dataPool, $toolsPool, true);
+        $dataPool = $workersPool->balanceWorker->loadBalanceData($dataPool, $toolsPool);
         // загрузка логики
-        $dataPool = $workersPool->logicWorker->loadLogicData($dataPool, $toolsPool);
+        $dataPool = $workersPool->logicWorker->executeInstruction(
+            $dataPool,
+            $toolsPool,
+            $instructionsPool->logicWorkerInstructions->load_data
+        );
         // загрузка состояния
         $dataPool = $workersPool->stateWorker->loadStateData($dataPool, $toolsPool);
         // загрузка статистики

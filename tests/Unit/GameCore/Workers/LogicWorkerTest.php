@@ -20,10 +20,15 @@ class LogicWorkerTest extends TestCase
         $dataPool = $game->dataPool;
         $workersPool = $game->workersPool;
         $toolsPool = $game->toolsPool;
+        $instructionsPool = $game->instructionsPool;
 
         $dataPool->sessionData->gameId = 1;
 
-        $dataPool = $workersPool->logicWorker->loadLogicData($dataPool, $toolsPool);
+        $dataPool = $workersPool->logicWorker->executeInstruction(
+            $dataPool,
+            $toolsPool,
+            $instructionsPool->logicWorkerInstructions->load_data
+        );
 
         if (count($dataPool->logicData->linesRules) === 0) {
             $check = false;
@@ -57,6 +62,7 @@ class LogicWorkerTest extends TestCase
         $dataPool = $game->dataPool;
         $workersPool = $game->workersPool;
         $toolsPool = $game->toolsPool;
+        $instructionsPool = $game->instructionsPool;
 
         $dataPool->stateData->screen = 'mainGame';
         $dataPool->logicData->linesRules = json_decode(V2GameRule::where('game_id', 1)->where('name', 'lines')->first()->rules);
@@ -65,7 +71,11 @@ class LogicWorkerTest extends TestCase
         $dataPool->logicData->featureGameRules = json_decode(V2GameRule::where('game_id', 1)->where('name', 'featureGame')->first()->rules);
         $dataPool->logicData->percentagesRules = json_decode(V2GameRule::where('game_id', 1)->where('name', 'percentages')->first()->rules);
 
-        $dataPool = $workersPool->logicWorker->getResultOfSpin($dataPool, $toolsPool, []);
+        $dataPool = $workersPool->logicWorker->executeInstruction(
+            $dataPool,
+            $toolsPool,
+            $instructionsPool->logicWorkerInstructions->spin
+        );
 
         if (count($dataPool->logicData->table) !== 15) {
             $check = false;
@@ -87,6 +97,7 @@ class LogicWorkerTest extends TestCase
         $dataPool = $game->dataPool;
         $workersPool = $game->workersPool;
         $toolsPool = $game->toolsPool;
+        $instructionsPool = $game->instructionsPool;
 
         $dataPool->stateData->screen = 'featureGame';
         $dataPool->logicData->lineBet = 1;
@@ -97,7 +108,11 @@ class LogicWorkerTest extends TestCase
         $dataPool->logicData->featureGameRules = json_decode(V2GameRule::where('game_id', 1)->where('name', 'featureGame')->first()->rules);
         $dataPool->logicData->percentagesRules = json_decode(V2GameRule::where('game_id', 1)->where('name', 'percentages')->first()->rules);
 
-        $dataPool = $workersPool->logicWorker->getResultOfFreeSpin($dataPool, $toolsPool, []);
+        $dataPool = $workersPool->logicWorker->executeInstruction(
+            $dataPool,
+            $toolsPool,
+            $instructionsPool->logicWorkerInstructions->free_spin
+        );
 
         if (count($dataPool->logicData->table) !== 15) {
             $check = false;

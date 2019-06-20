@@ -945,6 +945,7 @@ class DemoGameTest extends TestCase
         $response = (new GameDirector)->build("demo")
             ->executeAction($requestArray);
 
+
         $sessionUuid = json_decode($response)->sessionData->sessionUuid;
         $balance = json_decode($response)->balanceData->balance;
 
@@ -968,7 +969,6 @@ class DemoGameTest extends TestCase
 
         $response = json_decode($responseJson);
         $balance = $balance + 40 - 20;
-
 
         if ($response->stateData->screen !== 'featureGame') {
             $check = false;

@@ -22,7 +22,7 @@ class BridgeController extends Controller
      */
     public function startGame(Request $request)
     {
-        $token = $request->input('token'); // токен от сайта 777games
+        $token = (string) $request->input('token'); // токен от сайта 777games
         $userId = $request->input('userId');
         $nickname = $request->input('nickname');
         $gameId = $request->input('gameId');
