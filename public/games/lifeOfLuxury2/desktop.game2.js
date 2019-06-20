@@ -698,8 +698,7 @@ function game2() {
             winCellInfo = dataArray.logicData['winningCells'];
             wlValues = dataArray.logicData['payoffsForLines'];
 
-            balanceR = dataArray.balanceData['balance'] - dataArray.balanceData['totalPayoff'];
-            balance = dataArray.balanceData['balance'] - dataArray.balanceData['totalPayoff'];
+            // balance = dataArray.balanceData['balance'] - dataArray.balanceData['totalPayoff'];
 
             allWin = dataArray.balanceData['payoffByLines'];
             if (dataSpinRequest.stateData.isDropFeatureGame) {
@@ -712,11 +711,11 @@ function game2() {
                 winOldTrigerFreeSpin = dataArray.longData.balanceData['totalPayoff'];
                 infoOld = dataArray.longData.logicData.table;
                 wlValuesOld = dataArray.longData.logicData['payoffsForLines'];
-                balanceOld = dataArray.longData.balanceData['balance'] - dataArray.longData.balanceData['totalPayoff'];
+                // balanceOld = dataArray.longData.balanceData['balance'] - dataArray.longData.balanceData['totalPayoff'];
                 wcvWinValuesArrayOld = [];
                 wlWinValuesArrayOld = [];
                 for (key in dataArray.longData.logicData['payoffsForLines']) {
-                    wlWinValuesArrayOld.push(ataArray.longData.logicData['payoffsForLines'][key].lineNumber + 1);
+                    wlWinValuesArrayOld.push(dataArray.longData.logicData['payoffsForLines'][key].lineNumber + 1);
                 }
                 for (key in dataArray.longData.logicData['winningCells']) {
                     wcvWinValuesArrayOld.push(+(key));
@@ -1866,6 +1865,7 @@ function game2() {
                     updateFinishSound.play();
                     bonusText.setText(0);
                     credit.setText(balance + allWinOld);
+                    balanceOld = balance;
                     balance = balance + allWinOld;
                     paid.setText(allWinOld);
                     winTextCenter.setText(allWinOld);
