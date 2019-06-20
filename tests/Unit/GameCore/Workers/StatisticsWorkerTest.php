@@ -11,54 +11,54 @@ class StatisticsWorkerTest extends TestCase
      * Условия: проигрышь
      * Результат: проигрышь
      */
-    // public function testGetResultOfSpinForStatisticsWorker1()
-    // {
-    //     $check = true;
-    //
-    //     $game = $this->getGame();
-    //     $dataPool = $game->dataPool;
-    //     $workersPool = $game->workersPool;
-    //     $toolsPool = $game->toolsPool;
-    //     $instructionsPool = $game->instructionsPool;
-    //
-    //     $dataPool->balanceData->balance = 100;
-    //     $dataPool->stateData->screen = 'mainGame';
-    //     $dataPool->logicData->action = 'spin';
-    //     $dataPool->logicData->linesInGame = 15;
-    //     $dataPool->logicData->lineBet = 1;
-    //     $dataPool->logicData->table = [1,2,3,4,5,6,7,8,9,1,2,3,4,5,6];
-    //     $dataPool->logicData->featureGameRules = json_decode('[10, 3]');
-    //
-    //     $dataPool = $workersPool->statisticsWorker->getResultOfSpin($dataPool, $toolsPool, true);
-    //
-    //     if ($dataPool->statisticsData->winnings !== 0) {
-    //         $check = false;
-    //     }
-    //     if ($dataPool->statisticsData->winningsOnMainGame !== 0) {
-    //         $check = false;
-    //     }
-    //     if ($dataPool->statisticsData->winningsOnFeatureGame !== 0) {
-    //         $check = false;
-    //     }
-    //     if ($dataPool->statisticsData->loss !== 15) {
-    //         $check = false;
-    //     }
-    //     if ($dataPool->statisticsData->lossOnMainGame !== 15) {
-    //         $check = false;
-    //     }
-    //     if ($dataPool->statisticsData->spinCount !== 1) {
-    //         $check = false;
-    //     }
-    //     if ($dataPool->statisticsData->spinCountInMainGame !== 1) {
-    //         $check = false;
-    //     }
-    //     if ($dataPool->statisticsData->spinCountInFeatureGame !== 0) {
-    //         $check = false;
-    //     }
-    //
-    //     $this->assertTrue($check);
-    // }
-    //
+    public function testGetResultOfSpinForStatisticsWorker1()
+    {
+        $check = true;
+
+        $game = $this->getGame();
+        $dataPool = $game->dataPool;
+        $workersPool = $game->workersPool;
+        $toolsPool = $game->toolsPool;
+        $instructionsPool = $game->instructionsPool;
+
+        $dataPool->balanceData->balance = 100;
+        $dataPool->stateData->screen = 'mainGame';
+        $dataPool->logicData->action = 'spin';
+        $dataPool->logicData->linesInGame = 15;
+        $dataPool->logicData->lineBet = 1;
+        $dataPool->logicData->table = [1,2,3,4,5,6,7,8,9,1,2,3,4,5,6];
+        $dataPool->logicData->featureGameRules = json_decode('[10, 3]');
+
+        $dataPool = $workersPool->statisticsWorker->getResultOfSpin($dataPool, $toolsPool, true);
+
+        if ($dataPool->statisticsData->winnings !== 0) {
+            $check = false;
+        }
+        if ($dataPool->statisticsData->winningsOnMainGame !== 0) {
+            $check = false;
+        }
+        if ($dataPool->statisticsData->winningsOnFeatureGame !== 0) {
+            $check = false;
+        }
+        if ($dataPool->statisticsData->loss !== 15) {
+            $check = false;
+        }
+        if ($dataPool->statisticsData->lossOnMainGame !== 15) {
+            $check = false;
+        }
+        if ($dataPool->statisticsData->spinCount !== 1) {
+            $check = false;
+        }
+        if ($dataPool->statisticsData->spinCountInMainGame !== 1) {
+            $check = false;
+        }
+        if ($dataPool->statisticsData->spinCountInFeatureGame !== 0) {
+            $check = false;
+        }
+
+        $this->assertTrue($check);
+    }
+    
     // /**
     //  * Проверка работы StatisticsWorker
     //  * Условия: выигрышь по линии

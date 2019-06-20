@@ -20,7 +20,7 @@ class ResponseWorker extends Worker
      */
     public function makeResponse(IDataPool $dataPool): string
     {
-        if ($dataPool->systemData->tablePreset !== []) {
+        if ($dataPool->systemData->tablePreset !== [] || $dataPool->systemData->isSimulation) {
             $responseData = $dataPool;
         } else {
             $responseData = new \stdClass;
