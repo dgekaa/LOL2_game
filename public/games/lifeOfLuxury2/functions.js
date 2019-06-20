@@ -1041,7 +1041,7 @@ function requestInit() {
                 data = JSON.parse(data);
                 if (data) {
                     var sessionName = data;
-                    requestState(sessionName);
+                    requestState(data);
                 } else {
                     alert('Error 11');
                 }
@@ -1116,27 +1116,28 @@ var sessionUuid;
 var featureGameStatus = false;
 var freeSpinCountInit, mulFreespinInit, allWinOldInit, allFreeSpinCountInit;
 var wlValuesFS;
-function requestState(sessionName) {
+function requestState(data) {
     game1();
     game2();
     if (preloaderStatus) {
         document.getElementById('preloader').style.display = 'none';
         game.state.start('game1');
     }
-    betline = sessionName.logicData.lineBet;
-    lines = sessionName.logicData.linesInGame;
+    betline = data.logicData.lineBet;
+    lines = data.logicData.linesInGame;
     bet = lines * betline;
     firstRequest = true;
-    balance = (sessionName.balanceData.balance).toFixed() - sessionName.balanceData.totalWinningsInFeatureGame;
-    info = sessionName.logicData.table;
-    sessionUuid = sessionName.sessionData.sessionUuid;
-    if (sessionName.stateData.screen === 'featureGame') {
+    balance = (data.balanceData.balance).toFixed() - data.balanceData.totalWinningsInFeatureGame;
+    info = data.logicData.table;
+    sessionUuid = data.sessionData.sessionUuid;
+    if (data.stateData.screen === 'featureGame') {
         featureGameStatus = true;
+        balance = data.longData.balanceData['balance'] - data.longData.balanceData['totalPayoff'];
     }
-    freeSpinCountInit = sessionName.logicData.countOfMovesInFeatureGame - sessionName.stateData.moveNumberInFeatureGame;
-    mulFreespinInit = sessionName.logicData.multiplier;
-    allWinOldInit = sessionName.balanceData.totalWinningsInFeatureGame;
-    allFreeSpinCountInit = sessionName.logicData.countOfMovesInFeatureGame;
+    freeSpinCountInit = data.logicData.countOfMovesInFeatureGame - data.stateData.moveNumberInFeatureGame;
+    mulFreespinInit = data.logicData.multiplier;
+    allWinOldInit = data.balanceData.totalWinningsInFeatureGame;
+    allFreeSpinCountInit = data.logicData.countOfMovesInFeatureGame;
 }
 
 
