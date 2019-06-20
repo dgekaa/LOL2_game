@@ -254,7 +254,7 @@ class StatisticsCalculatorToolTest extends TestCase
         $screen = 'mainGame';
 
         $statisticsCalculatorTool = new StatisticsCalculatorTool();
-        $result = $statisticsCalculatorTool->calculateSpinCountOnMainGame(
+        $result = $statisticsCalculatorTool->calculateSpinCountInMainGame(
             $oldValue,
             $screen
         );

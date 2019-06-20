@@ -7,6 +7,7 @@ use App\Classes\Games\LifeOfLuxury2\Data\LogicData;
 use App\Classes\Games\LifeOfLuxury2\GameDirector;
 use App\Models\V2Session;
 
+
 class UserStatisticsTest extends TestCase
 {
     /**
@@ -18,114 +19,142 @@ class UserStatisticsTest extends TestCase
     {
         $check = true;
 
-        $game = $this->getGame();
-        $dataPool = $game->dataPool;
-        $workersPool = $game->workersPool;
-        $toolsPool = $game->toolsPool;
-        $instructionsPool = $game->instructionsPool;
-        $requestDataSets = $game->requestDataSets;
+        // удаление сессии
+        $session = V2Session::where('game_id', 2)->where('user_id', 1)->where('mode', 'demo')->get()->first();
+        if ($session) {
+            $session->delete();
+        }
 
-        $dataPool->logicData->linesInGame = 20;
-        $dataPool->logicData->table = [1,2,3,4,5,6,7,8,9,1,2,3,4,5,6];
-        $dataPool->stateData->screen = 'mainGame';
-        $dataPool->systemData->isSimulation = true;
+        $requestArray = [
+            "game_id" => "2",
+            "user_id" => "1",
+            "mode" => "demo",
+            "action" => "open_game",
+            "session_uuid" => "",
+            "token" => null
+        ];
 
-        $dataPool = $workersPool->statisticsWorker->getResultOfSpin($dataPool, $toolsPool);
+        $response = (new GameDirector())
+            ->build("demo")
+            ->executeAction($requestArray);
 
-        if ($dataPool->statisticsData->winnings !== 0) {
+
+        $sessionUuid = json_decode($response)->sessionData->sessionUuid;
+
+        // подготовка к выполнению спин действия
+        $requestArray = [
+            "game_id" => "2",
+            "user_id" => "1",
+            "mode" => "demo",
+            "action" => "spin",
+            "session_uuid" => $sessionUuid,
+            "token" => null,
+            "linesInGame" => "20",
+            "lineBet" => "1"
+        ];
+
+        //выпадает проигрышь
+        $table = [1,2,3,4,5,6,7,8,9,1,2,3,4,5,6];
+        $responseJson = (new GameDirector())
+            ->build("demo")
+            ->executeAction($requestArray, $table);
+
+        $response = json_decode($responseJson);
+
+        if ($response->statisticsData->winnings !== 0) {
             $check = false;
         }
-        if ($dataPool->statisticsData->winningsOnMainGame !== 0) {
+        if ($response->statisticsData->winningsOnMainGame !== 0) {
             $check = false;
         }
-        if ($dataPool->statisticsData->winningsOnFeatureGame !== 0) {
+        if ($response->statisticsData->winningsOnFeatureGame !== 0) {
             $check = false;
         }
-        if ($dataPool->statisticsData->loss !== 20) {
+        if ($response->statisticsData->loss !== 20) {
             $check = false;
         }
-        if ($dataPool->statisticsData->lossOnMainGame !== 20) {
+        if ($response->statisticsData->lossOnMainGame !== 20) {
             $check = false;
         }
-        if ($dataPool->statisticsData->lossOnFeatureGame !== 0) {
+        if ($response->statisticsData->lossOnFeatureGame !== 0) {
             $check = false;
         }
-        if ($dataPool->statisticsData->spinCount !== 1) {
+        if ($response->statisticsData->spinCount !== 1) {
             $check = false;
         }
-        if ($dataPool->statisticsData->spinCountInMainGame !== 1) {
+        if ($response->statisticsData->spinCountInMainGame !== 1) {
             $check = false;
         }
-        if ($dataPool->statisticsData->spinCountInFeatureGame !== 0) {
+        if ($response->statisticsData->spinCountInFeatureGame !== 0) {
             $check = false;
         }
-        if ($dataPool->statisticsData->winSpinCount !== 0) {
+        if ($response->statisticsData->winSpinCount !== 0) {
             $check = false;
         }
-        if ($dataPool->statisticsData->winSpinCountInMainGame !== 0) {
+        if ($response->statisticsData->winSpinCountInMainGame !== 0) {
             $check = false;
         }
-        if ($dataPool->statisticsData->winSpinCountInFeatureGame !== 0) {
+        if ($response->statisticsData->winSpinCountInFeatureGame !== 0) {
             $check = false;
         }
-        if ($dataPool->statisticsData->loseSpinCount !== 1) {
+        if ($response->statisticsData->loseSpinCount !== 1) {
             $check = false;
         }
-        if ($dataPool->statisticsData->loseSpinCountInMainGame !== 1) {
+        if ($response->statisticsData->loseSpinCountInMainGame !== 1) {
             $check = false;
         }
-        if ($dataPool->statisticsData->loseSpinCountInFeatureGame !== 0) {
+        if ($response->statisticsData->loseSpinCountInFeatureGame !== 0) {
             $check = false;
         }
-        if ($dataPool->statisticsData->featureGamesDropped !== 0) {
+        if ($response->statisticsData->featureGamesDropped !== 0) {
             $check = false;
         }
-        if ($dataPool->statisticsData->percentWinSpins != 0) {
+        if ($response->statisticsData->percentWinSpins != 0) {
             $check = false;
         }
-        if ($dataPool->statisticsData->percentWinSpinsInMainGame != 0) {
+        if ($response->statisticsData->percentWinSpinsInMainGame != 0) {
             $check = false;
         }
-        if ($dataPool->statisticsData->percentWinSpinsInFeatureGame != 0) {
+        if ($response->statisticsData->percentWinSpinsInFeatureGame != 0) {
             $check = false;
         }
-        if ($dataPool->statisticsData->percentLoseSpins != 100) {
+        if ($response->statisticsData->percentLoseSpins != 100) {
             $check = false;
         }
-        if ($dataPool->statisticsData->percentLoseSpinsInMainGame != 100) {
+        if ($response->statisticsData->percentLoseSpinsInMainGame != 100) {
             $check = false;
         }
-        if ($dataPool->statisticsData->percentLoseSpinsInFeatureGame != 0) {
+        if ($response->statisticsData->percentLoseSpinsInFeatureGame != 0) {
             $check = false;
         }
-        if ($dataPool->statisticsData->winPercent != 0) {
+        if ($response->statisticsData->winPercent != 0) {
             $check = false;
         }
-        if ($dataPool->statisticsData->winPercentOnMainGame != 0) {
+        if ($response->statisticsData->winPercentOnMainGame != 0) {
             $check = false;
         }
-        if ($dataPool->statisticsData->winPercentOnFeatureGame != 0) {
+        if ($response->statisticsData->winPercentOnFeatureGame != 0) {
             $check = false;
         }
-        if ($dataPool->statisticsData->statisticOfWinCombinations !== [[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0]]) {
+        if ($response->statisticsData->statisticOfWinCombinations !== [[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0]]) {
             $check = false;
         }
-        if ($dataPool->statisticsData->statisticOfWinCombinationsInMainGame !== [[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0]]) {
+        if ($response->statisticsData->statisticOfWinCombinationsInMainGame !== [[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0]]) {
             $check = false;
         }
-        if ($dataPool->statisticsData->statisticOfWinCombinationsInFeatureGame !== [[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0]]) {
+        if ($response->statisticsData->statisticOfWinCombinationsInFeatureGame !== [[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0]]) {
             $check = false;
         }
-        if ($dataPool->statisticsData->statisticsOfDroppedSymbols !== [0,2,2,2,2,2,2,1,1,1,0]) {
+        if ($response->statisticsData->statisticsOfDroppedSymbols !== [0,2,2,2,2,2,2,1,1,1,0]) {
             $check = false;
         }
-        if ($dataPool->statisticsData->statisticsOfDroppedSymbolsInMainGame !== [0,2,2,2,2,2,2,1,1,1,0]) {
+        if ($response->statisticsData->statisticsOfDroppedSymbolsInMainGame !== [0,2,2,2,2,2,2,1,1,1,0]) {
             $check = false;
         }
-        if ($dataPool->statisticsData->statisticsOfDroppedSymbolsInFeatureGame !== [0,0,0,0,0,0,0,0,0,0,0]) {
+        if ($response->statisticsData->statisticsOfDroppedSymbolsInFeatureGame !== [0,0,0,0,0,0,0,0,0,0,0]) {
             $check = false;
         }
-        if ($dataPool->statisticsData->statisticOfWinBonusCombinations !== [[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0]]) {
+        if ($response->statisticsData->statisticOfWinBonusCombinations !== [[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0]]) {
             $check = false;
         }
 
@@ -135,349 +164,455 @@ class UserStatisticsTest extends TestCase
     /**
      * Проверка работы spin
      * Условия: выпадают выигрыши по линиям
-     * Результат: все результирующие параметры говорят о проигрыше
+     * Результат: все результирующие параметры говорят о выигрыше
      */
-    // public function testStatisticsAfterActions2()
-    // {
-    //     $check = false;
-    //
-    //     $game = $this->getGame();
-    //     $dataPool = $game->dataPool;
-    //     $workersPool = $game->workersPool;
-    //     $toolsPool = $game->toolsPool;
-    //     $requestDataSets = $game->requestDataSets;
-    //
-    //     $requestArray = [
-    //         "game_id" => "2",
-    //         "user_id" => "1",
-    //         "mode" => "demo",
-    //         "action" => "open_game",
-    //         "session_uuid" => "",
-    //         "token" => null
-    //     ];
-    //
-    //     $response = (new GameDirector())
-    //         ->build("demo")
-    //         ->executeAction($requestArray);
-    //
-    //     $sessionUuid = json_decode($response)->sessionData->sessionUuid;
-    //
-    //     // подготовка к выполнению спин действия
-    //     $requestArray = [
-    //         "game_id" => "2",
-    //         "user_id" => "1",
-    //         "mode" => "demo",
-    //         "action" => "spin",
-    //         "session_uuid" => $sessionUuid,
-    //         "token" => null,
-    //         "linesInGame" => "20",
-    //         "lineBet" => "1"
-    //     ];
-    //
-    //
-    //     $table = [6,5,7,5,9,3,5,9,7,9,4,3,10,9,4];
-    //
-    //     $responseJson = (new GameDirector())
-    //         ->build("demo")
-    //         ->executeAction($requestArray, $table);
-    //
-    //     $response = json_decode($responseJson);
-    //
-    //     if ($dataPool->statisticsData->winnings !== ) {
-    //         $check = false;
-    //     }
-    //     if ($dataPool->statisticsData->winningsOnMainGame !== ) {
-    //         $check = false;
-    //     }
-    //     if ($dataPool->statisticsData->winningsOnFeatureGame !== ) {
-    //         $check = false;
-    //     }
-    //     if ($dataPool->statisticsData->loss !== ) {
-    //         $check = false;
-    //     }
-    //     if ($dataPool->statisticsData->lossOnMainGame !== ) {
-    //         $check = false;
-    //     }
-    //     if ($dataPool->statisticsData->lossOnFeatureGame !== ) {
-    //         $check = false;
-    //     }
-    //     if ($dataPool->statisticsData->spinCount !== ) {
-    //         $check = false;
-    //     }
-    //     if ($dataPool->statisticsData->spinCountInMainGame !== ) {
-    //         $check = false;
-    //     }
-    //     if ($dataPool->statisticsData->spinCountInFeatureGame !== ) {
-    //         $check = false;
-    //     }
-    //     if ($dataPool->statisticsData->featureGamesDropped !== ) {
-    //         $check = false;
-    //     }
-    //     if ($dataPool->statisticsData->percentWinSpins !== ) {
-    //         $check = false;
-    //     }
-    //     if ($dataPool->statisticsData->percentWinSpinsInMainGame !== ) {
-    //         $check = false;
-    //     }
-    //     if ($dataPool->statisticsData->percentWinSpinsInFeatureGame !== ) {
-    //         $check = false;
-    //     }
-    //     if ($dataPool->statisticsData->percentLoseSpins !== ) {
-    //         $check = false;
-    //     }
-    //     if ($dataPool->statisticsData->percentLoseSpinsInMainGame !== ) {
-    //         $check = false;
-    //     }
-    //     if ($dataPool->statisticsData->percentLoseSpinsInFeatureGame !== ) {
-    //         $check = false;
-    //     }
-    //     if ($dataPool->statisticsData->winPercent !== ) {
-    //         $check = false;
-    //     }
-    //     if ($dataPool->statisticsData->winPercentOnMainGame !== ) {
-    //         $check = false;
-    //     }
-    //     if ($dataPool->statisticsData->winPercentOnFeatureGame !== ) {
-    //         $check = false;
-    //     }
-    //     if ($dataPool->statisticsData->losePercent !== ) {
-    //         $check = false;
-    //     }
-    //     if ($dataPool->statisticsData->losePercentOnMainGame !== ) {
-    //         $check = false;
-    //     }
-    //     if ($dataPool->statisticsData->losePercentOnFeatureGame !== ) {
-    //         $check = false;
-    //     }
-    //     if ($dataPool->statisticsData->statisticOfWinCombinations !== ) {
-    //         $check = false;
-    //     }
-    //     if ($dataPool->statisticsData->statisticOfWinCombinationsInMainGame !== ) {
-    //         $check = false;
-    //     }
-    //     if ($dataPool->statisticsData->statisticOfWinCombinationsInFeatureGame !== ) {
-    //         $check = false;
-    //     }
-    //     if ($dataPool->statisticsData->statisticsOfDroppedSymbols !== ) {
-    //         $check = false;
-    //     }
-    //     if ($dataPool->statisticsData->statisticsOfDroppedSymbolsInMainGame !== ) {
-    //         $check = false;
-    //     }
-    //     if ($dataPool->statisticsData->statisticsOfDroppedSymbolsInFeatureGame !== ) {
-    //         $check = false;
-    //     }
-    //     if ($dataPool->statisticsData->statisticOfWinBonusCombinations !== ) {
-    //         $check = false;
-    //     }
-    //
-    //
-    //     $table = [2,5,6,5,2,6,4,6,7,2,1,8,10,3,7];
-    //     $responseJson = (new GameDirector())
-    //         ->build("demo")
-    //         ->executeAction($requestArray, $table);
-    //
-    //     $response = json_decode($responseJson);
-    //
-    //     if ($dataPool->statisticsData->screen !== 'mainGame') {
-    //         $check = false;
-    //     }
-    //
-    //
-    //     $table = [3,4,5,6,5,8,8,5,4,2,5,1,5,1,7];
-    //     $responseJson = (new GameDirector())
-    //         ->build("demo")
-    //         ->executeAction($requestArray, $table);
-    //
-    //     $response = json_decode($responseJson);
-    //
-    //     if ($dataPool->statisticsData->winnings !== ) {
-    //         $check = false;
-    //     }
-    //     if ($dataPool->statisticsData->winningsOnMainGame !== ) {
-    //         $check = false;
-    //     }
-    //     if ($dataPool->statisticsData->winningsOnFeatureGame !== ) {
-    //         $check = false;
-    //     }
-    //     if ($dataPool->statisticsData->loss !== ) {
-    //         $check = false;
-    //     }
-    //     if ($dataPool->statisticsData->lossOnMainGame !== ) {
-    //         $check = false;
-    //     }
-    //     if ($dataPool->statisticsData->lossOnFeatureGame !== ) {
-    //         $check = false;
-    //     }
-    //     if ($dataPool->statisticsData->spinCount !== ) {
-    //         $check = false;
-    //     }
-    //     if ($dataPool->statisticsData->spinCountInMainGame !== ) {
-    //         $check = false;
-    //     }
-    //     if ($dataPool->statisticsData->spinCountInFeatureGame !== ) {
-    //         $check = false;
-    //     }
-    //     if ($dataPool->statisticsData->featureGamesDropped !== ) {
-    //         $check = false;
-    //     }
-    //     if ($dataPool->statisticsData->percentWinSpins !== ) {
-    //         $check = false;
-    //     }
-    //     if ($dataPool->statisticsData->percentWinSpinsInMainGame !== ) {
-    //         $check = false;
-    //     }
-    //     if ($dataPool->statisticsData->percentWinSpinsInFeatureGame !== ) {
-    //         $check = false;
-    //     }
-    //     if ($dataPool->statisticsData->percentLoseSpins !== ) {
-    //         $check = false;
-    //     }
-    //     if ($dataPool->statisticsData->percentLoseSpinsInMainGame !== ) {
-    //         $check = false;
-    //     }
-    //     if ($dataPool->statisticsData->percentLoseSpinsInFeatureGame !== ) {
-    //         $check = false;
-    //     }
-    //     if ($dataPool->statisticsData->winPercent !== ) {
-    //         $check = false;
-    //     }
-    //     if ($dataPool->statisticsData->winPercentOnMainGame !== ) {
-    //         $check = false;
-    //     }
-    //     if ($dataPool->statisticsData->winPercentOnFeatureGame !== ) {
-    //         $check = false;
-    //     }
-    //     if ($dataPool->statisticsData->losePercent !== ) {
-    //         $check = false;
-    //     }
-    //     if ($dataPool->statisticsData->losePercentOnMainGame !== ) {
-    //         $check = false;
-    //     }
-    //     if ($dataPool->statisticsData->losePercentOnFeatureGame !== ) {
-    //         $check = false;
-    //     }
-    //     if ($dataPool->statisticsData->statisticOfWinCombinations !== ) {
-    //         $check = false;
-    //     }
-    //     if ($dataPool->statisticsData->statisticOfWinCombinationsInMainGame !== ) {
-    //         $check = false;
-    //     }
-    //     if ($dataPool->statisticsData->statisticOfWinCombinationsInFeatureGame !== ) {
-    //         $check = false;
-    //     }
-    //     if ($dataPool->statisticsData->statisticsOfDroppedSymbols !== ) {
-    //         $check = false;
-    //     }
-    //     if ($dataPool->statisticsData->statisticsOfDroppedSymbolsInMainGame !== ) {
-    //         $check = false;
-    //     }
-    //     if ($dataPool->statisticsData->statisticsOfDroppedSymbolsInFeatureGame !== ) {
-    //         $check = false;
-    //     }
-    //     if ($dataPool->statisticsData->statisticOfWinBonusCombinations !== ) {
-    //         $check = false;
-    //     }
-    //
-    //
-    //     $table = [2,4,7,8,7,0,8,3,0,6,4,5,8,4,3];
-    //     $responseJson = (new GameDirector())
-    //         ->build("demo")
-    //         ->executeAction($requestArray, $table);
-    //
-    //     $response = json_decode($responseJson);
-    //
-    //     if ($dataPool->statisticsData->winnings !== ) {
-    //         $check = false;
-    //     }
-    //     if ($dataPool->statisticsData->winningsOnMainGame !== ) {
-    //         $check = false;
-    //     }
-    //     if ($dataPool->statisticsData->winningsOnFeatureGame !== ) {
-    //         $check = false;
-    //     }
-    //     if ($dataPool->statisticsData->loss !== ) {
-    //         $check = false;
-    //     }
-    //     if ($dataPool->statisticsData->lossOnMainGame !== ) {
-    //         $check = false;
-    //     }
-    //     if ($dataPool->statisticsData->lossOnFeatureGame !== ) {
-    //         $check = false;
-    //     }
-    //     if ($dataPool->statisticsData->spinCount !== ) {
-    //         $check = false;
-    //     }
-    //     if ($dataPool->statisticsData->spinCountInMainGame !== ) {
-    //         $check = false;
-    //     }
-    //     if ($dataPool->statisticsData->spinCountInFeatureGame !== ) {
-    //         $check = false;
-    //     }
-    //     if ($dataPool->statisticsData->featureGamesDropped !== ) {
-    //         $check = false;
-    //     }
-    //     if ($dataPool->statisticsData->percentWinSpins !== ) {
-    //         $check = false;
-    //     }
-    //     if ($dataPool->statisticsData->percentWinSpinsInMainGame !== ) {
-    //         $check = false;
-    //     }
-    //     if ($dataPool->statisticsData->percentWinSpinsInFeatureGame !== ) {
-    //         $check = false;
-    //     }
-    //     if ($dataPool->statisticsData->percentLoseSpins !== ) {
-    //         $check = false;
-    //     }
-    //     if ($dataPool->statisticsData->percentLoseSpinsInMainGame !== ) {
-    //         $check = false;
-    //     }
-    //     if ($dataPool->statisticsData->percentLoseSpinsInFeatureGame !== ) {
-    //         $check = false;
-    //     }
-    //     if ($dataPool->statisticsData->winPercent !== ) {
-    //         $check = false;
-    //     }
-    //     if ($dataPool->statisticsData->winPercentOnMainGame !== ) {
-    //         $check = false;
-    //     }
-    //     if ($dataPool->statisticsData->winPercentOnFeatureGame !== ) {
-    //         $check = false;
-    //     }
-    //     if ($dataPool->statisticsData->losePercent !== ) {
-    //         $check = false;
-    //     }
-    //     if ($dataPool->statisticsData->losePercentOnMainGame !== ) {
-    //         $check = false;
-    //     }
-    //     if ($dataPool->statisticsData->losePercentOnFeatureGame !== ) {
-    //         $check = false;
-    //     }
-    //     if ($dataPool->statisticsData->statisticOfWinCombinations !== ) {
-    //         $check = false;
-    //     }
-    //     if ($dataPool->statisticsData->statisticOfWinCombinationsInMainGame !== ) {
-    //         $check = false;
-    //     }
-    //     if ($dataPool->statisticsData->statisticOfWinCombinationsInFeatureGame !== ) {
-    //         $check = false;
-    //     }
-    //     if ($dataPool->statisticsData->statisticsOfDroppedSymbols !== ) {
-    //         $check = false;
-    //     }
-    //     if ($dataPool->statisticsData->statisticsOfDroppedSymbolsInMainGame !== ) {
-    //         $check = false;
-    //     }
-    //     if ($dataPool->statisticsData->statisticsOfDroppedSymbolsInFeatureGame !== ) {
-    //         $check = false;
-    //     }
-    //     if ($dataPool->statisticsData->statisticOfWinBonusCombinations !== ) {
-    //         $check = false;
-    //     }
-    //
-    //     $this->assertTrue($check);
-    // }
-    //
+    public function testStatisticsAfterActions2()
+    {
+        $check = true;
+
+        // удаление сессии
+        $session = V2Session::where('game_id', 2)->where('user_id', 1)->where('mode', 'demo')->get()->first();
+        if ($session) {
+            $session->delete();
+        }
+
+        $requestArray = [
+            "game_id" => "2",
+            "user_id" => "1",
+            "mode" => "demo",
+            "action" => "open_game",
+            "session_uuid" => "",
+            "token" => null
+        ];
+
+        $response = (new GameDirector())
+            ->build("demo")
+            ->executeAction($requestArray);
+
+        $sessionUuid = json_decode($response)->sessionData->sessionUuid;
+
+        // подготовка к выполнению спин действия
+        $requestArray = [
+            "game_id" => "2",
+            "user_id" => "1",
+            "mode" => "demo",
+            "action" => "spin",
+            "session_uuid" => $sessionUuid,
+            "token" => null,
+            "linesInGame" => "20",
+            "lineBet" => "1"
+        ];
+
+
+        //выпадает выигрышь
+        $table = [6,5,7,5,9,3,5,9,7,9,4,3,10,9,4];
+        $responseJson = (new GameDirector())
+            ->build("demo")
+            ->executeAction($requestArray, $table);
+
+        $response = json_decode($responseJson);
+
+        if ($response->statisticsData->winnings !== 15) {
+            $check = false;
+        }
+        dd($response->statisticsData->winnings);
+        if ($response->statisticsData->winningsOnMainGame !== 15) {
+            $check = false;
+        }
+        if ($response->statisticsData->winningsOnFeatureGame !== 0) {
+            $check = false;
+        }
+        if ($response->statisticsData->loss !== 20) {
+            $check = false;
+        }
+        if ($response->statisticsData->lossOnMainGame !== 20) {
+            $check = false;
+        }
+        if ($response->statisticsData->lossOnFeatureGame !== 0) {
+            $check = false;
+        }
+        if ($response->statisticsData->spinCount !== 1) {
+            $check = false;
+        }
+        if ($response->statisticsData->spinCountInMainGame !== 1) {
+            $check = false;
+        }
+        if ($response->statisticsData->spinCountInFeatureGame !== 0) {
+            $check = false;
+        }
+        if ($response->statisticsData->winSpinCount !== 1) {
+            $check = false;
+        }
+        if ($response->statisticsData->winSpinCountInMainGame !== 1) {
+            $check = false;
+        }
+        if ($response->statisticsData->winSpinCountInFeatureGame !== 0) {
+            $check = false;
+        }
+        if ($response->statisticsData->loseSpinCount !== 0) {
+            $check = false;
+        }
+        if ($response->statisticsData->loseSpinCountInMainGame !== 0) {
+            $check = false;
+        }
+        if ($response->statisticsData->loseSpinCountInFeatureGame !== 0) {
+            $check = false;
+        }
+        if ($response->statisticsData->featureGamesDropped !== 0) {
+            $check = false;
+        }
+        if ($response->statisticsData->percentWinSpins != 100) {
+            $check = false;
+        }
+        if ($response->statisticsData->percentWinSpinsInMainGame != 100) {
+            $check = false;
+        }
+        if ($response->statisticsData->percentWinSpinsInFeatureGame != 0) {
+            $check = false;
+        }
+        if ($response->statisticsData->percentLoseSpins != 0) {
+            $check = false;
+        }
+        if ($response->statisticsData->percentLoseSpinsInMainGame != 0) {
+            $check = false;
+        }
+        if ($response->statisticsData->percentLoseSpinsInFeatureGame != 0) {
+            $check = false;
+        }
+        if ($response->statisticsData->winPercent != 75) {
+            $check = false;
+        }
+        if ($response->statisticsData->winPercentOnMainGame != 75) {
+            $check = false;
+        }
+        if ($response->statisticsData->winPercentOnFeatureGame != 0) {
+            $check = false;
+        }
+        if ($response->statisticsData->statisticOfWinCombinations !== [[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,1,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0]]) {
+            $check = false;
+        }
+        if ($response->statisticsData->statisticOfWinCombinationsInMainGame !== [[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,1,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0]]) {
+            $check = false;
+        }
+        if ($response->statisticsData->statisticOfWinCombinationsInFeatureGame !== [[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0]]) {
+            $check = false;
+        }
+        if ($response->statisticsData->statisticsOfDroppedSymbols !== [0,0,0,2,2,3,1,2,0,4,1]) {
+            $check = false;
+        }
+        if ($response->statisticsData->statisticsOfDroppedSymbolsInMainGame !== [0,2,2,2,2,2,2,1,1,1,0]) {
+            $check = false;
+        }
+        if ($response->statisticsData->statisticsOfDroppedSymbolsInFeatureGame !== [0,0,0,0,0,0,0,0,0,0,0]) {
+            $check = false;
+        }
+        if ($response->statisticsData->statisticOfWinBonusCombinations !== [[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0]]) {
+            $check = false;
+        }
+
+        $response->logicData->table = [2,5,6,5,2,6,4,6,7,2,1,8,10,3,7];
+        $dataPool = $workersPool->statisticsWorker->getResultOfSpin($dataPool, $toolsPool);
+
+        if ($response->statisticsData->winnings !== 0) {
+            $check = false;
+        }
+        if ($response->statisticsData->winningsOnMainGame !== 0) {
+            $check = false;
+        }
+        if ($response->statisticsData->winningsOnFeatureGame !== 0) {
+            $check = false;
+        }
+        if ($response->statisticsData->loss !== 20) {
+            $check = false;
+        }
+        if ($response->statisticsData->lossOnMainGame !== 20) {
+            $check = false;
+        }
+        if ($response->statisticsData->lossOnFeatureGame !== 0) {
+            $check = false;
+        }
+        if ($response->statisticsData->spinCount !== 1) {
+            $check = false;
+        }
+        if ($response->statisticsData->spinCountInMainGame !== 1) {
+            $check = false;
+        }
+        if ($response->statisticsData->spinCountInFeatureGame !== 0) {
+            $check = false;
+        }
+        if ($response->statisticsData->winSpinCount !== 0) {
+            $check = false;
+        }
+        if ($response->statisticsData->winSpinCountInMainGame !== 0) {
+            $check = false;
+        }
+        if ($response->statisticsData->winSpinCountInFeatureGame !== 0) {
+            $check = false;
+        }
+        if ($response->statisticsData->loseSpinCount !== 1) {
+            $check = false;
+        }
+        if ($response->statisticsData->loseSpinCountInMainGame !== 1) {
+            $check = false;
+        }
+        if ($response->statisticsData->loseSpinCountInFeatureGame !== 0) {
+            $check = false;
+        }
+        if ($response->statisticsData->featureGamesDropped !== 0) {
+            $check = false;
+        }
+        if ($response->statisticsData->percentWinSpins != 0) {
+            $check = false;
+        }
+        if ($response->statisticsData->percentWinSpinsInMainGame != 0) {
+            $check = false;
+        }
+        if ($response->statisticsData->percentWinSpinsInFeatureGame != 0) {
+            $check = false;
+        }
+        if ($response->statisticsData->percentLoseSpins != 100) {
+            $check = false;
+        }
+        if ($response->statisticsData->percentLoseSpinsInMainGame != 100) {
+            $check = false;
+        }
+        if ($response->statisticsData->percentLoseSpinsInFeatureGame != 0) {
+            $check = false;
+        }
+        if ($response->statisticsData->winPercent != 0) {
+            $check = false;
+        }
+        if ($response->statisticsData->winPercentOnMainGame != 0) {
+            $check = false;
+        }
+        if ($response->statisticsData->winPercentOnFeatureGame != 0) {
+            $check = false;
+        }
+        if ($response->statisticsData->statisticOfWinCombinations !== [[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0]]) {
+            $check = false;
+        }
+        if ($response->statisticsData->statisticOfWinCombinationsInMainGame !== [[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0]]) {
+            $check = false;
+        }
+        if ($response->statisticsData->statisticOfWinCombinationsInFeatureGame !== [[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0]]) {
+            $check = false;
+        }
+        if ($response->statisticsData->statisticsOfDroppedSymbols !== [0,2,2,2,2,2,2,1,1,1,0]) {
+            $check = false;
+        }
+        if ($response->statisticsData->statisticsOfDroppedSymbolsInMainGame !== [0,2,2,2,2,2,2,1,1,1,0]) {
+            $check = false;
+        }
+        if ($response->statisticsData->statisticsOfDroppedSymbolsInFeatureGame !== [0,0,0,0,0,0,0,0,0,0,0]) {
+            $check = false;
+        }
+        if ($response->statisticsData->statisticOfWinBonusCombinations !== [[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0]]) {
+            $check = false;
+        }
+
+        $response->logicData->table = [3,4,5,6,5,8,8,5,4,2,5,1,5,1,7];
+        $dataPool = $workersPool->statisticsWorker->getResultOfSpin($dataPool, $toolsPool);
+
+        if ($response->statisticsData->winnings !== 0) {
+            $check = false;
+        }
+        if ($response->statisticsData->winningsOnMainGame !== 0) {
+            $check = false;
+        }
+        if ($response->statisticsData->winningsOnFeatureGame !== 0) {
+            $check = false;
+        }
+        if ($response->statisticsData->loss !== 20) {
+            $check = false;
+        }
+        if ($response->statisticsData->lossOnMainGame !== 20) {
+            $check = false;
+        }
+        if ($response->statisticsData->lossOnFeatureGame !== 0) {
+            $check = false;
+        }
+        if ($response->statisticsData->spinCount !== 1) {
+            $check = false;
+        }
+        if ($response->statisticsData->spinCountInMainGame !== 1) {
+            $check = false;
+        }
+        if ($response->statisticsData->spinCountInFeatureGame !== 0) {
+            $check = false;
+        }
+        if ($response->statisticsData->winSpinCount !== 0) {
+            $check = false;
+        }
+        if ($response->statisticsData->winSpinCountInMainGame !== 0) {
+            $check = false;
+        }
+        if ($response->statisticsData->winSpinCountInFeatureGame !== 0) {
+            $check = false;
+        }
+        if ($response->statisticsData->loseSpinCount !== 1) {
+            $check = false;
+        }
+        if ($response->statisticsData->loseSpinCountInMainGame !== 1) {
+            $check = false;
+        }
+        if ($response->statisticsData->loseSpinCountInFeatureGame !== 0) {
+            $check = false;
+        }
+        if ($response->statisticsData->featureGamesDropped !== 0) {
+            $check = false;
+        }
+        if ($response->statisticsData->percentWinSpins != 0) {
+            $check = false;
+        }
+        if ($response->statisticsData->percentWinSpinsInMainGame != 0) {
+            $check = false;
+        }
+        if ($response->statisticsData->percentWinSpinsInFeatureGame != 0) {
+            $check = false;
+        }
+        if ($response->statisticsData->percentLoseSpins != 100) {
+            $check = false;
+        }
+        if ($response->statisticsData->percentLoseSpinsInMainGame != 100) {
+            $check = false;
+        }
+        if ($response->statisticsData->percentLoseSpinsInFeatureGame != 0) {
+            $check = false;
+        }
+        if ($response->statisticsData->winPercent != 0) {
+            $check = false;
+        }
+        if ($response->statisticsData->winPercentOnMainGame != 0) {
+            $check = false;
+        }
+        if ($response->statisticsData->winPercentOnFeatureGame != 0) {
+            $check = false;
+        }
+        if ($response->statisticsData->statisticOfWinCombinations !== [[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0]]) {
+            $check = false;
+        }
+        if ($response->statisticsData->statisticOfWinCombinationsInMainGame !== [[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0]]) {
+            $check = false;
+        }
+        if ($response->statisticsData->statisticOfWinCombinationsInFeatureGame !== [[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0]]) {
+            $check = false;
+        }
+        if ($response->statisticsData->statisticsOfDroppedSymbols !== [0,2,2,2,2,2,2,1,1,1,0]) {
+            $check = false;
+        }
+        if ($response->statisticsData->statisticsOfDroppedSymbolsInMainGame !== [0,2,2,2,2,2,2,1,1,1,0]) {
+            $check = false;
+        }
+        if ($response->statisticsData->statisticsOfDroppedSymbolsInFeatureGame !== [0,0,0,0,0,0,0,0,0,0,0]) {
+            $check = false;
+        }
+        if ($response->statisticsData->statisticOfWinBonusCombinations !== [[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0]]) {
+            $check = false;
+        }
+
+        $response->logicData->table = [2,4,7,8,7,0,8,3,0,6,4,5,8,4,3];
+        $dataPool = $workersPool->statisticsWorker->getResultOfSpin($dataPool, $toolsPool);
+
+        if ($response->statisticsData->winnings !== 0) {
+            $check = false;
+        }
+        if ($response->statisticsData->winningsOnMainGame !== 0) {
+            $check = false;
+        }
+        if ($response->statisticsData->winningsOnFeatureGame !== 0) {
+            $check = false;
+        }
+        if ($response->statisticsData->loss !== 20) {
+            $check = false;
+        }
+        if ($response->statisticsData->lossOnMainGame !== 20) {
+            $check = false;
+        }
+        if ($response->statisticsData->lossOnFeatureGame !== 0) {
+            $check = false;
+        }
+        if ($response->statisticsData->spinCount !== 1) {
+            $check = false;
+        }
+        if ($response->statisticsData->spinCountInMainGame !== 1) {
+            $check = false;
+        }
+        if ($response->statisticsData->spinCountInFeatureGame !== 0) {
+            $check = false;
+        }
+        if ($response->statisticsData->winSpinCount !== 0) {
+            $check = false;
+        }
+        if ($response->statisticsData->winSpinCountInMainGame !== 0) {
+            $check = false;
+        }
+        if ($response->statisticsData->winSpinCountInFeatureGame !== 0) {
+            $check = false;
+        }
+        if ($response->statisticsData->loseSpinCount !== 1) {
+            $check = false;
+        }
+        if ($response->statisticsData->loseSpinCountInMainGame !== 1) {
+            $check = false;
+        }
+        if ($response->statisticsData->loseSpinCountInFeatureGame !== 0) {
+            $check = false;
+        }
+        if ($response->statisticsData->featureGamesDropped !== 0) {
+            $check = false;
+        }
+        if ($response->statisticsData->percentWinSpins != 0) {
+            $check = false;
+        }
+        if ($response->statisticsData->percentWinSpinsInMainGame != 0) {
+            $check = false;
+        }
+        if ($response->statisticsData->percentWinSpinsInFeatureGame != 0) {
+            $check = false;
+        }
+        if ($response->statisticsData->percentLoseSpins != 100) {
+            $check = false;
+        }
+        if ($response->statisticsData->percentLoseSpinsInMainGame != 100) {
+            $check = false;
+        }
+        if ($response->statisticsData->percentLoseSpinsInFeatureGame != 0) {
+            $check = false;
+        }
+        if ($response->statisticsData->winPercent != 0) {
+            $check = false;
+        }
+        if ($response->statisticsData->winPercentOnMainGame != 0) {
+            $check = false;
+        }
+        if ($response->statisticsData->winPercentOnFeatureGame != 0) {
+            $check = false;
+        }
+        if ($response->statisticsData->statisticOfWinCombinations !== [[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0]]) {
+            $check = false;
+        }
+        if ($response->statisticsData->statisticOfWinCombinationsInMainGame !== [[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0]]) {
+            $check = false;
+        }
+        if ($response->statisticsData->statisticOfWinCombinationsInFeatureGame !== [[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0]]) {
+            $check = false;
+        }
+        if ($response->statisticsData->statisticsOfDroppedSymbols !== [0,2,2,2,2,2,2,1,1,1,0]) {
+            $check = false;
+        }
+        if ($response->statisticsData->statisticsOfDroppedSymbolsInMainGame !== [0,2,2,2,2,2,2,1,1,1,0]) {
+            $check = false;
+        }
+        if ($response->statisticsData->statisticsOfDroppedSymbolsInFeatureGame !== [0,0,0,0,0,0,0,0,0,0,0]) {
+            $check = false;
+        }
+        if ($response->statisticsData->statisticOfWinBonusCombinations !== [[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0]]) {
+            $check = false;
+        }
+
+        $this->assertTrue($check);
+    }
+
     // /**
     //  * Проверка работы free_spin в demo режиме
     //  * Условия: выпадают выигрыши по линиям
@@ -538,91 +673,91 @@ class UserStatisticsTest extends TestCase
     //     $balance = $balance + 40 - 20;
     //
     //
-    //     if ($dataPool->statisticsData->winnings !== ) {
+    //     if ($response->statisticsData->winnings !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->winningsOnMainGame !== ) {
+    //     if ($response->statisticsData->winningsOnMainGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->winningsOnFeatureGame !== ) {
+    //     if ($response->statisticsData->winningsOnFeatureGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->loss !== ) {
+    //     if ($response->statisticsData->loss !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->lossOnMainGame !== ) {
+    //     if ($response->statisticsData->lossOnMainGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->lossOnFeatureGame !== ) {
+    //     if ($response->statisticsData->lossOnFeatureGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->spinCount !== ) {
+    //     if ($response->statisticsData->spinCount !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->spinCountInMainGame !== ) {
+    //     if ($response->statisticsData->spinCountInMainGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->spinCountInFeatureGame !== ) {
+    //     if ($response->statisticsData->spinCountInFeatureGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->featureGamesDropped !== ) {
+    //     if ($response->statisticsData->featureGamesDropped !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->percentWinSpins !== ) {
+    //     if ($response->statisticsData->percentWinSpins !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->percentWinSpinsInMainGame !== ) {
+    //     if ($response->statisticsData->percentWinSpinsInMainGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->percentWinSpinsInFeatureGame !== ) {
+    //     if ($response->statisticsData->percentWinSpinsInFeatureGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->percentLoseSpins !== ) {
+    //     if ($response->statisticsData->percentLoseSpins !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->percentLoseSpinsInMainGame !== ) {
+    //     if ($response->statisticsData->percentLoseSpinsInMainGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->percentLoseSpinsInFeatureGame !== ) {
+    //     if ($response->statisticsData->percentLoseSpinsInFeatureGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->winPercent !== ) {
+    //     if ($response->statisticsData->winPercent !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->winPercentOnMainGame !== ) {
+    //     if ($response->statisticsData->winPercentOnMainGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->winPercentOnFeatureGame !== ) {
+    //     if ($response->statisticsData->winPercentOnFeatureGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->losePercent !== ) {
+    //     if ($response->statisticsData->losePercent !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->losePercentOnMainGame !== ) {
+    //     if ($response->statisticsData->losePercentOnMainGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->losePercentOnFeatureGame !== ) {
+    //     if ($response->statisticsData->losePercentOnFeatureGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->statisticOfWinCombinations !== ) {
+    //     if ($response->statisticsData->statisticOfWinCombinations !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->statisticOfWinCombinationsInMainGame !== ) {
+    //     if ($response->statisticsData->statisticOfWinCombinationsInMainGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->statisticOfWinCombinationsInFeatureGame !== ) {
+    //     if ($response->statisticsData->statisticOfWinCombinationsInFeatureGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->statisticsOfDroppedSymbols !== ) {
+    //     if ($response->statisticsData->statisticsOfDroppedSymbols !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->statisticsOfDroppedSymbolsInMainGame !== ) {
+    //     if ($response->statisticsData->statisticsOfDroppedSymbolsInMainGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->statisticsOfDroppedSymbolsInFeatureGame !== ) {
+    //     if ($response->statisticsData->statisticsOfDroppedSymbolsInFeatureGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->statisticOfWinBonusCombinations !== ) {
+    //     if ($response->statisticsData->statisticOfWinBonusCombinations !== ) {
     //         $check = false;
     //     }
     //
@@ -647,91 +782,91 @@ class UserStatisticsTest extends TestCase
     //     $response = json_decode($responseJson);
     //     $balance = $balance + 60;
     //
-    //     if ($dataPool->statisticsData->winnings !== ) {
+    //     if ($response->statisticsData->winnings !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->winningsOnMainGame !== ) {
+    //     if ($response->statisticsData->winningsOnMainGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->winningsOnFeatureGame !== ) {
+    //     if ($response->statisticsData->winningsOnFeatureGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->loss !== ) {
+    //     if ($response->statisticsData->loss !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->lossOnMainGame !== ) {
+    //     if ($response->statisticsData->lossOnMainGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->lossOnFeatureGame !== ) {
+    //     if ($response->statisticsData->lossOnFeatureGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->spinCount !== ) {
+    //     if ($response->statisticsData->spinCount !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->spinCountInMainGame !== ) {
+    //     if ($response->statisticsData->spinCountInMainGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->spinCountInFeatureGame !== ) {
+    //     if ($response->statisticsData->spinCountInFeatureGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->featureGamesDropped !== ) {
+    //     if ($response->statisticsData->featureGamesDropped !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->percentWinSpins !== ) {
+    //     if ($response->statisticsData->percentWinSpins !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->percentWinSpinsInMainGame !== ) {
+    //     if ($response->statisticsData->percentWinSpinsInMainGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->percentWinSpinsInFeatureGame !== ) {
+    //     if ($response->statisticsData->percentWinSpinsInFeatureGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->percentLoseSpins !== ) {
+    //     if ($response->statisticsData->percentLoseSpins !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->percentLoseSpinsInMainGame !== ) {
+    //     if ($response->statisticsData->percentLoseSpinsInMainGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->percentLoseSpinsInFeatureGame !== ) {
+    //     if ($response->statisticsData->percentLoseSpinsInFeatureGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->winPercent !== ) {
+    //     if ($response->statisticsData->winPercent !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->winPercentOnMainGame !== ) {
+    //     if ($response->statisticsData->winPercentOnMainGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->winPercentOnFeatureGame !== ) {
+    //     if ($response->statisticsData->winPercentOnFeatureGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->losePercent !== ) {
+    //     if ($response->statisticsData->losePercent !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->losePercentOnMainGame !== ) {
+    //     if ($response->statisticsData->losePercentOnMainGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->losePercentOnFeatureGame !== ) {
+    //     if ($response->statisticsData->losePercentOnFeatureGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->statisticOfWinCombinations !== ) {
+    //     if ($response->statisticsData->statisticOfWinCombinations !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->statisticOfWinCombinationsInMainGame !== ) {
+    //     if ($response->statisticsData->statisticOfWinCombinationsInMainGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->statisticOfWinCombinationsInFeatureGame !== ) {
+    //     if ($response->statisticsData->statisticOfWinCombinationsInFeatureGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->statisticsOfDroppedSymbols !== ) {
+    //     if ($response->statisticsData->statisticsOfDroppedSymbols !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->statisticsOfDroppedSymbolsInMainGame !== ) {
+    //     if ($response->statisticsData->statisticsOfDroppedSymbolsInMainGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->statisticsOfDroppedSymbolsInFeatureGame !== ) {
+    //     if ($response->statisticsData->statisticsOfDroppedSymbolsInFeatureGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->statisticOfWinBonusCombinations !== ) {
+    //     if ($response->statisticsData->statisticOfWinBonusCombinations !== ) {
     //         $check = false;
     //     }
     //
@@ -746,91 +881,91 @@ class UserStatisticsTest extends TestCase
     //
     //     $balance = $balance + 660;
     //
-    //     if ($dataPool->statisticsData->winnings !== ) {
+    //     if ($response->statisticsData->winnings !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->winningsOnMainGame !== ) {
+    //     if ($response->statisticsData->winningsOnMainGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->winningsOnFeatureGame !== ) {
+    //     if ($response->statisticsData->winningsOnFeatureGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->loss !== ) {
+    //     if ($response->statisticsData->loss !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->lossOnMainGame !== ) {
+    //     if ($response->statisticsData->lossOnMainGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->lossOnFeatureGame !== ) {
+    //     if ($response->statisticsData->lossOnFeatureGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->spinCount !== ) {
+    //     if ($response->statisticsData->spinCount !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->spinCountInMainGame !== ) {
+    //     if ($response->statisticsData->spinCountInMainGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->spinCountInFeatureGame !== ) {
+    //     if ($response->statisticsData->spinCountInFeatureGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->featureGamesDropped !== ) {
+    //     if ($response->statisticsData->featureGamesDropped !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->percentWinSpins !== ) {
+    //     if ($response->statisticsData->percentWinSpins !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->percentWinSpinsInMainGame !== ) {
+    //     if ($response->statisticsData->percentWinSpinsInMainGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->percentWinSpinsInFeatureGame !== ) {
+    //     if ($response->statisticsData->percentWinSpinsInFeatureGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->percentLoseSpins !== ) {
+    //     if ($response->statisticsData->percentLoseSpins !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->percentLoseSpinsInMainGame !== ) {
+    //     if ($response->statisticsData->percentLoseSpinsInMainGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->percentLoseSpinsInFeatureGame !== ) {
+    //     if ($response->statisticsData->percentLoseSpinsInFeatureGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->winPercent !== ) {
+    //     if ($response->statisticsData->winPercent !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->winPercentOnMainGame !== ) {
+    //     if ($response->statisticsData->winPercentOnMainGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->winPercentOnFeatureGame !== ) {
+    //     if ($response->statisticsData->winPercentOnFeatureGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->losePercent !== ) {
+    //     if ($response->statisticsData->losePercent !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->losePercentOnMainGame !== ) {
+    //     if ($response->statisticsData->losePercentOnMainGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->losePercentOnFeatureGame !== ) {
+    //     if ($response->statisticsData->losePercentOnFeatureGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->statisticOfWinCombinations !== ) {
+    //     if ($response->statisticsData->statisticOfWinCombinations !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->statisticOfWinCombinationsInMainGame !== ) {
+    //     if ($response->statisticsData->statisticOfWinCombinationsInMainGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->statisticOfWinCombinationsInFeatureGame !== ) {
+    //     if ($response->statisticsData->statisticOfWinCombinationsInFeatureGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->statisticsOfDroppedSymbols !== ) {
+    //     if ($response->statisticsData->statisticsOfDroppedSymbols !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->statisticsOfDroppedSymbolsInMainGame !== ) {
+    //     if ($response->statisticsData->statisticsOfDroppedSymbolsInMainGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->statisticsOfDroppedSymbolsInFeatureGame !== ) {
+    //     if ($response->statisticsData->statisticsOfDroppedSymbolsInFeatureGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->statisticOfWinBonusCombinations !== ) {
+    //     if ($response->statisticsData->statisticOfWinBonusCombinations !== ) {
     //         $check = false;
     //     }
     //
@@ -898,91 +1033,91 @@ class UserStatisticsTest extends TestCase
     //     $balance = $balance + 40 - 20;
     //
     //
-    //     if ($dataPool->statisticsData->winnings !== ) {
+    //     if ($response->statisticsData->winnings !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->winningsOnMainGame !== ) {
+    //     if ($response->statisticsData->winningsOnMainGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->winningsOnFeatureGame !== ) {
+    //     if ($response->statisticsData->winningsOnFeatureGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->loss !== ) {
+    //     if ($response->statisticsData->loss !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->lossOnMainGame !== ) {
+    //     if ($response->statisticsData->lossOnMainGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->lossOnFeatureGame !== ) {
+    //     if ($response->statisticsData->lossOnFeatureGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->spinCount !== ) {
+    //     if ($response->statisticsData->spinCount !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->spinCountInMainGame !== ) {
+    //     if ($response->statisticsData->spinCountInMainGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->spinCountInFeatureGame !== ) {
+    //     if ($response->statisticsData->spinCountInFeatureGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->featureGamesDropped !== ) {
+    //     if ($response->statisticsData->featureGamesDropped !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->percentWinSpins !== ) {
+    //     if ($response->statisticsData->percentWinSpins !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->percentWinSpinsInMainGame !== ) {
+    //     if ($response->statisticsData->percentWinSpinsInMainGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->percentWinSpinsInFeatureGame !== ) {
+    //     if ($response->statisticsData->percentWinSpinsInFeatureGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->percentLoseSpins !== ) {
+    //     if ($response->statisticsData->percentLoseSpins !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->percentLoseSpinsInMainGame !== ) {
+    //     if ($response->statisticsData->percentLoseSpinsInMainGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->percentLoseSpinsInFeatureGame !== ) {
+    //     if ($response->statisticsData->percentLoseSpinsInFeatureGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->winPercent !== ) {
+    //     if ($response->statisticsData->winPercent !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->winPercentOnMainGame !== ) {
+    //     if ($response->statisticsData->winPercentOnMainGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->winPercentOnFeatureGame !== ) {
+    //     if ($response->statisticsData->winPercentOnFeatureGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->losePercent !== ) {
+    //     if ($response->statisticsData->losePercent !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->losePercentOnMainGame !== ) {
+    //     if ($response->statisticsData->losePercentOnMainGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->losePercentOnFeatureGame !== ) {
+    //     if ($response->statisticsData->losePercentOnFeatureGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->statisticOfWinCombinations !== ) {
+    //     if ($response->statisticsData->statisticOfWinCombinations !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->statisticOfWinCombinationsInMainGame !== ) {
+    //     if ($response->statisticsData->statisticOfWinCombinationsInMainGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->statisticOfWinCombinationsInFeatureGame !== ) {
+    //     if ($response->statisticsData->statisticOfWinCombinationsInFeatureGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->statisticsOfDroppedSymbols !== ) {
+    //     if ($response->statisticsData->statisticsOfDroppedSymbols !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->statisticsOfDroppedSymbolsInMainGame !== ) {
+    //     if ($response->statisticsData->statisticsOfDroppedSymbolsInMainGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->statisticsOfDroppedSymbolsInFeatureGame !== ) {
+    //     if ($response->statisticsData->statisticsOfDroppedSymbolsInFeatureGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->statisticOfWinBonusCombinations !== ) {
+    //     if ($response->statisticsData->statisticOfWinBonusCombinations !== ) {
     //         $check = false;
     //     }
     //
@@ -1007,91 +1142,91 @@ class UserStatisticsTest extends TestCase
     //     $response = json_decode($responseJson);
     //     $balance = $balance + 120;
     //
-    //     if ($dataPool->statisticsData->winnings !== ) {
+    //     if ($response->statisticsData->winnings !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->winningsOnMainGame !== ) {
+    //     if ($response->statisticsData->winningsOnMainGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->winningsOnFeatureGame !== ) {
+    //     if ($response->statisticsData->winningsOnFeatureGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->loss !== ) {
+    //     if ($response->statisticsData->loss !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->lossOnMainGame !== ) {
+    //     if ($response->statisticsData->lossOnMainGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->lossOnFeatureGame !== ) {
+    //     if ($response->statisticsData->lossOnFeatureGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->spinCount !== ) {
+    //     if ($response->statisticsData->spinCount !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->spinCountInMainGame !== ) {
+    //     if ($response->statisticsData->spinCountInMainGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->spinCountInFeatureGame !== ) {
+    //     if ($response->statisticsData->spinCountInFeatureGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->featureGamesDropped !== ) {
+    //     if ($response->statisticsData->featureGamesDropped !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->percentWinSpins !== ) {
+    //     if ($response->statisticsData->percentWinSpins !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->percentWinSpinsInMainGame !== ) {
+    //     if ($response->statisticsData->percentWinSpinsInMainGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->percentWinSpinsInFeatureGame !== ) {
+    //     if ($response->statisticsData->percentWinSpinsInFeatureGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->percentLoseSpins !== ) {
+    //     if ($response->statisticsData->percentLoseSpins !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->percentLoseSpinsInMainGame !== ) {
+    //     if ($response->statisticsData->percentLoseSpinsInMainGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->percentLoseSpinsInFeatureGame !== ) {
+    //     if ($response->statisticsData->percentLoseSpinsInFeatureGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->winPercent !== ) {
+    //     if ($response->statisticsData->winPercent !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->winPercentOnMainGame !== ) {
+    //     if ($response->statisticsData->winPercentOnMainGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->winPercentOnFeatureGame !== ) {
+    //     if ($response->statisticsData->winPercentOnFeatureGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->losePercent !== ) {
+    //     if ($response->statisticsData->losePercent !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->losePercentOnMainGame !== ) {
+    //     if ($response->statisticsData->losePercentOnMainGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->losePercentOnFeatureGame !== ) {
+    //     if ($response->statisticsData->losePercentOnFeatureGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->statisticOfWinCombinations !== ) {
+    //     if ($response->statisticsData->statisticOfWinCombinations !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->statisticOfWinCombinationsInMainGame !== ) {
+    //     if ($response->statisticsData->statisticOfWinCombinationsInMainGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->statisticOfWinCombinationsInFeatureGame !== ) {
+    //     if ($response->statisticsData->statisticOfWinCombinationsInFeatureGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->statisticsOfDroppedSymbols !== ) {
+    //     if ($response->statisticsData->statisticsOfDroppedSymbols !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->statisticsOfDroppedSymbolsInMainGame !== ) {
+    //     if ($response->statisticsData->statisticsOfDroppedSymbolsInMainGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->statisticsOfDroppedSymbolsInFeatureGame !== ) {
+    //     if ($response->statisticsData->statisticsOfDroppedSymbolsInFeatureGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->statisticOfWinBonusCombinations !== ) {
+    //     if ($response->statisticsData->statisticOfWinBonusCombinations !== ) {
     //         $check = false;
     //     }
     //
@@ -1105,91 +1240,91 @@ class UserStatisticsTest extends TestCase
     //
     //     $balance = $balance + 5280;
     //
-    //     if ($dataPool->statisticsData->winnings !== ) {
+    //     if ($response->statisticsData->winnings !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->winningsOnMainGame !== ) {
+    //     if ($response->statisticsData->winningsOnMainGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->winningsOnFeatureGame !== ) {
+    //     if ($response->statisticsData->winningsOnFeatureGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->loss !== ) {
+    //     if ($response->statisticsData->loss !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->lossOnMainGame !== ) {
+    //     if ($response->statisticsData->lossOnMainGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->lossOnFeatureGame !== ) {
+    //     if ($response->statisticsData->lossOnFeatureGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->spinCount !== ) {
+    //     if ($response->statisticsData->spinCount !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->spinCountInMainGame !== ) {
+    //     if ($response->statisticsData->spinCountInMainGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->spinCountInFeatureGame !== ) {
+    //     if ($response->statisticsData->spinCountInFeatureGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->featureGamesDropped !== ) {
+    //     if ($response->statisticsData->featureGamesDropped !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->percentWinSpins !== ) {
+    //     if ($response->statisticsData->percentWinSpins !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->percentWinSpinsInMainGame !== ) {
+    //     if ($response->statisticsData->percentWinSpinsInMainGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->percentWinSpinsInFeatureGame !== ) {
+    //     if ($response->statisticsData->percentWinSpinsInFeatureGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->percentLoseSpins !== ) {
+    //     if ($response->statisticsData->percentLoseSpins !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->percentLoseSpinsInMainGame !== ) {
+    //     if ($response->statisticsData->percentLoseSpinsInMainGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->percentLoseSpinsInFeatureGame !== ) {
+    //     if ($response->statisticsData->percentLoseSpinsInFeatureGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->winPercent !== ) {
+    //     if ($response->statisticsData->winPercent !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->winPercentOnMainGame !== ) {
+    //     if ($response->statisticsData->winPercentOnMainGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->winPercentOnFeatureGame !== ) {
+    //     if ($response->statisticsData->winPercentOnFeatureGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->losePercent !== ) {
+    //     if ($response->statisticsData->losePercent !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->losePercentOnMainGame !== ) {
+    //     if ($response->statisticsData->losePercentOnMainGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->losePercentOnFeatureGame !== ) {
+    //     if ($response->statisticsData->losePercentOnFeatureGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->statisticOfWinCombinations !== ) {
+    //     if ($response->statisticsData->statisticOfWinCombinations !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->statisticOfWinCombinationsInMainGame !== ) {
+    //     if ($response->statisticsData->statisticOfWinCombinationsInMainGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->statisticOfWinCombinationsInFeatureGame !== ) {
+    //     if ($response->statisticsData->statisticOfWinCombinationsInFeatureGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->statisticsOfDroppedSymbols !== ) {
+    //     if ($response->statisticsData->statisticsOfDroppedSymbols !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->statisticsOfDroppedSymbolsInMainGame !== ) {
+    //     if ($response->statisticsData->statisticsOfDroppedSymbolsInMainGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->statisticsOfDroppedSymbolsInFeatureGame !== ) {
+    //     if ($response->statisticsData->statisticsOfDroppedSymbolsInFeatureGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->statisticOfWinBonusCombinations !== ) {
+    //     if ($response->statisticsData->statisticOfWinBonusCombinations !== ) {
     //         $check = false;
     //     }
     //
@@ -1255,91 +1390,91 @@ class UserStatisticsTest extends TestCase
     //     $response = json_decode($responseJson);
     //     $balance = $balance + 40 - 20;
     //
-    //     if ($dataPool->statisticsData->winnings !== ) {
+    //     if ($response->statisticsData->winnings !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->winningsOnMainGame !== ) {
+    //     if ($response->statisticsData->winningsOnMainGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->winningsOnFeatureGame !== ) {
+    //     if ($response->statisticsData->winningsOnFeatureGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->loss !== ) {
+    //     if ($response->statisticsData->loss !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->lossOnMainGame !== ) {
+    //     if ($response->statisticsData->lossOnMainGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->lossOnFeatureGame !== ) {
+    //     if ($response->statisticsData->lossOnFeatureGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->spinCount !== ) {
+    //     if ($response->statisticsData->spinCount !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->spinCountInMainGame !== ) {
+    //     if ($response->statisticsData->spinCountInMainGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->spinCountInFeatureGame !== ) {
+    //     if ($response->statisticsData->spinCountInFeatureGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->featureGamesDropped !== ) {
+    //     if ($response->statisticsData->featureGamesDropped !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->percentWinSpins !== ) {
+    //     if ($response->statisticsData->percentWinSpins !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->percentWinSpinsInMainGame !== ) {
+    //     if ($response->statisticsData->percentWinSpinsInMainGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->percentWinSpinsInFeatureGame !== ) {
+    //     if ($response->statisticsData->percentWinSpinsInFeatureGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->percentLoseSpins !== ) {
+    //     if ($response->statisticsData->percentLoseSpins !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->percentLoseSpinsInMainGame !== ) {
+    //     if ($response->statisticsData->percentLoseSpinsInMainGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->percentLoseSpinsInFeatureGame !== ) {
+    //     if ($response->statisticsData->percentLoseSpinsInFeatureGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->winPercent !== ) {
+    //     if ($response->statisticsData->winPercent !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->winPercentOnMainGame !== ) {
+    //     if ($response->statisticsData->winPercentOnMainGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->winPercentOnFeatureGame !== ) {
+    //     if ($response->statisticsData->winPercentOnFeatureGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->losePercent !== ) {
+    //     if ($response->statisticsData->losePercent !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->losePercentOnMainGame !== ) {
+    //     if ($response->statisticsData->losePercentOnMainGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->losePercentOnFeatureGame !== ) {
+    //     if ($response->statisticsData->losePercentOnFeatureGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->statisticOfWinCombinations !== ) {
+    //     if ($response->statisticsData->statisticOfWinCombinations !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->statisticOfWinCombinationsInMainGame !== ) {
+    //     if ($response->statisticsData->statisticOfWinCombinationsInMainGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->statisticOfWinCombinationsInFeatureGame !== ) {
+    //     if ($response->statisticsData->statisticOfWinCombinationsInFeatureGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->statisticsOfDroppedSymbols !== ) {
+    //     if ($response->statisticsData->statisticsOfDroppedSymbols !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->statisticsOfDroppedSymbolsInMainGame !== ) {
+    //     if ($response->statisticsData->statisticsOfDroppedSymbolsInMainGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->statisticsOfDroppedSymbolsInFeatureGame !== ) {
+    //     if ($response->statisticsData->statisticsOfDroppedSymbolsInFeatureGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->statisticOfWinBonusCombinations !== ) {
+    //     if ($response->statisticsData->statisticOfWinBonusCombinations !== ) {
     //         $check = false;
     //     }
     //
@@ -1363,91 +1498,91 @@ class UserStatisticsTest extends TestCase
     //     $response = json_decode($responseJson);
     //     $balance = $balance + 60;
     //
-    //     if ($dataPool->statisticsData->winnings !== ) {
+    //     if ($response->statisticsData->winnings !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->winningsOnMainGame !== ) {
+    //     if ($response->statisticsData->winningsOnMainGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->winningsOnFeatureGame !== ) {
+    //     if ($response->statisticsData->winningsOnFeatureGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->loss !== ) {
+    //     if ($response->statisticsData->loss !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->lossOnMainGame !== ) {
+    //     if ($response->statisticsData->lossOnMainGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->lossOnFeatureGame !== ) {
+    //     if ($response->statisticsData->lossOnFeatureGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->spinCount !== ) {
+    //     if ($response->statisticsData->spinCount !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->spinCountInMainGame !== ) {
+    //     if ($response->statisticsData->spinCountInMainGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->spinCountInFeatureGame !== ) {
+    //     if ($response->statisticsData->spinCountInFeatureGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->featureGamesDropped !== ) {
+    //     if ($response->statisticsData->featureGamesDropped !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->percentWinSpins !== ) {
+    //     if ($response->statisticsData->percentWinSpins !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->percentWinSpinsInMainGame !== ) {
+    //     if ($response->statisticsData->percentWinSpinsInMainGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->percentWinSpinsInFeatureGame !== ) {
+    //     if ($response->statisticsData->percentWinSpinsInFeatureGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->percentLoseSpins !== ) {
+    //     if ($response->statisticsData->percentLoseSpins !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->percentLoseSpinsInMainGame !== ) {
+    //     if ($response->statisticsData->percentLoseSpinsInMainGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->percentLoseSpinsInFeatureGame !== ) {
+    //     if ($response->statisticsData->percentLoseSpinsInFeatureGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->winPercent !== ) {
+    //     if ($response->statisticsData->winPercent !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->winPercentOnMainGame !== ) {
+    //     if ($response->statisticsData->winPercentOnMainGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->winPercentOnFeatureGame !== ) {
+    //     if ($response->statisticsData->winPercentOnFeatureGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->losePercent !== ) {
+    //     if ($response->statisticsData->losePercent !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->losePercentOnMainGame !== ) {
+    //     if ($response->statisticsData->losePercentOnMainGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->losePercentOnFeatureGame !== ) {
+    //     if ($response->statisticsData->losePercentOnFeatureGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->statisticOfWinCombinations !== ) {
+    //     if ($response->statisticsData->statisticOfWinCombinations !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->statisticOfWinCombinationsInMainGame !== ) {
+    //     if ($response->statisticsData->statisticOfWinCombinationsInMainGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->statisticOfWinCombinationsInFeatureGame !== ) {
+    //     if ($response->statisticsData->statisticOfWinCombinationsInFeatureGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->statisticsOfDroppedSymbols !== ) {
+    //     if ($response->statisticsData->statisticsOfDroppedSymbols !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->statisticsOfDroppedSymbolsInMainGame !== ) {
+    //     if ($response->statisticsData->statisticsOfDroppedSymbolsInMainGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->statisticsOfDroppedSymbolsInFeatureGame !== ) {
+    //     if ($response->statisticsData->statisticsOfDroppedSymbolsInFeatureGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->statisticOfWinBonusCombinations !== ) {
+    //     if ($response->statisticsData->statisticOfWinBonusCombinations !== ) {
     //         $check = false;
     //     }
     //
@@ -1473,91 +1608,91 @@ class UserStatisticsTest extends TestCase
     //
     //
     //
-    //     if ($dataPool->statisticsData->winnings !== ) {
+    //     if ($response->statisticsData->winnings !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->winningsOnMainGame !== ) {
+    //     if ($response->statisticsData->winningsOnMainGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->winningsOnFeatureGame !== ) {
+    //     if ($response->statisticsData->winningsOnFeatureGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->loss !== ) {
+    //     if ($response->statisticsData->loss !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->lossOnMainGame !== ) {
+    //     if ($response->statisticsData->lossOnMainGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->lossOnFeatureGame !== ) {
+    //     if ($response->statisticsData->lossOnFeatureGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->spinCount !== ) {
+    //     if ($response->statisticsData->spinCount !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->spinCountInMainGame !== ) {
+    //     if ($response->statisticsData->spinCountInMainGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->spinCountInFeatureGame !== ) {
+    //     if ($response->statisticsData->spinCountInFeatureGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->featureGamesDropped !== ) {
+    //     if ($response->statisticsData->featureGamesDropped !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->percentWinSpins !== ) {
+    //     if ($response->statisticsData->percentWinSpins !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->percentWinSpinsInMainGame !== ) {
+    //     if ($response->statisticsData->percentWinSpinsInMainGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->percentWinSpinsInFeatureGame !== ) {
+    //     if ($response->statisticsData->percentWinSpinsInFeatureGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->percentLoseSpins !== ) {
+    //     if ($response->statisticsData->percentLoseSpins !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->percentLoseSpinsInMainGame !== ) {
+    //     if ($response->statisticsData->percentLoseSpinsInMainGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->percentLoseSpinsInFeatureGame !== ) {
+    //     if ($response->statisticsData->percentLoseSpinsInFeatureGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->winPercent !== ) {
+    //     if ($response->statisticsData->winPercent !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->winPercentOnMainGame !== ) {
+    //     if ($response->statisticsData->winPercentOnMainGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->winPercentOnFeatureGame !== ) {
+    //     if ($response->statisticsData->winPercentOnFeatureGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->losePercent !== ) {
+    //     if ($response->statisticsData->losePercent !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->losePercentOnMainGame !== ) {
+    //     if ($response->statisticsData->losePercentOnMainGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->losePercentOnFeatureGame !== ) {
+    //     if ($response->statisticsData->losePercentOnFeatureGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->statisticOfWinCombinations !== ) {
+    //     if ($response->statisticsData->statisticOfWinCombinations !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->statisticOfWinCombinationsInMainGame !== ) {
+    //     if ($response->statisticsData->statisticOfWinCombinationsInMainGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->statisticOfWinCombinationsInFeatureGame !== ) {
+    //     if ($response->statisticsData->statisticOfWinCombinationsInFeatureGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->statisticsOfDroppedSymbols !== ) {
+    //     if ($response->statisticsData->statisticsOfDroppedSymbols !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->statisticsOfDroppedSymbolsInMainGame !== ) {
+    //     if ($response->statisticsData->statisticsOfDroppedSymbolsInMainGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->statisticsOfDroppedSymbolsInFeatureGame !== ) {
+    //     if ($response->statisticsData->statisticsOfDroppedSymbolsInFeatureGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->statisticOfWinBonusCombinations !== ) {
+    //     if ($response->statisticsData->statisticOfWinBonusCombinations !== ) {
     //         $check = false;
     //     }
     //
@@ -1571,91 +1706,91 @@ class UserStatisticsTest extends TestCase
     //
     //     $balance = $balance;
     //
-    //     if ($dataPool->statisticsData->winnings !== ) {
+    //     if ($response->statisticsData->winnings !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->winningsOnMainGame !== ) {
+    //     if ($response->statisticsData->winningsOnMainGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->winningsOnFeatureGame !== ) {
+    //     if ($response->statisticsData->winningsOnFeatureGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->loss !== ) {
+    //     if ($response->statisticsData->loss !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->lossOnMainGame !== ) {
+    //     if ($response->statisticsData->lossOnMainGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->lossOnFeatureGame !== ) {
+    //     if ($response->statisticsData->lossOnFeatureGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->spinCount !== ) {
+    //     if ($response->statisticsData->spinCount !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->spinCountInMainGame !== ) {
+    //     if ($response->statisticsData->spinCountInMainGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->spinCountInFeatureGame !== ) {
+    //     if ($response->statisticsData->spinCountInFeatureGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->featureGamesDropped !== ) {
+    //     if ($response->statisticsData->featureGamesDropped !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->percentWinSpins !== ) {
+    //     if ($response->statisticsData->percentWinSpins !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->percentWinSpinsInMainGame !== ) {
+    //     if ($response->statisticsData->percentWinSpinsInMainGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->percentWinSpinsInFeatureGame !== ) {
+    //     if ($response->statisticsData->percentWinSpinsInFeatureGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->percentLoseSpins !== ) {
+    //     if ($response->statisticsData->percentLoseSpins !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->percentLoseSpinsInMainGame !== ) {
+    //     if ($response->statisticsData->percentLoseSpinsInMainGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->percentLoseSpinsInFeatureGame !== ) {
+    //     if ($response->statisticsData->percentLoseSpinsInFeatureGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->winPercent !== ) {
+    //     if ($response->statisticsData->winPercent !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->winPercentOnMainGame !== ) {
+    //     if ($response->statisticsData->winPercentOnMainGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->winPercentOnFeatureGame !== ) {
+    //     if ($response->statisticsData->winPercentOnFeatureGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->losePercent !== ) {
+    //     if ($response->statisticsData->losePercent !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->losePercentOnMainGame !== ) {
+    //     if ($response->statisticsData->losePercentOnMainGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->losePercentOnFeatureGame !== ) {
+    //     if ($response->statisticsData->losePercentOnFeatureGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->statisticOfWinCombinations !== ) {
+    //     if ($response->statisticsData->statisticOfWinCombinations !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->statisticOfWinCombinationsInMainGame !== ) {
+    //     if ($response->statisticsData->statisticOfWinCombinationsInMainGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->statisticOfWinCombinationsInFeatureGame !== ) {
+    //     if ($response->statisticsData->statisticOfWinCombinationsInFeatureGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->statisticsOfDroppedSymbols !== ) {
+    //     if ($response->statisticsData->statisticsOfDroppedSymbols !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->statisticsOfDroppedSymbolsInMainGame !== ) {
+    //     if ($response->statisticsData->statisticsOfDroppedSymbolsInMainGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->statisticsOfDroppedSymbolsInFeatureGame !== ) {
+    //     if ($response->statisticsData->statisticsOfDroppedSymbolsInFeatureGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->statisticOfWinBonusCombinations !== ) {
+    //     if ($response->statisticsData->statisticOfWinBonusCombinations !== ) {
     //         $check = false;
     //     }
     //
@@ -1667,91 +1802,91 @@ class UserStatisticsTest extends TestCase
     //     $response = json_decode($responseJson);
     //     $balance = $balance + 240;
     //
-    //     if ($dataPool->statisticsData->winnings !== ) {
+    //     if ($response->statisticsData->winnings !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->winningsOnMainGame !== ) {
+    //     if ($response->statisticsData->winningsOnMainGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->winningsOnFeatureGame !== ) {
+    //     if ($response->statisticsData->winningsOnFeatureGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->loss !== ) {
+    //     if ($response->statisticsData->loss !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->lossOnMainGame !== ) {
+    //     if ($response->statisticsData->lossOnMainGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->lossOnFeatureGame !== ) {
+    //     if ($response->statisticsData->lossOnFeatureGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->spinCount !== ) {
+    //     if ($response->statisticsData->spinCount !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->spinCountInMainGame !== ) {
+    //     if ($response->statisticsData->spinCountInMainGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->spinCountInFeatureGame !== ) {
+    //     if ($response->statisticsData->spinCountInFeatureGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->featureGamesDropped !== ) {
+    //     if ($response->statisticsData->featureGamesDropped !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->percentWinSpins !== ) {
+    //     if ($response->statisticsData->percentWinSpins !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->percentWinSpinsInMainGame !== ) {
+    //     if ($response->statisticsData->percentWinSpinsInMainGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->percentWinSpinsInFeatureGame !== ) {
+    //     if ($response->statisticsData->percentWinSpinsInFeatureGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->percentLoseSpins !== ) {
+    //     if ($response->statisticsData->percentLoseSpins !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->percentLoseSpinsInMainGame !== ) {
+    //     if ($response->statisticsData->percentLoseSpinsInMainGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->percentLoseSpinsInFeatureGame !== ) {
+    //     if ($response->statisticsData->percentLoseSpinsInFeatureGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->winPercent !== ) {
+    //     if ($response->statisticsData->winPercent !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->winPercentOnMainGame !== ) {
+    //     if ($response->statisticsData->winPercentOnMainGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->winPercentOnFeatureGame !== ) {
+    //     if ($response->statisticsData->winPercentOnFeatureGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->losePercent !== ) {
+    //     if ($response->statisticsData->losePercent !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->losePercentOnMainGame !== ) {
+    //     if ($response->statisticsData->losePercentOnMainGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->losePercentOnFeatureGame !== ) {
+    //     if ($response->statisticsData->losePercentOnFeatureGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->statisticOfWinCombinations !== ) {
+    //     if ($response->statisticsData->statisticOfWinCombinations !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->statisticOfWinCombinationsInMainGame !== ) {
+    //     if ($response->statisticsData->statisticOfWinCombinationsInMainGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->statisticOfWinCombinationsInFeatureGame !== ) {
+    //     if ($response->statisticsData->statisticOfWinCombinationsInFeatureGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->statisticsOfDroppedSymbols !== ) {
+    //     if ($response->statisticsData->statisticsOfDroppedSymbols !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->statisticsOfDroppedSymbolsInMainGame !== ) {
+    //     if ($response->statisticsData->statisticsOfDroppedSymbolsInMainGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->statisticsOfDroppedSymbolsInFeatureGame !== ) {
+    //     if ($response->statisticsData->statisticsOfDroppedSymbolsInFeatureGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->statisticOfWinBonusCombinations !== ) {
+    //     if ($response->statisticsData->statisticOfWinBonusCombinations !== ) {
     //         $check = false;
     //     }
     //
@@ -1765,91 +1900,91 @@ class UserStatisticsTest extends TestCase
     //
     //     $balance = $balance;
     //
-    //     if ($dataPool->statisticsData->winnings !== ) {
+    //     if ($response->statisticsData->winnings !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->winningsOnMainGame !== ) {
+    //     if ($response->statisticsData->winningsOnMainGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->winningsOnFeatureGame !== ) {
+    //     if ($response->statisticsData->winningsOnFeatureGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->loss !== ) {
+    //     if ($response->statisticsData->loss !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->lossOnMainGame !== ) {
+    //     if ($response->statisticsData->lossOnMainGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->lossOnFeatureGame !== ) {
+    //     if ($response->statisticsData->lossOnFeatureGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->spinCount !== ) {
+    //     if ($response->statisticsData->spinCount !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->spinCountInMainGame !== ) {
+    //     if ($response->statisticsData->spinCountInMainGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->spinCountInFeatureGame !== ) {
+    //     if ($response->statisticsData->spinCountInFeatureGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->featureGamesDropped !== ) {
+    //     if ($response->statisticsData->featureGamesDropped !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->percentWinSpins !== ) {
+    //     if ($response->statisticsData->percentWinSpins !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->percentWinSpinsInMainGame !== ) {
+    //     if ($response->statisticsData->percentWinSpinsInMainGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->percentWinSpinsInFeatureGame !== ) {
+    //     if ($response->statisticsData->percentWinSpinsInFeatureGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->percentLoseSpins !== ) {
+    //     if ($response->statisticsData->percentLoseSpins !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->percentLoseSpinsInMainGame !== ) {
+    //     if ($response->statisticsData->percentLoseSpinsInMainGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->percentLoseSpinsInFeatureGame !== ) {
+    //     if ($response->statisticsData->percentLoseSpinsInFeatureGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->winPercent !== ) {
+    //     if ($response->statisticsData->winPercent !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->winPercentOnMainGame !== ) {
+    //     if ($response->statisticsData->winPercentOnMainGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->winPercentOnFeatureGame !== ) {
+    //     if ($response->statisticsData->winPercentOnFeatureGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->losePercent !== ) {
+    //     if ($response->statisticsData->losePercent !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->losePercentOnMainGame !== ) {
+    //     if ($response->statisticsData->losePercentOnMainGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->losePercentOnFeatureGame !== ) {
+    //     if ($response->statisticsData->losePercentOnFeatureGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->statisticOfWinCombinations !== ) {
+    //     if ($response->statisticsData->statisticOfWinCombinations !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->statisticOfWinCombinationsInMainGame !== ) {
+    //     if ($response->statisticsData->statisticOfWinCombinationsInMainGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->statisticOfWinCombinationsInFeatureGame !== ) {
+    //     if ($response->statisticsData->statisticOfWinCombinationsInFeatureGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->statisticsOfDroppedSymbols !== ) {
+    //     if ($response->statisticsData->statisticsOfDroppedSymbols !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->statisticsOfDroppedSymbolsInMainGame !== ) {
+    //     if ($response->statisticsData->statisticsOfDroppedSymbolsInMainGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->statisticsOfDroppedSymbolsInFeatureGame !== ) {
+    //     if ($response->statisticsData->statisticsOfDroppedSymbolsInFeatureGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->statisticOfWinBonusCombinations !== ) {
+    //     if ($response->statisticsData->statisticOfWinBonusCombinations !== ) {
     //         $check = false;
     //     }
     //
@@ -1874,91 +2009,91 @@ class UserStatisticsTest extends TestCase
     //     $response = json_decode($responseJson);
     //     $balance = $balance + 60 - 20;
     //
-    //     if ($dataPool->statisticsData->winnings !== ) {
+    //     if ($response->statisticsData->winnings !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->winningsOnMainGame !== ) {
+    //     if ($response->statisticsData->winningsOnMainGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->winningsOnFeatureGame !== ) {
+    //     if ($response->statisticsData->winningsOnFeatureGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->loss !== ) {
+    //     if ($response->statisticsData->loss !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->lossOnMainGame !== ) {
+    //     if ($response->statisticsData->lossOnMainGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->lossOnFeatureGame !== ) {
+    //     if ($response->statisticsData->lossOnFeatureGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->spinCount !== ) {
+    //     if ($response->statisticsData->spinCount !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->spinCountInMainGame !== ) {
+    //     if ($response->statisticsData->spinCountInMainGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->spinCountInFeatureGame !== ) {
+    //     if ($response->statisticsData->spinCountInFeatureGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->featureGamesDropped !== ) {
+    //     if ($response->statisticsData->featureGamesDropped !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->percentWinSpins !== ) {
+    //     if ($response->statisticsData->percentWinSpins !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->percentWinSpinsInMainGame !== ) {
+    //     if ($response->statisticsData->percentWinSpinsInMainGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->percentWinSpinsInFeatureGame !== ) {
+    //     if ($response->statisticsData->percentWinSpinsInFeatureGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->percentLoseSpins !== ) {
+    //     if ($response->statisticsData->percentLoseSpins !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->percentLoseSpinsInMainGame !== ) {
+    //     if ($response->statisticsData->percentLoseSpinsInMainGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->percentLoseSpinsInFeatureGame !== ) {
+    //     if ($response->statisticsData->percentLoseSpinsInFeatureGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->winPercent !== ) {
+    //     if ($response->statisticsData->winPercent !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->winPercentOnMainGame !== ) {
+    //     if ($response->statisticsData->winPercentOnMainGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->winPercentOnFeatureGame !== ) {
+    //     if ($response->statisticsData->winPercentOnFeatureGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->losePercent !== ) {
+    //     if ($response->statisticsData->losePercent !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->losePercentOnMainGame !== ) {
+    //     if ($response->statisticsData->losePercentOnMainGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->losePercentOnFeatureGame !== ) {
+    //     if ($response->statisticsData->losePercentOnFeatureGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->statisticOfWinCombinations !== ) {
+    //     if ($response->statisticsData->statisticOfWinCombinations !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->statisticOfWinCombinationsInMainGame !== ) {
+    //     if ($response->statisticsData->statisticOfWinCombinationsInMainGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->statisticOfWinCombinationsInFeatureGame !== ) {
+    //     if ($response->statisticsData->statisticOfWinCombinationsInFeatureGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->statisticsOfDroppedSymbols !== ) {
+    //     if ($response->statisticsData->statisticsOfDroppedSymbols !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->statisticsOfDroppedSymbolsInMainGame !== ) {
+    //     if ($response->statisticsData->statisticsOfDroppedSymbolsInMainGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->statisticsOfDroppedSymbolsInFeatureGame !== ) {
+    //     if ($response->statisticsData->statisticsOfDroppedSymbolsInFeatureGame !== ) {
     //         $check = false;
     //     }
-    //     if ($dataPool->statisticsData->statisticOfWinBonusCombinations !== ) {
+    //     if ($response->statisticsData->statisticOfWinBonusCombinations !== ) {
     //         $check = false;
     //     }
     //
