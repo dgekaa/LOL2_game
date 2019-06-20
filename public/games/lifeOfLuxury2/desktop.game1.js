@@ -156,7 +156,6 @@ function game1() {
             changeLine[i] = game.add.audio('changeLine' + i);
             changeBet[i] = game.add.audio('changeBet' + i);
         }
-        addSounds();
         var cellPos = [
             [77, 127],
             [77, 276],
@@ -1658,7 +1657,12 @@ function game1() {
             if (afterFreespinStatus) {
                 winText.visible = true;
             }
-            winText.setText('Trigger Pay \n' + wlValues[lineflash].winValue);
+            console.log(wlValues[lineflash])
+            if (wlValues[lineflash]) {
+                winText.setText('Trigger Pay \n' + wlValues[lineflash].winValue);
+            } else {
+                winText.setText('Trigger Pay \n' + wlValuesFS.winning);
+            }
             if (info[squareArr[wlWinValuesArray[lineflash] - 1][0] - 1] !== 0) {
                 trigerLine = info[squareArr[wlWinValuesArray[lineflash] - 1][0] - 1];
             } else if (info[squareArr[wlWinValuesArray[lineflash] - 1][1] - 1] !== 0) {

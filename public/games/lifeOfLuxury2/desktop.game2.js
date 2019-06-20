@@ -60,7 +60,15 @@ function game2() {
         var mulFreespin = 2;
         var mulFreespinOld = 2;
         var freeSpinCount = 12;
-
+        var allFreeSpinCount = 12;
+        allWinOld = 0;
+        if (featureGameStatus) {
+            allWinOld = allWinOldInit;
+            mulFreespin = mulFreespinInit;
+            mulFreespinOld = mulFreespinInit;
+            freeSpinCount = freeSpinCountInit;
+            allFreeSpinCount = allFreeSpinCountInit;
+        }
         var balanceSongAudio = game.add.audio('balanceSong');
         balanceSongAudio.loop = true;
         var briSoundAudio = game.add.audio('briSound');
@@ -84,7 +92,7 @@ function game2() {
         for (var i = 1; i <= 15; ++i) {
             game.add.sprite(cellPos[i - 1][0], cellPos[i - 1][1], 'emptyCell');
         }
-        info = [5, 1, 2, 3, 4, 5, 6, 7, 1, 9, 6, 4, 2, 3, 1];
+        // info = [5, 1, 2, 3, 4, 5, 6, 7, 1, 9, 6, 4, 2, 3, 1];
         bg = game.add.sprite(0, 0, 'game.background2');
 
         slotLayer1Group = game.add.group();
@@ -393,6 +401,19 @@ function game2() {
         ];
         balance = +balance;
         addScore();
+        if (featureGameStatus) {
+            briMulti[1].visible = false;
+            briMulti[2].visible = false;
+            for (let i = 1; i <= mulFreespin % 10; ++i) {
+                briMulti[i].visible = true;
+            }
+            if (mulFreespin >= 10) {
+                multiBriText.visible = true;
+                multiBriText.setText(mulFreespin - mulFreespin % 10);
+                briMulti[10].visible = true;
+            }
+            featureGameStatus = false;
+        }
         freespinStartBG = game.add.sprite(75, 125, 'freespinStartBG');
         freesponStartBGAdditionalBonus = game.add.sprite(75, 125, 'freesponStartBGAdditionalBonus');
         freesponStartBGAdditionalBonus.visible = false;
@@ -483,7 +504,7 @@ function game2() {
             bottomText.strokeThickness = 5;
             freeSpinCount = freeSpinCount - 1;
             spinsLeft.setText(freeSpinCount)
-            bottomText.setText("SPIN " + (12 - freeSpinCount) + ": ALL PAYS AT " + mulFreespin + "X");
+            bottomText.setText("SPIN " + (allFreeSpinCount - freeSpinCount) + ": ALL PAYS AT " + mulFreespin + "X");
             bg2_panels.loadTexture('game.background3');
             slotLayer2Group.add(topLabel);
             hideLines();
@@ -511,8 +532,7 @@ function game2() {
                     console.log(JSON.parse(data));
                     if (IsJsonString(data)) {
                         dataSpinRequest = JSON.parse(data);
-
-                        if (dataSpinRequest.status !== 'false') {
+                       if (dataSpinRequest.status !== 'false') {
                             parseSpinAnswer(dataSpinRequest);
                         } else {
                             errorStatus = true;
@@ -688,7 +708,22 @@ function game2() {
             if (realSpinStatus) {
                 realSpinStatus = false;
             }
-
+            if (dataSpinRequest.longData) {
+                winOldTrigerFreeSpin = dataArray.longData.balanceData['totalPayoff'];
+                infoOld = dataArray.longData.logicData.table;
+                wlValuesOld = dataArray.longData.logicData['payoffsForLines'];
+                balanceOld = dataArray.longData.balanceData['balance'] - dataArray.longData.balanceData['totalPayoff'];
+                wcvWinValuesArrayOld = [];
+                wlWinValuesArrayOld = [];
+                for (key in dataArray.longData.logicData['payoffsForLines']) {
+                    wlWinValuesArrayOld.push(ataArray.longData.logicData['payoffsForLines'][key].lineNumber + 1);
+                }
+                for (key in dataArray.longData.logicData['winningCells']) {
+                    wcvWinValuesArrayOld.push(+(key));
+                }
+                winCellInfoOld = dataArray.longData.logicData['winningCells'];
+                wlValuesFS = dataArray.longData.logicData['payoffsForBonus'];
+            }
             info = dataArray.logicData.table;
             middlespin(0);
             middlespin(1);
@@ -1095,6 +1130,7 @@ function game2() {
             freesponStartBGAdditionalBonus.alpha = 0;
             game.add.tween(freesponStartBGAdditionalBonus).to({ alpha: 1 }, 1000, "Linear", true).onComplete.add(function() {
                 freeSpinCount = freeSpinCount + 12;
+                allFreeSpinCount = allFreeSpinCount + 12;
                 spinsLeft.setText(freeSpinCount)
                 setTimeout(function() {
                     game.add.tween(freesponStartBGAdditionalBonus).to({ alpha: 0 }, 1000, "Linear", true).onComplete.add(function() {
@@ -1295,7 +1331,9 @@ function game2() {
                     thirdBri.animations.add('anim', [], 8, true).play();
                     let longX;
                     let longY = 171;
-                    mulFreespin = mulFreespin + 1;
+                    if (mulFreespin < 29) {
+                        mulFreespin = mulFreespin + 1;
+                    }
                     if (mulFreespin % 10 !== 0) {
                         longX = 189 + 44 * (mulFreespin % 10);
                     } else {
@@ -1370,7 +1408,7 @@ function game2() {
             if (!dataSpinRequest.stateData.isDropFeatureGame) {
                 bottomText.setText(allWin + " Credits Won");
             }
-            winText.setText('Line Pay \n' + (wlValues[lineflash].winValue / mulFreespinOld) + " x " + mulFreespinOld + " = " + allWin);
+            winText.setText('Line Pay \n' + (wlValues[lineflash].winValue / mulFreespinOld) + " x " + mulFreespinOld + " = " + wlValues[lineflash].winValue);
             if (info[squareArr[wlWinValuesArray[lineflash] - 1][0] - 1] !== 0) {
                 trigerLine = info[squareArr[wlWinValuesArray[lineflash] - 1][0] - 1];
             } else if (info[squareArr[wlWinValuesArray[lineflash] - 1][1] - 1] !== 0) {
@@ -1515,6 +1553,8 @@ function game2() {
             totalBet.setText(bet)
         }
 
+        console.log(mulFreespin)
+
         function addScore() {
             credit = game.add.text(214, 664, balance, {
                 font: '47px "Digital-7 Mono"',
@@ -1579,17 +1619,17 @@ function game2() {
             });
             bottomText.anchor.setTo(0.5, 0.5);
             // bottomText.visible = false;
-            spinsLeft = game.add.text(193 - 238, 38, '12', {
+            spinsLeft = game.add.text(193 - 238, 38, freeSpinCount, {
                 font: '45px "ArialMT-CondensedBold"',
                 fill: '#ffffff'
             });
             spinsLeft.anchor.setTo(1, 0.5);
-            bonusText = game.add.text(1006 + 244, 38, '0', {
+            bonusText = game.add.text(1006 + 244, 38, allWinOld, {
                 font: '45px "ArialMT-CondensedBold"',
                 fill: '#ffffff'
             });
             bonusText.anchor.setTo(1, 0.5);
-            multiplierText = game.add.text(859, 172 - 204, '2', {
+            multiplierText = game.add.text(859, 172 - 204, mulFreespin, {
                 font: '45px "ArialMT-CondensedBold"',
                 fill: '#ffffff'
             });
@@ -1864,6 +1904,8 @@ function game2() {
             hideSquare();
             for (var i = 1; i <= 15; ++i) {
                 game2.copyCell[i].visible = false;
+                squareArrFreespin[i].visible = false;
+                squareArrFreespin[i].tint = 0xffffff;
             }
             winText.visible = false;
             freesponFinishBGText.visible = true;
