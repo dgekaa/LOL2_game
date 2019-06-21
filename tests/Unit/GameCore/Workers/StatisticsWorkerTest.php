@@ -58,7 +58,7 @@ class StatisticsWorkerTest extends TestCase
 
         $this->assertTrue($check);
     }
-    
+
     // /**
     //  * Проверка работы StatisticsWorker
     //  * Условия: выигрышь по линии

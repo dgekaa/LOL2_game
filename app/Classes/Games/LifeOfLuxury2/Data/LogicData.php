@@ -20,4 +20,10 @@ class LogicData extends CoreLogicData
 
     /** @var int максимально кол-во ходов в featureGame которое доступно для пользователя со старта */
     public $startCountOfFreeSpinsInFeatureGame = 12;
+
+    /** @var int ставка */
+    public $lineBet = 20;
+
+    /** @var int выбранное кол-во линий для хода */
+    public $linesInGame = 20;
 }

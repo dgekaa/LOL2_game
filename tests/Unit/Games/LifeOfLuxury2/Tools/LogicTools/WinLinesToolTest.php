@@ -630,4 +630,33 @@ class WinLinesToolTest extends TestCase
         $this->assertTrue($check);
     }
 
+    /**
+     * Тест проверяющий, что при выпадении на линии 3 монеты, они не выигрывают по линии
+     * Условия: выпадают на линии 3 монеты
+     * Результат: выигрышные линии не выпадают
+     */
+    public function testGetWinningLinesForMainGame4()
+    {
+        $check = true;
+
+        $winLinesTool = new WinLinesTool;
+
+        $table = [2,10,3,5,10,6,7,8,0,4,2,3,4,5,6];
+        $linesRules = json_decode(V2GameRule::where('game_id', 2)->where('name', 'lines')->first()->rules);
+        $linesInGame = 1;
+        $lineBet = 20;
+
+        $winningLines = $winLinesTool->getWinningLines(
+            $table,
+            $linesRules,
+            $linesInGame
+        );
+
+        if ($winningLines !== []) {
+            $check = false;
+        }
+
+        $this->assertTrue($check);
+    }
+
 }

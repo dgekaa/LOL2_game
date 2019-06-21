@@ -10,6 +10,50 @@ use Avior\GameCore\Tools\LogicTools\WinLinesTool as BaseWinLinesTool;
 class WinLinesTool extends BaseWinLinesTool
 {
     /**
+     * Получение выигрышных линий (при отсутвии джокерного символа)
+     *
+     * @param array $table
+     * @param array $lines
+     * @param int $linesInGame
+     *
+     * @return array [['lineNumber' => , 'symbol' => , 'winCellCount' => ], ]
+     */
+    public function getWinningLines(
+        array $table,
+        array $lines,
+        int $linesInGame
+    ): array
+    {
+        $winningLines = []; // [['lineNumber' => , 'symbol' => , 'winCellCount' => ], ]
+        foreach ($lines as $key => $line) {
+            // проверка играет ли данная линия
+            if ($key > ($linesInGame - 1)) {
+                break;
+            }
+
+            // подсчет кол-ва выигрышных ячеек
+            $winCellCount = $this->getNumberOfWonCells($table, $line);
+
+            // проверка наличия выигрышной комбинации
+            $checkWinLines = $this->checkWhetherLineWon($table, $line, $winCellCount);
+
+            // генерация результата
+            if ($checkWinLines === true) {
+                // если по линии выиграли не монеты
+                if ($table[$line[0]] !== 10) {
+                    $winningLines[] = [
+                        'lineNumber' => $key,
+                        'symbol' => $table[$line[0]],
+                        'winCellCount' => $winCellCount
+                    ];
+                }
+            }
+        }
+
+        return $winningLines;
+    }
+
+    /**
      * Получение выигрыша по линиям
      * При наличии в выишрышной линии алмаза выигрышь за линию удваивается
      *
