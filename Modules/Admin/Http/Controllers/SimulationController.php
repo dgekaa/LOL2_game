@@ -5,72 +5,111 @@ namespace Modules\Admin\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
-use App\Classes\Games\LifeOfLuxury2\GameDirector as Lol2GameDirector;
+use Illuminate\View\View;
+use Modules\Admin\Repositories\GameReposiroty;
+use Modules\Admin\Services\SimulationService;
 
+/**
+ * Контролер который занимается выводом страниц связанных с симуляцией игр
+ * и запуском симуляции. Симуляция делается с целью получения статистики об
+ * работе игры на большом кол-ве итераций.
+ */
 class SimulationController extends Controller
 {
+    /** @var array описание "опциии" необходимых для выполнения симуляции
+    * Опция выбирается по параемтру alias, который приходит в запросе (является частью url).
+    * Данный параметр уникальный для каждой игры и хранится в таблице БД v2_games
+    * Содержит набор параметров:
+    * gameDirecot - путь к классу IGameDirector, который будет собирать игру
+    * gameId - id игры в БД в таблице v2_games
+    * view - название представления из папки simulation. Если значение пустое, то
+    * предполагается, что параметр будет === alias
+    * additional_methonds - названия методов из SimulationService,
+    * которые выполняются по порядку и которые принимают и обновляют $data
+    * для добавления каких то недостающих данных для конкретной симуляции
+    * */
+    protected $simulationOptions = [
+        'life-of-luxury-2' => [
+            'gameDirecot' => '\App\Classes\Games\LifeOfLuxury2\GameDirector',
+            'gameId' => 2,
+            'view' => '',
+            'additionalMethonds' => ['addStatisticSymbolsInWinBonus', 'fixMinDroppendJokersInFeatureGame']
+        ]
+    ];
+
     /**
      * Display a listing of the resource.
+     *
      * @return Response
      */
     public function index()
     {
-        return view('admin::simulations.index');
+        $games = GameReposiroty::getWorkGames();
+
+        return view('admin::simulation.index', ['games' => $games]);
+    }
+
+    /**
+     * Show the specified resource.
+     *
+     * @return Response
+     */
+    public function show($alias): View
+    {
+        return view('admin::simulation.' . $alias, ['alias' => $alias]);
     }
 
     /**
      * Show the specified resource.
      * @return Response
      */
-    public function showLol2()
-    {
-        return view('admin::simulations.lol2');
-    }
+    public function showResult(
+        Request $request,
+        string $alias
+    ): View {
+        $spinCount = $request->input('spin_count');
+        $lineBet = $request->input('line_bet');
+        $linesInGame = $request->input('lines_in_game');
 
-    /**
-     * Show the specified resource.
-     * @return Response
-     */
-    public function executeSimulationLol2(Request $request)
-    {
-        $responseJson = (new Lol2GameDirector())
-            ->build('demo')
-            ->executeAction([
-                'game_id' => 2,
-                'user_id' => 1,
-                'mode' => 'demo',
-                'action' => 'simulation',
-                'session_uuid' => '',
-                'token' => '',
-                'linesInGame' => $request->input('linesInGame'),
-                'lineBet' => $request->input('lineBet'),
-                'spin_count' => $request->input('spin_count')
-            ]);
+        // it is array with a data for the GameDirector
+        $requestArray = [
+            'lines_in_game' => $linesInGame,
+            'line_bet' => $lineBet,
+            'spin_count' => $spinCount,
+            'user_id' => 1,
+            'mode' => 'demo',
+            'action' => 'simulation',
+            'session_uuid' => '',
+            'token' => ''
+        ];
 
-        $response = json_decode($responseJson);
+        // определение директора
+        $gameDirector = new $this->simulationOptions[$alias]['gameDirecot'];
 
-        $statisticSymbolsInWinBonus = [0,0,0,0,0,0]; // [кол-во символов => кол-во выигрышных выпадений]
-        foreach ($response->statisticsData->statisticOfWinBonusCombinations as $key => $syblols) {
-            foreach ($syblols as $key2 => $value) {
-                $statisticSymbolsInWinBonus[$key] += $value;
-            }
+        // определение id игры
+        $requestArray['game_id'] = $this->simulationOptions[$alias]['gameId'];
+
+        // выполнение симуляции
+        $data = SimulationService::execute($requestArray, $alias, $gameDirector);
+
+        // получение дополнительных данных для представления
+        foreach ($this->simulationOptions[$alias]['additionalMethonds'] as $key => $value) {
+            $data = SimulationService::$value($data);
         }
 
-        // приведение минимального кол-ва выпавших алмазов в featureGame к понятному числу
-        if ($response->statisticsData->minDroppendDiamandsInFeatureGame === 9999) {
-            $response->statisticsData->minDroppendDiamandsInFeatureGame = $response->statisticsData->maxDroppendDiamandsInFeatureGame;
+        // изменение представления
+        if ($this->simulationOptions[$alias]['view'] !== '') {
+            $alias = $this->simulationOptions[$alias]['view'];
         }
-        
-        return view('admin::simulations.lol2',
-            [
-                'statisticsData' => $response->statisticsData,
-                'statisticSymbolsInWinBonus' => $statisticSymbolsInWinBonus,
-                'executionTime' => $response->systemData->executionTime,
-                'spinCount' => $request->input('spin_count'),
-                'lineBet' => (int) $request->input('lineBet')
-            ]
-        );
-    }
 
+        $data->spinCount = $spinCount;
+        $data->lineBet = $lineBet;
+        $data->linesInGame = $linesInGame;
+
+        return view('admin::simulation.' . $alias, [
+            'data' => $data,
+            'alias' => $alias
+        ]);
+    }
 
 }

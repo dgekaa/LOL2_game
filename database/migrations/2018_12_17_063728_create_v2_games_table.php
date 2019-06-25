@@ -15,6 +15,7 @@ class CreateV2GamesTable extends Migration
         Schema::create('v2_games', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
+            $table->string('alias');
             $table->timestamps();
         });
     }

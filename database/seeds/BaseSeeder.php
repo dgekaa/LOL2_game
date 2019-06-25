@@ -12,7 +12,8 @@ class BaseSeeder extends Seeder
     public function run()
     {
         DB::table('v2_games')->insert([
-            'name' => 'base'
+            'name' => 'Core game',
+            'alias' => 'core-game'
         ]);
 
         DB::table('v2_game_rules')->insert([

@@ -17,6 +17,12 @@ Route::prefix('admin')->group(function() {
 
 Route::prefix('admin/simulations')->group(function() {
     Route::get('/', 'SimulationController@index');
-    Route::get('/lol2', 'SimulationController@showLol2');
-    Route::post('/lol2', 'SimulationController@executeSimulationLol2');
+    Route::get('/{alias}', 'SimulationController@show');
+    Route::post('/{alias}', 'SimulationController@showResult');
+});
+
+Route::prefix('admin/percent-manager')->group(function() {
+    Route::get('/', 'PercentManagerController@index');
+    Route::get('/{alias}', 'PercentManagerController@edit');
+    Route::post('/{alias}', 'PercentManagerController@update');
 });

@@ -9,6 +9,9 @@ use Avior\GameCore\Data\LogicData as CoreLogicData;
  */
 class LogicData extends CoreLogicData
 {
+    /** @var int кол-во символов в игре */
+    public $countSymbolsInGame = 11;
+
     /** @var int max ставка */
     public $maxLineBet = 20;
 

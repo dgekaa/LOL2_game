@@ -12,7 +12,8 @@ class LifeOfLuxury2Seeder extends Seeder
     public function run()
     {
         DB::table('v2_games')->insert([
-            'name' => 'life_of_luxury_2'
+            'name' => 'Life Of luxury 2',
+            'alias' => 'life-of-luxury-2'
         ]);
 
         DB::table('v2_game_rules')->insert([
@@ -51,6 +52,12 @@ class LifeOfLuxury2Seeder extends Seeder
             'game_id' => 2,
             'name' => 'featureGame',
             'rules' => '[10, 3]' // ['symbol' => , 'minAmount' => ]
+        ]);
+
+        DB::table('v2_game_rules')->insert([
+            'game_id' => 2,
+            'name' => 'common',
+            'rules' => '{"countSymbolsInGame":11}'
         ]);
     }
 }
