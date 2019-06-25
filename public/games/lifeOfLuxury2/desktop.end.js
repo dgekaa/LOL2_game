@@ -256,7 +256,7 @@
     };
 
     preload.create = function() {
-        game.sound.mute = true; //исправить на false в продакшене
+        game.sound.mute = false; //исправить на false в продакшене
         game.scale.fullScreenScaleMode = Phaser.ScaleManager.EXACT_FIT;
         game.scale.scaleMode = Phaser.ScaleManager.EXACT_FIT;
         if (firstRequest) {
