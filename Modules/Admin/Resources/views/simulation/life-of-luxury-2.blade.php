@@ -66,7 +66,7 @@
                     Win Spins Count = @if (isset($data->statisticsData->winSpinCountInMainGame)) {{$data->statisticsData->winSpinCountInMainGame}} @else 0 @endif<br>
                     Lose Spins Count = @if (isset($data->statisticsData->loseSpinCountInMainGame)) {{$data->statisticsData->loseSpinCountInMainGame}} @else 0 @endif<br>
                     Win Spins Amount = @if (isset($data->statisticsData->winningsOnMainGame)) {{$data->statisticsData->winningsOnMainGame}} @else 0 @endif<br>
-                    Win % = @if (isset($data->statisticsData->winPercentOnMainGame)) {{$data->statisticsData->winPercentOnMainGame}} @else 0 @endif
+                    Win spin % = @if (isset($data->statisticsData->percentWinSpinsInMainGame)) {{$data->statisticsData->percentWinSpinsInMainGame}} @else 0 @endif
                     <br>
                     <br>
                     Free Spins Count = @if (isset($data->statisticsData->featureGamesDropped)) {{$data->statisticsData->featureGamesDropped}} @else 0 @endif<br>

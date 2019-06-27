@@ -106,6 +106,10 @@ class SimulationController extends Controller
         $data->lineBet = $lineBet;
         $data->linesInGame = $linesInGame;
 
+        $res1 = 100 / $data->statisticsData->loss * $data->statisticsData->winnings;
+        $res2 = 100 / $data->statisticsData->loss * $data->statisticsData->winningsOnMainGame;
+        $data->statisticsData->winPercentOnFeatureGame = 100 / $data->statisticsData->loss * $data->statisticsData->winningsOnFeatureGame;
+
         return view('admin::simulation.' . $alias, [
             'data' => $data,
             'alias' => $alias
