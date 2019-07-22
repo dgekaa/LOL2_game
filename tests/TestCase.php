@@ -19,17 +19,29 @@ abstract class TestCase extends BaseTestCase
     {
         $dataPool = $workersPool->sessionWorker->loadSessionData($dataPool, $toolsPool);
         // загрузка баланса
-        $dataPool = $workersPool->balanceWorker->loadBalanceData($dataPool, $toolsPool);
+        $dataPool = $workersPool->balanceWorker->executeInstruction(
+            $dataPool,
+            $toolsPool,
+            $instructionsPool->balanceWorkerInstructions->loadData
+        );
         // загрузка логики
         $dataPool = $workersPool->logicWorker->executeInstruction(
             $dataPool,
             $toolsPool,
-            $instructionsPool->logicWorkerInstructions->load_data
+            $instructionsPool->logicWorkerInstructions->loadData
         );
         // загрузка состояния
-        $dataPool = $workersPool->stateWorker->loadStateData($dataPool, $toolsPool);
+        $dataPool = $workersPool->stateWorker->executeInstruction(
+            $dataPool,
+            $toolsPool,
+            $instructionsPool->stateWorkerInstructions->loadData
+        );
         // загрузка статистики
-        $dataPool = $workersPool->statisticsWorker->loadStatisticsData($dataPool, $toolsPool);
+        $dataPool = $workersPool->statisticsWorker->executeInstruction(
+            $dataPool,
+            $toolsPool,
+            $instructionsPool->userStatisticsWorkerInstructions->loadData
+        );
 
         return $dataPool;
     }

@@ -3,6 +3,7 @@
 namespace App\Classes\Games\LifeOfLuxury2\Workers;
 
 use Avior\GameCore\Base\IDataPool;
+use Avior\GameCore\Base\IToolsPool;
 use Avior\GameCore\Data\DataPool;
 use Avior\GameCore\Workers\Worker;
 
@@ -105,5 +106,20 @@ class ResponseWorker extends Worker
         }
 
         return \json_encode($responseData);
+    }
+
+    /**
+     * Метод отправляющий уведомления о событиях
+     *
+     * @param  IDataPool  $dataPool  [description]
+     * @param  IToolsPool $toolsPool [description]
+     *
+     * @return IDataPool             [description]
+     */
+    protected function sendNotifies(
+        IDataPool $dataPool,
+        IToolsPool $toolsPool
+    ): IDataPool {
+        return $dataPool;
     }
 }

@@ -27,7 +27,7 @@ class LogicWorkerTest extends TestCase
         $dataPool = $workersPool->logicWorker->executeInstruction(
             $dataPool,
             $toolsPool,
-            $instructionsPool->logicWorkerInstructions->load_data
+            $instructionsPool->logicWorkerInstructions->loadData
         );
 
         if (count($dataPool->logicData->linesRules) === 0) {
@@ -111,7 +111,7 @@ class LogicWorkerTest extends TestCase
         $dataPool = $workersPool->logicWorker->executeInstruction(
             $dataPool,
             $toolsPool,
-            $instructionsPool->logicWorkerInstructions->free_spin
+            $instructionsPool->logicWorkerInstructions->freeSpin
         );
 
         if (count($dataPool->logicData->table) !== 15) {

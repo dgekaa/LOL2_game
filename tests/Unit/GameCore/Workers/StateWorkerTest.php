@@ -30,7 +30,11 @@ class StateWorkerTest extends TestCase
         $dataPool->logicData->featureGameRules = json_decode('[10, 3]');
         $dataPool->systemData->isSimulation = true;
 
-        $dataPool = $workersPool->stateWorker->getResultOfSpin($dataPool, $toolsPool, true);
+        $dataPool = $workersPool->stateWorker->executeInstruction(
+            $dataPool,
+            $toolsPool,
+            $instructionsPool->stateWorkerInstructions->spin
+        );
 
         if ($dataPool->stateData->isWin !== false) {
             $check = false;
@@ -97,7 +101,11 @@ class StateWorkerTest extends TestCase
 
 
         // выполнение операции
-        $dataPool = $workersPool->stateWorker->getResultOfSpin($dataPool, $toolsPool, true);
+        $dataPool = $workersPool->stateWorker->executeInstruction(
+            $dataPool,
+            $toolsPool,
+            $instructionsPool->stateWorkerInstructions->spin
+        );
 
         if ($dataPool->stateData->isWin !== true) {
             $check = false;
@@ -164,7 +172,11 @@ class StateWorkerTest extends TestCase
         $dataPool->logicData->payoffsForBonus = [['symbol' => 10, 'count' => 3, 'winning' => 15]];
 
         // выполнение операции
-        $dataPool = $workersPool->stateWorker->getResultOfSpin($dataPool, $toolsPool, true);
+        $dataPool = $workersPool->stateWorker->executeInstruction(
+            $dataPool,
+            $toolsPool,
+            $instructionsPool->stateWorkerInstructions->spin
+        );
 
         if ($dataPool->stateData->isWin !== true) {
             $check = false;
@@ -231,7 +243,11 @@ class StateWorkerTest extends TestCase
         $dataPool->logicData->payoffsForBonus = [];
 
         // выполнение операции
-        $dataPool = $workersPool->stateWorker->getResultOfFreeSpin($dataPool, $toolsPool, true);
+        $dataPool = $workersPool->stateWorker->executeInstruction(
+            $dataPool,
+            $toolsPool,
+            $instructionsPool->stateWorkerInstructions->freeSpin
+        );
 
         if ($dataPool->stateData->isWin !== false) {
             $check = false;
@@ -299,7 +315,11 @@ class StateWorkerTest extends TestCase
         $dataPool->stateData->screen = 'featureGame';
 
         // выполнение операции
-        $dataPool = $workersPool->stateWorker->getResultOfFreeSpin($dataPool, $toolsPool, true);
+        $dataPool = $workersPool->stateWorker->executeInstruction(
+            $dataPool,
+            $toolsPool,
+            $instructionsPool->stateWorkerInstructions->freeSpin
+        );
 
         if ($dataPool->stateData->isWin !== true) {
             $check = false;
@@ -327,7 +347,11 @@ class StateWorkerTest extends TestCase
         }
 
         // выполнение операции
-        $dataPool = $workersPool->stateWorker->getResultOfFreeSpin($dataPool, $toolsPool, true);
+        $dataPool = $workersPool->stateWorker->executeInstruction(
+            $dataPool,
+            $toolsPool,
+            $instructionsPool->stateWorkerInstructions->freeSpin
+        );
 
         if ($dataPool->stateData->isWin !== true) {
             $check = false;

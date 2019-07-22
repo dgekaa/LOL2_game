@@ -29,7 +29,11 @@ class BalanceWorkerTest extends TestCase
         $dataPool->logicData->table = [1,2,3,4,5,6,7,8,9,1,2,3,4,5,6];
         $dataPool->systemData->isSimulation = true;
 
-        $dataPool = $workersPool->balanceWorker->getResultOfSpin($dataPool, $toolsPool, true);
+        $dataPool = $workersPool->balanceWorker->executeInstruction(
+            $dataPool,
+            $toolsPool,
+            $instructionsPool->balanceWorkerInstructions->spin
+        );
 
         if ($dataPool->balanceData->balance !== 85) {
             $check = false;
@@ -91,7 +95,11 @@ class BalanceWorkerTest extends TestCase
         $dataPool->logicData->winningCells = [[1 => 1, 4 => 1]];
 
         // выполнение операции
-        $dataPool = $workersPool->balanceWorker->getResultOfSpin($dataPool, $toolsPool, true);
+        $dataPool = $workersPool->balanceWorker->executeInstruction(
+            $dataPool,
+            $toolsPool,
+            $instructionsPool->balanceWorkerInstructions->spin
+        );
 
         if ($dataPool->balanceData->balance !== 95) {
             $check = false;
@@ -155,7 +163,11 @@ class BalanceWorkerTest extends TestCase
         $dataPool->stateData->screen = 'featureGame';
 
         // выполнение операции
-        $dataPool = $workersPool->balanceWorker->getResultOfFreeSpin($dataPool, $toolsPool, true);
+        $dataPool = $workersPool->balanceWorker->executeInstruction(
+            $dataPool,
+            $toolsPool,
+            $instructionsPool->balanceWorkerInstructions->freeSpin
+        );
 
         if ($dataPool->balanceData->balance !== 100) {
             $check = false;
@@ -219,7 +231,11 @@ class BalanceWorkerTest extends TestCase
         $dataPool->stateData->screen = 'featureGame';
 
         // выполнение операции
-        $dataPool = $workersPool->balanceWorker->getResultOfFreeSpin($dataPool, $toolsPool, true);
+        $dataPool = $workersPool->balanceWorker->executeInstruction(
+            $dataPool,
+            $toolsPool,
+            $instructionsPool->balanceWorkerInstructions->freeSpin
+        );
 
         if ($dataPool->balanceData->balance !== 110) {
             $check = false;
@@ -244,7 +260,11 @@ class BalanceWorkerTest extends TestCase
         }
 
         // выполнение операции
-        $dataPool = $workersPool->balanceWorker->getResultOfFreeSpin($dataPool, $toolsPool, true);
+        $dataPool = $workersPool->balanceWorker->executeInstruction(
+            $dataPool,
+            $toolsPool,
+            $instructionsPool->balanceWorkerInstructions->freeSpin
+        );
 
         if ($dataPool->balanceData->balance !== 120) {
             $check = false;

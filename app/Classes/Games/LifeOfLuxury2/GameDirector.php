@@ -18,7 +18,8 @@ class GameDirector extends BaseGameDirector
         $this->dataPool->addData('sessionData', new \App\Classes\Games\LifeOfLuxury2\Data\SessionData);
         $this->dataPool->addData('logicData', new \App\Classes\Games\LifeOfLuxury2\Data\LogicData);
         $this->dataPool->addData('requestData', new \App\Classes\Games\LifeOfLuxury2\Data\RequestData);
-        $this->dataPool->addData('statisticsData', new \App\Classes\Games\LifeOfLuxury2\Data\StatisticsData);
+        $this->dataPool->addData('userStatisticsData', new \App\Classes\Games\LifeOfLuxury2\Data\StatisticsData);
+        $this->dataPool->addData('gameStatisticsData', new \App\Classes\Games\LifeOfLuxury2\Data\StatisticsData);
 
         // сбор набора данных, который будет обрабатываться при соответсвующих запросах
         $this->requestDataSetPool->addRequestData('open_game', new \App\Classes\Games\LifeOfLuxury2\RequestDataSets\OpenGameRequestData);
