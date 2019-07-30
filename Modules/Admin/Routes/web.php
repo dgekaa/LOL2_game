@@ -26,3 +26,8 @@ Route::prefix('admin/percent-manager')->group(function() {
     Route::get('/{alias}', 'PercentManagerController@edit');
     Route::post('/{alias}', 'PercentManagerController@update');
 });
+
+Route::prefix('admin/statistics')->group(function() {
+    Route::get('/', 'StatisticsController@index');
+    Route::get('/{alias}', 'StatisticsController@show');
+});

@@ -23,7 +23,7 @@ class SimulationService
     public static function addStatisticSymbolsInWinBonus(object $data): object
     {
         $statisticSymbolsInWinBonus = [0,0,0,0,0,0]; // [кол-во символов => кол-во выигрышных выпадений]
-        foreach ($data->statisticsData->statisticOfWinBonusCombinations as $key => $syblols) {
+        foreach ($data->userStatisticsData->statisticOfWinBonusCombinations as $key => $syblols) {
             foreach ($syblols as $key2 => $value) {
                 $statisticSymbolsInWinBonus[$key] += $value;
             }
@@ -36,8 +36,8 @@ class SimulationService
     public static function fixMinDroppendJokersInFeatureGame(object $data): object
     {
         // приведение минимального кол-ва выпавших алмазов в featureGame к понятному числу
-        if ($data->statisticsData->minDroppendDiamandsInFeatureGame === 9999) {
-            $data->statisticsData->minDroppendDiamandsInFeatureGame = $data->statisticsData->maxDroppendDiamandsInFeatureGame;
+        if ($data->userStatisticsData->minDroppendDiamandsInFeatureGame === 9999) {
+            $data->userStatisticsData->minDroppendDiamandsInFeatureGame = $data->userStatisticsData->maxDroppendDiamandsInFeatureGame;
         }
 
         return $data;

@@ -20,7 +20,7 @@ class SimulationController extends Controller
     * Опция выбирается по параемтру alias, который приходит в запросе (является частью url).
     * Данный параметр уникальный для каждой игры и хранится в таблице БД v2_games
     * Содержит набор параметров:
-    * gameDirecot - путь к классу IGameDirector, который будет собирать игру
+    * gameDirector - путь к классу IGameDirector, который будет собирать игру
     * gameId - id игры в БД в таблице v2_games
     * view - название представления из папки simulation. Если значение пустое, то
     * предполагается, что параметр будет === alias
@@ -30,7 +30,7 @@ class SimulationController extends Controller
     * */
     protected $simulationOptions = [
         'life-of-luxury-2' => [
-            'gameDirecot' => '\App\Classes\Games\LifeOfLuxury2\GameDirector',
+            'gameDirector' => '\App\Classes\Games\LifeOfLuxury2\GameDirector',
             'gameId' => 2,
             'view' => '',
             'additionalMethonds' => ['addStatisticSymbolsInWinBonus', 'fixMinDroppendJokersInFeatureGame']
@@ -84,7 +84,7 @@ class SimulationController extends Controller
         ];
 
         // определение директора
-        $gameDirector = new $this->simulationOptions[$alias]['gameDirecot'];
+        $gameDirector = new $this->simulationOptions[$alias]['gameDirector'];
 
         // определение id игры
         $requestArray['game_id'] = $this->simulationOptions[$alias]['gameId'];
@@ -106,9 +106,10 @@ class SimulationController extends Controller
         $data->lineBet = $lineBet;
         $data->linesInGame = $linesInGame;
 
-        $res1 = 100 / $data->statisticsData->loss * $data->statisticsData->winnings;
-        $res2 = 100 / $data->statisticsData->loss * $data->statisticsData->winningsOnMainGame;
-        $data->statisticsData->winPercentOnFeatureGame = 100 / $data->statisticsData->loss * $data->statisticsData->winningsOnFeatureGame;
+        // получение правильных процентов (TODO: в statisticsData попадают не правильные значение, нужно исправить)
+        $res1 = 100 / $data->userStatisticsData->loss * $data->userStatisticsData->winnings;
+        $res2 = 100 / $data->userStatisticsData->loss * $data->userStatisticsData->winningsOnMainGame;
+        $data->userStatisticsData->winPercentOnFeatureGame = 100 / $data->userStatisticsData->loss * $data->userStatisticsData->winningsOnFeatureGame;
 
         return view('admin::simulation.' . $alias, [
             'data' => $data,

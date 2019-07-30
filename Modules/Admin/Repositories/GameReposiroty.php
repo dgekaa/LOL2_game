@@ -20,4 +20,11 @@ class GameReposiroty extends BaseRepository
 
         return $games;
     }
+
+    public static function getGameByAlias(string $alias): V2Game
+    {
+        $game = V2Game::where('id', '!=', 1)->where('alias', $alias)->first();
+
+        return $game;
+    }
 }

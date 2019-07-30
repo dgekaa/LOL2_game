@@ -60,22 +60,22 @@
             </div>
             <div class="col-6">
                 <div class="work_space">
-                    Total bet = @if (isset($data->statisticsData->loss)) {{$data->statisticsData->loss}} @else 0 @endif <br>
-                    Total win = @if (isset($data->statisticsData->winnings)) {{$data->statisticsData->winnings}} @else 0 @endif<br><br> <!-- total winnings in the main game -->
-                    Spins Count = @if (isset($data->statisticsData->spinCountInMainGame)) {{$data->statisticsData->spinCountInMainGame}} @else 0 @endif <br>
-                    Win Spins Count = @if (isset($data->statisticsData->winSpinCountInMainGame)) {{$data->statisticsData->winSpinCountInMainGame}} @else 0 @endif<br>
-                    Lose Spins Count = @if (isset($data->statisticsData->loseSpinCountInMainGame)) {{$data->statisticsData->loseSpinCountInMainGame}} @else 0 @endif<br>
-                    Win Spins Amount = @if (isset($data->statisticsData->winningsOnMainGame)) {{$data->statisticsData->winningsOnMainGame}} @else 0 @endif<br>
-                    Win spin % = @if (isset($data->statisticsData->percentWinSpinsInMainGame)) {{$data->statisticsData->percentWinSpinsInMainGame}} @else 0 @endif
+                    Total bet = @if (isset($data->userStatisticsData->loss)) {{$data->userStatisticsData->loss}} @else 0 @endif <br>
+                    Total win = @if (isset($data->userStatisticsData->winnings)) {{$data->userStatisticsData->winnings}} @else 0 @endif<br><br> <!-- total winnings in the main game -->
+                    Spins Count = @if (isset($data->userStatisticsData->spinCountInMainGame)) {{$data->userStatisticsData->spinCountInMainGame}} @else 0 @endif <br>
+                    Win Spins Count = @if (isset($data->userStatisticsData->winSpinCountInMainGame)) {{$data->userStatisticsData->winSpinCountInMainGame}} @else 0 @endif<br>
+                    Lose Spins Count = @if (isset($data->userStatisticsData->loseSpinCountInMainGame)) {{$data->userStatisticsData->loseSpinCountInMainGame}} @else 0 @endif<br>
+                    Win Spins Amount = @if (isset($data->userStatisticsData->winningsOnMainGame)) {{$data->userStatisticsData->winningsOnMainGame}} @else 0 @endif<br>
+                    Win spin % = @if (isset($data->userStatisticsData->percentWinSpinsInMainGame)) {{$data->userStatisticsData->percentWinSpinsInMainGame}} @else 0 @endif
                     <br>
                     <br>
-                    Free Spins Count = @if (isset($data->statisticsData->featureGamesDropped)) {{$data->statisticsData->featureGamesDropped}} @else 0 @endif<br>
-                    Free Spins Amount = @if (isset($data->statisticsData->winningsOnFeatureGame)) {{$data->statisticsData->winningsOnFeatureGame}} @else 0 @endif<br>
-                    Win spin % = @if (isset($data->statisticsData->percentWinSpinsInFeatureGame)) {{$data->statisticsData->percentWinSpinsInFeatureGame}} @else 0 @endif<br><br>
+                    Free Spins Count = @if (isset($data->userStatisticsData->featureGamesDropped)) {{$data->userStatisticsData->featureGamesDropped}} @else 0 @endif<br>
+                    Free Spins Amount = @if (isset($data->userStatisticsData->winningsOnFeatureGame)) {{$data->userStatisticsData->winningsOnFeatureGame}} @else 0 @endif<br>
+                    Win spin % = @if (isset($data->userStatisticsData->percentWinSpinsInFeatureGame)) {{$data->userStatisticsData->percentWinSpinsInFeatureGame}} @else 0 @endif<br><br>
 
-                    PAYOUT = @if (isset($data->statisticsData->winPercent)) {{$data->statisticsData->winPercent}} @else 0 @endif %<br>
-                    PAYOUT by Spins = @if (isset($data->statisticsData->winPercentOnMainGame)) {{$data->statisticsData->winPercentOnMainGame}} @else 0 @endif %<br>
-                    PAYOUT by Free Spins = @if (isset($data->statisticsData->winPercentOnFeatureGame)) {{$data->statisticsData->winPercentOnFeatureGame}} @else 0 @endif %<br>
+                    PAYOUT = @if (isset($data->userStatisticsData->winPercent)) {{$data->userStatisticsData->winPercent}} @else 0 @endif %<br>
+                    PAYOUT by Spins = @if (isset($data->userStatisticsData->winPercentOnMainGame)) {{$data->userStatisticsData->winPercentOnMainGame}} @else 0 @endif %<br>
+                    PAYOUT by Free Spins = @if (isset($data->userStatisticsData->winPercentOnFeatureGame)) {{$data->userStatisticsData->winPercentOnFeatureGame}} @else 0 @endif %<br>
 
                     execution time = @if (isset($data->systemData->executionTime)) {{$data->systemData->executionTime}} @else @endif sec<br><br>
 
@@ -83,62 +83,62 @@
                     <br>
                     Combination statistics:<br>
 
-                    @if (isset($data->statisticsData->statisticOfWinCombinationsInMainGame))
-                        @foreach ($data->statisticsData->statisticOfWinCombinationsInMainGame[0] as $key => $count)
+                    @if (isset($data->userStatisticsData->statisticOfWinCombinationsInMainGame))
+                        @foreach ($data->userStatisticsData->statisticOfWinCombinationsInMainGame[0] as $key => $count)
                             @if($key > 2)
                                 Diamond ({{$key}}) {{$count}}<br>
                             @endif
                         @endforeach
                         <br>
-                        @foreach ($data->statisticsData->statisticOfWinCombinationsInMainGame[1] as $key => $count)
+                        @foreach ($data->userStatisticsData->statisticOfWinCombinationsInMainGame[1] as $key => $count)
                             @if($key > 1)
                                 Plane ({{$key}}) {{$count}}<br>
                             @endif
                         @endforeach
                         <br>
-                        @foreach ($data->statisticsData->statisticOfWinCombinationsInMainGame[9] as $key => $count)
+                        @foreach ($data->userStatisticsData->statisticOfWinCombinationsInMainGame[9] as $key => $count)
                             @if($key > 2)
                                 Yacht ({{$key}}) {{$count}}<br>
                             @endif
                         @endforeach
                         <br>
-                        @foreach ($data->statisticsData->statisticOfWinCombinationsInMainGame[4] as $key => $count)
+                        @foreach ($data->userStatisticsData->statisticOfWinCombinationsInMainGame[4] as $key => $count)
                             @if($key > 2)
                                 Car ({{$key}}) {{$count}}<br>
                             @endif
                         @endforeach
                         <br>
-                        @foreach ($data->statisticsData->statisticOfWinCombinationsInMainGame[5] as $key => $count)
+                        @foreach ($data->userStatisticsData->statisticOfWinCombinationsInMainGame[5] as $key => $count)
                             @if($key > 2)
                                 Ring ({{$key}}) {{$count}}<br>
                             @endif
                         @endforeach
                         <br>
-                        @foreach ($data->statisticsData->statisticOfWinCombinationsInMainGame[3] as $key => $count)
+                        @foreach ($data->userStatisticsData->statisticOfWinCombinationsInMainGame[3] as $key => $count)
                             @if($key > 2)
                                 Dollar ({{$key}}) {{$count}}<br>
                             @endif
                         @endforeach
                         <br>
-                        @foreach ($data->statisticsData->statisticOfWinCombinationsInMainGame[6] as $key => $count)
+                        @foreach ($data->userStatisticsData->statisticOfWinCombinationsInMainGame[6] as $key => $count)
                             @if($key > 2)
                                 Watch ({{$key}}) {{$count}}<br>
                             @endif
                         @endforeach
                         <br>
-                        @foreach ($data->statisticsData->statisticOfWinCombinationsInMainGame[7] as $key => $count)
+                        @foreach ($data->userStatisticsData->statisticOfWinCombinationsInMainGame[7] as $key => $count)
                             @if($key > 2)
                                 Gold ({{$key}}) {{$count}}<br>
                             @endif
                         @endforeach
                         <br>
-                        @foreach ($data->statisticsData->statisticOfWinCombinationsInMainGame[2] as $key => $count)
+                        @foreach ($data->userStatisticsData->statisticOfWinCombinationsInMainGame[2] as $key => $count)
                             @if($key > 2)
                                 Silver ({{$key}}) {{$count}}<br>
                             @endif
                         @endforeach
                         <br>
-                        @foreach ($data->statisticsData->statisticOfWinCombinationsInMainGame[8] as $key => $count)
+                        @foreach ($data->userStatisticsData->statisticOfWinCombinationsInMainGame[8] as $key => $count)
                             @if($key > 2)
                                 Bronze ({{$key}}) {{$count}}<br>
                             @endif
@@ -157,9 +157,9 @@
                     <hr>
                     <br>
 
-                    @if (isset($data->statisticsData->statisticsOfDroppedSymbolsInMainGame[0]))
-                        Diamonds in the main game: {{$data->statisticsData->statisticsOfDroppedSymbolsInMainGame[0]}}<br>
-                        Diamonds in the freespin game: {{$data->statisticsData->statisticsOfDroppedSymbolsInFeatureGame[0]}}<br>
+                    @if (isset($data->userStatisticsData->statisticsOfDroppedSymbolsInMainGame[0]))
+                        Diamonds in the main game: {{$data->userStatisticsData->statisticsOfDroppedSymbolsInMainGame[0]}}<br>
+                        Diamonds in the freespin game: {{$data->userStatisticsData->statisticsOfDroppedSymbolsInFeatureGame[0]}}<br>
                     @else
                         Diamonds in the main game: 0<br>
                         Diamonds in the freespin game: 0<br>
@@ -167,33 +167,33 @@
                     <br>
 
                     Dropped coins in one spin:<br>
-                    @if (isset($data->statisticsData->droppedBonusSymbolsInOneSpinInMainGame))
+                    @if (isset($data->userStatisticsData->droppedBonusSymbolsInOneSpinInMainGame))
                         @for($key = 5; $key > 0; $key--)
-                            Coin ({{$key}}) {{$data->statisticsData->droppedBonusSymbolsInOneSpinInMainGame[$key]}}<br>
+                            Coin ({{$key}}) {{$data->userStatisticsData->droppedBonusSymbolsInOneSpinInMainGame[$key]}}<br>
                         @endfor
                     @endif
                     <br>
 
                     Which led to the bonus game:<br>
-                    @if (isset($data->statisticsData->statisticOfWinBonusCombinations))
-                        5 coins: {{$data->statisticsData->statisticOfWinBonusCombinations[5][0]}}<br>
-                        4 coins + 1 diamonds: {{$data->statisticsData->statisticOfWinBonusCombinations[5][1]}}<br>
-                        3 coins + 2 diamonds: {{$data->statisticsData->statisticOfWinBonusCombinations[5][2]}}<br>
-                        2 coins + 3 diamonds: {{$data->statisticsData->statisticOfWinBonusCombinations[5][3]}}<br>
+                    @if (isset($data->userStatisticsData->statisticOfWinBonusCombinations))
+                        5 coins: {{$data->userStatisticsData->statisticOfWinBonusCombinations[5][0]}}<br>
+                        4 coins + 1 diamonds: {{$data->userStatisticsData->statisticOfWinBonusCombinations[5][1]}}<br>
+                        3 coins + 2 diamonds: {{$data->userStatisticsData->statisticOfWinBonusCombinations[5][2]}}<br>
+                        2 coins + 3 diamonds: {{$data->userStatisticsData->statisticOfWinBonusCombinations[5][3]}}<br>
                         <br>
-                        4 coins: {{$data->statisticsData->statisticOfWinBonusCombinations[4][0]}}<br>
-                        3 coins + 1 diamonds: {{$data->statisticsData->statisticOfWinBonusCombinations[4][1]}}<br>
-                        2 coins + 2 diamonds: {{$data->statisticsData->statisticOfWinBonusCombinations[4][2]}}<br>
-                        1 coins + 3 diamonds: {{$data->statisticsData->statisticOfWinBonusCombinations[4][3]}}<br>
+                        4 coins: {{$data->userStatisticsData->statisticOfWinBonusCombinations[4][0]}}<br>
+                        3 coins + 1 diamonds: {{$data->userStatisticsData->statisticOfWinBonusCombinations[4][1]}}<br>
+                        2 coins + 2 diamonds: {{$data->userStatisticsData->statisticOfWinBonusCombinations[4][2]}}<br>
+                        1 coins + 3 diamonds: {{$data->userStatisticsData->statisticOfWinBonusCombinations[4][3]}}<br>
                         <br>
-                        3 coins: {{$data->statisticsData->statisticOfWinBonusCombinations[3][0]}}<br>
-                        2 coins + 1 diamonds: {{$data->statisticsData->statisticOfWinBonusCombinations[3][1]}}<br>
-                        1 coins + 2 diamonds: {{$data->statisticsData->statisticOfWinBonusCombinations[3][2]}}<br>
+                        3 coins: {{$data->userStatisticsData->statisticOfWinBonusCombinations[3][0]}}<br>
+                        2 coins + 1 diamonds: {{$data->userStatisticsData->statisticOfWinBonusCombinations[3][1]}}<br>
+                        1 coins + 2 diamonds: {{$data->userStatisticsData->statisticOfWinBonusCombinations[3][2]}}<br>
                         <br>
                     @endif
 
-                    Minimum number of diamonds from the freespins game @if (isset($data->statisticsData->minDroppendDiamandsInFeatureGame)) {{$data->statisticsData->minDroppendDiamandsInFeatureGame}} @else 0 @endif <br>
-                    Maximum number of diamonds from the freespins game @if (isset($data->statisticsData->maxDroppendDiamandsInFeatureGame)) {{$data->statisticsData->maxDroppendDiamandsInFeatureGame}} @else 0 @endif <br>
+                    Minimum number of diamonds from the freespins game @if (isset($data->userStatisticsData->minDroppendDiamandsInFeatureGame)) {{$data->userStatisticsData->minDroppendDiamandsInFeatureGame}} @else 0 @endif <br>
+                    Maximum number of diamonds from the freespins game @if (isset($data->userStatisticsData->maxDroppendDiamandsInFeatureGame)) {{$data->userStatisticsData->maxDroppendDiamandsInFeatureGame}} @else 0 @endif <br>
 
                 </div>
             </div>
