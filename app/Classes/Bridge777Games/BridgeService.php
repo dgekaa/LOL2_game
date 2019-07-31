@@ -28,12 +28,12 @@ class BridgeService
         // получение баланса через апи
         if ($mode === 'full') {
             $balance = BridgeApi::getBalance($token, $userId, $gameId);
-        } elseif ($mode === 'demo') {
-            $balance = 10000;
-        }
 
-        // запись баланса в БД
-        BridgeBalanceRepository::updateUserBalance($userId, $mode, $balance);
+            // запись баланса в БД
+            BridgeBalanceRepository::updateUserBalance($userId, $mode, $balance);
+        } elseif ($mode === 'demo') {
+            //$balance = 10000;
+        }
 
         return true;
     }

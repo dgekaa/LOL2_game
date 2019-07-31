@@ -25,9 +25,9 @@ class StartActionOpenGameObserver implements IObserver
         if ($event->name === 'startActionOpenGame') {
             // если запущен demo режим и делается открытие игры, то баланс приводится к исходному
             if ($event->dataPool->requestData->mode === 'demo') {
-                $event->toolsPool->dataTools->balanceDataTool->resetUserBalanceForDemoGame(
-                    $event->dataPool->requestData->userId
-                );
+                // $event->toolsPool->dataTools->balanceDataTool->resetUserBalanceForDemoGame(
+                //     $event->dataPool->requestData->userId
+                // );
             }
         }
 
