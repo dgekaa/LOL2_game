@@ -33,7 +33,7 @@ class StatisticsController extends Controller
      */
     public function show(string $alias): View
     {
-        $mode = 'demo';
+        $mode = 'full';
         $game = GameReposiroty::getGameByAlias($alias);
         $gameStatistics = GameStatisticReposiroty::getGameStatistics($game->id, $mode);
         $statistics = json_decode($gameStatistics->statistics);

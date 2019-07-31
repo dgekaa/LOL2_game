@@ -46,6 +46,7 @@ class GameDirector extends BaseGameDirector
             // подпись обсерверов на события
             $this->actionsPool->spin->attach(new \App\Classes\Games\LifeOfLuxury2\Observers\Full\ActionObservers\EndActionSpinObserver);
             $this->actionsPool->free_spin->attach(new \App\Classes\Games\LifeOfLuxury2\Observers\Full\ActionObservers\EndActionFreeSpinObserver);
+            $this->actionsPool->close_game->attach(new \App\Classes\Games\LifeOfLuxury2\Observers\Full\ActionObservers\EndActionCloseGameObserver);
         }
 
         if ($mode === "demo") {

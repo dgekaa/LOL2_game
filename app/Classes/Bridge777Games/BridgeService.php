@@ -19,13 +19,12 @@ class BridgeService
      *
      * @return bool
      */
-    static public function addUserBalance(
+    public static function addUserBalance(
         string $token,
         int $gameId,
         int $userId,
         string $mode
-    ): bool
-    {
+    ): bool {
         // получение баланса через апи
         if ($mode === 'full') {
             $balance = BridgeApi::getBalance($token, $userId, $gameId);
@@ -51,15 +50,14 @@ class BridgeService
      *
      * @return string json
      */
-    static public function sendStartSpinMoveFunds(
+    public static function sendStartSpinMoveFunds(
         string $eventId,
         string $token,
         int $userId,
         int $gameId,
         int $linesInGame,
         int $bet
-    ): string
-    {
+    ): string {
         // преобразование ставки из центов в доллары
         $bet /= 100;
 
@@ -97,7 +95,7 @@ class BridgeService
      *
      * @return string json
      */
-    static public function sendEndSpinMoveFunds(
+    public static function sendEndSpinMoveFunds(
         string $eventId,
         string $token,
         int $userId,
@@ -107,8 +105,7 @@ class BridgeService
         array $table,
         string $screen,
         bool $isDropFeatureGame
-    ): string
-    {
+    ): string {
         $direction = BridgeTool::getDirectionParametr($totalPayoff);
         $eventType = BridgeTool::getEventTypeParametr($totalPayoff);
         $result = BridgeTool::getResultParametr($table);
@@ -139,5 +136,69 @@ class BridgeService
         $response = BridgeApi::sendMoveFunds($params);
 
         return $response;
+    }
+
+    /**
+     * Отправка запроса оповещающего об выходе из игры
+     *
+     * @param  string $token   [description]
+     * @param  int    $userId  [description]
+     * @param  int    $gameId  [description]
+     * @param  string $collect [description]
+     *
+     * @return string          [description]
+     */
+    public static function sendCloseGame(
+        string $token,
+        int $userId,
+        int $gameId,
+        string $collect
+    ): string {
+        if ($collect === 'true') {
+            $collect = true;
+        } elseif ($collect === 'false') {
+            $collect = false;
+        } else {
+            $collect = false;
+        }
+
+        // отправка запроса на 777games
+        $ch = curl_init("https://play777games.com/exit");
+        $payload = json_encode(array(
+              'token' => $token,
+              'userId' => $userId,
+              'gameId' => $gameId,
+              'collect' => $collect
+            ));
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $result = curl_exec($ch);
+        curl_close($ch);
+
+        return $result;
+    }
+
+    public static function addCreadit(
+        string $token,
+        int $userId,
+        int $gameId,
+        string $eventID
+    ): string {
+        $requestData = array(
+            'token' => $_SESSION['token'],
+            'userId' => $_SESSION['userId'],
+            'gameId' => $_SESSION['gameId'],
+            'direction' => 'debit',
+            'eventType' => 'BetPlacing',
+            'amount' => 0,
+            'extraInfo' => [],
+            'eventID' => $eventID
+        );
+
+        // получение ответа от slot.pantera
+        $responseMoveFunds = BridgeApi::sendMoveFunds($requestData);
+
+        return $responseMoveFunds;
     }
 }

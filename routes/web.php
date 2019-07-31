@@ -19,6 +19,7 @@ Route::get('/index', 'PageController@index');
 
 Route::group(['namespace' => 'Api'], function () {
     Route::get('startGame', 'BridgeController@startGame');
+    Route::get('add-credit', 'BridgeController@addCreadit');
 
     Route::get('api-v2/action', 'GameControllerV2@action');
 });
