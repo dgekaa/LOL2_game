@@ -6,6 +6,7 @@ use Tests\TestCase;
 use App\Classes\Games\LifeOfLuxury2\Data\LogicData;
 use App\Classes\Games\LifeOfLuxury2\GameDirector;
 use App\Models\V2Session;
+use App\Models\V2Balance;
 
 class DemoGameTest extends TestCase
 {
@@ -17,6 +18,10 @@ class DemoGameTest extends TestCase
     public function testActionSpin1()
     {
         $check = false;
+
+        $balance = V2Balance::where('user_id', 1)->where('mode', 'demo')->first();
+        $balance->value = 10000;
+        $balance->save();
 
         $game = $this->getGame();
         $dataPool = $game->dataPool;
@@ -75,6 +80,10 @@ class DemoGameTest extends TestCase
     {
         $check = true;
 
+        $balance = V2Balance::where('user_id', 1)->where('mode', 'demo')->first();
+        $balance->value = 10000;
+        $balance->save();
+
         $game = $this->getGame();
         $dataPool = $game->dataPool;
         $workersPool = $game->workersPool;
@@ -115,6 +124,7 @@ class DemoGameTest extends TestCase
             ->executeAction($requestArray, $table);
 
         $response = json_decode($responseJson);
+
 
         if ($response->stateData->screen !== 'mainGame') {
             $check = false;
@@ -175,6 +185,10 @@ class DemoGameTest extends TestCase
     public function testActionSpin3()
     {
         $check = true;
+
+        $balance = V2Balance::where('user_id', 1)->where('mode', 'demo')->first();
+        $balance->value = 10000;
+        $balance->save();
 
         $game = $this->getGame();
         $dataPool = $game->dataPool;
