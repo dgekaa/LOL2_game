@@ -7,7 +7,7 @@ use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use Illuminate\View\View;
 use Modules\Admin\Repositories\GameReposiroty;
-use Modules\Admin\Repositories\V2GameStatisticReposiroty;
+use Modules\Admin\Repositories\GameStatisticReposiroty;
 
 /**
  * Контролер который занимается выводом страниц связанных с статистикой игр
@@ -35,7 +35,7 @@ class StatisticsController extends Controller
     {
         $mode = 'demo';
         $game = GameReposiroty::getGameByAlias($alias);
-        $gameStatistics = V2GameStatisticReposiroty::getGameStatistics($game->id, $mode);
+        $gameStatistics = GameStatisticReposiroty::getGameStatistics($game->id, $mode);
         $statistics = json_decode($gameStatistics->statistics);
 
         return view('admin::statistics.' . $alias, [
