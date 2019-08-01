@@ -107,9 +107,9 @@ class SimulationController extends Controller
         $data->linesInGame = $linesInGame;
 
         // получение правильных процентов (TODO: в statisticsData попадают не правильные значение, нужно исправить)
-        $res1 = 100 / $data->userStatisticsData->loss * $data->userStatisticsData->winnings;
-        $res2 = 100 / $data->userStatisticsData->loss * $data->userStatisticsData->winningsOnMainGame;
-        $data->userStatisticsData->winPercentOnFeatureGame = 100 / $data->userStatisticsData->loss * $data->userStatisticsData->winningsOnFeatureGame;
+        // $res1 = 100 / $data->userStatisticsData->loss * $data->userStatisticsData->winnings;
+        // $res2 = 100 / $data->userStatisticsData->loss * $data->userStatisticsData->winningsOnMainGame;
+        // $data->userStatisticsData->winPercentOnFeatureGame = 100 / $data->userStatisticsData->loss * $data->userStatisticsData->winningsOnFeatureGame;
 
         return view('admin::simulation.' . $alias, [
             'data' => $data,
