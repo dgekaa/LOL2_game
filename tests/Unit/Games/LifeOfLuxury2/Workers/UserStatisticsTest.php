@@ -2318,7 +2318,7 @@ class UserStatisticsTest extends TestCase
         if ($response->userStatisticsData->winPercentOnMainGame != 250) {
             $check = false;
         }
-        if ($response->userStatisticsData->winPercentOnFeatureGame != 2300) {
+        if ($response->userStatisticsData->winPercentOnFeatureGame != 1150) {
             $check = false;
         }
         if ($response->userStatisticsData->statisticOfWinCombinations !== [[0,0,0,0,0,0],[0,0,6,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0]]) {
