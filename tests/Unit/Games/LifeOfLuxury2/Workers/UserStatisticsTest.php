@@ -644,6 +644,7 @@ class UserStatisticsTest extends TestCase
     {
         $check = true;
 
+
         // удаление сессии
         $session = V2Session::where('game_id', 2)->where('user_id', 1)->where('mode', 'demo')->get()->first();
         if ($session) {

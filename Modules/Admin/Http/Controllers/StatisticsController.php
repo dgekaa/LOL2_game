@@ -36,6 +36,11 @@ class StatisticsController extends Controller
         $mode = 'full';
         $game = GameReposiroty::getGameByAlias($alias);
         $gameStatistics = GameStatisticReposiroty::getGameStatistics($game->id, $mode);
+
+        if (!$gameStatistics) {
+            exit('Нет статистики');
+        }
+
         $statistics = json_decode($gameStatistics->statistics);
 
         return view('admin::statistics.' . $alias, [

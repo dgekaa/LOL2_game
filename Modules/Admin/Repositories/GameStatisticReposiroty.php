@@ -8,7 +8,7 @@ use App\Models\V2GameStatistic;
 
 class GameStatisticReposiroty extends BaseRepository
 {
-    public static function getGameStatistics(int $gameId, string $mode): V2GameStatistic
+    public static function getGameStatistics(int $gameId, string $mode): ?V2GameStatistic
     {
         $gameStatistics = V2GameStatistic::where('game_id', $gameId)->where('mode', $mode)->first();
 
