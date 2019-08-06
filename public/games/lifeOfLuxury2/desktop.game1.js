@@ -1191,11 +1191,11 @@ function game1() {
         function addCreditFlick() {
             flickBtn = true;
             if (addcreditFlickStatus) {
-                //autoPlay.loadTexture('addCredit');
-                autoPlay.loadTexture('addCredit_p');
+                autoPlay.loadTexture('addCredit');
+                //autoPlay.loadTexture('addCredit_p');
                 setTimeout(function() {
                     if (addcreditFlickStatus) {
-                        // autoPlay.loadTexture('addCredit_p');
+                        autoPlay.loadTexture('addCredit_p');
                         setTimeout(function() {
                             addCreditFlick();
                         }, 500);
