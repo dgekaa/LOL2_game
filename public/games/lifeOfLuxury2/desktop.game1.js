@@ -582,7 +582,7 @@ function game1() {
         autoPlay.input.useHandCursor = true;
         autoPlay.events.onInputDown.add(function() {
             if ((balance + allWinOld) === 0) {
-                // autoPlay.loadTexture('addCredit_p'); 
+                // autoPlay.loadTexture('addCredit_p');
             } else {
                 if (autostart === false) {
                     // autoPlay.loadTexture('autoPlay_p');
@@ -593,14 +593,14 @@ function game1() {
         });
         autoPlay.events.onInputUp.add(function() {
             if ((balance + allWinOld) === 0) {
-                // autoPlay.loadTexture('addCredit'); 
+                // autoPlay.loadTexture('addCredit');
                 console.log('press add credits');
                 $.ajax({
                     type: "get",
-                    url: getNeedUrlPath() + '/add-credit?sessionName=' + sessionName,
+                    url: getNeedUrlPath() + '/add-credit?userId=' + userId + '&gameId=' + gameId + '&token=' + token,
                     dataType: 'html',
                     success: function(data) {
-                        console.log(getNeedUrlPath() + '/add-credit?sessionName=' + sessionName);
+                        console.log(getNeedUrlPath() + '/add-credit?userId=' + userId + '&gameId=' + gameId + '&token=' + token);
                         console.log(data)
                     },
                     error: function(xhr, ajaxOptions, thrownError) {
@@ -1191,7 +1191,8 @@ function game1() {
         function addCreditFlick() {
             flickBtn = true;
             if (addcreditFlickStatus) {
-                autoPlay.loadTexture('addCredit');
+                //autoPlay.loadTexture('addCredit');
+                autoPlay.loadTexture('addCredit_p');
                 setTimeout(function() {
                     if (addcreditFlickStatus) {
                         // autoPlay.loadTexture('addCredit_p');
@@ -1271,18 +1272,20 @@ function game1() {
                             [maxBetSpin, 'maxBetSpin']
                         ]);
                     }
-                    console.log(111)
-                    console.log(balance + allWin)
                     hideMobileBtn();
                     addcreditFlickStatus = false;
                     autoPlay.loadTexture('autoPlay');
+                    console.log(balance + allWin)
                     if ((balance + allWin) === 0) {
                         checkBalance();
                         showButtons([
                             [autoPlay, 'autoPlay']
                         ]);
-                        autoPlay.loadTexture('addCredit');
+                        //autoPlay.loadTexture('addCredit');
                         addcreditFlickStatus = true;
+                        bottomText.visible = true;
+                        bottomText.setText("To play please add credit to game.");
+                        autoPlay.loadTexture('addCredit');
                         addCreditFlick();
                     }
                 } else {
@@ -2390,6 +2393,8 @@ function game1() {
                     [startButton, 'startButton']
                 ]);
                 if (!flickBtn) {
+                    bottomText.visible = true;
+                    bottomText.setText("To play please add credit to game.");
                     autoPlay.loadTexture('autoPlay');
                     hideButtons([
                         [autoPlay, 'autoPlay']
