@@ -2393,8 +2393,6 @@ function game1() {
                     [startButton, 'startButton']
                 ]);
                 if (!flickBtn) {
-                    bottomText.visible = true;
-                    bottomText.setText("To play please add credit to game.");
                     autoPlay.loadTexture('autoPlay');
                     hideButtons([
                         [autoPlay, 'autoPlay']
@@ -2413,6 +2411,9 @@ function game1() {
                         [autoPlay, 'autoPlay']
                     ]);
                     if (!flickBtn) {
+                        addcreditFlickStatus = true;
+                        bottomText.visible = true;
+                        bottomText.setText("To play please add credit to game.");
                         autoPlay.loadTexture('addCredit');
                         addCreditFlick();
                     }
