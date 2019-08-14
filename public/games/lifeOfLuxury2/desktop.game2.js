@@ -969,7 +969,7 @@ function game2() {
         var curBri = 0;
         var afterDropFeatureGame = false;
         var wcvFreeSpinWinValuesArray = [];
-
+        console.log(bottomText)
         function checkWin() {
             curBri = 0;
             wlWinValuesArray = [];

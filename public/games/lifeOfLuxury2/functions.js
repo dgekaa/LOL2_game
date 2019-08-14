@@ -1116,7 +1116,9 @@ var sessionUuid;
 var featureGameStatus = false;
 var freeSpinCountInit, mulFreespinInit, allWinOldInit, allFreeSpinCountInit;
 var wlValuesFS;
+
 function requestState(data) {
+    console.log(data)
     game1();
     game2();
     if (preloaderStatus) {
@@ -1130,6 +1132,10 @@ function requestState(data) {
     balance = (data.balanceData.balance).toFixed() - data.balanceData.totalWinningsInFeatureGame;
     info = data.logicData.table;
     sessionUuid = data.sessionData.sessionUuid;
+    const {sessionData:{mode}} = data;
+    if(mode === 'demo'){
+
+    }
     if (data.stateData.screen === 'featureGame') {
         featureGameStatus = true;
         balance = data.longData.balanceData['balance'] - data.longData.balanceData['totalPayoff'];
@@ -1327,8 +1333,6 @@ function maxBetline() {
     betlineCounter = betlineOptions.length - 1;
     betline = betlineOptions[betlineOptions.length - 1];
 }
-
-
 
 //функции для игры с картами
 
