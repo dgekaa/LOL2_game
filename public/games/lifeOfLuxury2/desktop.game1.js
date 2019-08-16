@@ -138,8 +138,8 @@ function game1() {
 		}
 		if (demo === 'demo') {
 			game.scale.setGameSize(1024, 831)
-			game1.ticker = game.add.tileSprite(0, 800, 1154, 31, 'ticker');
 		}
+		game1.ticker = game.add.tileSprite(0, 800, 1154, 31, 'ticker');
 		checkBalanceTimer = false;
 		createdStarsStatus = true;
 		createdStarsMiniStatus = true;
@@ -824,8 +824,8 @@ function game1() {
 		//   }
 		// }
 		var coinCount = 0;
-		
-		
+
+
 		function parseSpinAnswer(dataSpinRequest) {
 			console.log(`Win : ${dataSpinRequest.stateData.isWin}`)
 
