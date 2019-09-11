@@ -29,6 +29,7 @@ class GameDirector extends BaseGameDirector
 
         // сбор рабочих
         $this->workersPool->addWorker('responseWorker', new \App\Classes\Games\LifeOfLuxury2\Workers\ResponseWorker);
+        $this->workersPool->addWorker('sessionWorker', new \App\Classes\Games\LifeOfLuxury2\Workers\SessionWorker);
 
         // сбор инструменов
         $this->toolsPool->addTool('logicTools', 'tableTool', new \App\Classes\Games\LifeOfLuxury2\Tools\LogicTools\TableTool);
@@ -36,6 +37,7 @@ class GameDirector extends BaseGameDirector
         $this->toolsPool->addTool('logicTools', 'bonusCalculatorTool', new \App\Classes\Games\LifeOfLuxury2\Tools\LogicTools\BonusCalculatorTool);
         $this->toolsPool->addTool('logicTools', 'multiplierTool', new \App\Classes\Games\LifeOfLuxury2\Tools\LogicTools\MultiplierTool);
         $this->toolsPool->addTool('stateTools', 'stateCalculatorTool', new \App\Classes\Games\LifeOfLuxury2\Tools\StateTools\StateCalculatorTool);
+        $this->toolsPool->addTool('sessionTools', 'userIdentifierTool', new \App\Classes\Games\LifeOfLuxury2\Tools\SessionTools\UserIdentifierTool);
 
         // подпись обсерверов на события
         $this->actionsPool->open_game->attach(new \App\Classes\Games\LifeOfLuxury2\Observers\Full\ActionObservers\StartActionOpenGameObserver);

@@ -14,8 +14,6 @@ class CreateV2UsersTable extends Migration
     {
         Schema::create('v2_users', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('email');
-            $table->string('password');
             $table->string('session_token');
             $table->timestamps();
         });
