@@ -17,7 +17,7 @@ class LifeOfLuxury2Seeder extends Seeder
         ]);
 
         DB::table('v2_game_rules')->insert([
-            'game_id' => 2,
+            'game_id' => 6,
             'name' => 'percentages',
             'rules' => '[{"bet":0,"mainGame":[[0,6.5,12,11,10,10,12,13,15,8,2.5],[2.5,6.5,12,11,10,10,11,12,15,8,2
 ],[2.5,6.5,12,11,10,10,11,12,15,8,2],[2.5,6.5,12,11,10,10,11,12,15,8,2],[0,6.5,12,11,10,10,
@@ -27,20 +27,20 @@ class LifeOfLuxury2Seeder extends Seeder
         ]);
 
         DB::table('v2_game_rules')->insert([
-            'game_id' => 2,
+            'game_id' => 6,
             'name' => 'winCombinations',
             // недостаток, что должны идти по порядку и если у какого то симола нет выигрышной комбинации, то нужно ставить [0,0,0,0,0,0]
             'rules' => '[[0,0,0,0,0,0], [0,0,10,50,500,5000], [0,0,0,5,25,120], [0,0,0,10,50,200], [0,0,0,20,100,500], [0,0,0,15,75,200], [0,0,0,10,30,150], [0,0,0,5,30,150], [0,0,0,5,20,100], [0,0,5,30,200,1000], [0,0,0,0,0,0]]' // [[symbol => [count => winValue, ... ], ...]
         ]);
 
         DB::table('v2_game_rules')->insert([
-            'game_id' => 2,
+            'game_id' => 6,
             'name' => 'lines',
             'rules' => '[[1,4,7,10,13],[0,3,6,9,12],[2,5,8,11,14],[0,4,8,10,12],[2,4,6,10,14],[1,3,7,11,13],[1,5,7,9,13],[0,3,7,11,14],[2,5,7,9,12],[0,4,6,10,12],[2,4,8,10,14],[1,3,6,9,13],[1,5,8,11,13],[0,4,7,10,12],[2,4,7,10,14],[1,4,6,10,13],[1,4,8,11,14],[0,5,6,11,12],[2,3,8,9,14],[2,3,7,9,14]]' // [[cellNumber, cellNumber, cellNumber, cellNumber, cellNumber], ...]
         ]);
 
         DB::table('v2_game_rules')->insert([
-            'game_id' => 2,
+            'game_id' => 6,
             'name' => 'bonus',
             // выигрышь на бонусных символах делает прибавку к основному выигрышу
             // в виде произведения общей ставки за ход на множитель зависящий от
@@ -49,13 +49,13 @@ class LifeOfLuxury2Seeder extends Seeder
         ]);
 
         DB::table('v2_game_rules')->insert([
-            'game_id' => 2,
+            'game_id' => 6,
             'name' => 'featureGame',
             'rules' => '[10, 3]' // ['symbol' => , 'minAmount' => ]
         ]);
 
         DB::table('v2_game_rules')->insert([
-            'game_id' => 2,
+            'game_id' => 6,
             'name' => 'common',
             'rules' => '{"countSymbolsInGame":11}'
         ]);

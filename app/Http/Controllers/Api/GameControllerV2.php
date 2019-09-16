@@ -19,7 +19,7 @@ class GameControllerV2 extends Controller
         $gameId = (int) $request->input('game_id');
         $mode = (string) $request->input('mode');
 
-        if ($gameId === 2) {
+        if ($gameId === 6) {
             $response = (new GameDirector())
                 ->build($mode)
                 ->executeAction($request->all());
