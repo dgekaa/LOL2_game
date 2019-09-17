@@ -598,10 +598,10 @@ function game1() {
 				console.log('press add credits');
 				$.ajax({
 					type: "get",
-					url: getNeedUrlPath() + '/add-credit?userId=' + userId + '&gameId=' + gameId + '&token=' + token,
+					url: getNeedUrlPath() + '/add-credit?userId=' + userId + '&gameId=' + gameId + '&token=' + token +'&platform_id='+ platformId,
 					dataType: 'html',
 					success: function (data) {
-						console.log(getNeedUrlPath() + '/add-credit?userId=' + userId + '&gameId=' + gameId + '&token=' + token);
+						console.log(getNeedUrlPath() + '/add-credit?userId=' + userId + '&gameId=' + gameId + '&token=' + token+'&platform_id='+ platformId);
 						console.log(data)
 					},
 					error: function (xhr, ajaxOptions, thrownError) {
@@ -1411,10 +1411,10 @@ function game1() {
 
 
 		function requestSpin(gamename, sessionUuid, betline, lines) {
-			console.log(getNeedUrlPath() + `/api-v2/action?game_id=${gameId}&user_id=${userId}&mode=${demo}&action=spin&session_uuid=${sessionUuid}&token=${token}&linesInGame=${lines}&lineBet=${betline}`);
+			console.log(getNeedUrlPath() + `/api-v2/action?game_id=${gameId}&user_id=${userId}&mode=${demo}&action=spin&session_uuid=${sessionUuid}&token=${token}&linesInGame=${lines}&lineBet=${betline}&platform_id=${platformId}`);
 			$.ajax({
 				type: "get",
-				url: getNeedUrlPath() + `/api-v2/action?game_id=${gameId}&user_id=${userId}&mode=${demo}&action=spin&session_uuid=${sessionUuid}&token=${token}&linesInGame=${lines}&lineBet=${betline}`,
+				url: getNeedUrlPath() + `/api-v2/action?game_id=${gameId}&user_id=${userId}&mode=${demo}&action=spin&session_uuid=${sessionUuid}&token=${token}&linesInGame=${lines}&lineBet=${betline}&platform_id=${platformId}`,
 				dataType: 'html',
 				success: function (data) {
 					console.log(data);
@@ -1473,7 +1473,7 @@ function game1() {
 		function moveFundsExceptionFunc(gamename, sessionName, betline, lines, moveFundsExceptionID) {
 			$.ajax({
 				type: "get",
-				url: getNeedUrlPath() + '/moveFundsException?moveFundsExceptionID=' + moveFundsExceptionID,
+				url: getNeedUrlPath() + '/moveFundsException?moveFundsExceptionID=' + moveFundsExceptionID+'&platform_id='+ platformId,
 				dataType: 'html',
 				success: function (data) {
 					console.log(data);
@@ -1521,7 +1521,7 @@ function game1() {
 		function BetPlacingAbortExceptionFunc(gamename, sessionName, betline, lines, moveFundsExceptionID) {
 			$.ajax({
 				type: "get",
-				url: getNeedUrlPath() + '/betPlacingAbort?betPlacingAbortExceptionID=' + moveFundsExceptionID,
+				url: getNeedUrlPath() + '/betPlacingAbort?betPlacingAbortExceptionID=' + moveFundsExceptionID +'&platform_id='+ platformId,
 				dataType: 'html',
 				success: function (data) {
 					console.log(data);

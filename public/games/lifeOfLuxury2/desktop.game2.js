@@ -522,10 +522,10 @@ function game2() {
         var errorStatus = false;
 
         function requestSpin(gamename, sessionName, betline, lines) {
-            console.log(getNeedUrlPath() + `/api-v2/action?game_id=${gameId}&user_id=${userId}&mode=${demo}&action=free_spin&session_uuid=${sessionUuid}&token=${token}&linesInGame=${lines}&lineBet=${betline}`);
+            console.log(getNeedUrlPath() + `/api-v2/action?game_id=${gameId}&user_id=${userId}&mode=${demo}&action=free_spin&session_uuid=${sessionUuid}&token=${token}&linesInGame=${lines}&lineBet=${betline}&platform_id=${platformId}`);
             $.ajax({
                 type: "get",
-                url: getNeedUrlPath() + `/api-v2/action?game_id=${gameId}&user_id=${userId}&mode=${demo}&action=free_spin&session_uuid=${sessionUuid}&token=${token}&linesInGame=${lines}&lineBet=${betline}`,
+                url: getNeedUrlPath() + `/api-v2/action?game_id=${gameId}&user_id=${userId}&mode=${demo}&action=free_spin&session_uuid=${sessionUuid}&token=${token}&linesInGame=${lines}&lineBet=${betline}&platform_id=${platformId}`,
                 dataType: 'html',
                 success: function(data) {
                     console.log(data);
@@ -578,13 +578,13 @@ function game2() {
         function moveFundsExceptionFunc(gamename, sessionName, betline, lines, moveFundsExceptionID) {
             $.ajax({
                 type: "get",
-                url: getNeedUrlPath() + '/moveFundsException?moveFundsExceptionID=' + moveFundsExceptionID,
+                url: getNeedUrlPath() + '/moveFundsException?moveFundsExceptionID=' + moveFundsExceptionID+'&platform_id='+ platformId,
                 dataType: 'html',
                 success: function(data) {
                     console.log(data);
                     if (IsJsonString(data)) {
                         dataSpinRequest = JSON.parse(data);
-                        // проверка статуса ответа  
+                        // проверка статуса ответа
                         if (dataSpinRequest.status === 'false') {
                             switch (dataSpinRequest.message) {
                                 case 'FirstMoveFundsException':
@@ -626,13 +626,13 @@ function game2() {
         function BetPlacingAbortExceptionFunc(gamename, sessionName, betline, lines, moveFundsExceptionID) {
             $.ajax({
                 type: "get",
-                url: getNeedUrlPath() + '/betPlacingAbort?betPlacingAbortExceptionID=' + moveFundsExceptionID,
+                url: getNeedUrlPath() + '/betPlacingAbort?betPlacingAbortExceptionID=' + moveFundsExceptionID+'&platform_id='+ platformId,
                 dataType: 'html',
                 success: function(data) {
                     console.log(data);
                     if (IsJsonString(data)) {
                         dataSpinRequest = JSON.parse(data);
-                        // проверка статуса ответа  
+                        // проверка статуса ответа
                         if (dataSpinRequest.status === 'false') {
                             switch (dataSpinRequest.message) {
                                 case 'FirstMoveFundsException':
