@@ -14,4 +14,7 @@ class CloseGameRequestData extends BaseCloseGameRequestData
 
     /** @var string collect-значение для 777games */
     public $collect;
+
+    /** @var int id платформы для 777games */
+    public $platformId;
 }

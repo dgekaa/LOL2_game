@@ -39,14 +39,15 @@ class BridgeController extends Controller
         }
 
         // подготовка get параметров для игры
-        $getParams = "game_id=$gameId&user_id=$userId&mode=$mode&token=$token";
+        $getParams = "game_id=$gameId&user_id=$userId&mode=$mode&token=$token&platformId=$platformId";
 
         // получение и сохранение баланса пользователя
         BridgeService::addUserBalance(
             $token,
             $gameId,
             $userId,
-            $mode
+            $mode,
+            $platformId
         );
 
         // переадресация на игру
@@ -64,6 +65,7 @@ class BridgeController extends Controller
             'token' => $request->input('token'),
             'userId' => $request->input('user_id'),
             'gameId' => $request->input('game_id'),
+            'platformId' => $request->input('platformId'),
             'direction' => 'debit',
             'eventType' => 'BetPlacing',
             'amount' => 0,

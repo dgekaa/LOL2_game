@@ -11,4 +11,7 @@ class OpenGameRequestData extends BaseOpenGameRequestData
 {
     /** @var string токен от 777games */
     public $token;
+
+    /** @var int id платформы для 777games */
+    public $platformId;
 }

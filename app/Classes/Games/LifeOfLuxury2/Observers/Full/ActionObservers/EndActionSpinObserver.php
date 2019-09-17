@@ -34,7 +34,8 @@ class EndActionSpinObserver implements IObserver
                 $event->dataPool->requestData->userId,
                 $event->dataPool->requestData->gameId,
                 $event->dataPool->requestData->linesInGame,
-                $event->dataPool->requestData->linesInGame * $event->dataPool->requestData->lineBet
+                $event->dataPool->requestData->linesInGame * $event->dataPool->requestData->lineBet,
+                $event->dataPool->requestData->platformId
             );
 
             // отрпвка данных с результатими хода в основной игре
@@ -47,7 +48,8 @@ class EndActionSpinObserver implements IObserver
                 $event->dataPool->balanceData->totalPayoff,
                 $event->dataPool->logicData->table,
                 $event->dataPool->stateData->screen,
-                $event->dataPool->stateData->isDropFeatureGame
+                $event->dataPool->stateData->isDropFeatureGame,
+                $event->dataPool->requestData->platformId
             );
 
             // запись баланса в БД

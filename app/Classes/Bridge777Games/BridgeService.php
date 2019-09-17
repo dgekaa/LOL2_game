@@ -23,16 +23,17 @@ class BridgeService
         string $token,
         int $gameId,
         int $userId,
-        string $mode
+        string $mode,
+        int $platformId
     ): bool {
         // получение баланса через апи
         if ($mode === 'full') {
-            $balance = BridgeApi::getBalance($token, $userId, $gameId);
+            $balance = BridgeApi::getBalance($token, $userId, $gameId, $platformId);
 
             // запись баланса в БД
             BridgeBalanceRepository::updateUserBalance($userId, $mode, $balance);
         } elseif ($mode === 'demo') {
-            //$balance = 10000;
+            $balance = 10000;
         }
 
         return true;
@@ -56,7 +57,8 @@ class BridgeService
         int $userId,
         int $gameId,
         int $linesInGame,
-        int $bet
+        int $bet,
+        int $platformId
     ): string {
         // преобразование ставки из центов в доллары
         $bet /= 100;
@@ -69,6 +71,7 @@ class BridgeService
             'gameId' => $gameId,
             'direction' => 'debit',
             'eventType' => 'BetPlacing',
+            'platformId' => $platformId,
             'amount' => $bet,
             'extraInfo' => [
                 'selected' => [$linesInGame]
@@ -104,7 +107,8 @@ class BridgeService
         int $totalPayoff,
         array $table,
         string $screen,
-        bool $isDropFeatureGame
+        bool $isDropFeatureGame,
+        int $platformId
     ): string {
         $direction = BridgeTool::getDirectionParametr($totalPayoff);
         $eventType = BridgeTool::getEventTypeParametr($totalPayoff);
@@ -122,6 +126,7 @@ class BridgeService
             'token' => $token,
             'userId' => $userId,
             'gameId' => $gameId,
+            'platformId' => $platformId,
             'transactionId' => Uuid::generate()->string,
             'direction' => 'credit',
             'eventType' => $eventType,
@@ -152,7 +157,8 @@ class BridgeService
         string $token,
         int $userId,
         int $gameId,
-        string $collect
+        string $collect,
+        int $platformId
     ): string {
         if ($collect === 'true') {
             $collect = true;
@@ -168,7 +174,8 @@ class BridgeService
               'token' => $token,
               'userId' => $userId,
               'gameId' => $gameId,
-              'collect' => $collect
+              'collect' => $collect,
+              'platformId' => $platformId
             ));
         curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
         curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
@@ -183,7 +190,8 @@ class BridgeService
         string $token,
         int $userId,
         int $gameId,
-        string $eventID
+        string $eventID,
+        int $platformId
     ): string {
         $requestData = array(
             'token' => $_SESSION['token'],
@@ -191,6 +199,7 @@ class BridgeService
             'gameId' => $_SESSION['gameId'],
             'direction' => 'debit',
             'eventType' => 'BetPlacing',
+            'platformId' => $platformId,
             'amount' => 0,
             'extraInfo' => [],
             'eventID' => $eventID

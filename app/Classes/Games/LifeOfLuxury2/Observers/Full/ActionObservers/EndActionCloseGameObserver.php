@@ -26,8 +26,9 @@ class EndActionCloseGameObserver implements IObserver
             $userId = $event->dataPool->requestData->userId;
             $gameId = $event->dataPool->requestData->gameId;
             $collect = $event->dataPool->requestData->collect;
+            $platformId = $event->dataPool->requestData->platformId;
 
-            BridgeService::sendCloseGame($token, $userId, $gameId, $collect);
+            BridgeService::sendCloseGame($token, $userId, $gameId, $collect, $platformId);
         }
 
         return $event->dataPool;

@@ -18,9 +18,10 @@ class BridgeApi
     public static function getBalance(
         string $token,
         int $userId,
-        int $gameId
+        int $gameId,
+        int $platformId
     ): int {
-        $responseGetBalance = Curl::to("https://play777games.com/getBalance?token={$token}&userId={$userId}&gameId={$gameId}")
+        $responseGetBalance = Curl::to("https://play777games.com/getBalance?token={$token}&userId={$userId}&gameId={$gameId}&platformId={$platformId}")
            ->post();
 
         // получение баланса в долларах
