@@ -21,8 +21,13 @@ class BridgeApi
         int $gameId,
         int $platformId
     ): int {
-        $responseGetBalance = Curl::to("https://play777games.com/getBalance?token={$token}&userId={$userId}&gameId={$gameId}&platformId={$platformId}")
-           ->post();
+        if ($platformId === 1) {
+            $responseGetBalance = Curl::to("https://play777games.com/getBalance?token={$token}&userId={$userId}&gameId={$gameId}&platformId={$platformId}")
+               ->post();
+        } elseif ($platformId === 2) {
+            $responseGetBalance = Curl::to("https://play.devbet.live/getBalance?token={$token}&userId={$userId}&gameId={$gameId}&platformId={$platformId}")
+               ->post();
+        }
 
         // получение баланса в долларах
         $dollarBalance = (float) json_decode($responseGetBalance)->balance;
@@ -43,7 +48,11 @@ class BridgeApi
      */
     public static function sendMoveFunds(array $params): string
     {
-        $requestURL = "https://play777games.com/moveFunds?";
+        if ($params['platformId'] === 1) {
+            $requestURL = "https://play777games.com/moveFunds?";
+        } elseif ($params['platformId'] === 2) {
+            $requestURL = "https://play.devbet.live/moveFunds?";
+        }
         $requestURL .= http_build_query($params);
 
         $responseMoveFunds = Curl::to($requestURL)->post();

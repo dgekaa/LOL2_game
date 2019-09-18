@@ -168,8 +168,15 @@ class BridgeService
             $collect = false;
         }
 
+        $url = '';
+        if ($platformId === 1) {
+            $url = "https://play777games.com/exit";
+        } elseif ($platformId === 2) {
+            $url = "https://play.devbet.live/exit";
+        }
+
         // отправка запроса на 777games
-        $ch = curl_init("https://play777games.com/exit");
+        $ch = curl_init($url);
         $payload = json_encode(array(
               'token' => $token,
               'userId' => $userId,
