@@ -48,6 +48,7 @@ class BridgeApi
      */
     public static function sendMoveFunds(array $params): string
     {
+        $requestURL = "https://play777games.com/moveFunds?";
         if ($params['platformId'] === 1) {
             $requestURL = "https://play777games.com/moveFunds?";
         } elseif ($params['platformId'] === 2) {
