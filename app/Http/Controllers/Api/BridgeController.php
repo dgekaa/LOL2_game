@@ -29,7 +29,7 @@ class BridgeController extends Controller
         $nickname = $request->input('nickname');
         $gameId = $request->input('gameId');
         $demo = $request->input('demo');
-        $platformId = $request->input('platformId');
+        $platformId = (int) $request->input('platformId');
 
         // преобразование параметро demo в парамет mode
         if ($demo === 'false') {
@@ -65,7 +65,7 @@ class BridgeController extends Controller
             'token' => $request->input('token'),
             'userId' => $request->input('user_id'),
             'gameId' => $request->input('game_id'),
-            'platformId' => $request->input('platformId'),
+            'platformId' => (int) $request->input('platformId'),
             'direction' => 'debit',
             'eventType' => 'BetPlacing',
             'amount' => 0,
