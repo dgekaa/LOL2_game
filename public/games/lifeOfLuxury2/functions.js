@@ -994,7 +994,7 @@ var platformId;
 var token;
 var urlPath2;
 
-var platformId = getUrlVars()['platform_id']
+platformId = getUrlVars()['platformId']
 
 function getUrlVars() {
     var vars = {};
