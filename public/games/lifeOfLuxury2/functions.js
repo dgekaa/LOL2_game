@@ -12,6 +12,13 @@ function randomNumber(min, max) {
 }
 var infoPage;
 
+function infoRandom() {
+    info = [];
+    for (var i = 0; i <= 15; ++i) {
+        info.push(randomNumber(1, 8));
+    }
+}
+
 function addinfoPage() {
     infoPageLeft = game.add.sprite(-1024, 0, 'help_page_4');
     infoPageCenter = game.add.sprite(0, 0 + 831, 'help_page_1');
@@ -26,10 +33,10 @@ function addinfoPage() {
 
 function exitInfoPage() {
     flickBtnInfoStatus = false;
-    game.add.tween(return_to_game).to({ y: 104 + 831 }, 300, Phaser.Easing.LINEAR, true);
-    game.add.tween(nextBtnInfoPage).to({ y: 14 + 831 }, 300, Phaser.Easing.LINEAR, true);
-    game.add.tween(prevBtnInfoPage).to({ y: 14 + 831 }, 300, Phaser.Easing.LINEAR, true);
-    game.add.tween(infoPageCenter).to({ y: 0 + 831 }, 300, Phaser.Easing.LINEAR, true).onComplete.add(function () {
+    game.add.tween(return_to_game).to({ y: 104 + 831 }, 600, Phaser.Easing.LINEAR, true);
+    game.add.tween(nextBtnInfoPage).to({ y: 14 + 831 }, 600, Phaser.Easing.LINEAR, true);
+    game.add.tween(prevBtnInfoPage).to({ y: 14 + 831 }, 600, Phaser.Easing.LINEAR, true);
+    game.add.tween(infoPageCenter).to({ y: 0 + 831 }, 600, Phaser.Easing.LINEAR, true).onComplete.add(function() {
         showButtons();
     });
 }
@@ -38,21 +45,21 @@ function addBtnInfoPage() {
     return_to_game = game.add.sprite(23, 104 + 831, 'return_p');
     return_to_game.inputEnabled = true;
     return_to_game.input.useHandCursor = true;
-    return_to_game.events.onInputUp.add(function () {
+    return_to_game.events.onInputUp.add(function() {
         helpSound.play();
         exitInfoPage();
     })
     nextBtnInfoPage = game.add.sprite(856, 14 + 831, 'Next');
     nextBtnInfoPage.inputEnabled = true;
     nextBtnInfoPage.input.useHandCursor = true;
-    nextBtnInfoPage.events.onInputUp.add(function () {
+    nextBtnInfoPage.events.onInputUp.add(function() {
         helpSound.play();
         nextInfoPage();
     })
     prevBtnInfoPage = game.add.sprite(23, 14 + 831, 'Prev');
     prevBtnInfoPage.inputEnabled = true;
     prevBtnInfoPage.input.useHandCursor = true;
-    prevBtnInfoPage.events.onInputUp.add(function () {
+    prevBtnInfoPage.events.onInputUp.add(function() {
         helpSound.play();
         prevInfoPage();
     })
@@ -71,10 +78,10 @@ function openInfoPage(infoPageName) {
     infoPageLeft.loadTexture(infoPage.pageName + '_page_' + infoPage.countPage);
     infoPageCenter.loadTexture(infoPage.pageName + '_page_' + infoPage.currentPage);
     infoPageRight.loadTexture(infoPage.pageName + '_page_' + (+infoPage.currentPage + 1));
-    game.add.tween(return_to_game).to({ y: 104 }, 300, Phaser.Easing.LINEAR, true);
-    game.add.tween(nextBtnInfoPage).to({ y: 14 }, 300, Phaser.Easing.LINEAR, true);
-    game.add.tween(prevBtnInfoPage).to({ y: 14 }, 300, Phaser.Easing.LINEAR, true);
-    game.add.tween(infoPageCenter).to({ y: 0 }, 300, Phaser.Easing.LINEAR, true).onComplete.add(function () {
+    game.add.tween(return_to_game).to({ y: 104 }, 600, Phaser.Easing.LINEAR, true);
+    game.add.tween(nextBtnInfoPage).to({ y: 14 }, 600, Phaser.Easing.LINEAR, true);
+    game.add.tween(prevBtnInfoPage).to({ y: 14 }, 600, Phaser.Easing.LINEAR, true);
+    game.add.tween(infoPageCenter).to({ y: 0 }, 600, Phaser.Easing.LINEAR, true).onComplete.add(function() {
         flickBtnInfoStatus = true;
         flickBtnInfo();
     });
@@ -82,8 +89,8 @@ function openInfoPage(infoPageName) {
 
 function prevInfoPage() {
     hideBtnInfoPage();
-    game.add.tween(infoPageCenter).to({ x: 1024 }, 600, Phaser.Easing.LINEAR, true).onComplete.add(function () { })
-    game.add.tween(infoPageLeft).to({ x: 0 }, 600, Phaser.Easing.LINEAR, true).onComplete.add(function () {
+    game.add.tween(infoPageCenter).to({ x: 1024 }, 600, Phaser.Easing.LINEAR, true).onComplete.add(function() {})
+    game.add.tween(infoPageLeft).to({ x: 0 }, 600, Phaser.Easing.LINEAR, true).onComplete.add(function() {
         // Переписать
         if (infoPage.currentPage === 1) {
             infoPage.currentPage = infoPage.countPage;
@@ -110,8 +117,8 @@ function prevInfoPage() {
 
 function nextInfoPage() {
     hideBtnInfoPage();
-    game.add.tween(infoPageCenter).to({ x: -1024 }, 600, Phaser.Easing.LINEAR, true).onComplete.add(function () { })
-    game.add.tween(infoPageRight).to({ x: 0 }, 600, Phaser.Easing.LINEAR, true).onComplete.add(function () {
+    game.add.tween(infoPageCenter).to({ x: -1024 }, 600, Phaser.Easing.LINEAR, true).onComplete.add(function() {})
+    game.add.tween(infoPageRight).to({ x: 0 }, 600, Phaser.Easing.LINEAR, true).onComplete.add(function() {
         // Переписать
         if (infoPage.currentPage === infoPage.countPage) {
             infoPage.currentPage = 1;
@@ -153,12 +160,12 @@ function flickBtnInfo() {
         return_to_game.loadTexture('return_p');
         nextBtnInfoPage.loadTexture('Next');
         prevBtnInfoPage.loadTexture('Prev');
-        setTimeout(function () {
+        setTimeout(function() {
             if (flickBtnInfoStatus) {
                 return_to_game.loadTexture('return');
                 nextBtnInfoPage.loadTexture('Next_p');
                 prevBtnInfoPage.loadTexture('Prev_p');
-                setTimeout(function () {
+                setTimeout(function() {
                     flickBtnInfo();
                 }, 500);
             }
@@ -227,25 +234,25 @@ function addButtonsGame1(game, pageCount) {
     selectGame.scale.setTo(0.7, 0.7);
     selectGame.inputEnabled = true;
     selectGame.input.useHandCursor = true;
-    selectGame.events.onInputOver.add(function () {
+    selectGame.events.onInputOver.add(function() {
         selectGame.loadTexture('selectGame_p');
     });
-    selectGame.events.onInputOut.add(function () {
+    selectGame.events.onInputOut.add(function() {
         selectGame.loadTexture('selectGame');
     });
-    selectGame.events.onInputDown.add(function () { });
+    selectGame.events.onInputDown.add(function() {});
 
     payTable = game.add.sprite(150, 510, 'payTable');
     payTable.scale.setTo(0.7, 0.7);
     payTable.inputEnabled = true;
     payTable.input.useHandCursor = true;
-    payTable.events.onInputOver.add(function () {
+    payTable.events.onInputOver.add(function() {
         payTable.loadTexture('payTable_p');
     });
-    payTable.events.onInputOut.add(function () {
+    payTable.events.onInputOut.add(function() {
         payTable.loadTexture('payTable');
     });
-    payTable.events.onInputUp.add(function () {
+    payTable.events.onInputUp.add(function() {
         hideButtons([
             [payTable, 'payTable'],
             [betmax, 'betmax'],
@@ -274,10 +281,10 @@ function addButtonsGame1(game, pageCount) {
     betone.scale.setTo(0.7, 0.7);
     betone.inputEnabled = true;
     betone.input.useHandCursor = true;
-    betone.events.onInputOver.add(function () {
+    betone.events.onInputOver.add(function() {
         betone.loadTexture('betone_p');
     });
-    betone.events.onInputDown.add(function () {
+    betone.events.onInputDown.add(function() {
         if (checkWin == 1) {
             checkWin = 0;
             hideNumbersAmin();
@@ -287,7 +294,7 @@ function addButtonsGame1(game, pageCount) {
             updateBetinfo(game, scorePosions, lines, betline);
         }
     });
-    betone.events.onInputOut.add(function () {
+    betone.events.onInputOut.add(function() {
         betone.loadTexture('betone');
     });
 
@@ -296,10 +303,10 @@ function addButtonsGame1(game, pageCount) {
     betmax.scale.setTo(0.7, 0.7);
     betmax.inputEnabled = true;
     betmax.input.useHandCursor = true;
-    betmax.events.onInputOver.add(function () {
+    betmax.events.onInputOver.add(function() {
         betmax.loadTexture('betmax_p');
     });
-    betmax.events.onInputDown.add(function () {
+    betmax.events.onInputDown.add(function() {
         if (checkWin == 1) {
             checkWin = 0;
             hideNumbersAmin();
@@ -310,7 +317,7 @@ function addButtonsGame1(game, pageCount) {
             //betMaxSound.play();
         }
     });
-    betmax.events.onInputOut.add(function () {
+    betmax.events.onInputOut.add(function() {
         betmax.loadTexture('betmax');
     });
 
@@ -318,17 +325,17 @@ function addButtonsGame1(game, pageCount) {
     automaricstart.scale.setTo(0.7, 0.7);
     automaricstart.inputEnabled = true;
     automaricstart.input.useHandCursor = true;
-    automaricstart.events.onInputOver.add(function () {
+    automaricstart.events.onInputOver.add(function() {
         if (automaricstart.inputEnabled == true) {
             automaricstart.loadTexture('automaricstart_p');
         }
     });
-    automaricstart.events.onInputOut.add(function () {
+    automaricstart.events.onInputOut.add(function() {
         if (automaricstart.inputEnabled == true) {
             automaricstart.loadTexture('automaricstart');
         }
     });
-    automaricstart.events.onInputDown.add(function () {
+    automaricstart.events.onInputDown.add(function() {
         //проверка есть ли выигрышь который нужно забрать и проверка включен ли авто-режим
         //главная проверка на то можно ли включить/выключить автостарт
 
@@ -362,17 +369,17 @@ function addButtonsGame1(game, pageCount) {
     startButton.scale.setTo(0.7, 0.7);
     startButton.inputEnabled = true;
     startButton.input.useHandCursor = true;
-    startButton.events.onInputOver.add(function () {
+    startButton.events.onInputOver.add(function() {
         if (startButton.inputEnabled == true) {
             startButton.loadTexture('startButton_p');
         }
     });
-    startButton.events.onInputOut.add(function () {
+    startButton.events.onInputOut.add(function() {
         if (startButton.inputEnabled == true) {
             startButton.loadTexture('startButton');
         }
     });
-    startButton.events.onInputDown.add(function () {
+    startButton.events.onInputDown.add(function() {
         if (settingsMode) {
             pageSound.play();
             for (var i = 1; i <= pageCount; ++i) {
@@ -448,13 +455,13 @@ function addButtonsGame1(game, pageCount) {
     buttonLine1.scale.setTo(0.7, 0.7);
     buttonLine1.inputEnabled = true;
     buttonLine1.input.useHandCursor = true;
-    buttonLine1.events.onInputOver.add(function () {
+    buttonLine1.events.onInputOver.add(function() {
         buttonLine1.loadTexture('buttonLine1_p');
     });
-    buttonLine1.events.onInputOut.add(function () {
+    buttonLine1.events.onInputOut.add(function() {
         buttonLine1.loadTexture('buttonLine1');
     });
-    buttonLine1.events.onInputUp.add(function () {
+    buttonLine1.events.onInputUp.add(function() {
         if (settingsMode) {
             pageSound.play();
             if (currentPage == 1)
@@ -469,7 +476,7 @@ function addButtonsGame1(game, pageCount) {
             showLines([1]);
         }
     });
-    buttonLine1.events.onInputDown.add(function () {
+    buttonLine1.events.onInputDown.add(function() {
         if (!settingsMode) {
             soundForBattons[0].play();
             hideLines();
@@ -489,17 +496,17 @@ function addButtonsGame1(game, pageCount) {
     buttonLine3.scale.setTo(0.7, 0.7);
     buttonLine3.inputEnabled = true;
     buttonLine3.input.useHandCursor = true;
-    buttonLine3.events.onInputOver.add(function () {
+    buttonLine3.events.onInputOver.add(function() {
         buttonLine3.loadTexture('buttonLine3_p');
     });
-    buttonLine3.events.onInputOut.add(function () {
+    buttonLine3.events.onInputOut.add(function() {
         buttonLine3.loadTexture('buttonLine3');
     });
-    buttonLine3.events.onInputUp.add(function () {
+    buttonLine3.events.onInputUp.add(function() {
         hideLines();
         showLines([1, 2, 3]);
     });
-    buttonLine3.events.onInputDown.add(function () {
+    buttonLine3.events.onInputDown.add(function() {
         soundForBattons[1].play();
 
         hideLines();
@@ -518,17 +525,17 @@ function addButtonsGame1(game, pageCount) {
     buttonLine5.scale.setTo(0.7, 0.7);
     buttonLine5.inputEnabled = true;
     buttonLine5.input.useHandCursor = true;
-    buttonLine5.events.onInputOver.add(function () {
+    buttonLine5.events.onInputOver.add(function() {
         buttonLine5.loadTexture('buttonLine5_p');
     });
-    buttonLine5.events.onInputOut.add(function () {
+    buttonLine5.events.onInputOut.add(function() {
         buttonLine5.loadTexture('buttonLine5');
     });
-    buttonLine5.events.onInputUp.add(function () {
+    buttonLine5.events.onInputUp.add(function() {
         hideLines();
         showLines([1, 2, 3, 4, 5]);
     });
-    buttonLine5.events.onInputDown.add(function () {
+    buttonLine5.events.onInputDown.add(function() {
         soundForBattons[2].play();
 
         hideLines();
@@ -547,17 +554,17 @@ function addButtonsGame1(game, pageCount) {
     buttonLine7.scale.setTo(0.7, 0.7);
     buttonLine7.inputEnabled = true;
     buttonLine7.input.useHandCursor = true;
-    buttonLine7.events.onInputOver.add(function () {
+    buttonLine7.events.onInputOver.add(function() {
         buttonLine7.loadTexture('buttonLine7_p');
     });
-    buttonLine7.events.onInputOut.add(function () {
+    buttonLine7.events.onInputOut.add(function() {
         buttonLine7.loadTexture('buttonLine7');
     });
-    buttonLine7.events.onInputUp.add(function () {
+    buttonLine7.events.onInputUp.add(function() {
         hideLines();
         showLines([1, 2, 3, 4, 5, 6, 7]);
     });
-    buttonLine7.events.onInputDown.add(function () {
+    buttonLine7.events.onInputDown.add(function() {
         soundForBattons[3].play();
 
         hideLines();
@@ -576,13 +583,13 @@ function addButtonsGame1(game, pageCount) {
     buttonLine9.scale.setTo(0.7, 0.7);
     buttonLine9.inputEnabled = true;
     buttonLine9.input.useHandCursor = true;
-    buttonLine9.events.onInputOver.add(function () {
+    buttonLine9.events.onInputOver.add(function() {
         buttonLine9.loadTexture('buttonLine9_p');
     });
-    buttonLine9.events.onInputOut.add(function () {
+    buttonLine9.events.onInputOut.add(function() {
         buttonLine9.loadTexture('buttonLine9');
     });
-    buttonLine9.events.onInputUp.add(function () {
+    buttonLine9.events.onInputUp.add(function() {
         if (settingsMode) {
             pageSound.play();
             if (currentPage == pageCount) {
@@ -600,7 +607,7 @@ function addButtonsGame1(game, pageCount) {
             showLines([1, 2, 3, 4, 5, 6, 7, 8, 9]);
         }
     });
-    buttonLine9.events.onInputDown.add(function () {
+    buttonLine9.events.onInputDown.add(function() {
         if (!settingsMode) {
             soundForBattons[4].play();
 
@@ -689,7 +696,7 @@ function showSpinResult(checkWin, checkRopeGame, wlValues) {
 
         var wlWinValuesArray = [];
 
-        wlValues.forEach(function (line, i) {
+        wlValues.forEach(function(line, i) {
             if (line > 0) {
                 wlWinValuesArray.push(i + 1);
             }
@@ -698,7 +705,7 @@ function showSpinResult(checkWin, checkRopeGame, wlValues) {
         stepTotalWinR = 0; // число в которое сумируются значения из wl (из выигрышных линий)
         var currentIndex = -1;
 
-        timer = setInterval(function () {
+        timer = setInterval(function() {
             if (++currentIndex > (wlWinValuesArray.length - 1)) {
                 if (!isMobile) {
                     showButtons([
@@ -786,7 +793,7 @@ function addSelectionOfTheManyCellAnim(game, slotPosition) {
 }
 
 function showSelectionOfTheManyCellAnim(game, slotPosition, monkeyCell) {
-    monkeyCell.forEach(function (item) {
+    monkeyCell.forEach(function(item) {
         manyCellAnim[item] = game.add.sprite(slotPosition[item][0], slotPosition[item][1], 'selectionOfTheManyCellAnim');
         manyCellAnim[item].animations.add('selectionOfTheManyCellAnim', [0, 1, 2], 8, true);
         manyCellAnim[item].animations.getAnimation('selectionOfTheManyCellAnim').play();
@@ -794,7 +801,7 @@ function showSelectionOfTheManyCellAnim(game, slotPosition, monkeyCell) {
 }
 
 function hideSelectionOfTheManyCellAnim(monkeyCell) {
-    monkeyCell.forEach(function (item) {
+    monkeyCell.forEach(function(item) {
         manyCellAnim[item].visible = false;
     });
 }
@@ -838,7 +845,7 @@ function slotRotation(game, finalValues) {
     slot14Anim.visible = true;
     slot15Anim.visible = true;
 
-    setTimeout(function () {
+    setTimeout(function() {
         stopSound.play();
 
         slot1Anim.visible = false;
@@ -850,7 +857,7 @@ function slotRotation(game, finalValues) {
         slot3.loadTexture('cell' + finalValues[2]);
     }, 1000);
 
-    setTimeout(function () {
+    setTimeout(function() {
         stopSound.play();
 
         slot4Anim.visible = false;
@@ -862,7 +869,7 @@ function slotRotation(game, finalValues) {
         slot6.loadTexture('cell' + finalValues[5]);
     }, 1200);
 
-    setTimeout(function () {
+    setTimeout(function() {
         stopSound.play();
 
         slot7Anim.visible = false;
@@ -874,7 +881,7 @@ function slotRotation(game, finalValues) {
         slot9.loadTexture('cell' + finalValues[8]);
     }, 1400);
 
-    setTimeout(function () {
+    setTimeout(function() {
         stopSound.play();
 
         slot10Anim.visible = false;
@@ -886,7 +893,7 @@ function slotRotation(game, finalValues) {
         slot12.loadTexture('cell' + finalValues[11]);
     }, 1600);
 
-    setTimeout(function () {
+    setTimeout(function() {
         stopSound.play();
 
         slot13Anim.visible = false;
@@ -899,7 +906,7 @@ function slotRotation(game, finalValues) {
     }, 1800);
 
     // итоговые действия
-    setTimeout(function () {
+    setTimeout(function() {
         rotateSound.stop();
         checkRotaion = false;
         gear2Animation.stop();
@@ -946,7 +953,7 @@ function hideTableTitle() {
 var winLineText;
 
 function showNumberWinLine(game, winLine, x, y) {
-    if (typeof (winLineText) != "undefined") {
+    if (typeof(winLineText) != "undefined") {
         winLineText.visible = false;
     }
 
@@ -998,7 +1005,7 @@ platformId = getUrlVars()['platformId']
 
 function getUrlVars() {
     var vars = {};
-    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (m, key, value) {
+    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m, key, value) {
         vars[key] = value;
     });
     return vars;
@@ -1009,7 +1016,7 @@ function getUrlVars() {
 urlPath = location.href;
 
 urlPath2 = urlPath.split('&');
-urlPath2.forEach(function (item) {
+urlPath2.forEach(function(item) {
     if (item.indexOf('mode=') + 1) {
         demo = item.replace('mode=', '');
     }
@@ -1045,7 +1052,7 @@ function requestInit() {
         // url: getNeedUrlPath() + '/init?sessionID=' + sessionID,
         url: getNeedUrlPath() + `/api-v2/action?game_id=${gameId}&user_id=${userId}&mode=${demo}&action=open_game&session_uuid=&token=${token}&platform_id=${platformId}`,
         dataType: 'html',
-        success: function (data) {
+        success: function(data) {
             // data = "result=ok&state=0&SID=aeea5r0ai19oht0rvj3c5dd2p2&user=1271|user1271|1000.00";
             console.log(getNeedUrlPath() + `/api-v2/action?game_id=${gameId}&user_id=${userId}&mode=${demo}&action=open_game&session_uuid=&token=${token}&platform_id=${platformId}`);
             console.log('requestInit: ' + data);
@@ -1063,7 +1070,7 @@ function requestInit() {
                 errorStatus = true;
             }
         },
-        error: function (xhr, ajaxOptions, thrownError) {
+        error: function(xhr, ajaxOptions, thrownError) {
             var errorText = 'ошибка 10';
             console.log(errorText);
         }
@@ -1083,7 +1090,7 @@ function exitGame(collect) {
         // url: getNeedUrlPath() + '/exit?token=' + token + '&userId=' + userId + '&gameId=' + gameId + '&collect=' + collectValue,
         url: getNeedUrlPath() + `/api-v2/action?game_id=1&user_id=1&mode=demo&action=close_game&session_uuid=${sessionUuid}&platform_id=${platformId}`,
         dataType: 'html',
-        success: function (data) {
+        success: function(data) {
             console.log(getNeedUrlPath() + `/api-v2/action?game_id=1&user_id=1&mode=demo&action=close_game&session_uuid=${sessionUuid}`)
             console.log(data)
             if (collectValue) {
@@ -1093,7 +1100,7 @@ function exitGame(collect) {
                 // top.location = 'https://play777games.com/';
             }
         },
-        error: function (xhr, ajaxOptions, thrownError) {
+        error: function(xhr, ajaxOptions, thrownError) {
             var errorText = 'ошибка 110';
             console.log(xhr);
             console.log(ajaxOptions);
@@ -1108,11 +1115,11 @@ function resetSession() {
         type: "get",
         url: getNeedUrlPath() + `/reset-session`,
         dataType: 'html',
-        success: function (data) {
+        success: function(data) {
             console.log(data);
             requestInit();
         },
-        error: function (xhr, ajaxOptions, thrownError) {
+        error: function(xhr, ajaxOptions, thrownError) {
             var errorText = 'ошибка 60';
             console.log(errorText);
             setTimeout("resetSession();", 200);
@@ -1246,7 +1253,7 @@ function updateTotalWinR(game, scorePosions, totalWinR) {
 
     var currentDifference = 0;
 
-    totalWinRCounter = setInterval(function () {
+    totalWinRCounter = setInterval(function() {
 
         currentDifference += 1 * mark;
 
@@ -1259,7 +1266,7 @@ function updateTotalWinR(game, scorePosions, totalWinR) {
         });
     }, interval);
 
-    setTimeout(function () {
+    setTimeout(function() {
         hideStepTotalWinR(game, scorePosions, lines);
         clearInterval(totalWinRCounter);
     }, timeInterval);
@@ -1383,7 +1390,7 @@ var selectedCardR;
 function parseDoubleAnswer(dataDoubleRequest) {
     if (find(dataDoubleRequest, 'result=ok') != -1 && find(dataDoubleRequest, 'state=0') != -1) {
 
-        dataDoubleRequest.forEach(function (item) {
+        dataDoubleRequest.forEach(function(item) {
             if (item.indexOf('dwin=') + 1) {
                 dwin = item.replace('dwin=', '');
                 totalWin = dwin; // изменяем для последующего использования dwin из ответа для вывода dwin
@@ -1485,12 +1492,12 @@ function showDoubleToAndTakeOrRiskTexts(game, totalWin, x, y) {
     ySave = y;
 
     var i = 1;
-    timerTitleAmin = setInterval(function () {
+    timerTitleAmin = setInterval(function() {
         if (i == 0) {
-            if (typeof (doubleToText) != "undefined") {
+            if (typeof(doubleToText) != "undefined") {
                 doubleToText.visible = false;
             }
-            if (typeof (takeOrRiskText) != "undefined") {
+            if (typeof(takeOrRiskText) != "undefined") {
                 takeOrRiskText.visible = false;
             }
 
@@ -1503,10 +1510,10 @@ function showDoubleToAndTakeOrRiskTexts(game, totalWin, x, y) {
 
             i = 1;
         } else {
-            if (typeof (doubleToText) != "undefined") {
+            if (typeof(doubleToText) != "undefined") {
                 doubleToText.visible = false;
             }
-            if (typeof (takeOrRiskText) != "undefined") {
+            if (typeof(takeOrRiskText) != "undefined") {
                 takeOrRiskText.visible = false;
             }
 
@@ -1589,19 +1596,19 @@ function addCards(game, cardPosition) {
         card5 = game.add.sprite(cardPosition[4][0], cardPosition[4][1], 'card_bg');
 
         card2.inputEnabled = true;
-        card2.events.onInputDown.add(function () {
+        card2.events.onInputDown.add(function() {
             requestDouble(gamename, 1, lines, bet, sid);
         });
         card3.inputEnabled = true;
-        card3.events.onInputDown.add(function () {
+        card3.events.onInputDown.add(function() {
             requestDouble(gamename, 2, lines, bet, sid);
         });
         card4.inputEnabled = true;
-        card4.events.onInputDown.add(function () {
+        card4.events.onInputDown.add(function() {
             requestDouble(gamename, 3, lines, bet, sid);
         });
         card5.inputEnabled = true;
-        card5.events.onInputDown.add(function () {
+        card5.events.onInputDown.add(function() {
             requestDouble(gamename, 4, lines, bet, sid);
         });
 
@@ -1627,13 +1634,13 @@ function openSelectedCard(selectedCardR, valuesOfAllCards) {
 var valuesOfAllCards; // значения остальных карт [,,,,]
 function openAllCards(valuesOfAllCards) {
     openCard.play();
-    cardArray.forEach(function (item, i) {
+    cardArray.forEach(function(item, i) {
         item.loadTexture('card_' + valuesOfAllCards[i]);
     });
 }
 
 function hideAllCards(cardArray) {
-    cardArray.forEach(function (item, i) {
+    cardArray.forEach(function(item, i) {
         item.loadTexture('card_bg');
     });
 }
@@ -1663,11 +1670,11 @@ function showWinGame3(x, y, win, stepTotalWinR) {
     var text = game.add.text(x, y + 100, win, { font: '22px \"Press Start 2P\"', fill: '#fcfe6e', stroke: '#000000', strokeThickness: 3 });
 
     var timeInterval = 450;
-    var textCounter = setInterval(function () {
+    var textCounter = setInterval(function() {
         text.position.y -= 3;
     }, 10);
 
-    setTimeout(function () {
+    setTimeout(function() {
         clearInterval(textCounter);
     }, timeInterval);
 
@@ -1691,7 +1698,7 @@ function updateBalanceGame3(game, scorePosions, balanceR) {
     var interval = 5;
 
     var ropeValuesResult = 0;
-    ropeValues.forEach(function (item) {
+    ropeValues.forEach(function(item) {
         ropeValuesResult += item * lines * betline;
     });
 
@@ -1709,7 +1716,7 @@ function updateBalanceGame3(game, scorePosions, balanceR) {
 
     var currentBalanceDifference = 0;
 
-    var textCounter = setInterval(function () {
+    var textCounter = setInterval(function() {
 
         currentBalanceDifference += 1 * mark;
 
@@ -1732,7 +1739,7 @@ function updateBalanceGame3(game, scorePosions, balanceR) {
 
     balance = parseInt(parseInt(balanceR) + parseInt(ropeValuesResult));
 
-    setTimeout(function () {
+    setTimeout(function() {
         takeWin.stop();
         clearInterval(textCounter);
         setTimeout("game.state.start('game1');unlockDisplay();", 1000);
@@ -1755,7 +1762,7 @@ function updateBalanceGame4(game, scorePosions, balanceR) {
     var interval = 5;
 
     var ropeValuesResult = 0;
-    ropeValues.forEach(function (item) {
+    ropeValues.forEach(function(item) {
         ropeValuesResult += item * lines * betline;
     });
 
@@ -1773,7 +1780,7 @@ function updateBalanceGame4(game, scorePosions, balanceR) {
 
     var currentBalanceDifference = 0;
 
-    var textCounter = setInterval(function () {
+    var textCounter = setInterval(function() {
 
         currentBalanceDifference += 1 * mark;
 
@@ -1788,7 +1795,7 @@ function updateBalanceGame4(game, scorePosions, balanceR) {
 
     balance = parseInt(parseInt(balanceR) + parseInt(ropeValuesResult));
 
-    setTimeout(function () {
+    setTimeout(function() {
         takeWin.stop();
         clearInterval(textCounter);
         unlockDisplay();
@@ -1818,10 +1825,10 @@ function addButtonsGame1Mobile(game) {
     startButton.anchor.setTo(0.5, 0.5);
     startButton.inputEnabled = true;
     startButton.input.useHandCursor = true;
-    startButton.events.onInputUp.add(function () {
+    startButton.events.onInputUp.add(function() {
         startButton.loadTexture('startButton');
     });
-    startButton.events.onInputDown.add(function () {
+    startButton.events.onInputDown.add(function() {
         if (checkUpdateBalance == false) { //проверка на то идет ли обновление баланса
             startButton.loadTexture('startButton_d');
             if (checkWin == 0) {
@@ -1876,12 +1883,12 @@ function addButtonsGame1Mobile(game) {
     double = game.add.sprite(549, 133, 'double');
     double.inputEnabled = true;
     double.input.useHandCursor = true;
-    double.events.onInputDown.add(function () {
+    double.events.onInputDown.add(function() {
         checkWin = 0;
         hideNumbersAmin();
         game.state.start('game2');
     });
-    double.events.onInputUp.add(function () {
+    double.events.onInputUp.add(function() {
         double.loadTexture('double');
     });
     double.visible = false;
@@ -1889,7 +1896,7 @@ function addButtonsGame1Mobile(game) {
     bet1 = game.add.sprite(546, 274, 'bet1');
     bet1.inputEnabled = true;
     bet1.input.useHandCursor = true;
-    bet1.events.onInputDown.add(function () {
+    bet1.events.onInputDown.add(function() {
         // lines = 9;
         // betline = 25;
 
@@ -1900,7 +1907,7 @@ function addButtonsGame1Mobile(game) {
         $('.betCell').css('height', widthVisibleZone * 0.32147 + 'px');
         $('canvas').css('display', 'none');
     });
-    bet1.events.onInputUp.add(function () {
+    bet1.events.onInputUp.add(function() {
         bet1.loadTexture('bet1');
     });
 
@@ -1908,7 +1915,7 @@ function addButtonsGame1Mobile(game) {
     dollar.scale.setTo(0.7, 0.7);
     dollar.inputEnabled = true;
     dollar.input.useHandCursor = true;
-    dollar.events.onInputDown.add(function () {
+    dollar.events.onInputDown.add(function() {
         //game.state.start('game4');
     });
 
@@ -1916,7 +1923,7 @@ function addButtonsGame1Mobile(game) {
     gear.scale.setTo(0.7, 0.7);
     gear.inputEnabled = true;
     gear.input.useHandCursor = true;
-    gear.events.onInputDown.add(function () {
+    gear.events.onInputDown.add(function() {
         //game.state.start('game3');
     });
 
@@ -1924,10 +1931,10 @@ function addButtonsGame1Mobile(game) {
     home.scale.setTo(0.7, 0.7);
     home.inputEnabled = true;
     home.input.useHandCursor = true;
-    home.events.onInputDown.add(function () {
+    home.events.onInputDown.add(function() {
         home.loadTexture('home_d');
     });
-    home.events.onInputUp.add(function () {
+    home.events.onInputUp.add(function() {
         home.loadTexture('home');
     });
 }
@@ -1936,10 +1943,10 @@ function addButtonsGame2Mobile(game) {
     startButton = game.add.sprite(538, 300, 'collect');
     startButton.inputEnabled = true;
     startButton.input.useHandCursor = true;
-    startButton.events.onInputUp.add(function () {
+    startButton.events.onInputUp.add(function() {
         startButton.loadTexture('collect');
     });
-    startButton.events.onInputDown.add(function () {
+    startButton.events.onInputDown.add(function() {
         hideDoubleToAndTakeOrRiskTexts();
         game.state.start('game1');
     });
@@ -1976,7 +1983,7 @@ function animCursor() {
     }
     cursorAnimSprite = game.add.sprite(game.input.x, game.input.y, 'cursor_anim');
     cursorAnimSprite.anchor.setTo(0.5, 0.5);
-    cursorAnimSprite.animations.add('cursor_anim', [0, 1, 2, 3, 4], 15, false).play().onComplete.add(function () {
+    cursorAnimSprite.animations.add('cursor_anim', [0, 1, 2, 3, 4], 15, false).play().onComplete.add(function() {
         cursorAnimSprite.visible = false;
     });
 }
@@ -2062,7 +2069,7 @@ function coinGoRightToLeft(elem) {
 }
 
 function coinGoLeftToRight(elem) {
-    game.add.tween(elem).to({ x: elem.position.x + 900, y: elem.position.y + 1530 }, 3500, Phaser.Easing.LINEAR, true).onComplete.add(function () {
+    game.add.tween(elem).to({ x: elem.position.x + 900, y: elem.position.y + 1530 }, 3500, Phaser.Easing.LINEAR, true).onComplete.add(function() {
         location.href = '/';
     });
 }
@@ -2072,7 +2079,7 @@ function coinGoRightToLeft(elem) {
 }
 
 function coinGoLeftToRight(elem) {
-    game.add.tween(elem).to({ x: elem.position.x + 900, y: elem.position.y + 1530 }, 3500, Phaser.Easing.LINEAR, true).onComplete.add(function () {
+    game.add.tween(elem).to({ x: elem.position.x + 900, y: elem.position.y + 1530 }, 3500, Phaser.Easing.LINEAR, true).onComplete.add(function() {
         location.href = '/';
     });
 }
@@ -2081,7 +2088,7 @@ function giveBalance() {
     var x = 0;
     var interval;
     allBalance = balance + allWinOld;
-    (function () {
+    (function() {
         if (x < allBalance) {
             interval = 1000 / 10;
             if (allBalance > 5000) {
@@ -2108,7 +2115,7 @@ function giveBalance() {
             setTimeout(arguments.callee, interval);
         } else {
             credit.setText(0);
-            setTimeout(function () {
+            setTimeout(function() {
                 // location.href = 'https://play777games.com/';
                 // top.location = 'https://play777games.com/';
             }, 1000);
@@ -2152,7 +2159,7 @@ function hideButtons(buttonsArray) {
             });
         }
     } else {
-        buttonsArray.forEach(function (item) {
+        buttonsArray.forEach(function(item) {
             item[0].inputEnabled = false;
             item[0].input.useHandCursor = false;
             item[0].visible = false;
@@ -2208,7 +2215,7 @@ function showButtons(buttonsArray) {
             });
         }
     } else {
-        buttonsArray.forEach(function (item) {
+        buttonsArray.forEach(function(item) {
             item[0].inputEnabled = true;
             item[0].input.useHandCursor = true;
             item[0].visible = true;

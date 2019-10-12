@@ -593,7 +593,7 @@ function game1() {
 			}
 		});
 		autoPlay.events.onInputUp.add(function () {
-			if ((balance + allWinOld) === 0) {
+			if ((balance + allWinOld) === 0 && demo !== 'true') {
 				// autoPlay.loadTexture('addCredit');
 				console.log('press add credits');
 				$.ajax({
@@ -804,6 +804,7 @@ function game1() {
 			allWin = allWinOld + winOldTrigerFreeSpin;
 			bottomText.visible = true;
 			bottomText.setText(allWin + ' Credits Won');
+       bottomText.fontSize = 35;
 			paid.setText(allWinOld);
 			info = infoOld;
 			for (var i = 1; i <= 15; ++i) {
@@ -1239,6 +1240,7 @@ function game1() {
 				stopWinAnim = false;
 				wcvWinValuesArray = [];
 				bottomText.setText(allWin + " Credits Won");
+         bottomText.fontSize = 35;
 				for (key in info) {
 					if (info[key] === 10 || info[key] === 0) {
 						wcvWinValuesArray.push(+(key));
@@ -1254,6 +1256,7 @@ function game1() {
 
 				showWin(wlWinValuesArray, winCellInfo);
 				bottomText.setText(allWin + " Credits Won");
+         bottomText.fontSize = 35;
 			} else {
 				spinStatus = false;
 				gameStatusTextFlick();
@@ -1280,7 +1283,7 @@ function game1() {
 					addcreditFlickStatus = false;
 					autoPlay.loadTexture('autoPlay');
 					console.log(balance + allWin)
-					if ((balance + allWin) === 0) {
+					if ((balance + allWin) === 0 && demo !== 'true') {
 						checkBalance();
 						showButtons([
 							[autoPlay, 'autoPlay']
@@ -1289,6 +1292,7 @@ function game1() {
 						addcreditFlickStatus = true;
 						bottomText.visible = true;
 						bottomText.setText("To play please add credit to game.");
+            bottomText.fontSize = 25;
 						autoPlay.loadTexture('addCredit');
 						addCreditFlick();
 					}
@@ -1373,6 +1377,7 @@ function game1() {
 			if (!afterFreespinStatus) {
 				bottomText.visible = true;
 				bottomText.setText("BONUS!");
+        bottomText.fontSize = 35;
 				setTimeout(function () {
 					flickWin(wcvWinValuesArray);
 				}, 1000);
@@ -2081,7 +2086,7 @@ function game1() {
 				}
 				hideMobileBtn();
 				autoPlay.loadTexture('autoPlay');
-				if ((balance + allWin) === 0) {
+				if ((balance + allWin) === 0 && demo !== 'true') {
 					checkBalance();
 					showButtons([
 						[autoPlay, 'autoPlay']
@@ -2134,7 +2139,7 @@ function game1() {
 				}
 				hideMobileBtn();
 				autoPlay.loadTexture('autoPlay');
-				if ((balance + allWin) === 0) {
+				if ((balance + allWin) === 0 && demo !== 'true') {
 					checkBalance();
 					showButtons([
 						[autoPlay, 'autoPlay']
@@ -2187,7 +2192,7 @@ function game1() {
 				}
 				hideMobileBtn();
 				autoPlay.loadTexture('autoPlay');
-				if ((balance + allWin) === 0) {
+				if ((balance + allWin) === 0 && demo !== 'true') {
 					checkBalance();
 					showButtons([
 						[autoPlay, 'autoPlay']
@@ -2290,7 +2295,7 @@ function game1() {
 						}
 						hideMobileBtn();
 						autoPlay.loadTexture('autoPlay');
-						if ((balance + allWin) === 0) {
+						if ((balance + allWin) === 0 && demo !== 'true') {
 							checkBalance();
 							showButtons([
 								[autoPlay, 'autoPlay']
@@ -2398,7 +2403,7 @@ function game1() {
 
 		function checkScore() {
 			addcreditFlickStatus = false;
-			if ((balance + allWinOld) < betline * lines) {
+			if ((balance + allWinOld) < betline * lines ) {
 				hideButtons([
 					[startButton, 'startButton']
 				]);
@@ -2414,7 +2419,7 @@ function game1() {
 					]);
 				}
 				hideMobileBtn();
-				if ((balance + allWinOld) === 0) {
+				if ((balance + allWinOld) === 0 && demo !== 'true') {
 					checkBalance();
 					addcreditFlickStatus = true;
 					showButtons([
@@ -2424,6 +2429,7 @@ function game1() {
 						addcreditFlickStatus = true;
 						bottomText.visible = true;
 						bottomText.setText("To play please add credit to game.");
+            bottomText.fontSize = 25;
 						autoPlay.loadTexture('addCredit');
 						addCreditFlick();
 					}
@@ -2448,7 +2454,7 @@ function game1() {
 		var getBalanceWait = false;
 
 		function checkBalance() {
-			if (!getBalanceWait) {
+			if (!getBalanceWait && demo !== 'true') {
 				if (((balance + allWinOld) === 0) && ((balance + allWin) === 0) && curGame === 1) {
 					// getBalance();
 				} else {
@@ -2555,6 +2561,7 @@ function game1() {
 			gameStatusText.visible = false;
 			bottomText.visible = true;
 			bottomText.setText('Good Luck!');
+      bottomText.fontSize = 35;
 			paid.setText('0');
 			startButton.loadTexture('stopButton');
 			hideLines();
