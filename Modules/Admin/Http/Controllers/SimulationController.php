@@ -31,7 +31,7 @@ class SimulationController extends Controller
     protected $simulationOptions = [
         'life-of-luxury-2' => [
             'gameDirector' => '\App\Classes\Games\LifeOfLuxury2\GameDirector',
-            'gameId' => 2,
+            'gameId' => 6,
             'view' => '',
             'additionalMethonds' => ['addStatisticSymbolsInWinBonus', 'fixMinDroppendJokersInFeatureGame']
         ]
