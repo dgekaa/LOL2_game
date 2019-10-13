@@ -7,23 +7,6 @@
     <link rel="stylesheet" href="../../css/test.css">
 </head>
 <body>
-    <nav class="navbar clearfix">
-        <div class="container">
-            <ul class="nav">
-                <li><a href="/admin">Dashboard</a></li>
-                <li><a href="/admin/simulations">Simulations</a></li>
-                <li><a href="/admin/statistics">Statistic</a></li>
-                <li><a href="/admin/percent-manager">Percent Manager</a></li>
-            </ul>
-        </div>
-    </nav>
-
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-
     @yield('content')
 </body>
 </html>
