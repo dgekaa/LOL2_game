@@ -190,29 +190,32 @@ function game1() {
         slotLayer1Group.add(bg);
 
         topLabel = game.add.sprite(240, 0, 'top_label_1');
+
         bg_overlay = game.add.sprite(0, 0, 'game.background_overlay');
 
         slotLayer3Group = game.add.group();
         slotLayer3Group.add(topLabel);
         slotLayer2Group = game.add.group();
+        groupCell = game.add.group();
         slotLayer2Group.add(bg_overlay);
         slotLayer4Group = game.add.group();
+
         for (var i = 1; i <= 15; ++i) {
             if (i === 1 || i === 4 || i === 7 || i === 10 || i === 13) {
-                game1.cell[i] = game.add.tileSprite(cellPos[i - 1][0], cellPos[i - 1][1], 158, 179, 'cell' + info[i - 1] + '_x');
-                game1.cell[i].tilePosition.y = -30;
+                game1.cell[i] = game.add.sprite(cellPos[i - 1][0], cellPos[i - 1][1], 'cell' + info[i - 1]);
             }
             if (i === 2 || i === 5 || i === 8 || i === 11 || i === 14) {
-                game1.cell[i] = game.add.tileSprite(cellPos[i - 1][0], cellPos[i - 1][1] - 30, 158, 209, 'cell' + info[i - 1] + '_x');
+                game1.cell[i] = game.add.sprite(cellPos[i - 1][0], cellPos[i - 1][1], 'cell' + info[i - 1]);
             }
             if (i === 3 || i === 6 || i === 9 || i === 12 || i === 15) {
-                game1.cell[i] = game.add.tileSprite(cellPos[i - 1][0], cellPos[i - 1][1] - 30, 158, 179, 'cell' + info[i - 1] + '_x');
+                game1.cell[i] = game.add.sprite(cellPos[i - 1][0], cellPos[i - 1][1], 'cell' + info[i - 1]);
             }
-            // test = game.add.tileSprite(77, 126, 158, 179, 'cell4_x');
-            // test.tilePosition.y = -30;
-            slotLayer2Group.add(game1.cell[i]);
+            groupCell.add(game1.cell[i]);
         }
-
+        var mask = game.add.graphics(0, 0);
+        mask.beginFill(0xffffff);
+        mask.drawRect(0, 127, 1024, 449);
+        groupCell.mask = mask;
         game1.bars[0] = game.add.tileSprite(77, 126, 158, 447, 'bar');
         game1.bars[0].tilePosition.y = randomNumber(0, 9) * 149;
         game1.bars[1] = game.add.tileSprite(255, 126, 158, 447, 'bar');
@@ -683,21 +686,21 @@ function game1() {
                                     game1.cell[1 + 3 * 4].visible = true;
                                     game1.cell[2 + 3 * 4].visible = true;
                                     game1.cell[3 + 3 * 4].visible = true;
-                                    game1.cell[1].loadTexture('cell' + info[0] + '_x');
-                                    game1.cell[2].loadTexture('cell' + info[1] + '_x');
-                                    game1.cell[3].loadTexture('cell' + info[2] + '_x');
-                                    game1.cell[4].loadTexture('cell' + info[3] + '_x');
-                                    game1.cell[5].loadTexture('cell' + info[4] + '_x');
-                                    game1.cell[6].loadTexture('cell' + info[5] + '_x');
-                                    game1.cell[7].loadTexture('cell' + info[6] + '_x');
-                                    game1.cell[8].loadTexture('cell' + info[7] + '_x');
-                                    game1.cell[9].loadTexture('cell' + info[8] + '_x');
-                                    game1.cell[10].loadTexture('cell' + info[9] + '_x');
-                                    game1.cell[11].loadTexture('cell' + info[10] + '_x');
-                                    game1.cell[12].loadTexture('cell' + info[11] + '_x');
-                                    game1.cell[13].loadTexture('cell' + info[12] + '_x');
-                                    game1.cell[14].loadTexture('cell' + info[13] + '_x');
-                                    game1.cell[15].loadTexture('cell' + info[14] + '_x');
+                                    game1.cell[1].loadTexture('cell' + info[0]);
+                                    game1.cell[2].loadTexture('cell' + info[1]);
+                                    game1.cell[3].loadTexture('cell' + info[2]);
+                                    game1.cell[4].loadTexture('cell' + info[3]);
+                                    game1.cell[5].loadTexture('cell' + info[4]);
+                                    game1.cell[6].loadTexture('cell' + info[5]);
+                                    game1.cell[7].loadTexture('cell' + info[6]);
+                                    game1.cell[8].loadTexture('cell' + info[7]);
+                                    game1.cell[9].loadTexture('cell' + info[8]);
+                                    game1.cell[10].loadTexture('cell' + info[9]);
+                                    game1.cell[11].loadTexture('cell' + info[10]);
+                                    game1.cell[12].loadTexture('cell' + info[11]);
+                                    game1.cell[13].loadTexture('cell' + info[12]);
+                                    game1.cell[14].loadTexture('cell' + info[13]);
+                                    game1.cell[15].loadTexture('cell' + info[14]);
                                     if (game1.spinStatus1 === true) {
                                         game1.spinStatus1 = false;
                                         endspin(0);
@@ -804,7 +807,7 @@ function game1() {
             paid.setText(allWinOld);
             info = infoOld;
             for (var i = 1; i <= 15; ++i) {
-                game1.cell[i].loadTexture('cell' + infoOld[i - 1] + '_x');
+                game1.cell[i].loadTexture('cell' + infoOld[i - 1]);
                 game1.copyCell[i].loadTexture('cell' + infoOld[i - 1]);
             }
             showWinFreeSpin(wcvWinValuesArrayOld);
@@ -865,13 +868,13 @@ function game1() {
         }
 
         function startspin(number) {
-            game.add.tween(game1.cell[1 + number * 3].tilePosition).to({ y: game1.cell[1 + number * 3].tilePosition.y - 30 }, 200, Phaser.Easing.LINEAR, true).onComplete.add(function() {
+            game.add.tween(game1.cell[1 + number * 3]).to({ y: game1.cell[1 + number * 3].position.y - 30 }, 200, Phaser.Easing.LINEAR, true).onComplete.add(function() {
                 game1.cell[1 + number * 3].visible = false;
             });
-            game.add.tween(game1.cell[2 + number * 3].tilePosition).to({ y: game1.cell[2 + number * 3].tilePosition.y - 30 }, 200, Phaser.Easing.LINEAR, true).onComplete.add(function() {
+            game.add.tween(game1.cell[2 + number * 3]).to({ y: game1.cell[2 + number * 3].position.y - 30 }, 200, Phaser.Easing.LINEAR, true).onComplete.add(function() {
                 game1.cell[2 + number * 3].visible = false;
             });
-            game.add.tween(game1.cell[3 + number * 3].tilePosition).to({ y: game1.cell[3 + number * 3].tilePosition.y - 30 }, 200, Phaser.Easing.LINEAR, true).onComplete.add(function() {
+            game.add.tween(game1.cell[3 + number * 3]).to({ y: game1.cell[3 + number * 3].position.y - 30 }, 200, Phaser.Easing.LINEAR, true).onComplete.add(function() {
                 game1.cell[3 + number * 3].visible = false;
                 game1.bars[number].visible = true;
                 if (number == 0) {
@@ -915,9 +918,9 @@ function game1() {
                         game1.cell[1 + 3 * 0].visible = true;
                         game1.cell[2 + 3 * 0].visible = true;
                         game1.cell[3 + 3 * 0].visible = true;
-                        game1.cell[1].loadTexture('cell' + info[0] + '_x');
-                        game1.cell[2].loadTexture('cell' + info[1] + '_x');
-                        game1.cell[3].loadTexture('cell' + info[2] + '_x');
+                        game1.cell[1].loadTexture('cell' + info[0]);
+                        game1.cell[2].loadTexture('cell' + info[1]);
+                        game1.cell[3].loadTexture('cell' + info[2]);
                         if (info[0] == 10 || info[1] == 10 || info[2] == 10) {
                             coinCount = coinCount + 1;
                             coinSound1.play();
@@ -940,12 +943,12 @@ function game1() {
                         game1.cell[1 + 3 * 1].visible = true;
                         game1.cell[2 + 3 * 1].visible = true;
                         game1.cell[3 + 3 * 1].visible = true;
-                        game1.cell[1].loadTexture('cell' + info[0] + '_x');
-                        game1.cell[2].loadTexture('cell' + info[1] + '_x');
-                        game1.cell[3].loadTexture('cell' + info[2] + '_x');
-                        game1.cell[4].loadTexture('cell' + info[3] + '_x');
-                        game1.cell[5].loadTexture('cell' + info[4] + '_x');
-                        game1.cell[6].loadTexture('cell' + info[5] + '_x');
+                        game1.cell[1].loadTexture('cell' + info[0]);
+                        game1.cell[2].loadTexture('cell' + info[1]);
+                        game1.cell[3].loadTexture('cell' + info[2]);
+                        game1.cell[4].loadTexture('cell' + info[3]);
+                        game1.cell[5].loadTexture('cell' + info[4]);
+                        game1.cell[6].loadTexture('cell' + info[5]);
 
                         if (info[3] == 10 || info[4] == 10 || info[5] == 10 || info[3] == 0 || info[4] == 0 || info[5] == 0) {
                             coinCount = coinCount + 1;
@@ -978,15 +981,15 @@ function game1() {
                         game1.cell[2 + 3 * 2].visible = true;
                         game1.cell[3 + 3 * 2].visible = true;
 
-                        game1.cell[1].loadTexture('cell' + info[0] + '_x');
-                        game1.cell[2].loadTexture('cell' + info[1] + '_x');
-                        game1.cell[3].loadTexture('cell' + info[2] + '_x');
-                        game1.cell[4].loadTexture('cell' + info[3] + '_x');
-                        game1.cell[5].loadTexture('cell' + info[4] + '_x');
-                        game1.cell[6].loadTexture('cell' + info[5] + '_x');
-                        game1.cell[7].loadTexture('cell' + info[6] + '_x');
-                        game1.cell[8].loadTexture('cell' + info[7] + '_x');
-                        game1.cell[9].loadTexture('cell' + info[8] + '_x');
+                        game1.cell[1].loadTexture('cell' + info[0]);
+                        game1.cell[2].loadTexture('cell' + info[1]);
+                        game1.cell[3].loadTexture('cell' + info[2]);
+                        game1.cell[4].loadTexture('cell' + info[3]);
+                        game1.cell[5].loadTexture('cell' + info[4]);
+                        game1.cell[6].loadTexture('cell' + info[5]);
+                        game1.cell[7].loadTexture('cell' + info[6]);
+                        game1.cell[8].loadTexture('cell' + info[7]);
+                        game1.cell[9].loadTexture('cell' + info[8]);
                         if (info[6] == 10 || info[7] == 10 || info[8] == 10 || info[6] == 0 || info[7] == 0 || info[8] == 0) {
                             coinCount = coinCount + 1;
                             if (coinCount === 1) {
@@ -1026,18 +1029,18 @@ function game1() {
                         game1.cell[2 + 3 * 3].visible = true;
                         game1.cell[3 + 3 * 3].visible = true;
 
-                        game1.cell[1].loadTexture('cell' + info[0] + '_x');
-                        game1.cell[2].loadTexture('cell' + info[1] + '_x');
-                        game1.cell[3].loadTexture('cell' + info[2] + '_x');
-                        game1.cell[4].loadTexture('cell' + info[3] + '_x');
-                        game1.cell[5].loadTexture('cell' + info[4] + '_x');
-                        game1.cell[6].loadTexture('cell' + info[5] + '_x');
-                        game1.cell[7].loadTexture('cell' + info[6] + '_x');
-                        game1.cell[8].loadTexture('cell' + info[7] + '_x');
-                        game1.cell[9].loadTexture('cell' + info[8] + '_x');
-                        game1.cell[10].loadTexture('cell' + info[9] + '_x');
-                        game1.cell[11].loadTexture('cell' + info[10] + '_x');
-                        game1.cell[12].loadTexture('cell' + info[11] + '_x');
+                        game1.cell[1].loadTexture('cell' + info[0]);
+                        game1.cell[2].loadTexture('cell' + info[1]);
+                        game1.cell[3].loadTexture('cell' + info[2]);
+                        game1.cell[4].loadTexture('cell' + info[3]);
+                        game1.cell[5].loadTexture('cell' + info[4]);
+                        game1.cell[6].loadTexture('cell' + info[5]);
+                        game1.cell[7].loadTexture('cell' + info[6]);
+                        game1.cell[8].loadTexture('cell' + info[7]);
+                        game1.cell[9].loadTexture('cell' + info[8]);
+                        game1.cell[10].loadTexture('cell' + info[9]);
+                        game1.cell[11].loadTexture('cell' + info[10]);
+                        game1.cell[12].loadTexture('cell' + info[11]);
                         if (info[9] == 10 || info[10] == 10 || info[11] == 10 || info[9] == 0 || info[10] == 0 || info[11] == 0) {
                             coinCount = coinCount + 1;
                             if (coinCount === 1) {
@@ -1083,21 +1086,21 @@ function game1() {
                         game1.cell[2 + 3 * 4].visible = true;
                         game1.cell[3 + 3 * 4].visible = true;
 
-                        game1.cell[1].loadTexture('cell' + info[0] + '_x');
-                        game1.cell[2].loadTexture('cell' + info[1] + '_x');
-                        game1.cell[3].loadTexture('cell' + info[2] + '_x');
-                        game1.cell[4].loadTexture('cell' + info[3] + '_x');
-                        game1.cell[5].loadTexture('cell' + info[4] + '_x');
-                        game1.cell[6].loadTexture('cell' + info[5] + '_x');
-                        game1.cell[7].loadTexture('cell' + info[6] + '_x');
-                        game1.cell[8].loadTexture('cell' + info[7] + '_x');
-                        game1.cell[9].loadTexture('cell' + info[8] + '_x');
-                        game1.cell[10].loadTexture('cell' + info[9] + '_x');
-                        game1.cell[11].loadTexture('cell' + info[10] + '_x');
-                        game1.cell[12].loadTexture('cell' + info[11] + '_x');
-                        game1.cell[13].loadTexture('cell' + info[12] + '_x');
-                        game1.cell[14].loadTexture('cell' + info[13] + '_x');
-                        game1.cell[15].loadTexture('cell' + info[14] + '_x');
+                        game1.cell[1].loadTexture('cell' + info[0]);
+                        game1.cell[2].loadTexture('cell' + info[1]);
+                        game1.cell[3].loadTexture('cell' + info[2]);
+                        game1.cell[4].loadTexture('cell' + info[3]);
+                        game1.cell[5].loadTexture('cell' + info[4]);
+                        game1.cell[6].loadTexture('cell' + info[5]);
+                        game1.cell[7].loadTexture('cell' + info[6]);
+                        game1.cell[8].loadTexture('cell' + info[7]);
+                        game1.cell[9].loadTexture('cell' + info[8]);
+                        game1.cell[10].loadTexture('cell' + info[9]);
+                        game1.cell[11].loadTexture('cell' + info[10]);
+                        game1.cell[12].loadTexture('cell' + info[11]);
+                        game1.cell[13].loadTexture('cell' + info[12]);
+                        game1.cell[14].loadTexture('cell' + info[13]);
+                        game1.cell[15].loadTexture('cell' + info[14]);
 
                         if (info[12] == 10 || info[13] == 10 || info[14] == 10) {
                             coinCount = coinCount + 1;
@@ -1125,20 +1128,20 @@ function game1() {
             if (number == 4) {
                 timeSpin = false;
             }
-            game1.cell[1 + number * 3].tilePosition.y = game1.cell[1 + number * 3].tilePosition.y + 60;
-            game1.cell[2 + number * 3].tilePosition.y = game1.cell[2 + number * 3].tilePosition.y + 60;
-            game1.cell[3 + number * 3].tilePosition.y = game1.cell[3 + number * 3].tilePosition.y + 60;
+            game1.cell[1 + number * 3].position.y = 127 + 30;
+            game1.cell[2 + number * 3].position.y = 276 + 30;
+            game1.cell[3 + number * 3].position.y = 425 + 30;
 
-            game.add.tween(game1.cell[1 + number * 3].tilePosition).to({ y: game1.cell[1 + number * 3].tilePosition.y - 30 }, 200, Phaser.Easing.LINEAR, true).onComplete.add(function() {});
-            game.add.tween(game1.cell[2 + number * 3].tilePosition).to({ y: game1.cell[2 + number * 3].tilePosition.y - 30 }, 200, Phaser.Easing.LINEAR, true).onComplete.add(function() {});
-            game.add.tween(game1.cell[3 + number * 3].tilePosition).to({ y: game1.cell[3 + number * 3].tilePosition.y - 30 }, 200, Phaser.Easing.LINEAR, true).onComplete.add(function() {
+            game.add.tween(game1.cell[1 + number * 3]).to({ y: game1.cell[1 + number * 3].position.y - 30 }, 200, Phaser.Easing.LINEAR, true).onComplete.add(function() {});
+            game.add.tween(game1.cell[2 + number * 3]).to({ y: game1.cell[2 + number * 3].position.y - 30 }, 200, Phaser.Easing.LINEAR, true).onComplete.add(function() {});
+            game.add.tween(game1.cell[3 + number * 3]).to({ y: game1.cell[3 + number * 3].position.y - 30 }, 200, Phaser.Easing.LINEAR, true).onComplete.add(function() {
                 if (number == 4) {
                     // slotLayer3Group.add(topLabel);
                     // bg2_panels.loadTexture('background2_panels');
                     checkWin();
                     for (var i = 1; i <= 15; ++i) {
                         game1.cell[i].visible = true;
-                        game1.cell[i].loadTexture('cell' + info[i - 1] + '_x');
+                        game1.cell[i].loadTexture('cell' + info[i - 1]);
                     }
                     game1.bars[0].visible = false;
                     game1.bars[1].visible = false;
@@ -2624,21 +2627,21 @@ function game1() {
                                                     game1.cell[1 + 3 * 4].visible = true;
                                                     game1.cell[2 + 3 * 4].visible = true;
                                                     game1.cell[3 + 3 * 4].visible = true;
-                                                    game1.cell[1].loadTexture('cell' + info[0] + '_x');
-                                                    game1.cell[2].loadTexture('cell' + info[1] + '_x');
-                                                    game1.cell[3].loadTexture('cell' + info[2] + '_x');
-                                                    game1.cell[4].loadTexture('cell' + info[3] + '_x');
-                                                    game1.cell[5].loadTexture('cell' + info[4] + '_x');
-                                                    game1.cell[6].loadTexture('cell' + info[5] + '_x');
-                                                    game1.cell[7].loadTexture('cell' + info[6] + '_x');
-                                                    game1.cell[8].loadTexture('cell' + info[7] + '_x');
-                                                    game1.cell[9].loadTexture('cell' + info[8] + '_x');
-                                                    game1.cell[10].loadTexture('cell' + info[9] + '_x');
-                                                    game1.cell[11].loadTexture('cell' + info[10] + '_x');
-                                                    game1.cell[12].loadTexture('cell' + info[11] + '_x');
-                                                    game1.cell[13].loadTexture('cell' + info[12] + '_x');
-                                                    game1.cell[14].loadTexture('cell' + info[13] + '_x');
-                                                    game1.cell[15].loadTexture('cell' + info[14] + '_x');
+                                                    game1.cell[1].loadTexture('cell' + info[0]);
+                                                    game1.cell[2].loadTexture('cell' + info[1]);
+                                                    game1.cell[3].loadTexture('cell' + info[2]);
+                                                    game1.cell[4].loadTexture('cell' + info[3]);
+                                                    game1.cell[5].loadTexture('cell' + info[4]);
+                                                    game1.cell[6].loadTexture('cell' + info[5]);
+                                                    game1.cell[7].loadTexture('cell' + info[6]);
+                                                    game1.cell[8].loadTexture('cell' + info[7]);
+                                                    game1.cell[9].loadTexture('cell' + info[8]);
+                                                    game1.cell[10].loadTexture('cell' + info[9]);
+                                                    game1.cell[11].loadTexture('cell' + info[10]);
+                                                    game1.cell[12].loadTexture('cell' + info[11]);
+                                                    game1.cell[13].loadTexture('cell' + info[12]);
+                                                    game1.cell[14].loadTexture('cell' + info[13]);
+                                                    game1.cell[15].loadTexture('cell' + info[14]);
                                                     if (game1.spinStatus1 === true) {
                                                         game1.spinStatus1 = false;
                                                         endspin(0);

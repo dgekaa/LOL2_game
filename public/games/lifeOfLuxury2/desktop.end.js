@@ -119,7 +119,6 @@
         for (let i = 0; i <= 10; ++i) {
             game.load.image('cell' + i, needUrlPath + '/img/' + i + '.png' + part2Url);
             game.load.image('cell' + i + '_f', needUrlPath + '/img/' + i + '_f.png' + part2Url);
-            game.load.image('cell' + i + '_x', needUrlPath + '/img/' + i + '_x.png' + part2Url);
         }
         game.load.image('freespinStartBG', '' + path + '/img/freesponStartBG.png' + part2Url);
         game.load.image('freesponStartBGAdditionalBonus', '' + path + '/img/freesponStartBGAdditionalBonus.png' + part2Url);
