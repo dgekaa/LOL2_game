@@ -1101,11 +1101,8 @@ function exitGame(collect) {
             }
         },
         error: function(xhr, ajaxOptions, thrownError) {
-            var errorText = 'ошибка 110';
-            console.log(xhr);
-            console.log(ajaxOptions);
-            console.log(thrownError);
-            // setTimeout("exitGame(collectValue);", 100);
+          error_bg.visible = true;
+          errorStatus = true;
         }
     });
 }
