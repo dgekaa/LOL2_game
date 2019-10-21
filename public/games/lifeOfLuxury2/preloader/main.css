@@ -9,6 +9,15 @@
   z-index: 9999;
 }
 
+.preloader.error {
+  background: #000 url(../img/session_error.png) 50% 50% no-repeat;
+  background-size: contain;
+}
+
+.preloader.error>* {
+  display: none;
+}
+
 .loading-text {
   position: absolute;
   top: 0;

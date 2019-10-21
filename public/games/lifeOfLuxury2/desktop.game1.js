@@ -597,24 +597,25 @@ function game1() {
             }
         });
         autoPlay.events.onInputUp.add(function() {
-            if ((balance + allWinOld) === 0 && demo !== 'demo') {
-                // autoPlay.loadTexture('addCredit');
-                console.log('press add credits');
-                $.ajax({
-                    type: "get",
-                    url: getNeedUrlPath() + '/add-credit?userId=' + userId + '&gameId=' + gameId + '&token=' + token + '&platform_id=' + platformId,
-                    dataType: 'html',
-                    success: function(data) {
-                        console.log(getNeedUrlPath() + '/add-credit?userId=' + userId + '&gameId=' + gameId + '&token=' + token + '&platform_id=' + platformId);
-                        console.log(data)
-                    },
-                    error: function(xhr, ajaxOptions, thrownError) {
-                        var errorText = 'ошибка 80';
-                        alert(errorText);
-                    }
-                });
-            } else {
-                if (autostart === false) {
+
+            if (autostart === false) {
+                if ((balance + allWinOld) === 0 && demo !== 'demo') {
+                    // autoPlay.loadTexture('addCredit');
+                    console.log('press add credits');
+                    $.ajax({
+                        type: "get",
+                        url: getNeedUrlPath() + '/add-credit?userId=' + userId + '&gameId=' + gameId + '&token=' + token + '&platform_id=' + platformId,
+                        dataType: 'html',
+                        success: function(data) {
+                            console.log(getNeedUrlPath() + '/add-credit?userId=' + userId + '&gameId=' + gameId + '&token=' + token + '&platform_id=' + platformId);
+                            console.log(data)
+                        },
+                        error: function(xhr, ajaxOptions, thrownError) {
+                            var errorText = 'ошибка 80';
+                            alert(errorText);
+                        }
+                    });
+                } else {
                     if (balanceUpdateStatus) {
                         stopUpdateBalance();
                         autoPlay.loadTexture('autoPlay');
@@ -624,18 +625,18 @@ function game1() {
                         autostart = true;
                         startFunc();
                     }
-                } else {
-                    autoPlay.loadTexture('autoPlay');
-                    $("#spin").removeClass('auto');
-                    autostart = false;
-                    showButtons();
-                    if (spinStatus === true) {
-                        hideButtons();
-                        showButtons([
-                            [startButton, 'startButton']
-                        ]);
-                        startButton.loadTexture('stopButton');
-                    }
+                }
+            } else {
+                autoPlay.loadTexture('autoPlay');
+                $("#spin").removeClass('auto');
+                autostart = false;
+                showButtons();
+                if (spinStatus === true) {
+                    hideButtons();
+                    showButtons([
+                        [startButton, 'startButton']
+                    ]);
+                    startButton.loadTexture('stopButton');
                 }
             }
         })
