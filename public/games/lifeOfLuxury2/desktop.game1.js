@@ -585,40 +585,28 @@ function game1() {
         autoPlay = game.add.sprite(888, 706, 'autoPlay');
         autoPlay.inputEnabled = true;
         autoPlay.input.useHandCursor = true;
-        autoPlay.events.onInputDown.add(function() {
-            if ((balance + allWinOld) === 0) {
-                // autoPlay.loadTexture('addCredit_p');
-            } else {
-                if (autostart === false) {
-                    // autoPlay.loadTexture('autoPlay_p');
-                } else {
-                    // autoPlay.loadTexture('autoStop_p');
-                }
-            }
-        });
+        autoPlay.events.onInputDown.add(function() {});
         autoPlay.events.onInputUp.add(function() {
-
             if (autostart === false) {
-                if ((balance + allWinOld) === 0 && demo !== 'demo') {
-                    // autoPlay.loadTexture('addCredit');
-                    console.log('press add credits');
-                    $.ajax({
-                        type: "get",
-                        url: getNeedUrlPath() + '/add-credit?userId=' + userId + '&gameId=' + gameId + '&token=' + token + '&platform_id=' + platformId,
-                        dataType: 'html',
-                        success: function(data) {
-                            console.log(getNeedUrlPath() + '/add-credit?userId=' + userId + '&gameId=' + gameId + '&token=' + token + '&platform_id=' + platformId);
-                            console.log(data)
-                        },
-                        error: function(xhr, ajaxOptions, thrownError) {
-                            var errorText = 'ошибка 80';
-                            alert(errorText);
-                        }
-                    });
+                if (balanceUpdateStatus) {
+                    stopUpdateBalance();
+                    autoPlay.loadTexture('autoPlay');
                 } else {
-                    if (balanceUpdateStatus) {
-                        stopUpdateBalance();
-                        autoPlay.loadTexture('autoPlay');
+                    if ((balance + allWinOld) < betline * lines && demo !== 'demo') {
+                        console.log('press add credits');
+                        $.ajax({
+                            type: "get",
+                            url: getNeedUrlPath() + '/add-credit?userId=' + userId + '&gameId=' + gameId + '&token=' + token + '&platform_id=' + platformId,
+                            dataType: 'html',
+                            success: function(data) {
+                                console.log(getNeedUrlPath() + '/add-credit?userId=' + userId + '&gameId=' + gameId + '&token=' + token + '&platform_id=' + platformId);
+                                console.log(data)
+                            },
+                            error: function(xhr, ajaxOptions, thrownError) {
+                                var errorText = 'ошибка 80';
+                                alert(errorText);
+                            }
+                        });
                     } else {
                         $("#spin").addClass('auto');
                         autoPlay.loadTexture('autoStop');
@@ -1246,7 +1234,7 @@ function game1() {
                     addcreditFlickStatus = false;
                     autoPlay.loadTexture('autoPlay');
                     console.log(balance + allWin)
-                    if ((balance + allWin) === 0 && demo !== 'demo') {
+                    if ((balance + allWin) < betline * lines && demo !== 'demo') {
                         checkBalance();
                         showButtons([
                             [autoPlay, 'autoPlay']
@@ -2051,7 +2039,7 @@ function game1() {
                 }
                 hideMobileBtn();
                 autoPlay.loadTexture('autoPlay');
-                if ((balance + allWin) === 0 && demo !== 'demo') {
+                if ((balance + allWin) < betline * lines && demo !== 'demo') {
                     checkBalance();
                     showButtons([
                         [autoPlay, 'autoPlay']
@@ -2104,7 +2092,7 @@ function game1() {
                 }
                 hideMobileBtn();
                 autoPlay.loadTexture('autoPlay');
-                if ((balance + allWin) === 0 && demo !== 'demo') {
+                if ((balance + allWin) < betline * lines && demo !== 'demo') {
                     checkBalance();
                     showButtons([
                         [autoPlay, 'autoPlay']
@@ -2157,7 +2145,7 @@ function game1() {
                 }
                 hideMobileBtn();
                 autoPlay.loadTexture('autoPlay');
-                if ((balance + allWin) === 0 && demo !== 'demo') {
+                if ((balance + allWin) < betline * lines && demo !== 'demo') {
                     checkBalance();
                     showButtons([
                         [autoPlay, 'autoPlay']
@@ -2260,7 +2248,7 @@ function game1() {
                         }
                         hideMobileBtn();
                         autoPlay.loadTexture('autoPlay');
-                        if ((balance + allWin) === 0 && demo !== 'demo') {
+                        if ((balance + allWin) < betline * lines && demo !== 'demo') {
                             checkBalance();
                             showButtons([
                                 [autoPlay, 'autoPlay']
@@ -2384,7 +2372,7 @@ function game1() {
                     ]);
                 }
                 hideMobileBtn();
-                if ((balance + allWinOld) === 0 && demo !== 'demo') {
+                if ((balance + allWinOld) < betline * lines && demo !== 'demo') {
                     checkBalance();
                     addcreditFlickStatus = true;
                     showButtons([
@@ -2418,59 +2406,62 @@ function game1() {
         var checkBalancedata;
         var getBalanceWait = false;
 
-        function checkBalance() {
-            if (!getBalanceWait && demo !== 'demo') {
-                if (((balance + allWinOld) === 0) && ((balance + allWin) === 0) && curGame === 1) {
-                    // getBalance();
-                } else {
-                    checkBalanceTimer = true;
-                    setTimeout(function() {
-                        if (checkBalanceTimer && !autostart && curGame === 1 && !balanceUpdateStatus) {
-                            if ((balance + allWin) > 0) {
-                                // getBalance();
-                            }
-                        } else {
-                            checkBalance()
-                        }
-                    }, 30000);
-                }
+    function checkBalance() {
+      if (!getBalanceWait && demo !== 'demo') {
+        if (((balance + allWinOld) < betline * lines) && ((balance + allWin) < betline * lines) && curGame === 1) {
+          getBalance();
+        } else {
+          setTimeout(function() {
+            if (!autostart && curGame === 1 && !balanceUpdateStatus && !spinStatus) {
+              if ((balance + allWin) > 0) {
+                getBalance();
+              }
+            } else {
+              checkBalance()
             }
+          }, 30000);
         }
+      }
+    }
 
-        // function getBalance() {
-        //     if (!getBalanceWait) {
-        //         getBalanceWait = true;
-        //         $.ajax({
-        //             type: "get",
-        //             url: getNeedUrlPath() + '/get-user-balance?userId=' + userId + '&gameId=' + gameId + '&token=' + token,
-        //             dataType: 'html',
-        //             success: function(data) {
-        //                 console.log(data)
-        //                 if (IsJsonString(data)) {
-        //                     checkBalancedata = JSON.parse(data);
-        //                     setTimeout(function() {
-        //                         getBalanceWait = false;
-        //                         if (checkBalancedata['status'] == 'true') {
-        //                             balance = +(checkBalancedata['balance'] * 100).toFixed();
-        //                             changeBalance();
-        //                         } else {
-        //                             getBalance();
-        //                         }
-        //                     }, 900);
-        //                 } else {
-        //                     console.log('json format error');
-        //                     error_bg.visible = true;
-        //                     errorStatus = true;
-        //                 }
-        //             },
-        //             error: function(xhr, ajaxOptions, thrownError) {
-        //                 var errorText = 'ошибка 26';
-        //                 console.log(errorText);
-        //                 getBalance()
-        //             }
-        //         });
-        //     }
-        // }
+    function getBalance() {
+      if (!getBalanceWait) {
+        getBalanceWait = true;
+        $.ajax({
+          type: "get",
+          url: getNeedUrlPath() + '/get-user-balance?userId=' + userId + '&gameId=' + gameId + '&token=' + token + '&platformId=' + platformId,
+          dataType: 'html',
+          success: function(data) {
+            console.log(data)
+            if (IsJsonString(data)) {
+              checkBalancedata = JSON.parse(data);
+              setTimeout(function() {
+                getBalanceWait = false;
+                if (checkBalancedata['status'] == 'true' && (balance + allWin) !== +(checkBalancedata['balance'] * 100).toFixed()) {
+                  balance = +(checkBalancedata['balance'] * 100).toFixed();
+                  changeBalance();
+                } else if (checkBalancedata['status'] !== 'true') {
+                  error_bg.visible = true;
+                  errorStatus = true;
+                } else if ((balance + allWinOld) >= betline * lines) {
+                  checkBalance()
+                } else {
+                  getBalance();
+                }
+              }, 900);
+            } else {
+              console.log('json format error');
+              error_bg.visible = true;
+              errorStatus = true;
+            }
+          },
+          error: function(xhr, ajaxOptions, thrownError) {
+            error_bg.visible = true;
+            errorStatus = true;
+          }
+        });
+      }
+    }
 
         function changeBalance() {
             credit.setText(balance);
