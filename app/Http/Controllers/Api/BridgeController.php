@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Classes\Bridge777Games\BridgeService;
 use App\Classes\Bridge777Games\BridgeApi;
 use Webpatser\Uuid\Uuid;
+use Ixudra\Curl\Facades\Curl;
 
 class BridgeController extends Controller
 {
@@ -77,5 +78,30 @@ class BridgeController extends Controller
         $responseMoveFunds = BridgeApi::sendMoveFunds($requestData);
 
         return $responseMoveFunds;
+    }
+
+    public function getBalance(Request $request)
+    {
+        $token = $request->input('token');
+        $userId = $request->input('userId');
+        $nickname = $request->input('nickname');
+        $gameId = $request->input('gameId');
+        $demo = $request->input('demo');
+        $token = $request->input('token');
+        $platformId = $request->input('platformId');
+
+        $url = 'https://play777games.com/';
+        if ($platformId === 2) {
+            $url = 'https://play.devbet.live/';
+        }
+
+        $responseGetBalance = Curl::to("{$url}getBalance?token={$token}&userId={$userId}&gameId={$gameId}&platformId={$platformId}")
+        ->post();
+
+        if ($responseGetBalance == false) {
+            return json_encode($responseGetBalance);
+        }
+
+        return response()->json($responseGetBalance);
     }
 }
