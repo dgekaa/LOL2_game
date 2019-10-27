@@ -1062,17 +1062,18 @@ function requestInit() {
                     var sessionName = data;
                     requestState(data);
                 } else {
-                    alert('Error 11');
+                    $('.preloader').addClass('error');
+                    errorStatus = true;
                 }
             } else {
                 console.log('json format error');
-                error_bg.visible = true;
+                $('.preloader').addClass('error');
                 errorStatus = true;
             }
         },
         error: function(xhr, ajaxOptions, thrownError) {
-            var errorText = 'ошибка 10';
-            console.log(errorText);
+            $('.preloader').addClass('error');
+            errorStatus = true;
         }
     });
 }
@@ -1101,8 +1102,8 @@ function exitGame(collect) {
             }
         },
         error: function(xhr, ajaxOptions, thrownError) {
-          error_bg.visible = true;
-          errorStatus = true;
+            error_bg.visible = true;
+            errorStatus = true;
         }
     });
 }
