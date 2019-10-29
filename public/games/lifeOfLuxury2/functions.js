@@ -1088,11 +1088,10 @@ function exitGame(collect) {
     }
     $.ajax({
         type: "get",
-        // url: getNeedUrlPath() + '/exit?token=' + token + '&userId=' + userId + '&gameId=' + gameId + '&collect=' + collectValue,
-        url: getNeedUrlPath() + `/api-v2/action?game_id=1&user_id=1&mode=demo&action=close_game&session_uuid=${sessionUuid}&platform_id=${platformId}`,
+        url: getNeedUrlPath() + '/exit?token=' + token + '&userId=' + userId + '&gameId=' + gameId + '&collect=' + collectValue + '&platformId=' + platformId,
+        // url: getNeedUrlPath() + `/api-v2/action?game_id=1&user_id=1&mode=demo&action=close_game&session_uuid=${sessionUuid}&platform_id=${platformId}`,
         dataType: 'html',
         success: function(data) {
-            console.log(getNeedUrlPath() + `/api-v2/action?game_id=1&user_id=1&mode=demo&action=close_game&session_uuid=${sessionUuid}`)
             console.log(data)
             if (collectValue) {
                 giveBalance();
