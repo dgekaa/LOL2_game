@@ -2429,7 +2429,7 @@ function game1() {
         getBalanceWait = true;
         $.ajax({
           type: "get",
-          url: getNeedUrlPath() + '/get-user-balance?userId=' + userId + '&gameId=' + gameId + '&token=' + token + '&platformId=' + platformId,
+          url: getNeedUrlPath() + '/get-user-balance?userId=' + userId + '&gameId=' + gameId + '&token=' + token + '&platformId=' + platformId + '&session_uuid='+sessionUuid,
           dataType: 'html',
           success: function(data) {
             console.log(data)
@@ -2437,8 +2437,8 @@ function game1() {
               checkBalancedata = JSON.parse(data);
               setTimeout(function() {
                 getBalanceWait = false;
-                if (checkBalancedata['status'] == 'true' && (balance + allWin) !== +(checkBalancedata['balance'] * 100).toFixed()) {
-                  balance = +(checkBalancedata['balance'] * 100).toFixed();
+                if (checkBalancedata['status'] == 'true' && (balance + allWin) !== +(checkBalancedata['balance']).toFixed()) {
+                  balance = +(checkBalancedata['balance']).toFixed();
                   changeBalance();
                 } else if (checkBalancedata['status'] !== 'true') {
                   error_bg.visible = true;
