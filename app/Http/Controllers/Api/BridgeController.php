@@ -136,7 +136,7 @@ class BridgeController extends Controller
             $platformId = (int) $_GET['platformId'];
         }
 
-        if ($platformId === 2) {
+        if ($platformId === 2 || $platformId === '2') {
             $url = 'https://play.devbet.live/';
         }
 
