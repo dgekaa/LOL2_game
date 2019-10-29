@@ -9,6 +9,7 @@ use App\Classes\Bridge777Games\BridgeService;
 use App\Classes\Bridge777Games\BridgeApi;
 use Webpatser\Uuid\Uuid;
 use Ixudra\Curl\Facades\Curl;
+use App\Models\V2RecoveryData;
 
 class BridgeController extends Controller
 {
@@ -89,6 +90,7 @@ class BridgeController extends Controller
         $demo = $request->input('demo');
         $token = $request->input('token');
         $platformId = $request->input('platformId');
+        $sessionUuid = $request->input('session_uuid');
 
         $url = 'https://play777games.com/';
         if ($platformId === 2 || $platformId === '2') {
@@ -99,6 +101,9 @@ class BridgeController extends Controller
         ->post();
 
     	$data = json_decode($responseGetBalance);
+
+        // $session = Session::where('session_uuid', $sessionUuid)->first();
+        // $recoveryData = V2RecoveryData::where('session_id', $session->id)->last();
 
     	return ['status' => 'true', 'balance' => $data->balance * 10000 / 100];
     }
