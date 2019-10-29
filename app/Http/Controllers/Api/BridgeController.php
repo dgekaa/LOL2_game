@@ -104,4 +104,52 @@ class BridgeController extends Controller
 
         return response()->json($responseGetBalance);
     }
+
+    public function exitGame(Request $request)
+    {
+        $url = 'https://play777games.com/';
+
+        $token = $request->input('token');
+        $userId = $request->input('user_id');
+        $gameId = $request->input('game_id');
+        $collect = $request->input('collect');
+        $test = false;
+
+        if ($collect === 'true') {
+            $collect = true;
+        } elseif ($collect === 'false') {
+            $collect = false;
+        } else {
+            $collect = false;
+        }
+
+        $platformId = 1;
+        if (isset($_GET['platformId'])) {
+            $platformId = (int) $_GET['platformId'];
+        }
+
+        if ($platformId === 2) {
+            $url = 'https://play.devbet.live/';
+        }
+
+        $platformId = 1;
+        if (isset($_GET['platformId'])) {
+            $platformId = $_GET['platformId'];
+        }
+        $ch = curl_init( "{$url}exit" );
+        $payload = json_encode( array(
+          'token' => $token,
+          'userId' => $userId,
+          'gameId' => $gameId,
+          'collect' => $collect,
+          'platformId' => $platformId
+        ) );
+        curl_setopt( $ch, CURLOPT_POSTFIELDS, $payload );
+        curl_setopt( $ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
+        curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
+        $result = curl_exec($ch);
+        curl_close($ch);
+
+        return $result;
+    }
 }
