@@ -98,11 +98,7 @@ class BridgeController extends Controller
         $responseGetBalance = Curl::to("{$url}getBalance?token={$token}&userId={$userId}&gameId={$gameId}&platformId={$platformId}")
         ->post();
 
-        if ($responseGetBalance == false) {
-            return json_encode($responseGetBalance);
-        }
-
-        return response()->json($responseGetBalance);
+        return $responseGetBalance;
     }
 
     public function exitGame(Request $request)
