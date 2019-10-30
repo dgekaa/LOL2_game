@@ -66,8 +66,8 @@ class BridgeController extends Controller
     ): string {
         $requestData = array(
             'token' => $request->input('token'),
-            'userId' => $request->input('user_id'),
-            'gameId' => $request->input('game_id'),
+            'userId' => $request->input('userId'),
+            'gameId' => $request->input('gameId'),
             'platformId' => (int) $request->input('platformId'),
             'direction' => 'debit',
             'eventType' => 'BetPlacing',
