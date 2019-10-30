@@ -388,6 +388,10 @@ function game2() {
                     squareArrImg[i - 1][j - 1].tint = 0xffffff;
                 }
             }
+            for (var i = 1; i <= 15; ++i) {
+                squareArrFreespin[i].visible = false;
+                squareArrFreespin[i].tint = 0xffffff;
+            }
         }
         scorePosions = [
             [160, 57, 38],
@@ -532,7 +536,7 @@ function game2() {
                     console.log(JSON.parse(data));
                     if (IsJsonString(data)) {
                         dataSpinRequest = JSON.parse(data);
-                       if (dataSpinRequest.status !== 'false') {
+                        if (dataSpinRequest.status !== 'false') {
                             parseSpinAnswer(dataSpinRequest);
                         } else {
                             errorStatus = true;
@@ -578,7 +582,7 @@ function game2() {
         function moveFundsExceptionFunc(gamename, sessionName, betline, lines, moveFundsExceptionID) {
             $.ajax({
                 type: "get",
-                url: getNeedUrlPath() + '/moveFundsException?moveFundsExceptionID=' + moveFundsExceptionID+'&platform_id='+ platformId,
+                url: getNeedUrlPath() + '/moveFundsException?moveFundsExceptionID=' + moveFundsExceptionID + '&platform_id=' + platformId,
                 dataType: 'html',
                 success: function(data) {
                     console.log(data);
@@ -626,7 +630,7 @@ function game2() {
         function BetPlacingAbortExceptionFunc(gamename, sessionName, betline, lines, moveFundsExceptionID) {
             $.ajax({
                 type: "get",
-                url: getNeedUrlPath() + '/betPlacingAbort?betPlacingAbortExceptionID=' + moveFundsExceptionID+'&platform_id='+ platformId,
+                url: getNeedUrlPath() + '/betPlacingAbort?betPlacingAbortExceptionID=' + moveFundsExceptionID + '&platform_id=' + platformId,
                 dataType: 'html',
                 success: function(data) {
                     console.log(data);
@@ -714,11 +718,15 @@ function game2() {
                 // balanceOld = dataArray.longData.balanceData['balance'] - dataArray.longData.balanceData['totalPayoff'];
                 wcvWinValuesArrayOld = [];
                 wlWinValuesArrayOld = [];
+                winWithoutCoinOld = 0;
                 for (key in dataArray.longData.logicData['payoffsForLines']) {
+                    winWithoutCoinOld = winWithoutCoinOld + dataArray.longData.logicData['payoffsForLines'][key].winValue;
                     wlWinValuesArrayOld.push(dataArray.longData.logicData['payoffsForLines'][key].lineNumber + 1);
                 }
-                for (key in dataArray.longData.logicData['winningCells']) {
+                for (key in dataArray.longData.logicData.table) {
+                    if (dataArray.longData.logicData.table[key] === 10 || dataArray.longData.logicData.table[key] === 0) {
                     wcvWinValuesArrayOld.push(+(key));
+                }
                 }
                 winCellInfoOld = dataArray.longData.logicData['winningCells'];
                 wlValuesFS = dataArray.longData.logicData['payoffsForBonus'];
@@ -970,6 +978,7 @@ function game2() {
         var afterDropFeatureGame = false;
         var wcvFreeSpinWinValuesArray = [];
         console.log(bottomText)
+
         function checkWin() {
             curBri = 0;
             wlWinValuesArray = [];
@@ -1654,10 +1663,14 @@ function game2() {
             return_to_game = game.add.sprite(883, 506, 'return');
             return_to_game.inputEnabled = true;
             return_to_game.input.useHandCursor = true;
-            return_to_game.events.onInputDown.add(function() {
+            return_to_game.events.onInputDown.add(function(click, pointer) {
+                if (pointer.button !== 0 && pointer.button !== undefined)
+                    return;
                 return_to_game.loadTexture('return_p');
             });
-            return_to_game.events.onInputUp.add(function() {
+            return_to_game.events.onInputUp.add(function(click, pointer) {
+                if (pointer.button !== 0 && pointer.button !== undefined)
+                    return;
                 return_to_game.loadTexture('return');
                 help_page.visible = false;
                 paytable_page.visible = false;
@@ -1670,10 +1683,14 @@ function game2() {
             help_next = game.add.sprite(883, 85, 'moreHelp');
             help_next.inputEnabled = true;
             help_next.input.useHandCursor = true;
-            help_next.events.onInputDown.add(function() {
+            help_next.events.onInputDown.add(function(click, pointer) {
+                if (pointer.button !== 0 && pointer.button !== undefined)
+                    return;
                 help_next.loadTexture('moreHelp_p');
             });
-            help_next.events.onInputUp.add(function() {
+            help_next.events.onInputUp.add(function(click, pointer) {
+                if (pointer.button !== 0 && pointer.button !== undefined)
+                    return;
                 help_next.loadTexture('moreHelp');
                 nextHelp(helpPageCurent);
             })
@@ -1681,10 +1698,14 @@ function game2() {
             paytable_next = game.add.sprite(883, 85, 'moreHelp');
             paytable_next.inputEnabled = true;
             paytable_next.input.useHandCursor = true;
-            paytable_next.events.onInputDown.add(function() {
+            paytable_next.events.onInputDown.add(function(click, pointer) {
+                if (pointer.button !== 0 && pointer.button !== undefined)
+                    return;
                 paytable_next.loadTexture('moreHelp_p');
             });
-            paytable_next.events.onInputUp.add(function() {
+            paytable_next.events.onInputUp.add(function(click, pointer) {
+                if (pointer.button !== 0 && pointer.button !== undefined)
+                    return;
                 paytable_next.loadTexture('moreHelp');
                 nextPaytable(paytablePageCurent);
             })
