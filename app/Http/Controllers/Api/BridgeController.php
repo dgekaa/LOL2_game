@@ -66,9 +66,9 @@ class BridgeController extends Controller
     ): string {
         $requestData = array(
             'token' => $request->input('token'),
-            'userId' => $request->input('user_id'),
-            'gameId' => $request->input('game_id'),
-            'platformId' => (int) $request->input('platformId'),
+            'userId' => $request->input('userId'),
+            'gameId' => $request->input('gameId'),
+            'platformId' => (int) $request->input('platform_id'),
             'direction' => 'debit',
             'eventType' => 'BetPlacing',
             'amount' => 0,
@@ -103,12 +103,17 @@ class BridgeController extends Controller
 
     	$data = json_decode($responseGetBalance);
 
-        $session = V2Session::where('session_uuid', $sessionUuid)->first();
-        $recoveryData = V2RecoveryData::where('session_id', $session->id)->orderBy('id', 'desc')->first();
-    	$gameData = json_decode($recoveryData->recovery_data);
-    	$gameData->balanceData->balance = $data->balance;
-    	$recoveryData->recovery_data = json_encode($gameData);
-    	$recoveryData->save();
+        try {
+            $session = V2Session::where('session_uuid', $sessionUuid)->first();
+            $recoveryData = V2RecoveryData::where('session_id', $session->id)->orderBy('id', 'desc')->first();
+            $gameData = json_decode($recoveryData->recovery_data);
+            $gameData->balanceData->balance = $data->balance;
+            $recoveryData->recovery_data = json_encode($gameData);
+            $recoveryData->save();
+        } catch (\Exception $e) {
+            return ['status' => 'false', 'error' => 'responseGetBalance'];
+        }
+
 
     	return ['status' => 'true', 'balance' => $data->balance * 10000 / 100];
     }
