@@ -69,6 +69,7 @@ class BridgeController extends Controller
             'userId' => $request->input('userId'),
             'gameId' => $request->input('gameId'),
             'platformId' => (int) $request->input('platform_id'),
+            'transactionId' => Uuid::generate()->string,
             'direction' => 'debit',
             'eventType' => 'BetPlacing',
             'amount' => 0,
