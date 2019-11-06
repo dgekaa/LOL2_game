@@ -74,7 +74,7 @@ class BridgeController extends Controller
             'eventType' => 'BetPlacing',
             'amount' => 0,
             'extraInfo' => [],
-            'eventID' => Uuid::generate()->string
+            'eventId' => Uuid::generate()->string
         );
 
         // получение ответа от slot.pantera
