@@ -45,21 +45,27 @@ function addBtnInfoPage() {
     return_to_game = game.add.sprite(23, 104 + 831, 'return_p');
     return_to_game.inputEnabled = true;
     return_to_game.input.useHandCursor = true;
-    return_to_game.events.onInputUp.add(function() {
+    return_to_game.events.onInputUp.add(function(click, pointer) {
+        if (pointer.button !== 0 && pointer.button !== undefined)
+            return;
         helpSound.play();
         exitInfoPage();
     })
     nextBtnInfoPage = game.add.sprite(856, 14 + 831, 'Next');
     nextBtnInfoPage.inputEnabled = true;
     nextBtnInfoPage.input.useHandCursor = true;
-    nextBtnInfoPage.events.onInputUp.add(function() {
+    nextBtnInfoPage.events.onInputUp.add(function(click, pointer) {
+        if (pointer.button !== 0 && pointer.button !== undefined)
+            return;
         helpSound.play();
         nextInfoPage();
     })
     prevBtnInfoPage = game.add.sprite(23, 14 + 831, 'Prev');
     prevBtnInfoPage.inputEnabled = true;
     prevBtnInfoPage.input.useHandCursor = true;
-    prevBtnInfoPage.events.onInputUp.add(function() {
+    prevBtnInfoPage.events.onInputUp.add(function(click, pointer) {
+        if (pointer.button !== 0 && pointer.button !== undefined)
+            return;
         helpSound.play();
         prevInfoPage();
     })
@@ -252,7 +258,9 @@ function addButtonsGame1(game, pageCount) {
     payTable.events.onInputOut.add(function() {
         payTable.loadTexture('payTable');
     });
-    payTable.events.onInputUp.add(function() {
+    payTable.events.onInputUp.add(function(click, pointer) {
+        if (pointer.button !== 0 && pointer.button !== undefined)
+            return;
         hideButtons([
             [payTable, 'payTable'],
             [betmax, 'betmax'],
@@ -461,7 +469,9 @@ function addButtonsGame1(game, pageCount) {
     buttonLine1.events.onInputOut.add(function() {
         buttonLine1.loadTexture('buttonLine1');
     });
-    buttonLine1.events.onInputUp.add(function() {
+    buttonLine1.events.onInputUp.add(function(click, pointer) {
+        if (pointer.button !== 0 && pointer.button !== undefined)
+            return;
         if (settingsMode) {
             pageSound.play();
             if (currentPage == 1)
@@ -502,7 +512,9 @@ function addButtonsGame1(game, pageCount) {
     buttonLine3.events.onInputOut.add(function() {
         buttonLine3.loadTexture('buttonLine3');
     });
-    buttonLine3.events.onInputUp.add(function() {
+    buttonLine3.events.onInputUp.add(function(click, pointer) {
+        if (pointer.button !== 0 && pointer.button !== undefined)
+            return;
         hideLines();
         showLines([1, 2, 3]);
     });
@@ -531,7 +543,9 @@ function addButtonsGame1(game, pageCount) {
     buttonLine5.events.onInputOut.add(function() {
         buttonLine5.loadTexture('buttonLine5');
     });
-    buttonLine5.events.onInputUp.add(function() {
+    buttonLine5.events.onInputUp.add(function(click, pointer) {
+        if (pointer.button !== 0 && pointer.button !== undefined)
+            return;
         hideLines();
         showLines([1, 2, 3, 4, 5]);
     });
@@ -560,7 +574,9 @@ function addButtonsGame1(game, pageCount) {
     buttonLine7.events.onInputOut.add(function() {
         buttonLine7.loadTexture('buttonLine7');
     });
-    buttonLine7.events.onInputUp.add(function() {
+    buttonLine7.events.onInputUp.add(function(click, pointer) {
+        if (pointer.button !== 0 && pointer.button !== undefined)
+            return;
         hideLines();
         showLines([1, 2, 3, 4, 5, 6, 7]);
     });
@@ -589,7 +605,9 @@ function addButtonsGame1(game, pageCount) {
     buttonLine9.events.onInputOut.add(function() {
         buttonLine9.loadTexture('buttonLine9');
     });
-    buttonLine9.events.onInputUp.add(function() {
+    buttonLine9.events.onInputUp.add(function(click, pointer) {
+        if (pointer.button !== 0 && pointer.button !== undefined)
+            return;
         if (settingsMode) {
             pageSound.play();
             if (currentPage == pageCount) {
@@ -1822,7 +1840,9 @@ function addButtonsGame1Mobile(game) {
     startButton.anchor.setTo(0.5, 0.5);
     startButton.inputEnabled = true;
     startButton.input.useHandCursor = true;
-    startButton.events.onInputUp.add(function() {
+    startButton.events.onInputUp.add(function(click, pointer) {
+        if (pointer.button !== 0 && pointer.button !== undefined)
+            return;
         startButton.loadTexture('startButton');
     });
     startButton.events.onInputDown.add(function() {
@@ -1885,7 +1905,9 @@ function addButtonsGame1Mobile(game) {
         hideNumbersAmin();
         game.state.start('game2');
     });
-    double.events.onInputUp.add(function() {
+    double.events.onInputUp.add(function(click, pointer) {
+        if (pointer.button !== 0 && pointer.button !== undefined)
+            return;
         double.loadTexture('double');
     });
     double.visible = false;
@@ -1904,7 +1926,9 @@ function addButtonsGame1Mobile(game) {
         $('.betCell').css('height', widthVisibleZone * 0.32147 + 'px');
         $('canvas').css('display', 'none');
     });
-    bet1.events.onInputUp.add(function() {
+    bet1.events.onInputUp.add(function(click, pointer) {
+        if (pointer.button !== 0 && pointer.button !== undefined)
+            return;
         bet1.loadTexture('bet1');
     });
 
@@ -1931,7 +1955,9 @@ function addButtonsGame1Mobile(game) {
     home.events.onInputDown.add(function() {
         home.loadTexture('home_d');
     });
-    home.events.onInputUp.add(function() {
+    home.events.onInputUp.add(function(click, pointer) {
+        if (pointer.button !== 0 && pointer.button !== undefined)
+            return;
         home.loadTexture('home');
     });
 }
@@ -1940,7 +1966,9 @@ function addButtonsGame2Mobile(game) {
     startButton = game.add.sprite(538, 300, 'collect');
     startButton.inputEnabled = true;
     startButton.input.useHandCursor = true;
-    startButton.events.onInputUp.add(function() {
+    startButton.events.onInputUp.add(function(click, pointer) {
+        if (pointer.button !== 0 && pointer.button !== undefined)
+            return;
         startButton.loadTexture('collect');
     });
     startButton.events.onInputDown.add(function() {
