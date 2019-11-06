@@ -123,8 +123,8 @@ class BridgeController extends Controller
         $url = 'https://play777games.com/';
 
         $token = $request->input('token');
-        $userId = $request->input('user_id');
-        $gameId = $request->input('game_id');
+        $userId = $request->input('userId');
+        $gameId = $request->input('gameId');
         $collect = $request->input('collect');
         $test = false;
 
