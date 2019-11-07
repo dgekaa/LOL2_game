@@ -2,6 +2,8 @@
 
 namespace Avior\GameCore\Actions;
 
+set_time_limit(300000);
+
 use Avior\GameCore\Base\IAction;
 use Avior\GameCore\Base\IWorkersPool;
 use Avior\GameCore\Base\IDataPool;
