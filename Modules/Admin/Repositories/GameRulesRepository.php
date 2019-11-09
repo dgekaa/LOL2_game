@@ -17,12 +17,13 @@ class GameRulesRepository extends BaseRepository
      */
     public static function getPercentagesRulesByAlias(string $alias): string
     {
-        $percentagesRules = DB::table('v2_games')
-            ->join('v2_game_rules', 'v2_games.id', '=', 'v2_game_rules.game_id')
-            ->select('v2_game_rules.rules', 'v2_game_rules.name')
-            ->where('v2_games.alias', $alias)
-            ->where('v2_game_rules.name', 'percentages')
-            ->get()->first()->rules;
+        $percentagesRules = V2GameRule::where('game_id', 6)->where('name', 'percentages')->first()->rules;
+        // $percentagesRules = DB::table('v2_games')
+        //     ->join('v2_game_rules', 'v2_games.id', '=', 'v2_game_rules.game_id')
+        //     ->select('v2_game_rules.rules', 'v2_game_rules.name')
+        //     ->where('v2_games.alias', $alias)
+        //     ->where('v2_game_rules.name', 'percentages')
+        //     ->get()->first()->rules;
 
         return $percentagesRules;
     }
@@ -37,9 +38,7 @@ class GameRulesRepository extends BaseRepository
      */
     public static function savePercentagesRulesByAlias(string $alias, array $percentagesRules): object
     {
-        $gameId = V2Game::where('alias', $alias)->first()->id;
-
-        $rule = V2GameRule::where('game_id', $gameId)->where('name', 'percentages')->first();
+        $rule = V2GameRule::where('game_id', 6)->where('name', 'percentages')->first();
         $rule->rules = json_encode($percentagesRules);
         $rule->save();
 
