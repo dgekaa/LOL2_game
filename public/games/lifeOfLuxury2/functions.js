@@ -1167,7 +1167,7 @@ function requestState(data) {
     info = data.logicData.table;
     sessionUuid = data.sessionData.sessionUuid;
     const { sessionData: { mode } } = data;
-    if (mode === 'demo') {
+    if (mode === 'true') {
 
     }
     if (data.stateData.screen === 'featureGame') {

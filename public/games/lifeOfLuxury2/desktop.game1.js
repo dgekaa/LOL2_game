@@ -101,7 +101,7 @@ function game1() {
         colorLine: ['#009800', '#fffc00', '#0004ff', '#ff0000', '#ff00d1', '#00fa6d', '#89ff00', '#ff7f00', '#9400ff', '#0004ff', '#009300', '#ff3900', '#ff3900', '#9400ff', '#89ff00']
     };
 
-    game1.preload = function() {};
+    game1.preload = function() {game.load.image('watermark', 'img/watermark.png');};
 
     game1.create = function() {
         if (game.sound.usingWebAudio &&
@@ -2730,6 +2730,10 @@ function game1() {
                 checkScore();
             }
         };
+
+        if (demo === 'demo') {
+            game.add.sprite(0, 0, 'watermark');
+        }
     };
 
     game1.update = function() {

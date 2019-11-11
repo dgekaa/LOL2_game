@@ -6,6 +6,9 @@ ixudra/curl
 [![StyleCI](https://styleci.io/repos/18486198/shield)](https://styleci.io/repos/18486198)
 [![Total Downloads](https://img.shields.io/packagist/dt/ixudra/curl.svg?style=flat-square)](https://packagist.org/packages/ixudra/curl)
 
+
+![Ixudra Curl](https://repository-images.githubusercontent.com/18486198/cd2b2080-de01-11e9-8fb1-e64ffe5e9816)
+
 Custom PHP cURL library for the Laravel 4 or 5 framework - developed by [Ixudra](http://ixudra.be).
 
 The package provides an easy interface for sending cURL requests from your PHP web application. The package provides an 
@@ -298,6 +301,21 @@ Alternatively, you can use the `withHeaders()` to combine multiple headers into 
 
 ```
 
+You can also use key-value when using the `withHeaders()` method:
+
+```php
+
+    use Ixudra\Curl\Facades\Curl;
+
+    // Send a GET request to: http://www.foo.com/bar with 2 custom headers
+    $response = Curl::to('http://foo.com/bar')
+        ->withHeaders( array( 'MyFirstHeader' => '123', 'MySecondHeader' => '456' ) )
+        ->get();
+
+```
+
+ > Note that headers will override each other if you add the same header more than once.
+
 
 ### Specifying the content type
 
@@ -477,7 +495,7 @@ any validation on the cURL options. Additional information about available cURL 
 | asJsonRequest()       |  false            | Submit the request data as JSON                                   |
 | asJsonResponse()      |  false            | Decode the response data from JSON                                |
 | asJson()              |  false            | Utility method to set both `asJsonRequest()` and `asJsonResponse()` at the same time   |
-| withHeader()          |  array            | Add an HTTP header to the request                                 |
+| withHeader()          |  string           | Add an HTTP header to the request                                 |
 | withHeaders()         |  array            | Add multiple HTTP headers to the request                          |
 | withContentType()     |  none             | Set the content type of the response                              |
 | withFile()            |  none             | Add a file to the form data to be sent                            |
