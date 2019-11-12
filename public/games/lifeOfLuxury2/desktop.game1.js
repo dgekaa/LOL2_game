@@ -137,7 +137,7 @@ function game1() {
 
             }, this.game.sound, true);
         }
-        if (demo !== 'true') {
+        if (demo === 'demo') {
             game.scale.setGameSize(1024, 831)
         }
         game1.ticker = game.add.tileSprite(0, 800, 1154, 31, 'ticker');
@@ -519,7 +519,7 @@ function game1() {
                 // }, 4000);
                 bottomText.visible = false;
                 hideLines();
-                if (demo !== 'true') {
+                if (demo !== 'demo') {
                     if ((balance + allWin) !== 0) {
                         $('.popup_exit,.overlay').show();
                     } else {
@@ -608,7 +608,7 @@ function game1() {
                     stopUpdateBalance();
                     autoPlay.loadTexture('autoPlay');
                 } else {
-                    if ((balance + allWinOld) < betline * lines && demo !== 'true') {
+                    if ((balance + allWinOld) < betline * lines && demo !== 'demo') {
                         console.log('press add credits');
                         $.ajax({
                             type: "get",
@@ -1256,7 +1256,7 @@ function game1() {
                     addcreditFlickStatus = false;
                     autoPlay.loadTexture('autoPlay');
                     console.log(balance + allWin)
-                    if ((balance + allWin) < betline * lines && demo !== 'true') {
+                    if ((balance + allWin) < betline * lines && demo !== 'demo') {
                         checkBalance();
                         showButtons([
                             [autoPlay, 'autoPlay']
@@ -1389,10 +1389,10 @@ function game1() {
 
 
         function requestSpin(gamename, sessionUuid, betline, lines) {
-            console.log(getNeedUrlPath() + `/api-v2/action?game_id=${gameId}&user_id=${userId}&demo=${demo}&action=spin&session_uuid=${sessionUuid}&token=${token}&linesInGame=${lines}&lineBet=${betline}&platform_id=${platformId}`);
+            console.log(getNeedUrlPath() + `/api-v2/action?game_id=${gameId}&user_id=${userId}&mode=${demo}&action=spin&session_uuid=${sessionUuid}&token=${token}&linesInGame=${lines}&lineBet=${betline}&platform_id=${platformId}`);
             $.ajax({
                 type: "get",
-                url: getNeedUrlPath() + `/api-v2/action?game_id=${gameId}&user_id=${userId}&demo=${demo}&action=spin&session_uuid=${sessionUuid}&token=${token}&linesInGame=${lines}&lineBet=${betline}&platform_id=${platformId}`,
+                url: getNeedUrlPath() + `/api-v2/action?game_id=${gameId}&user_id=${userId}&mode=${demo}&action=spin&session_uuid=${sessionUuid}&token=${token}&linesInGame=${lines}&lineBet=${betline}&platform_id=${platformId}`,
                 dataType: 'html',
                 success: function(data) {
                     console.log(data);
@@ -2061,7 +2061,7 @@ function game1() {
                 }
                 hideMobileBtn();
                 autoPlay.loadTexture('autoPlay');
-                if ((balance + allWin) < betline * lines && demo !== 'true') {
+                if ((balance + allWin) < betline * lines && demo !== 'demo') {
                     checkBalance();
                     showButtons([
                         [autoPlay, 'autoPlay']
@@ -2114,7 +2114,7 @@ function game1() {
                 }
                 hideMobileBtn();
                 autoPlay.loadTexture('autoPlay');
-                if ((balance + allWin) < betline * lines && demo !== 'true') {
+                if ((balance + allWin) < betline * lines && demo !== 'demo') {
                     checkBalance();
                     showButtons([
                         [autoPlay, 'autoPlay']
@@ -2167,7 +2167,7 @@ function game1() {
                 }
                 hideMobileBtn();
                 autoPlay.loadTexture('autoPlay');
-                if ((balance + allWin) < betline * lines && demo !== 'true') {
+                if ((balance + allWin) < betline * lines && demo !== 'demo') {
                     checkBalance();
                     showButtons([
                         [autoPlay, 'autoPlay']
@@ -2270,7 +2270,7 @@ function game1() {
                         }
                         hideMobileBtn();
                         autoPlay.loadTexture('autoPlay');
-                        if ((balance + allWin) < betline * lines && demo !== 'true') {
+                        if ((balance + allWin) < betline * lines && demo !== 'demo') {
                             checkBalance();
                             showButtons([
                                 [autoPlay, 'autoPlay']
@@ -2394,7 +2394,7 @@ function game1() {
                     ]);
                 }
                 hideMobileBtn();
-                if ((balance + allWinOld) < betline * lines && demo !== 'true') {
+                if ((balance + allWinOld) < betline * lines && demo !== 'demo') {
                     checkBalance();
                     addcreditFlickStatus = true;
                     showButtons([
@@ -2429,7 +2429,7 @@ function game1() {
         var getBalanceWait = false;
 
         function checkBalance() {
-            if (!getBalanceWait && demo !== 'true') {
+            if (!getBalanceWait && demo !== 'demo') {
                 if (((balance + allWinOld) < betline * lines) && ((balance + allWin) < betline * lines) && curGame === 1) {
                     getBalance();
                 } else {
@@ -2731,7 +2731,7 @@ function game1() {
             }
         };
 
-        if (demo === 'true') {
+        if (demo === 'demo') {
             game.add.sprite(0, 0, 'watermark');
         }
     };

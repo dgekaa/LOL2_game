@@ -1035,8 +1035,8 @@ urlPath = location.href;
 
 urlPath2 = urlPath.split('&');
 urlPath2.forEach(function(item) {
-    if (item.indexOf('demo=') + 1) {
-        demo = item.replace('demo=', '');
+    if (item.indexOf('mode=') + 1) {
+        demo = item.replace('mode=', '');
     }
     if (item.indexOf('user_id=') + 1) {
         userId = item.replace('user_id=', '');
@@ -1068,11 +1068,11 @@ function requestInit() {
     $.ajax({
         type: "get",
         // url: getNeedUrlPath() + '/init?sessionID=' + sessionID,
-        url: getNeedUrlPath() + `/api-v2/action?game_id=${gameId}&user_id=${userId}&demo=${demo}&action=open_game&session_uuid=&token=${token}&platform_id=${platformId}`,
+        url: getNeedUrlPath() + `/api-v2/action?game_id=${gameId}&user_id=${userId}&mode=${demo}&action=open_game&session_uuid=&token=${token}&platform_id=${platformId}`,
         dataType: 'html',
         success: function(data) {
             // data = "result=ok&state=0&SID=aeea5r0ai19oht0rvj3c5dd2p2&user=1271|user1271|1000.00";
-            console.log(getNeedUrlPath() + `/api-v2/action?game_id=${gameId}&user_id=${userId}&demo=${demo}&action=open_game&session_uuid=&token=${token}&platform_id=${platformId}`);
+            console.log(getNeedUrlPath() + `/api-v2/action?game_id=${gameId}&user_id=${userId}&mode=${demo}&action=open_game&session_uuid=&token=${token}&platform_id=${platformId}`);
             console.log('requestInit: ' + data);
             if (IsJsonString(data)) {
                 data = JSON.parse(data);
@@ -1167,7 +1167,7 @@ function requestState(data) {
     info = data.logicData.table;
     sessionUuid = data.sessionData.sessionUuid;
     const { sessionData: { mode } } = data;
-    if (mode === 'true') {
+    if (mode === 'demo') {
 
     }
     if (data.stateData.screen === 'featureGame') {

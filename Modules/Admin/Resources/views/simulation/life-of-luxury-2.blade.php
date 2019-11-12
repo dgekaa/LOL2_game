@@ -200,6 +200,6 @@
         </div>
     </div>
     <script type="text/javascript">
-        document.body.querySelector('.btn').addEventListener('click', function() {this.textContent = 'process...'});
+        document.body.querySelector('.btn').addEventListener('click', function() {this.textContent = 'process...'}
     </script>
 @stop
