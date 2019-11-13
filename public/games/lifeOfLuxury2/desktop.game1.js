@@ -654,13 +654,15 @@ function game1() {
             // btnSound.play();
         });
         startButton.events.onInputUp.add(function(click, pointer) {
-            if (pointer.button !== 0 && pointer.button !== undefined)
-                return;
+            console.log(`spaceStatus: ${spaceStatus}`)
+            // if (pointer.button !== 0 && pointer.button !== undefined)
+            //     return;
             if (spaceStatus) {
                 if (balanceUpdateStatus) {
                     startButton.loadTexture('startButton');
                     stopUpdateBalance();
                 } else {
+                    console.log(11234)
                     preStartSpin();
                 }
             console.log(`balanceUpdateStatus: ${balanceUpdateStatus}`)
@@ -771,6 +773,7 @@ function game1() {
                 bet = lines * betline;
                 totalBet.setText(bet);
                 activateFreeSpins = true;
+                console.log('maxBet')
                 preStartSpin();
                 // requestSpin(gamename, sessionName, betline, lines);
             }
@@ -877,6 +880,7 @@ function game1() {
 
         }
         startFunc = function startAuto() {
+            console.log('startAuto')
             preStartSpin();
         }
 
@@ -2520,7 +2524,7 @@ function game1() {
         }
 
         function preStartSpin() {
-            console.log('yes')
+            console.log('inside')
             parseAnswerStatus = false;
             dataSpinRequest['status'] = false;
             allWinOld = 0;
