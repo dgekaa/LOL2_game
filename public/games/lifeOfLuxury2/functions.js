@@ -11,7 +11,6 @@ function randomNumber(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 var infoPage;
-
 function infoRandom() {
     info = [];
     for (var i = 0; i <= 15; ++i) {
