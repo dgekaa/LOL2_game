@@ -648,12 +648,13 @@ function game1() {
         startButton.inputEnabled = true;
         startButton.input.useHandCursor = true;
         startButton.events.onInputDown.add(function() {
-            // startButton.loadTexture('startButton_p');
-            // btnSound.play();
+            startButton.loadTexture('startButton_p');
+            btnSound.play();
         });
         startButton.events.onInputUp.add(function(click, pointer) {
-            if (pointer.button !== 0 && pointer.button !== undefined)
-                return;
+            // if (pointer.button !== 0 && pointer.button !== undefined)
+            //     return;
+            startButton.loadTexture('startButton');
             if (spaceStatus) {
                 if (balanceUpdateStatus) {
                     startButton.loadTexture('startButton');
@@ -2732,7 +2733,8 @@ function game1() {
         };
 
         if (demo === 'demo') {
-            game.add.sprite(0, 0, 'watermark');
+            var watermark = game.add.sprite(0, 0, 'watermark');
+            watermark.alpha = 0.2;
         }
     };
 
