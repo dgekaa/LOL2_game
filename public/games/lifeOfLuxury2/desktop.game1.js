@@ -657,12 +657,10 @@ function game1() {
             if (pointer.button !== 0 && pointer.button !== undefined)
                 return;
             if (spaceStatus) {
-                console.log('step 1')
                 if (balanceUpdateStatus) {
                     startButton.loadTexture('startButton');
                     stopUpdateBalance();
                 } else {
-                    console.log('step 2')
                     preStartSpin();
                 }
             console.log(`balanceUpdateStatus: ${balanceUpdateStatus}`)
@@ -773,7 +771,6 @@ function game1() {
                 bet = lines * betline;
                 totalBet.setText(bet);
                 activateFreeSpins = true;
-                console.log('step 3')
                 preStartSpin();
                 // requestSpin(gamename, sessionName, betline, lines);
             }
@@ -880,7 +877,6 @@ function game1() {
 
         }
         startFunc = function startAuto() {
-            console.log('step 4')
             preStartSpin();
         }
 
@@ -2598,15 +2594,24 @@ function game1() {
             addEventListener("keyup", function(event) {
                 if (event.keyCode == 32) {
                     if (!errorStatus) {
+                        console.log('step 1')
                         if (curGame === 1) {
+                            console.log('step 2')
                             if (spaceStatus) {
+                                console.log('step 3')
                                 if (spinStatus === false) {
+                                    console.log('step 4')
                                     if (paytableStatus === false) {
+                                        console.log('step 5')
                                         if (autostart === false) {
+                                            console.log('step 6')
                                             if ((balance + allWinOld) >= betline * lines) {
+                                                console.log('step 7')
                                                 if (balanceUpdateStatus) {
+                                                    console.log('step 8')
                                                     stopUpdateBalance();
                                                 } else {
+                                                    console.log('step 9')
                                                     spinStatus = true;
                                                     preStartSpin();
                                                 }
