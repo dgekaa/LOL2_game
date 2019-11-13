@@ -32,6 +32,7 @@ var createdStarsStatus = true;
 var activateFreeSpins = true; //удалить на продакшене
 var createdStarsMiniStatus = true;
 var briMulti = [];
+
 var timerSpin = [];
 var squareArr = [
     [2, 5, 8, 11, 14],
@@ -636,6 +637,7 @@ function game1() {
                 autostart = false;
                 showButtons();
                 if (spinStatus === true) {
+                    console.log(1)
                     hideButtons();
                     showButtons([
                         [startButton, 'startButton']
@@ -643,23 +645,25 @@ function game1() {
                     startButton.loadTexture('stopButton');
                 }
             }
-        })
+        });
         startButton = game.add.sprite(650, 706, 'startButton');
         startButton.inputEnabled = true;
         startButton.input.useHandCursor = true;
         startButton.events.onInputDown.add(function() {
-            startButton.loadTexture('startButton_p');
-            btnSound.play();
+            // startButton.loadTexture('startButton_p');
+            // btnSound.play();
         });
         startButton.events.onInputUp.add(function(click, pointer) {
-            // if (pointer.button !== 0 && pointer.button !== undefined)
-            //     return;
-            startButton.loadTexture('startButton');
+            if (pointer.button !== 0 && pointer.button !== undefined)
+                console.log(2)
+                return;
             if (spaceStatus) {
                 if (balanceUpdateStatus) {
+                    console.log(3)
                     startButton.loadTexture('startButton');
                     stopUpdateBalance();
                 } else {
+                    console.log(4)
                     preStartSpin();
                 }
             } else {
@@ -668,6 +672,7 @@ function game1() {
                         if (timeSpin) {
                             if (dataSpinRequest['status']) {
                                 if (parseAnswerStatus) {
+                                    console.log(5)
                                     startButton.loadTexture('startButton');
                                     hideButtons([
                                         [startButton, 'startButton']
@@ -1239,6 +1244,7 @@ function game1() {
                     showButtons();
                 }
                 if ((balance + allWin) < betline * lines) {
+                    console.log(6)
                     autostart = false;
                     $("#spin").removeClass('auto');
                     showButtons();
@@ -1272,6 +1278,7 @@ function game1() {
                     }
                 } else {
                     if (autostart == false) {
+                        console.log(7)
                         showButtons([
                             [startButton, 'startButton']
                         ]);
@@ -2047,6 +2054,7 @@ function game1() {
             balanceUpdateStatus = false;
             if ((balance + allWin) < betline * lines) {
                 autostart = false;
+                console.log(8)
                 $("#spin").removeClass('auto');
                 showButtons();
                 hideButtons([
@@ -2071,6 +2079,7 @@ function game1() {
                 }
             } else {
                 if (autostart == false) {
+                    console.log(9)
                     showButtons([
                         [startButton, 'startButton']
                     ]);
@@ -2100,6 +2109,7 @@ function game1() {
             balanceUpdateStatus = false;
             if ((balance + allWin) < betline * lines) {
                 autostart = false;
+                console.log(10)
                 $("#spin").removeClass('auto');
                 showButtons();
                 hideButtons([
@@ -2124,6 +2134,7 @@ function game1() {
                 }
             } else {
                 if (autostart == false) {
+                    console.log(11)
                     showButtons([
                         [startButton, 'startButton']
                     ]);
@@ -2153,6 +2164,7 @@ function game1() {
             };
             if ((balance + allWin) < betline * lines) {
                 autostart = false;
+                console.log(12)
                 $("#spin").removeClass('auto');
                 showButtons();
                 hideButtons([
@@ -2176,7 +2188,8 @@ function game1() {
                     autoPlay.loadTexture('addCredit');
                 }
             } else {
-                if (autostart == false) {
+                if (autostart == false)
+                    console.log(13)
                     showButtons([
                         [startButton, 'startButton']
                     ]);
@@ -2380,6 +2393,7 @@ function game1() {
         function checkScore() {
             addcreditFlickStatus = false;
             if ((balance + allWinOld) < betline * lines) {
+                console.log(15)
                 hideButtons([
                     [startButton, 'startButton']
                 ]);
@@ -2411,6 +2425,7 @@ function game1() {
                     }
                 }
             } else {
+                console.log(16)
                 showButtons([
                     [startButton, 'startButton']
                 ]);
@@ -2554,6 +2569,7 @@ function game1() {
                 [exit, 'exit']
             ]);
             if (autostart === false) {
+                console.log(117)
                 showButtons([
                     [startButton, 'startButton']
                 ]);
@@ -2613,6 +2629,7 @@ function game1() {
                                         if (timeSpin) {
                                             if (dataSpinRequest['status'] !== 'false') {
                                                 if (parseAnswerStatus) {
+                                                    console.log(20)
                                                     startButton.loadTexture('startButton');
                                                     hideButtons([
                                                         [startButton, 'startButton']
