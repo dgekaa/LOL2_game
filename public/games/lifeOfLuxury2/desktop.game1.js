@@ -650,13 +650,13 @@ function game1() {
         startButton.inputEnabled = true;
         startButton.input.useHandCursor = true;
         startButton.events.onInputDown.add(function() {
-            // startButton.loadTexture('startButton_p');
+            startButton.loadTexture('startButton_p');
             // btnSound.play();
         });
         startButton.events.onInputUp.add(function(click, pointer) {
-            if (pointer.button !== 0 && pointer.button !== undefined)
-                console.log(2)
-                return;
+            // if (pointer.button !== 0 && pointer.button !== undefined)
+            //     return;
+            startButton.loadTexture('startButton');
             if (spaceStatus) {
                 if (balanceUpdateStatus) {
                     console.log(3)
@@ -2188,7 +2188,7 @@ function game1() {
                     autoPlay.loadTexture('addCredit');
                 }
             } else {
-                if (autostart == false)
+                if (autostart == false) {
                     console.log(13)
                     showButtons([
                         [startButton, 'startButton']
