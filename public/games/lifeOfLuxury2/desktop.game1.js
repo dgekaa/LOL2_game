@@ -2744,6 +2744,7 @@ function game1() {
             game1.bars[1].tilePosition.y += 40;
         }
         if (game1.spinStatus3) {
+
             game1.bars[2].tilePosition.y += 40;
         }
         if (game1.spinStatus4) {
