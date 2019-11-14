@@ -657,6 +657,14 @@ function game1() {
             if (pointer.button !== 0 && pointer.button !== undefined)
                 return;
 
+            if ((balance + allWinOld) >= betline * lines) {
+                spaceStatus = true
+                console.log('step 1')
+            } else {
+                spaceStatus = false
+                console.log('step 2')
+            }
+
             if (spaceStatus) {
                 if (balanceUpdateStatus) {
                     startButton.loadTexture('startButton');
