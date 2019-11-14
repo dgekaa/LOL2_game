@@ -656,15 +656,22 @@ function game1() {
         startButton.events.onInputUp.add(function(click, pointer) {
             if (pointer.button !== 0 && pointer.button !== undefined)
                 return;
-            spaceStatus = true;
-            if (spaceStatus) {
+            if ((balance + allWinOld) >= betline * lines) {
                 if (balanceUpdateStatus) {
                     startButton.loadTexture('startButton');
                     stopUpdateBalance();
                 } else {
                     preStartSpin();
                 }
-            } else {
+            }
+            // if (spaceStatus) {
+            //     if (balanceUpdateStatus) {
+            //         startButton.loadTexture('startButton');
+            //         stopUpdateBalance();
+            //     } else {
+            //         preStartSpin();
+            //     }
+            if (!spaceStatus) {
                 if (paytableStatus === false) {
                     if (autostart === false) {
                         if (timeSpin) {
