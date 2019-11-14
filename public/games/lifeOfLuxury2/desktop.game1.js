@@ -657,14 +657,6 @@ function game1() {
             if (pointer.button !== 0 && pointer.button !== undefined)
                 return;
 
-            if ((balance + allWinOld) >= betline * lines) {
-                spaceStatus = true
-                console.log('step 1')
-            } else {
-                spaceStatus = false
-                console.log('step 2')
-            }
-
             if (spaceStatus) {
                 if (balanceUpdateStatus) {
                     startButton.loadTexture('startButton');
@@ -1414,8 +1406,7 @@ function game1() {
                         // if (activateFreeSpins)
                         // dataSpinRequest = { "info": [5, 2, 10, 10, 1, 3, 10, 5, 2, 2, 9, 6, 9, 3, 1], "allWin": 3, "betLine": "0.1", "linesInGame": "15", "winCellInfo": [false, false, 10, 10, false, false, false, false, false, 10, false, false, false, false, false], "wl": [], "status": true, "balance": 96.0, "rope": { "count": 12, "mul": 2, "allWin": 3 }, "winBonusSymbolsData": [3, 2], "freeSpinData": { "count": 10, "mul": 2, "allWin": 3 }, "check0FreeSpin": false, "info_for_api": ["Ring", "Silver", "Coin", "Coin", "Plane", "Dollar", "Dollar", "Ring", "Silver", "Coin", "Yacht", "Watch", "Yacht", "Dollar", "Plane"], "winLinesData": [] }
 
-
-                        if (dataSpinRequest.status !== 'false') {
+                        if (dataSpinRequest.status !== 'false' || (balance + allWin) > betline * lines) {
                             parseSpinAnswer(dataSpinRequest);
                         } else {
                             errorStatus = true;
@@ -2465,7 +2456,10 @@ function game1() {
                     url: getNeedUrlPath() + '/get-user-balance?userId=' + userId + '&gameId=' + gameId + '&token=' + token + '&platformId=' + platformId + '&session_uuid=' + sessionUuid,
                     dataType: 'html',
                     success: function(data) {
-                        console.log(data)
+                        if ((balance + allWin) > betline * lines) {
+                            spaceStatus = true;
+                        }
+
                         if (IsJsonString(data)) {
                             checkBalancedata = JSON.parse(data);
                             setTimeout(function() {
