@@ -154,7 +154,7 @@ class Builder {
      * Set any specific cURL option
      *
      * @param   string $key         The name of the cURL option
-     * @param   string $value       The value to which the option is to be set
+     * @param   mixed  $value       The value to which the option is to be set
      * @return Builder
      */
     public function withOption($key, $value)
@@ -233,8 +233,17 @@ class Builder {
      */
     public function withHeaders(array $headers)
     {
+        $data = array();
+        foreach( $headers as $key => $value ) {
+            if( !is_numeric($key) ) {
+                $value = $key .': '. $value;
+            }
+
+            $data[] = $value;
+        }
+
         $this->curlOptions[ 'HTTPHEADER' ] = array_merge(
-            $this->curlOptions[ 'HTTPHEADER' ], $headers
+            $this->curlOptions[ 'HTTPHEADER' ], $data
         );
 
         return $this;
@@ -480,6 +489,7 @@ class Builder {
         // Create the request with all specified options
         $this->curlObject = curl_init();
         $options = $this->forgeOptions();
+
         curl_setopt_array( $this->curlObject, $options );
 
         // Send the request
@@ -535,7 +545,28 @@ class Builder {
             }
         }, array_filter(array_map('trim', explode("\r\n", $headerString)))));
 
-        return array_collapse($headers);
+        $results = [];
+
+        foreach( $headers as $values ) {
+            if( !is_array($values) ) {
+                continue;
+            }
+
+            $key = array_keys($values)[ 0 ];
+            if( isset($results[ $key ]) ) {
+                $results[ $key ] = array_merge(
+                    (array) $results[ $key ],
+                    array( array_values($values)[ 0 ] )
+                );
+            } else {
+                $results = array_merge(
+                    $results,
+                    $values
+                );
+            }
+        }
+
+        return $results;
     }
 
     /**

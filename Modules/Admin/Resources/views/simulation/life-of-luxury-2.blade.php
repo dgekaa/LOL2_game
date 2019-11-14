@@ -199,4 +199,9 @@
             </div>
         </div>
     </div>
+        <script type="text/javascript">
+            document.body.querySelector('.btn').addEventListener('click', function () {
+                   this.innerHTML = 'in process...'
+            })
+        </script>
 @stop

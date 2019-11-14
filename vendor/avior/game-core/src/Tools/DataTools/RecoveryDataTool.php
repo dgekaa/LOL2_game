@@ -68,13 +68,11 @@ class RecoveryDataTool implements ITool
         foreach ($data as $key => $value) {
             // сохранение баланса полученного из БД
             if ($data instanceof BalanceData) {
-                if ($key !== 'balance') {
+                if ($key !== 'balance' ) {
                     $data->$key = $recoveryData->$key;
                 }
             } else {
-                if ($key !== 'table') {
-                    $data->$key = $recoveryData->$key;
-                }
+                $data->$key = $recoveryData->$key;
             }
         }
 
