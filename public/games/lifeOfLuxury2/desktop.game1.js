@@ -2678,7 +2678,7 @@ function game1() {
                                                     }
                                                     finishSpinSound.play();
                                                 }
-                                            }
+                                            };
                                         }
                                     }
                                 }
@@ -2690,7 +2690,7 @@ function game1() {
                         }
                     }
                 }
-            });
+            })
             $('canvas').mouseup(function(e) {
                 if (curGame === 2) {
                     if (balanceUpdateStatus2) {
@@ -2729,7 +2729,7 @@ function game1() {
             } else {
                 checkScore();
             }
-        };
+        }
     };
 
     game1.update = function() {
