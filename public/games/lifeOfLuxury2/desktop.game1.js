@@ -1389,15 +1389,14 @@ function game1() {
 
 
         function requestSpin(gamename, sessionUuid, betline, lines) {
-            getBalance();
             console.log(getNeedUrlPath() + `/api-v2/action?game_id=${gameId}&user_id=${userId}&mode=${demo}&action=spin&session_uuid=${sessionUuid}&token=${token}&linesInGame=${lines}&lineBet=${betline}&platform_id=${platformId}`);
             $.ajax({
                 type: "get",
                 url: getNeedUrlPath() + `/api-v2/action?game_id=${gameId}&user_id=${userId}&mode=${demo}&action=spin&session_uuid=${sessionUuid}&token=${token}&linesInGame=${lines}&lineBet=${betline}&platform_id=${platformId}`,
                 dataType: 'html',
                 success: function(data) {
-                    console.log(data);
                     console.log(JSON.parse(data));
+                    getBalance();
                     if (IsJsonString(data)) {
                         dataSpinRequest = JSON.parse(data);
                         //freespin
