@@ -32,7 +32,6 @@ var createdStarsStatus = true;
 var activateFreeSpins = true; //удалить на продакшене
 var createdStarsMiniStatus = true;
 var briMulti = [];
-
 var timerSpin = [];
 var squareArr = [
     [2, 5, 8, 11, 14],
@@ -637,7 +636,6 @@ function game1() {
                 autostart = false;
                 showButtons();
                 if (spinStatus === true) {
-                    console.log(1)
                     hideButtons();
                     showButtons([
                         [startButton, 'startButton']
@@ -645,18 +643,17 @@ function game1() {
                     startButton.loadTexture('stopButton');
                 }
             }
-        });
+        })
         startButton = game.add.sprite(650, 706, 'startButton');
         startButton.inputEnabled = true;
         startButton.input.useHandCursor = true;
         startButton.events.onInputDown.add(function() {
-            startButton.loadTexture('startButton_p');
+            // startButton.loadTexture('startButton_p');
             // btnSound.play();
         });
         startButton.events.onInputUp.add(function(click, pointer) {
             if (pointer.button !== 0 && pointer.button !== undefined)
                 return;
-
             if (spaceStatus) {
                 if (balanceUpdateStatus) {
                     startButton.loadTexture('startButton');
@@ -1398,15 +1395,16 @@ function game1() {
                 url: getNeedUrlPath() + `/api-v2/action?game_id=${gameId}&user_id=${userId}&mode=${demo}&action=spin&session_uuid=${sessionUuid}&token=${token}&linesInGame=${lines}&lineBet=${betline}&platform_id=${platformId}`,
                 dataType: 'html',
                 success: function(data) {
-                    console.log(data);
                     console.log(JSON.parse(data));
+                    getBalance();
                     if (IsJsonString(data)) {
                         dataSpinRequest = JSON.parse(data);
                         //freespin
                         // if (activateFreeSpins)
                         // dataSpinRequest = { "info": [5, 2, 10, 10, 1, 3, 10, 5, 2, 2, 9, 6, 9, 3, 1], "allWin": 3, "betLine": "0.1", "linesInGame": "15", "winCellInfo": [false, false, 10, 10, false, false, false, false, false, 10, false, false, false, false, false], "wl": [], "status": true, "balance": 96.0, "rope": { "count": 12, "mul": 2, "allWin": 3 }, "winBonusSymbolsData": [3, 2], "freeSpinData": { "count": 10, "mul": 2, "allWin": 3 }, "check0FreeSpin": false, "info_for_api": ["Ring", "Silver", "Coin", "Coin", "Plane", "Dollar", "Dollar", "Ring", "Silver", "Coin", "Yacht", "Watch", "Yacht", "Dollar", "Plane"], "winLinesData": [] }
 
-                        if (dataSpinRequest.status !== 'false' || (balance + allWin) > betline * lines) {
+
+                        if (dataSpinRequest.status !== 'false') {
                             parseSpinAnswer(dataSpinRequest);
                         } else {
                             errorStatus = true;
@@ -2147,7 +2145,6 @@ function game1() {
         }
 
         function updateBalance() {
-            balanceUpdateStatus = true;
             var x = 0;
             var interval;
             if (autostart == false) {
@@ -2220,6 +2217,7 @@ function game1() {
             winSound.play();
             allwinUpd = +allWin;
             spinStatus = false;
+            balanceUpdateStatus = true;
             if (afterFreespinStatus) {
                 x = allWinOld;
             }
@@ -2456,10 +2454,7 @@ function game1() {
                     url: getNeedUrlPath() + '/get-user-balance?userId=' + userId + '&gameId=' + gameId + '&token=' + token + '&platformId=' + platformId + '&session_uuid=' + sessionUuid,
                     dataType: 'html',
                     success: function(data) {
-                        if ((balance + allWin) > betline * lines) {
-                            spaceStatus = true;
-                        }
-
+                        console.log(data)
                         if (IsJsonString(data)) {
                             checkBalancedata = JSON.parse(data);
                             setTimeout(function() {
@@ -2737,8 +2732,7 @@ function game1() {
         };
 
         if (demo === 'demo') {
-            var watermark = game.add.sprite(0, 0, 'watermark');
-            watermark.alpha = 0.2;
+            game.add.sprite(0, 0, 'watermark');
         }
     };
 
@@ -2750,6 +2744,7 @@ function game1() {
             game1.bars[1].tilePosition.y += 40;
         }
         if (game1.spinStatus3) {
+
             game1.bars[2].tilePosition.y += 40;
         }
         if (game1.spinStatus4) {
