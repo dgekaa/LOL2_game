@@ -9,7 +9,7 @@ use App\Classes\Bridge777Games\BridgeService;
 use App\Classes\Bridge777Games\BridgeApi;
 use Webpatser\Uuid\Uuid;
 use Ixudra\Curl\Facades\Curl;
-use App\Models\V2RecoveryData;
+use App\Models\V2Balance;
 use App\Models\V2Session;
 
 class BridgeController extends Controller
@@ -104,17 +104,9 @@ class BridgeController extends Controller
 
     	$data = json_decode($responseGetBalance);
 
-        try {
-            $session = V2Session::where('session_uuid', $sessionUuid)->first();
-            $recoveryData = V2RecoveryData::where('session_id', $session->id)->orderBy('id', 'desc')->first();
-            $gameData = json_decode($recoveryData->recovery_data);
-            $gameData->balanceData->balance = $data->balance;
-            $recoveryData->recovery_data = json_encode($gameData);
-            $recoveryData->save();
-        } catch (\Exception $e) {
-            return ['status' => 'false', 'error' => 'responseGetBalance'];
-        }
-
+	$balanceData = V2Balance::where('user_id', $userId)->where('mode', 'full')->first();
+	$balanceData->value = $data->balance * 10000 / 100;
+	$balanceData->save();
 
     	return ['status' => 'true', 'balance' => $data->balance * 10000 / 100];
     }
