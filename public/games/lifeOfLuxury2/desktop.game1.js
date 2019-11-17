@@ -2706,8 +2706,6 @@ function game1() {
                 btn_yes.inputEnabled = true;
                 btn_yes.input.useHandCursor = true;
                 btn_yes.events.onInputUp.add(function(click, pointer) {
-                    if (pointer.button !== 0 && pointer.button !== undefined)
-                        return;
                     game.sound.mute = false;
                     black_bg2.visible = false;
                     btn_yes.visible = false;
@@ -2718,8 +2716,6 @@ function game1() {
                 btn_no.inputEnabled = true;
                 btn_no.input.useHandCursor = true;
                 btn_no.events.onInputUp.add(function(click, pointer) {
-                    if (pointer.button !== 0 && pointer.button !== undefined)
-                        return;
                     game.sound.mute = true;
                     black_bg2.visible = false;
                     btn_yes.visible = false;
@@ -2732,7 +2728,8 @@ function game1() {
         };
 
         if (demo === 'demo') {
-            game.add.sprite(0, 0, 'watermark');
+            var watermark = game.add.sprite(0, 0, 'watermark');
+            watermark.alpha = 0.2;
         }
     };
 
