@@ -644,7 +644,6 @@ function game1() {
                 }
             }
         });
-
         startButton = game.add.sprite(650, 706, 'startButton');
         startButton.inputEnabled = true;
         startButton.input.useHandCursor = true;
@@ -905,7 +904,7 @@ function game1() {
                 if (number == 4) {
                     game1.spinStatus5 = true;
                     timeSpin = true;
-                    // requestSpin(gamename, sessionUuid, betline, lines);
+                    requestSpin(gamename, sessionUuid, betline, lines);
                     changeTextCur = changeTextCur + 1;
                     if (changeTextCur === changeTextValue) {
                         topLabel.loadTexture('top_label_' + topLabelValue);
@@ -1482,7 +1481,7 @@ function game1() {
                         } else {
                             errorStatus = false;
                             establishing_bg.visible = false;
-                            // requestSpin(gamename, sessionUuid, betline, lines)
+                            requestSpin(gamename, sessionUuid, betline, lines)
                         }
                     } else {
                         console.log('json format error');
@@ -1530,7 +1529,7 @@ function game1() {
                         } else {
                             errorStatus = false;
                             establishing_bg.visible = false;
-                            // requestSpin(gamename, sessionUuid, betline, lines)
+                            requestSpin(gamename, sessionUuid, betline, lines)
                         }
                     } else {
                         console.log('json format error');
@@ -1554,7 +1553,7 @@ function game1() {
                 dataType: 'html',
                 success: function(data) {
                     console.log('reconect : true');
-                    // requestSpin(gamename, sessionUuid, betline, lines);
+                    requestSpin(gamename, sessionUuid, betline, lines);
                 },
                 error: function(xhr, ajaxOptions, thrownError) {
                     var errorText = '//ошибка переподкючения';
