@@ -34,7 +34,7 @@
             gamename = gamename.substring(0, gamename.indexOf('/?'));
             //part2Url = location.href.substring(location.href.indexOf('?'));
             part2Url = '';
-            needUrlPath = 'http://ezsl.tk/games/lifeOfLuxury';
+            needUrlPath = 'http://ezsl.tk/games/lifeOfLuxury2';
         }
         if (location.href.indexOf('playgames.devbet.live') !== -1) {
             var gamename = location.href.substring(location.href.indexOf('/games/') + 7);
