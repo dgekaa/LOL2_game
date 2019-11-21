@@ -1397,6 +1397,7 @@ function game1() {
                 url: getNeedUrlPath() + `/api-v2/action?game_id=${gameId}&user_id=${userId}&mode=${demo}&action=spin&session_uuid=${sessionUuid}&token=${token}&linesInGame=${lines}&lineBet=${betline}&platform_id=${platformId}`,
                 dataType: 'html',
                 success: function(data) {
+                    console.log(data)
                     if (demo !== 'demo') {
                         getBalance();
                         console.log('getBalance')
