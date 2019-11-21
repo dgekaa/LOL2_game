@@ -1454,6 +1454,7 @@ function game1() {
             });
         }
 
+
         function moveFundsExceptionFunc(gamename, sessionName, betline, lines, moveFundsExceptionID) {
             $.ajax({
                 type: "get",

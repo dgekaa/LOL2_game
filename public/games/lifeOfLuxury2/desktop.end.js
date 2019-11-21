@@ -34,7 +34,13 @@
             gamename = gamename.substring(0, gamename.indexOf('/?'));
             //part2Url = location.href.substring(location.href.indexOf('?'));
             part2Url = '';
-            needUrlPath = 'http://ezsl.tk/games/lifeOfLuxury2';
+            needUrlPath = 'http://ezsl.tk/games/lifeOfLuxury';
+        }
+        if (location.href.indexOf('playgames.devbet.live') !== -1) {
+            var gamename = location.href.substring(location.href.indexOf('/games/') + 7);
+            gamename = gamename.substring(0, gamename.indexOf('/?'));
+            part2Url = '';
+            needUrlPath = 'https://playgames.devbet.live/games/' + gamename;
         }
         if (location.href.indexOf('game.play777games.com') !== -1) {
             var gamename = location.href.substring(location.href.indexOf('/games/') + 7);
@@ -42,7 +48,6 @@
             var part2Url = location.href.substring(location.href.indexOf('?'));
             needUrlPath = 'https://game.play777games.com/games/' + gamename;
         }
-        console.log(needUrlPath)
         path = needUrlPath;
         if (game.sound.usingWebAudio &&
             game.sound.context.state === 'suspended') {

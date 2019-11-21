@@ -1059,7 +1059,7 @@ urlPath2.forEach(function(item) {
 
 function requestInit() {
     var sessionID = location.href.substring(location.href.indexOf('/?') + 12);
-    if (location.href.indexOf('game.play777games.com') !== -1) {
+    if (location.href.indexOf('game.play777games.com') !== -1 || location.href.indexOf('playgames.devbet.live') !== -1) {
         sessionID = location.href.substring(location.href.indexOf('/?') + 12);
         sessionID = sessionID.substring(0, sessionID.indexOf('&demo'));
     }
