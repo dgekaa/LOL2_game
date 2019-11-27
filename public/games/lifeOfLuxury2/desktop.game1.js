@@ -2504,6 +2504,7 @@ function game1() {
             if ((balance + allWinOld) >= betline * lines) {
                 bottomText.setText('');
                 bottomText.visible = true;
+                spaceStatus = true;
             }
 
             if ((balance + allWin) > 0) {
