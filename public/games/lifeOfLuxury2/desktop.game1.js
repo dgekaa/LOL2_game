@@ -2602,113 +2602,113 @@ function game1() {
                 }, 50);
             }, 50);
         }
-        if (firstStartGame) {
-            checkBalance();
-            firstStartGame = false;
-            document.body.addEventListener("keyup", function(event) {
-                if (event.keyCode == 32) {
-                    if (!errorStatus) {
-                        if (curGame === 1) {
-                            if (spaceStatus) {
-                                if (spinStatus === false) {
-                                    if (paytableStatus === false) {
-                                        if (autostart === false) {
-                                            if ((balance + allWinOld) >= betline * lines) {
-                                                if (balanceUpdateStatus) {
-                                                    stopUpdateBalance();
-                                                } else {
-                                                    spinStatus = true;
-                                                    preStartSpin();
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            } else {
+        window.addEventListener("keyup", function(event) {
+            if (event.keyCode === 32) {
+                if (!errorStatus) {
+                    if (curGame === 1) {
+                        if (spaceStatus) {
+                            if (spinStatus === false) {
                                 if (paytableStatus === false) {
                                     if (autostart === false) {
-                                        if (timeSpin) {
-                                            if (dataSpinRequest['status'] !== 'false') {
-                                                if (parseAnswerStatus) {
-                                                    startButton.loadTexture('startButton');
-                                                    hideButtons([
-                                                        [startButton, 'startButton']
-                                                    ]);
-                                                    timerSpin.forEach(function(item, i) {
-                                                        clearTimeout(timerSpin[i])
-                                                    });
-                                                    spinSound.stop();
-                                                    timeSpin = false;
-                                                    game1.bars[0].visible = false;
-                                                    game1.cell[1 + 3 * 0].visible = true;
-                                                    game1.cell[2 + 3 * 0].visible = true;
-                                                    game1.cell[3 + 3 * 0].visible = true;
-                                                    game1.bars[1].visible = false;
-                                                    game1.cell[1 + 3 * 1].visible = true;
-                                                    game1.cell[2 + 3 * 1].visible = true;
-                                                    game1.cell[3 + 3 * 1].visible = true;
-                                                    game1.bars[2].visible = false;
-                                                    game1.cell[1 + 3 * 2].visible = true;
-                                                    game1.cell[2 + 3 * 2].visible = true;
-                                                    game1.cell[3 + 3 * 2].visible = true;
-                                                    game1.bars[3].visible = false;
-                                                    game1.cell[1 + 3 * 3].visible = true;
-                                                    game1.cell[2 + 3 * 3].visible = true;
-                                                    game1.cell[3 + 3 * 3].visible = true;
-                                                    game1.bars[4].visible = false;
-                                                    game1.cell[1 + 3 * 4].visible = true;
-                                                    game1.cell[2 + 3 * 4].visible = true;
-                                                    game1.cell[3 + 3 * 4].visible = true;
-                                                    game1.cell[1].loadTexture('cell' + info[0]);
-                                                    game1.cell[2].loadTexture('cell' + info[1]);
-                                                    game1.cell[3].loadTexture('cell' + info[2]);
-                                                    game1.cell[4].loadTexture('cell' + info[3]);
-                                                    game1.cell[5].loadTexture('cell' + info[4]);
-                                                    game1.cell[6].loadTexture('cell' + info[5]);
-                                                    game1.cell[7].loadTexture('cell' + info[6]);
-                                                    game1.cell[8].loadTexture('cell' + info[7]);
-                                                    game1.cell[9].loadTexture('cell' + info[8]);
-                                                    game1.cell[10].loadTexture('cell' + info[9]);
-                                                    game1.cell[11].loadTexture('cell' + info[10]);
-                                                    game1.cell[12].loadTexture('cell' + info[11]);
-                                                    game1.cell[13].loadTexture('cell' + info[12]);
-                                                    game1.cell[14].loadTexture('cell' + info[13]);
-                                                    game1.cell[15].loadTexture('cell' + info[14]);
-                                                    if (game1.spinStatus1 === true) {
-                                                        game1.spinStatus1 = false;
-                                                        endspin(0);
-                                                    }
-                                                    if (game1.spinStatus2 === true) {
-                                                        game1.spinStatus2 = false;
-                                                        endspin(1);
-                                                    }
-                                                    if (game1.spinStatus3 === true) {
-                                                        game1.spinStatus3 = false;
-                                                        endspin(2);
-                                                    }
-                                                    if (game1.spinStatus4 === true) {
-                                                        game1.spinStatus4 = false;
-                                                        endspin(3);
-                                                    }
-                                                    if (game1.spinStatus5 === true) {
-                                                        game1.spinStatus5 = false;
-                                                        endspin(4);
-                                                    }
-                                                    finishSpinSound.play();
-                                                }
+                                        if ((balance + allWinOld) >= betline * lines) {
+                                            if (balanceUpdateStatus) {
+                                                stopUpdateBalance();
+                                            } else {
+                                                spinStatus = true;
+                                                preStartSpin();
                                             }
                                         }
                                     }
                                 }
                             }
-                        } else if (curGame === 2) {
-                            if (balanceUpdateStatus2) {
-                                balanceUpdateStatus2 = false;
+                        } else {
+                            if (paytableStatus === false) {
+                                if (autostart === false) {
+                                    if (timeSpin) {
+                                        if (dataSpinRequest['status'] !== 'false') {
+                                            if (parseAnswerStatus) {
+                                                startButton.loadTexture('startButton');
+                                                hideButtons([
+                                                    [startButton, 'startButton']
+                                                ]);
+                                                timerSpin.forEach(function(item, i) {
+                                                    clearTimeout(timerSpin[i])
+                                                });
+                                                spinSound.stop();
+                                                timeSpin = false;
+                                                game1.bars[0].visible = false;
+                                                game1.cell[1 + 3 * 0].visible = true;
+                                                game1.cell[2 + 3 * 0].visible = true;
+                                                game1.cell[3 + 3 * 0].visible = true;
+                                                game1.bars[1].visible = false;
+                                                game1.cell[1 + 3 * 1].visible = true;
+                                                game1.cell[2 + 3 * 1].visible = true;
+                                                game1.cell[3 + 3 * 1].visible = true;
+                                                game1.bars[2].visible = false;
+                                                game1.cell[1 + 3 * 2].visible = true;
+                                                game1.cell[2 + 3 * 2].visible = true;
+                                                game1.cell[3 + 3 * 2].visible = true;
+                                                game1.bars[3].visible = false;
+                                                game1.cell[1 + 3 * 3].visible = true;
+                                                game1.cell[2 + 3 * 3].visible = true;
+                                                game1.cell[3 + 3 * 3].visible = true;
+                                                game1.bars[4].visible = false;
+                                                game1.cell[1 + 3 * 4].visible = true;
+                                                game1.cell[2 + 3 * 4].visible = true;
+                                                game1.cell[3 + 3 * 4].visible = true;
+                                                game1.cell[1].loadTexture('cell' + info[0]);
+                                                game1.cell[2].loadTexture('cell' + info[1]);
+                                                game1.cell[3].loadTexture('cell' + info[2]);
+                                                game1.cell[4].loadTexture('cell' + info[3]);
+                                                game1.cell[5].loadTexture('cell' + info[4]);
+                                                game1.cell[6].loadTexture('cell' + info[5]);
+                                                game1.cell[7].loadTexture('cell' + info[6]);
+                                                game1.cell[8].loadTexture('cell' + info[7]);
+                                                game1.cell[9].loadTexture('cell' + info[8]);
+                                                game1.cell[10].loadTexture('cell' + info[9]);
+                                                game1.cell[11].loadTexture('cell' + info[10]);
+                                                game1.cell[12].loadTexture('cell' + info[11]);
+                                                game1.cell[13].loadTexture('cell' + info[12]);
+                                                game1.cell[14].loadTexture('cell' + info[13]);
+                                                game1.cell[15].loadTexture('cell' + info[14]);
+                                                if (game1.spinStatus1 === true) {
+                                                    game1.spinStatus1 = false;
+                                                    endspin(0);
+                                                }
+                                                if (game1.spinStatus2 === true) {
+                                                    game1.spinStatus2 = false;
+                                                    endspin(1);
+                                                }
+                                                if (game1.spinStatus3 === true) {
+                                                    game1.spinStatus3 = false;
+                                                    endspin(2);
+                                                }
+                                                if (game1.spinStatus4 === true) {
+                                                    game1.spinStatus4 = false;
+                                                    endspin(3);
+                                                }
+                                                if (game1.spinStatus5 === true) {
+                                                    game1.spinStatus5 = false;
+                                                    endspin(4);
+                                                }
+                                                finishSpinSound.play();
+                                            }
+                                        }
+                                    }
+                                }
                             }
+                        }
+                    } else if (curGame === 2) {
+                        if (balanceUpdateStatus2) {
+                            balanceUpdateStatus2 = false;
                         }
                     }
                 }
-            });
+            }
+        });
+        if (firstStartGame) {
+            checkBalance();
+            firstStartGame = false;
             $('canvas').mouseup(function(e) {
                 if (curGame === 2) {
                     if (balanceUpdateStatus2) {
