@@ -2605,7 +2605,7 @@ function game1() {
         if (firstStartGame) {
             checkBalance();
             firstStartGame = false;
-            addEventListener("keyup", function(event) {
+            document.body.addEventListener("keyup", function(event) {
                 if (event.keyCode == 32) {
                     if (!errorStatus) {
                         if (curGame === 1) {
