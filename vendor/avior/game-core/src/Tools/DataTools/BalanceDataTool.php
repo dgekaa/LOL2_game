@@ -25,6 +25,10 @@ class BalanceDataTool implements ITool
         ->where('mode', $mode)
         ->first();
 
+        if ($mode === 'demo') {
+            return 10000;
+        }
+
         return $balance->value;
     }
 
