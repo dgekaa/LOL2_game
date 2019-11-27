@@ -2504,7 +2504,6 @@ function game1() {
             if ((balance + allWinOld) >= betline * lines) {
                 bottomText.setText('');
                 bottomText.visible = true;
-                spaceStatus = true;
             }
 
             if ((balance + allWin) > 0) {
@@ -2607,14 +2606,10 @@ function game1() {
             checkBalance();
             firstStartGame = false;
             window.addEventListener("keyup", function(event) {
-                console.log('step 1')
                 if (event.keyCode === 32) {
-                    console.log('step 2')
                     if (!errorStatus) {
-                        console.log('step 3')
                         if (curGame === 1) {
-                            console.log('step 4')
-                            if (spaceStatus) {
+                            if (startButton.visible) {
                                 console.log('step 5')
                                 if (spinStatus === false) {
                                     console.log('step 6')
