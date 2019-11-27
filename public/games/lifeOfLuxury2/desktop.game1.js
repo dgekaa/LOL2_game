@@ -2495,6 +2495,12 @@ function game1() {
         function changeBalance() {
             credit.setText(balance);
             checkScore();
+
+            if ((balance + allWinOld) >= betline * lines) {
+                bottomText.setText('');
+                bottomText.visible = true;
+            }
+
             if ((balance + allWin) > 0) {
                 checkBalance();
             }
