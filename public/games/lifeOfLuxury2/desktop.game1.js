@@ -2606,10 +2606,6 @@ function game1() {
             checkBalance();
             firstStartGame = false;
             window.addEventListener("keyup", function(event) {
-                if ((balance + allWinOld) < betline * lines) {
-                    return
-                };
-
                 if (event.keyCode === 32) {
                     if (!errorStatus) {
                         if (curGame === 1) {
@@ -2772,6 +2768,8 @@ function game1() {
         if (game1.spinStatus5) {
             game1.bars[4].tilePosition.y += 40;
         };
+
+        console.log(document.activeElement)
         game1.ticker.tilePosition.x += 0.5;
     };
 
