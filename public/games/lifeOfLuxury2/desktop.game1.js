@@ -2769,7 +2769,6 @@ function game1() {
             game1.bars[4].tilePosition.y += 40;
         };
 
-        console.log(document.activeElement)
         game1.ticker.tilePosition.x += 0.5;
     };
 
