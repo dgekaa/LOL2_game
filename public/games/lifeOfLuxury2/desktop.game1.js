@@ -2603,9 +2603,10 @@ function game1() {
             }, 50);
         }
         if (firstStartGame) {
+            document.body.querySelector('canvas').setAttribute('tabindex', '1');
             checkBalance();
             firstStartGame = false;
-            window.addEventListener("keyup", function(event) {
+            document.body.querySelector('canvas').addEventListener("keyup", function(event) {
                 if (event.keyCode === 32) {
                     if (!errorStatus) {
                         if (curGame === 1) {
@@ -2770,6 +2771,7 @@ function game1() {
         };
 
         game1.ticker.tilePosition.x += 0.5;
+        document.body.querySelector('canvas').focus();
     };
 
     game.state.add('game1', game1);
