@@ -1922,6 +1922,11 @@ function game1() {
             checkScore();
             linesText.setText(lines)
             totalBet.setText(bet)
+
+            if ((balance + allWinOld) <= betline * lines) {
+                bottomText.setText("To play please add credit to game.");
+                bottomText.visible = true;
+            }
         }
 
         function upLinesBet() {
