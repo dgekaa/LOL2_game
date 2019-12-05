@@ -1923,7 +1923,7 @@ function game1() {
             linesText.setText(lines)
             totalBet.setText(bet)
 
-            if ((balance + allWinOld) <= betline * lines) {
+            if ((balance + allWinOld) < betline * lines) {
                 bottomText.setText("To play please add credit to game.");
                 bottomText.visible = true;
             }
@@ -1950,7 +1950,7 @@ function game1() {
             lineBetText.setText(betline)
             totalBet.setText(bet)
 
-            if ((balance + allWinOld) <= betline * lines) {
+            if ((balance + allWinOld) < betline * lines) {
                 bottomText.setText("To play please add credit to game.");
                 bottomText.visible = true;
             }
