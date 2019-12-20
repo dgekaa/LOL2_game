@@ -2660,12 +2660,12 @@ function game1() {
                     if (!errorStatus) {
                         if (curGame === 1) {
                             if (startButton.visible) {
+                                if (isSpinStart) allowSpin = false;
+
                                 if (spinStatus === false) {
                                     if (paytableStatus === false) {
                                         if (autostart === false) {
                                             if ((balance + allWinOld) >= betline * lines) {
-                                                if (isSpinStart) allowSpin = false
-
                                                 if (balanceUpdateStatus) {
                                                     stopUpdateBalance();
                                                 } else {
