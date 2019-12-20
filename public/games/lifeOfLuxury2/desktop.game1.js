@@ -37,6 +37,7 @@ var timerSpin = [];
 var isGetResponse = false;
 var globalMiddleSpin;
 var doItOnce = true;
+var isSpinStart = false;
 var squareArr = [
     [2, 5, 8, 11, 14],
     [1, 4, 7, 10, 13],
@@ -666,7 +667,7 @@ function game1() {
                 return;
             if (maxBetSpin.visible) spaceStatus = true;
 
-            if (doItOnce) allowSpin = false
+            if (isSpinStart) allowSpin = false
 
             if (spaceStatus && allowSpin) {
                 if (balanceUpdateStatus) {
@@ -1182,6 +1183,8 @@ function game1() {
                     if (!allowSpin) forcedStop.play();
                     allowSpin = true;
                     isGetResponse = false;
+                    doItOnce = false;
+                    isSpinStart = false;
                 }
             });
         }
@@ -2578,6 +2581,7 @@ function game1() {
         }
 
         function preStartSpin() {
+            isSpinStart = true;
             doItOnce = true;
             parseAnswerStatus = false;
             dataSpinRequest['status'] = false;
