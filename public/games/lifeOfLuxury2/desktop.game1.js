@@ -34,6 +34,7 @@ var createdStarsMiniStatus = true;
 var allowSpin = true;
 var briMulti = [];
 var timerSpin = [];
+var isGetResponse = false;
 var squareArr = [
     [2, 5, 8, 11, 14],
     [1, 4, 7, 10, 13],
@@ -662,7 +663,7 @@ function game1() {
                 return;
             if (maxBetSpin.visible) spaceStatus = true;
 
-            if (!allowSpin) {
+            if (!allowSpin && isGetResponse) {
                 timerSpin.forEach(function (i) {
                     clearTimeout(i)
                 });
@@ -886,7 +887,7 @@ function game1() {
             coinCount = 0;
             info = dataArray.logicData.table;
             parseAnswerStatus = true;
-            allowSpin = false;
+            isGetResponse = true;
             middlespin(0, 700);
             middlespin(1, 1050);
             middlespin(2, 1400);
@@ -1183,6 +1184,7 @@ function game1() {
                     game1.bars[3].visible = false;
                     game1.bars[4].visible = false;
                     allowSpin = true;
+                    isGetResponse = false;
                 }
             });
         }
@@ -1435,6 +1437,7 @@ function game1() {
 
 
                         if (dataSpinRequest.status !== 'false') {
+                            isGetResponse = true;
                             parseSpinAnswer(dataSpinRequest);
                         } else {
                             errorStatus = true;
@@ -1465,6 +1468,7 @@ function game1() {
                         console.log('json format error');
                         error_bg.visible = true;
                         errorStatus = true;
+                        isGetResponse = false;
                     }
                 },
                 error: function (xhr, ajaxOptions, thrownError) {
@@ -2623,6 +2627,7 @@ function game1() {
                 showMobileBtn();
             }
             hideSquare();
+            allowSpin = false;
             // bg2_panels.loadTexture('game.background');
             // slotLayer2Group.add(topLabel);
             setTimeout(function () {
