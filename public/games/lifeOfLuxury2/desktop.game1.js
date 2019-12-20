@@ -666,7 +666,7 @@ function game1() {
                 return;
             if (maxBetSpin.visible) spaceStatus = true;
 
-            if (!parseAnswerStatus) allowSpin = false
+            if (doItOnce) allowSpin = false
 
             if (spaceStatus && allowSpin) {
                 if (balanceUpdateStatus) {
