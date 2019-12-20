@@ -35,6 +35,8 @@ var allowSpin = true;
 var briMulti = [];
 var timerSpin = [];
 var isGetResponse = false;
+var globalMiddleSpin;
+var doItOnce = true;
 var squareArr = [
     [2, 5, 8, 11, 14],
     [1, 4, 7, 10, 13],
@@ -663,18 +665,6 @@ function game1() {
                 return;
             if (maxBetSpin.visible) spaceStatus = true;
 
-            if (!allowSpin && isGetResponse) {
-                timerSpin.forEach(function (i) {
-                    clearTimeout(i)
-                });
-
-                middlespin(0, 0);
-                middlespin(1, 0);
-                middlespin(2, 0);
-                middlespin(3, 0);
-                middlespin(4, 0);
-            }
-
             if (spaceStatus && allowSpin) {
                 if (balanceUpdateStatus) {
                     startButton.loadTexture('startButton');
@@ -1156,6 +1146,8 @@ function game1() {
                 }, time);
             }
         }
+
+        globalMiddleSpin = middlespin;
 
         function endspin(number) {
             if (number == 4) {
@@ -2583,6 +2575,7 @@ function game1() {
 
         function preStartSpin() {
             allowSpin = false;
+            doItOnce = true;
             parseAnswerStatus = false;
             dataSpinRequest['status'] = false;
             allWinOld = 0;
@@ -2660,17 +2653,7 @@ function game1() {
                     if (!errorStatus) {
                         if (curGame === 1) {
                             if (startButton.visible) {
-                                if (!allowSpin && isGetResponse) {
-                                    timerSpin.forEach(function (i) {
-                                        clearTimeout(i)
-                                    });
-
-                                    middlespin(0, 0);
-                                    middlespin(1, 0);
-                                    middlespin(2, 0);
-                                    middlespin(3, 0);
-                                    middlespin(4, 0);
-                                } else if (spinStatus === false) {
+                                if (spinStatus === false) {
                                     if (paytableStatus === false) {
                                         if (autostart === false) {
                                             if ((balance + allWinOld) >= betline * lines) {
@@ -2813,6 +2796,19 @@ function game1() {
     };
 
     game1.update = function () {
+        if (!allowSpin && isGetResponse && doItOnce) {
+            timerSpin.forEach(function (i) {
+                clearTimeout(i)
+            });
+
+            globalMiddleSpin(0, 0);
+            globalMiddleSpin(1, 0);
+            globalMiddleSpin(2, 0);
+            globalMiddleSpin(3, 0);
+            globalMiddleSpin(4, 0);
+            doItOnce = false;
+        }
+
         if (game1.spinStatus1) {
             game1.bars[0].tilePosition.y += 40;
         }
