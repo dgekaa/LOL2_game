@@ -159,6 +159,7 @@ function game1() {
         coinSound3 = game.add.audio('coin3');
         coinSound4 = game.add.audio('coin4');
         coinSound5 = game.add.audio('coin5');
+        forcedStop = game.add.audop('forcedStop');
         coins = game.add.audio('coins');
         for (var i = 1; i <= 20; ++i) {
             changeLine[i] = game.add.audio('changeLine' + i);
@@ -664,6 +665,8 @@ function game1() {
             if (pointer.button !== 0 && pointer.button !== undefined)
                 return;
             if (maxBetSpin.visible) spaceStatus = true;
+
+            if (!parseAnswerStatus) allowSpin = false
 
             if (spaceStatus && allowSpin) {
                 if (balanceUpdateStatus) {
@@ -1176,6 +1179,7 @@ function game1() {
                     game1.bars[3].visible = false;
                     game1.bars[4].visible = false;
                     spinSound.stop();
+                    if (!allowSpin) forcedStop.play();
                     allowSpin = true;
                     isGetResponse = false;
                 }
@@ -2574,7 +2578,6 @@ function game1() {
         }
 
         function preStartSpin() {
-            allowSpin = false;
             doItOnce = true;
             parseAnswerStatus = false;
             dataSpinRequest['status'] = false;

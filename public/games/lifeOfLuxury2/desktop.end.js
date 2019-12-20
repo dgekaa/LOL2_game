@@ -239,6 +239,7 @@
         for (let i = 1; i <= 9; ++i) {
             game.load.audio('spinSound' + i, needUrlPath + '/sounds/spinreels/' + i + '.mp3' + part2Url);
         }
+        game.load.audio('forcedStop', needUrlPath + '/sounds/forcedStop.mp3' + part2Url);
         game.load.audio('spinSound1f', needUrlPath + '/sounds/spinreels/1f.mp3' + part2Url);
         game.load.audio('spinSound2f', needUrlPath + '/sounds/spinreels/2f.mp3' + part2Url);
         game.load.spritesheet('bri_anim', '' + path + '/img/bri_anim.png' + part2Url, 158, 149, 13);
