@@ -159,7 +159,7 @@ function game1() {
         coinSound3 = game.add.audio('coin3');
         coinSound4 = game.add.audio('coin4');
         coinSound5 = game.add.audio('coin5');
-        forcedStop = game.add.audop('forcedStop');
+        forcedStop = game.add.audio('forcedStop');
         coins = game.add.audio('coins');
         for (var i = 1; i <= 20; ++i) {
             changeLine[i] = game.add.audio('changeLine' + i);
