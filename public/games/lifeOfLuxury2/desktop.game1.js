@@ -2664,6 +2664,8 @@ function game1() {
                                     if (paytableStatus === false) {
                                         if (autostart === false) {
                                             if ((balance + allWinOld) >= betline * lines) {
+                                                if (isSpinStart) allowSpin = false
+
                                                 if (balanceUpdateStatus) {
                                                     stopUpdateBalance();
                                                 } else {
