@@ -1183,6 +1183,7 @@ function game1() {
                     game1.bars[2].visible = false;
                     game1.bars[3].visible = false;
                     game1.bars[4].visible = false;
+                    spinSound.stop();
                     allowSpin = true;
                     isGetResponse = false;
                 }
@@ -2581,6 +2582,7 @@ function game1() {
         }
 
         function preStartSpin() {
+            allowSpin = false;
             parseAnswerStatus = false;
             dataSpinRequest['status'] = false;
             allWinOld = 0;
@@ -2627,7 +2629,6 @@ function game1() {
                 showMobileBtn();
             }
             hideSquare();
-            allowSpin = false;
             // bg2_panels.loadTexture('game.background');
             // slotLayer2Group.add(topLabel);
             setTimeout(function () {
@@ -2659,7 +2660,7 @@ function game1() {
                     if (!errorStatus) {
                         if (curGame === 1) {
                             if (startButton.visible) {
-                                if (!allowSpin) {
+                                if (!allowSpin && isGetResponse) {
                                     timerSpin.forEach(function (i) {
                                         clearTimeout(i)
                                     });
