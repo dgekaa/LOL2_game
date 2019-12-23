@@ -1,4 +1,4 @@
-var game = new Phaser.Game(1024, 800, Phaser.AUTO, '', 'ld29', null, false, false);
+var game = new Phaser.Game(624, 400, Phaser.AUTO, '', 'ld29', null, false, false);
 var game1;
 var startFunc;
 var stopUB;

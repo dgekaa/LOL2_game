@@ -3,13 +3,13 @@
 
     preload.preload = function() {
 
-        game.scale.fullScreenScaleMode = Phaser.ScaleManager.EXACT_FIT; //EXACT_FIT  SHOW_ALL
-
-        game.scale.scaleMode = Phaser.ScaleManager.EXACT_FIT;
-        game.scale.pageAlignVertically = true;
-        game.scale.scaleMode = 2;
-        game.scale.pageAlignHorizontally = true;
-        game.stage.disableVisibilityChange = true;
+        // game.scale.fullScreenScaleMode = Phaser.ScaleManager.EXACT_FIT; //EXACT_FIT  SHOW_ALL
+        //
+        // game.scale.scaleMode = Phaser.ScaleManager.EXACT_FIT;
+        // game.scale.pageAlignVertically = true;
+        // game.scale.scaleMode = 2;
+        // game.scale.pageAlignHorizontally = true;
+        // game.stage.disableVisibilityChange = true;
 
         var needUrlPath = '';
         if (location.href.indexOf('/games/') !== -1 && location.href.indexOf('public') !== -1) {
@@ -262,8 +262,8 @@
 
     preload.create = function() {
         game.sound.mute = false; //исправить на false в продакшене
-        game.scale.fullScreenScaleMode = Phaser.ScaleManager.EXACT_FIT;
-        game.scale.scaleMode = Phaser.ScaleManager.EXACT_FIT;
+        // game.scale.fullScreenScaleMode = Phaser.ScaleManager.EXACT_FIT;
+        // game.scale.scaleMode = Phaser.ScaleManager.EXACT_FIT;
         if (firstRequest) {
             game.scale.refresh();
             document.getElementById('preloader').style.display = 'none';
