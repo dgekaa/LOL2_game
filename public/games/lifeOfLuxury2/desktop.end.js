@@ -2,7 +2,7 @@
     var preload = {};
 
     preload.preload = function() {
-
+        console.log('d')
         game.scale.fullScreenScaleMode = Phaser.ScaleManager.SHOW_ALL; //EXACT_FIT  SHOW_ALL
 
         game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
