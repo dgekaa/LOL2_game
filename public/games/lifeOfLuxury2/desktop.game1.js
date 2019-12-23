@@ -509,8 +509,8 @@ function game1() {
         exit.inputEnabled = true;
         exit.input.useHandCursor = true;
         exit.events.onInputUp.add(function (click, pointer) {
-            if (pointer.button !== 0 && pointer.button !== undefined)
-                return;
+            // if (pointer.button !== 0 && pointer.button !== undefined)
+            //     return;
             return_to_gameSong.play();
             exit.loadTexture('exit');
             if (balanceUpdateStatus) {
@@ -544,8 +544,8 @@ function game1() {
         paytable.inputEnabled = true;
         paytable.input.useHandCursor = true;
         paytable.events.onInputUp.add(function (click, pointer) {
-            if (pointer.button !== 0 && pointer.button !== undefined)
-                return;
+            // if (pointer.button !== 0 && pointer.button !== undefined)
+            //     return;
             paytable.loadTexture('paytable');
             if (balanceUpdateStatus) {
                 stopUpdateBalance();
@@ -560,8 +560,8 @@ function game1() {
         help.inputEnabled = true;
         help.input.useHandCursor = true;
         help.events.onInputUp.add(function (click, pointer) {
-            if (pointer.button !== 0 && pointer.button !== undefined)
-                return;
+            // if (pointer.button !== 0 && pointer.button !== undefined)
+            //     return;
             help.loadTexture('help');
             if (balanceUpdateStatus) {
                 stopUpdateBalance();
@@ -580,8 +580,8 @@ function game1() {
             // selectLines.loadTexture('selectLines_p');
         });
         selectLines.events.onInputUp.add(function (click, pointer) {
-            if (pointer.button !== 0 && pointer.button !== undefined)
-                return;
+            // if (pointer.button !== 0 && pointer.button !== undefined)
+            //     return;
             selectLines.loadTexture('selectLines');
             if (balanceUpdateStatus) {
                 stopUpdateBalance();
@@ -596,8 +596,8 @@ function game1() {
             // betPerLine.loadTexture('betPerLine_p');
         });
         betPerLine.events.onInputUp.add(function (click, pointer) {
-            if (pointer.button !== 0 && pointer.button !== undefined)
-                return;
+            // if (pointer.button !== 0 && pointer.button !== undefined)
+            //     return;
             betPerLine.loadTexture('betPerLine');
             if (balanceUpdateStatus) {
                 stopUpdateBalance();
@@ -612,8 +612,8 @@ function game1() {
         autoPlay.events.onInputDown.add(function () {
         });
         autoPlay.events.onInputUp.add(function (click, pointer) {
-            if (pointer.button !== 0 && pointer.button !== undefined)
-                return;
+            // if (pointer.button !== 0 && pointer.button !== undefined)
+            //     return;
             if (autostart === false) {
                 if (balanceUpdateStatus) {
                     stopUpdateBalance();
@@ -663,8 +663,8 @@ function game1() {
             // btnSound.play();
         });
         startButton.events.onInputUp.add(function (click, pointer) {
-            if (pointer.button !== 0 && pointer.button !== undefined)
-                return;
+            // if (pointer.button !== 0 && pointer.button !== undefined)
+            //     return;
             if (maxBetSpin.visible) spaceStatus = true;
 
             if (isSpinStart) allowSpin = false
