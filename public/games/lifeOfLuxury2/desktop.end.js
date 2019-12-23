@@ -7,7 +7,7 @@
 
         game.scale.scaleMode = Phaser.ScaleManager.EXACT_FIT;
         game.scale.pageAlignVertically = true;
-        game.scale.scaleMode = 2;
+        game.scale.scaleMode = 11;
         game.scale.pageAlignHorizontally = true;
         game.stage.disableVisibilityChange = true;
 
