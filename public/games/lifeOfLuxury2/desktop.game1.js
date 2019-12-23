@@ -2842,6 +2842,8 @@ function game1() {
 
         document.body.querySelector('canvas').style.height = window.innerHeight + 'px'
         document.body.querySelector('canvas').style.width = window.innerWidth + 'px'
+        alert(window.innerHeight)
+        alert(window.innerWidth)
     };
 
     game.state.add('game1', game1);
