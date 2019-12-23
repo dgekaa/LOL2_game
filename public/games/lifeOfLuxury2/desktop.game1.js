@@ -2802,6 +2802,7 @@ function game1() {
             var watermark = game.add.sprite(0, 0, 'watermark');
             watermark.alpha = 0.2;
         }
+
     };
 
     game1.update = function () {
@@ -2838,8 +2839,9 @@ function game1() {
 
         game1.ticker.tilePosition.x += 0.5;
         document.body.querySelector('canvas').focus();
-        // document.body.querySelector('canvas').height = window.innerHeight
-        // document.body.querySelector('canvas').width = window.innerWidth
+
+        game.height = window.innerHeight
+        game.width = window.innerWidth
     };
 
     game.state.add('game1', game1);

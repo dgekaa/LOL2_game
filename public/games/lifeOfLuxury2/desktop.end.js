@@ -2,10 +2,10 @@
     var preload = {};
 
     preload.preload = function() {
-        console.log('d')
-        game.scale.fullScreenScaleMode = Phaser.ScaleManager.SHOW_ALL; //EXACT_FIT  SHOW_ALL
 
-        game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+        game.scale.fullScreenScaleMode = Phaser.ScaleManager.EXACT_FIT; //EXACT_FIT  SHOW_ALL
+
+        game.scale.scaleMode = Phaser.ScaleManager.EXACT_FIT;
         game.scale.pageAlignVertically = true;
         game.scale.scaleMode = 2;
         game.scale.pageAlignHorizontally = true;
