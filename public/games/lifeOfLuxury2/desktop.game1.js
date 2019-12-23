@@ -2841,5 +2841,4 @@ function game1() {
     };
 
     game.state.add('game1', game1);
-
 };

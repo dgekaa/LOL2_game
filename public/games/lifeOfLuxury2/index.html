@@ -24,11 +24,11 @@
     <script src="jquery-3.0.0.js"></script>
     <script src="offline.min.js"></script>
     <script src="jquery.touchhold.js"></script>
-    <script src="desktop.game1.js?v=1.28"></script>
-    <script src="desktop.game2.js?v=0.88"></script>
-    <script src="functions.js?v=1.58"></script>
+    <script src="desktop.game1.js?v=1.29"></script>
+    <script src="desktop.game2.js?v=0.89"></script>
+    <script src="functions.js?v=1.59"></script>
     <script src="desktop.begin.js"></script>
-    <script src="desktop.end.js?v=0.98"></script>
+    <script src="desktop.end.js?v=0.99"></script>
     <script src="../../js/autobahn.js"></script>
     <script>
         var iOS = !!navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform);
@@ -619,5 +619,19 @@
     });
 </script>
 <script src="../../js/menu.js"></script>
+<script>
+    window.addEventListener('resize', resizeCanvas, false);
+
+    function resizeCanvas() {
+        const canvas = document.querySelector('canvas');
+
+        if (canvas) {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+
+        console.log(document.querySelector('canvas'))
+    }
+</script>
 </body>
 </html>
