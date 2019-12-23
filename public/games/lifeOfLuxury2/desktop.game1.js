@@ -1,4 +1,4 @@
-var game = new Phaser.Game(624, 400, Phaser.AUTO, '', 'ld29', null, false, false);
+var game = new Phaser.Game(1024, 800, Phaser.AUTO, '', 'ld29', null, false, false);
 var game1;
 var startFunc;
 var stopUB;
@@ -38,6 +38,7 @@ var isGetResponse = false;
 var globalMiddleSpin;
 var doItOnce = true;
 var isSpinStart = false;
+var lola = false;
 var squareArr = [
     [2, 5, 8, 11, 14],
     [1, 4, 7, 10, 13],
@@ -2834,14 +2835,10 @@ function game1() {
         }
         if (game1.spinStatus5) {
             game1.bars[4].tilePosition.y += 40;
-        }
-        ;
+        };
 
         game1.ticker.tilePosition.x += 0.5;
         document.body.querySelector('canvas').focus();
-
-        game.height = window.innerHeight
-        game.width = window.innerWidth
     };
 
     game.state.add('game1', game1);
