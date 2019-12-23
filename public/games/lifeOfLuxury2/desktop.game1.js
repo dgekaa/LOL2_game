@@ -2838,6 +2838,8 @@ function game1() {
 
         game1.ticker.tilePosition.x += 0.5;
         document.body.querySelector('canvas').focus();
+        // document.body.querySelector('canvas').height = window.innerHeight
+        // document.body.querySelector('canvas').width = window.innerWidth
     };
 
     game.state.add('game1', game1);
