@@ -39,6 +39,13 @@ var globalMiddleSpin;
 var doItOnce = true;
 var isSpinStart = false;
 var lola = false;
+var isEnd = {
+    '0': false,
+    '1': false,
+    '2': false,
+    '3': false,
+    '4': false,
+};
 var squareArr = [
     [2, 5, 8, 11, 14],
     [1, 4, 7, 10, 13],
@@ -1155,39 +1162,43 @@ function game1() {
         globalMiddleSpin = middlespin;
 
         function endspin(number) {
-            if (number == 4) {
-                timeSpin = false;
-            }
-            game1.cell[1 + number * 3].position.y = 127 + 30;
-            game1.cell[2 + number * 3].position.y = 276 + 30;
-            game1.cell[3 + number * 3].position.y = 425 + 30;
-
-            game.add.tween(game1.cell[1 + number * 3]).to({y: game1.cell[1 + number * 3].position.y - 30}, 200, Phaser.Easing.LINEAR, true).onComplete.add(function () {
-            });
-            game.add.tween(game1.cell[2 + number * 3]).to({y: game1.cell[2 + number * 3].position.y - 30}, 200, Phaser.Easing.LINEAR, true).onComplete.add(function () {
-            });
-            game.add.tween(game1.cell[3 + number * 3]).to({y: game1.cell[3 + number * 3].position.y - 30}, 200, Phaser.Easing.LINEAR, true).onComplete.add(function () {
+            if (!isEnd[number + '']) {
                 if (number == 4) {
-                    // slotLayer3Group.add(topLabel);
-                    // bg2_panels.loadTexture('background2_panels');
-                    checkWin();
-                    for (var i = 1; i <= 15; ++i) {
-                        game1.cell[i].visible = true;
-                        game1.cell[i].loadTexture('cell' + info[i - 1]);
-                    }
-                    game1.bars[0].visible = false;
-                    game1.bars[1].visible = false;
-                    game1.bars[2].visible = false;
-                    game1.bars[3].visible = false;
-                    game1.bars[4].visible = false;
-                    spinSound.stop();
-                    if (!allowSpin) forcedStop.play();
-                    allowSpin = true;
-                    isGetResponse = false;
-                    doItOnce = false;
-                    isSpinStart = false;
+                    timeSpin = false;
                 }
-            });
+                game1.cell[1 + number * 3].position.y = 127 + 30;
+                game1.cell[2 + number * 3].position.y = 276 + 30;
+                game1.cell[3 + number * 3].position.y = 425 + 30;
+
+                game.add.tween(game1.cell[1 + number * 3]).to({y: game1.cell[1 + number * 3].position.y - 30}, 200, Phaser.Easing.LINEAR, true).onComplete.add(function () {
+                });
+                game.add.tween(game1.cell[2 + number * 3]).to({y: game1.cell[2 + number * 3].position.y - 30}, 200, Phaser.Easing.LINEAR, true).onComplete.add(function () {
+                });
+                game.add.tween(game1.cell[3 + number * 3]).to({y: game1.cell[3 + number * 3].position.y - 30}, 200, Phaser.Easing.LINEAR, true).onComplete.add(function () {
+                    if (number == 4) {
+                        // slotLayer3Group.add(topLabel);
+                        // bg2_panels.loadTexture('background2_panels');
+                        checkWin();
+                        for (var i = 1; i <= 15; ++i) {
+                            game1.cell[i].visible = true;
+                            game1.cell[i].loadTexture('cell' + info[i - 1]);
+                        }
+                        game1.bars[0].visible = false;
+                        game1.bars[1].visible = false;
+                        game1.bars[2].visible = false;
+                        game1.bars[3].visible = false;
+                        game1.bars[4].visible = false;
+                        spinSound.stop();
+                        if (!allowSpin) forcedStop.play();
+                        allowSpin = true;
+                        isGetResponse = false;
+                        doItOnce = false;
+                        isSpinStart = false;
+                    }
+                });
+
+                isEnd[number + ''] = true;
+            }
         }
 
         var wlWinValuesArray = [];
@@ -2582,6 +2593,11 @@ function game1() {
         }
 
         function preStartSpin() {
+            isEnd['0'] = false;
+            isEnd['1'] = false;
+            isEnd['2'] = false;
+            isEnd['3'] = false;
+            isEnd['4'] = false;
             isSpinStart = true;
             doItOnce = true;
             parseAnswerStatus = false;
