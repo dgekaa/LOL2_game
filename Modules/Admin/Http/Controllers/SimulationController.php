@@ -9,6 +9,8 @@ use Illuminate\View\View;
 use Modules\Admin\Repositories\GameReposiroty;
 use Modules\Admin\Services\SimulationService;
 
+set_time_limit(100000);
+
 /**
  * Контролер который занимается выводом страниц связанных с симуляцией игр
  * и запуском симуляции. Симуляция делается с целью получения статистики об
