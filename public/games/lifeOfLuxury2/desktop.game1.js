@@ -2548,8 +2548,11 @@ function game1() {
         }
 
         function getBalance() {
+<<<<<<< HEAD
             if (!window.navigator.onLine) return;
 
+=======
+>>>>>>> a43c1942c7988538819cc287c623f5e38a388730
             if (!getBalanceWait) {
                 getBalanceWait = true;
                 $.ajax({
