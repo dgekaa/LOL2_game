@@ -1058,6 +1058,8 @@ urlPath2.forEach(function(item) {
 });
 
 function requestInit() {
+    if (!window.navigator.onLine) return;
+
     var sessionID = location.href.substring(location.href.indexOf('/?') + 12);
     if (location.href.indexOf('game.play777games.com') !== -1 || location.href.indexOf('playgames.devbet.live') !== -1) {
         sessionID = location.href.substring(location.href.indexOf('/?') + 12);
@@ -1097,6 +1099,8 @@ function requestInit() {
 var collectValue;
 
 function exitGame(collect) {
+    if (!window.navigator.onLine) return;
+
     console.log(collect)
     if (collect) {
         collectValue = true;
@@ -1125,6 +1129,8 @@ function exitGame(collect) {
 }
 
 function resetSession() {
+    if (!window.navigator.onLine) return;
+
     $.ajax({
         type: "get",
         url: getNeedUrlPath() + `/reset-session`,

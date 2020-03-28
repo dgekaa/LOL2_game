@@ -244,26 +244,26 @@ function game2() {
             [15, 378]
         ];
         var textPos = [
-            [40, 353],
-            [40, 209],
-            [40, 496],
-            [40, 117],
-            [40, 591],
-            [40, 448],
-            [40, 255],
-            [40, 163],
-            [40, 543],
-            [993, 184],
-            [993, 521],
-            [993, 329],
-            [993, 377],
-            [993, 232],
-            [993, 473],
-            [993, 281],
-            [993, 425],
-            [993, 136],
-            [993, 569],
-            [40, 400]
+            [36, 353],
+            [36, 209],
+            [36, 496],
+            [36, 117],
+            [36, 591],
+            [36, 448],
+            [36, 255],
+            [36, 163],
+            [36, 543],
+            [989, 184],
+            [989, 521],
+            [989, 329],
+            [989, 377],
+            [989, 232],
+            [989, 473],
+            [989, 281],
+            [989, 425],
+            [989, 136],
+            [989, 569],
+            [36, 400]
         ];
         var squareArr = [
             [2, 5, 8, 11, 14],
@@ -527,59 +527,75 @@ function game2() {
 
         function requestSpin(gamename, sessionName, betline, lines) {
             console.log(getNeedUrlPath() + `/api-v2/action?game_id=${gameId}&user_id=${userId}&mode=${demo}&action=free_spin&session_uuid=${sessionUuid}&token=${token}&linesInGame=${lines}&lineBet=${betline}&platform_id=${platformId}`);
-            $.ajax({
-                type: "get",
-                url: getNeedUrlPath() + `/api-v2/action?game_id=${gameId}&user_id=${userId}&mode=${demo}&action=free_spin&session_uuid=${sessionUuid}&token=${token}&linesInGame=${lines}&lineBet=${betline}&platform_id=${platformId}`,
-                dataType: 'html',
-                success: function(data) {
-                    console.log(data);
-                    console.log(JSON.parse(data));
-                    if (IsJsonString(data)) {
-                        dataSpinRequest = JSON.parse(data);
-                        if (dataSpinRequest.status !== 'false') {
-                            parseSpinAnswer(dataSpinRequest);
-                        } else {
-                            errorStatus = true;
-                            switch (dataSpinRequest.message) {
-                                case 'FirstMoveFundsException':
-                                    error_bg.visible = true;
-                                    break;
-                                case 'BetPlacingAbortException':
-                                    establishing_bg.visible = true;
-                                    setTimeout("BetPlacingAbortExceptionFunc(gamename, sessionName, betline, lines, dataSpinRequest.betPlacingAbortExceptionID)", 3000);
-                                    break;
-                                case 'moveFundsException':
-                                    establishing_bg.visible = true;
-                                    setTimeout("moveFundsExceptionFunc(gamename, sessionName, betline, lines, dataSpinRequest.moveFundsExceptionID)", 3000);
-                                    break;
-                                case 'low balance':
-                                    error_bg.visible = true;
-                                    break;
-                                case 'UnauthenticatedException':
-                                    error_bg.visible = true;
-                                    break;
+
+            if (window.navigator.onLine) {
+                $.ajax({
+                    type: "get",
+                    url: getNeedUrlPath() + `/api-v2/action?game_id=${gameId}&user_id=${userId}&mode=${demo}&action=free_spin&session_uuid=${sessionUuid}&token=${token}&linesInGame=${lines}&lineBet=${betline}&platform_id=${platformId}`,
+                    dataType: 'html',
+                    success: function (data) {
+                        console.log(data);
+                        console.log(JSON.parse(data));
+                        if (IsJsonString(data)) {
+                            dataSpinRequest = JSON.parse(data);
+                            if (dataSpinRequest.status !== 'false') {
+                                parseSpinAnswer(dataSpinRequest);
+                            } else {
+                                errorStatus = true;
+                                switch (dataSpinRequest.message) {
+                                    case 'FirstMoveFundsException':
+                                        error_bg.visible = true;
+                                        break;
+                                    case 'BetPlacingAbortException':
+                                        establishing_bg.visible = true;
+                                        setTimeout("BetPlacingAbortExceptionFunc(gamename, sessionName, betline, lines, dataSpinRequest.betPlacingAbortExceptionID)", 3000);
+                                        break;
+                                    case 'moveFundsException':
+                                        establishing_bg.visible = true;
+                                        setTimeout("moveFundsExceptionFunc(gamename, sessionName, betline, lines, dataSpinRequest.moveFundsExceptionID)", 3000);
+                                        break;
+                                    case 'low balance':
+                                        error_bg.visible = true;
+                                        break;
+                                    case 'UnauthenticatedException':
+                                        error_bg.visible = true;
+                                        break;
+                                }
                             }
+                        } else {
+                            console.log('json format error');
+                            error_bg.visible = true;
+                            errorStatus = true;
                         }
-                    } else {
-                        console.log('json format error');
-                        error_bg.visible = true;
-                        errorStatus = true;
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        if (freeSpinCount !== 10) {
+                            var errorText = '//ошибка 30';
+                            console.log(errorText);
+                            reconnectSpin(gamename, sessionName, betline, lines);
+                            // setTimeout("requestSpin(gamename, sessionName, betline, lines)", 100);
+                        } else {
+                            requestSpin(gamename, sessionName, betline, lines);
+                        }
                     }
-                },
-                error: function(xhr, ajaxOptions, thrownError) {
-                    if (freeSpinCount !== 10) {
-                        var errorText = '//ошибка 30';
-                        console.log(errorText);
-                        reconnectSpin(gamename, sessionName, betline, lines);
-                        // setTimeout("requestSpin(gamename, sessionName, betline, lines)", 100);
-                    } else {
-                        requestSpin(gamename, sessionName, betline, lines);
-                    }
-                }
-            });
+                });
+            } else {
+                autoPlay.loadTexture('autoPlay');
+                $("#spin").removeClass('auto');
+                autostart = false;
+                showButtons();
+
+                middlespin(0);
+                middlespin(1);
+                middlespin(2);
+                middlespin(3);
+                middlespin(4);
+            }
         }
 
         function moveFundsExceptionFunc(gamename, sessionName, betline, lines, moveFundsExceptionID) {
+            if (!window.navigator.onLine) return;
+
             $.ajax({
                 type: "get",
                 url: getNeedUrlPath() + '/moveFundsException?moveFundsExceptionID=' + moveFundsExceptionID + '&platform_id=' + platformId,
@@ -628,6 +644,8 @@ function game2() {
         }
 
         function BetPlacingAbortExceptionFunc(gamename, sessionName, betline, lines, moveFundsExceptionID) {
+            if (!window.navigator.onLine) return;
+
             $.ajax({
                 type: "get",
                 url: getNeedUrlPath() + '/betPlacingAbort?betPlacingAbortExceptionID=' + moveFundsExceptionID + '&platform_id=' + platformId,
@@ -676,6 +694,8 @@ function game2() {
         }
 
         function reconnectSpin(gamename, sessionName, betline, lines) {
+            if (!window.navigator.onLine) return;
+
             $.ajax({
                 type: "get",
                 url: getNeedUrlPath() + '/reconnect',
