@@ -11,7 +11,7 @@ class StartFeatureGameObserver extends BaseObserver
     public function update(IEvent $event): IDataPool
     {
         if ($event->name === 'startFeatureGame') {
-<<<<<<< HEAD
+
             if ($event->dataPool->stateData->isWinOnMain === true) { // если выпала featureGame в основной игре
                 // изменение экрана
                 $event->dataPool->stateData->screen = 'featureGame';
@@ -35,7 +35,7 @@ class StartFeatureGameObserver extends BaseObserver
                 $longData->logicData = $event->dataPool->logicData;
                 $event->dataPool->longData->data = $longData;
             }
-=======
+
 
             // изменение экрана
             $event->dataPool->stateData->screen = 'featureGame';
@@ -66,7 +66,7 @@ class StartFeatureGameObserver extends BaseObserver
             $longData->logicData = new \stdClass;
             $longData->logicData = $event->dataPool->logicData;
             $event->dataPool->longData->data = $longData;
->>>>>>> a43c1942c7988538819cc287c623f5e38a388730
+
         }
 
         return $event->dataPool;
