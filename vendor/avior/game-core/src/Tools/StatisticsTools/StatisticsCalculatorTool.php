@@ -454,6 +454,10 @@ class StatisticsCalculatorTool implements ITool
         foreach ($table as $symbol) {
             if ($symbol === 0) {
                 $jockerCounter += 1;
+
+                if (empty($payoffsForBonus)) {
+                    $statisticOfWinBonusCombinations[0][$jockerCounter] += 1;
+                }
             }
         }
 

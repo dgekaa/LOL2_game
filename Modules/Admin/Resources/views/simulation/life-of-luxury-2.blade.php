@@ -190,6 +190,12 @@
                         2 coins + 1 diamonds: {{$data->userStatisticsData->statisticOfWinBonusCombinations[3][1]}}<br>
                         1 coins + 2 diamonds: {{$data->userStatisticsData->statisticOfWinBonusCombinations[3][2]}}<br>
                         <br>
+                        5 diamonds: {{ $data->userStatisticsData->statisticOfWinBonusCombinations[0][0] }}<br>
+                        0 coins + 1 diamonds: {{ $data->userStatisticsData->statisticOfWinBonusCombinations[0][1] }}<br>
+                        0 coins + 2 diamonds: {{ $data->userStatisticsData->statisticOfWinBonusCombinations[0][2] }}<br>
+                        0 coins + 3 diamonds: {{ $data->userStatisticsData->statisticOfWinBonusCombinations[0][3] }}<br>
+                        0 coins + 4 diamonds: {{ $data->userStatisticsData->statisticOfWinBonusCombinations[0][4] }}<br>
+                        <br>
                     @endif
 
                     Minimum number of diamonds from the freespins game @if (isset($data->userStatisticsData->minDroppendDiamandsInFeatureGame)) {{$data->userStatisticsData->minDroppendDiamandsInFeatureGame}} @else 0 @endif <br>
