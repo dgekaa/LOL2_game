@@ -685,8 +685,6 @@ function game2() {
         }
 
         function reconnectSpin(gamename, sessionName, betline, lines) {
-            if (!window.navigator.onLine) return;
-
             $.ajax({
                 type: "get",
                 url: getNeedUrlPath() + '/reconnect',
