@@ -1442,7 +1442,7 @@ function game1() {
         function requestSpin(gamename, sessionUuid, betline, lines) {
             console.log(getNeedUrlPath() + `/api-v2/action?game_id=${gameId}&user_id=${userId}&mode=${demo}&action=spin&session_uuid=${sessionUuid}&token=${token}&linesInGame=${lines}&lineBet=${betline}&platform_id=${platformId}`);
 
-            if (window.navigator.onLine) {
+            function sendMsg() {
                 $.ajax({
                     type: "get",
                     url: getNeedUrlPath() + `/api-v2/action?game_id=${gameId}&user_id=${userId}&mode=${demo}&action=spin&session_uuid=${sessionUuid}&token=${token}&linesInGame=${lines}&lineBet=${betline}&platform_id=${platformId}`,
@@ -1497,19 +1497,25 @@ function game1() {
                         }
                     },
                     error: function (xhr, ajaxOptions, thrownError) {
-                        var errorText = '//ошибка 30';
-                        console.log(errorText);
-                        error_bg.visible = true;
-                        errorStatus = true;
-                        // reconnectSpin(gamename, sessionName, betline, lines);
+                        // var errorText = '//ошибка 30';
+                        // console.log(errorText);
+                        // error_bg.visible = true;
+                        // errorStatus = true;
+                        sendMsg(gamename, sessionName, betline, lines);
                         // setTimeout("reconnectSpin(gamename, sessionName, betline, lines)", 100);
                     }
                 });
+            }
+
+            if (window.navigator.onLine) {
+                sendMsg(gamename, sessionName, betline, lines)
             } else {
-                autoPlay.loadTexture('autoPlay');
-                $("#spin").removeClass('auto');
-                autostart = false;
-                showButtons();
+                if (autostart) {
+                    autoPlay.loadTexture('autoPlay');
+                    $("#spin").removeClass('auto');
+                    autostart = false;
+                    showButtons();
+                }
 
                 middlespin(0, 700);
                 middlespin(1, 1050);
@@ -2884,7 +2890,8 @@ function game1() {
         }
         if (game1.spinStatus5) {
             game1.bars[4].tilePosition.y += 40;
-        };
+        }
+        ;
 
         game1.ticker.tilePosition.x += 0.5;
         document.body.querySelector('canvas').focus();

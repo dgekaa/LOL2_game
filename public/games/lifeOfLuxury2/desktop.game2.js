@@ -575,7 +575,7 @@ function game2() {
                     if (freeSpinCount !== 10) {
                         var errorText = '//ошибка 30';
                         console.log(errorText);
-                        reconnectSpin(gamename, sessionName, betline, lines);
+                        requestSpin(gamename, sessionName, betline, lines);
                         // setTimeout("requestSpin(gamename, sessionName, betline, lines)", 100);
                     } else {
                         requestSpin(gamename, sessionName, betline, lines);
