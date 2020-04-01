@@ -530,8 +530,6 @@ function game2() {
         var errorStatus = false;
 
         function requestSpin(gamename, sessionName, betline, lines) {
-            console.log(gameId, userId, demo, sessionUuid, token, lines, betline)
-
             $.ajax({
                 type: "get",
                 url: getNeedUrlPath() + `/api-v2/action?game_id=${gameId}&user_id=${userId}&mode=${demo}&action=free_spin&session_uuid=${sessionUuid}&token=${token}&linesInGame=${lines}&lineBet=${betline}&platform_id=${platformId}`,
@@ -565,11 +563,15 @@ function game2() {
                             }
                         }
                     } else {
-                        requestSpin(gamename, sessionName, betline, lines);
+                        console.log('json format error');
+                        error_bg.visible = true;
+                        errorStatus = true;
                     }
                 },
                 error: function (xhr, ajaxOptions, thrownError) {
-                    requestSpin(gamename, sessionName, betline, lines);
+                    setInterval(() => {
+                        if (window.navigator.onLine) requestSpin(gamename, sessionName, betline, lines);
+                    }, 1000);
                 }
             });
         }
