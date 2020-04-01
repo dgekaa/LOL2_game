@@ -569,8 +569,13 @@ function game2() {
                     }
                 },
                 error: function (xhr, ajaxOptions, thrownError) {
-                    setInterval(() => {
-                        if (window.navigator.onLine) requestSpin(gamename, sessionName, betline, lines);
+                    let timerId = setTimeout(function tick() {
+                        if (window.navigator.onLine) {
+                            requestSpin(gamename, sessionName, betline, lines);
+                            clearTimeout(timerId)
+                        } else {
+                            timerId = setTimeout(tick, 1000);
+                        }
                     }, 1000);
                 }
             });
