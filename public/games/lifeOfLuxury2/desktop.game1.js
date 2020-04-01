@@ -1438,10 +1438,12 @@ function game1() {
             }
         }
 
-
         function requestSpin(gamename, sessionUuid, betline, lines) {
             console.log(getNeedUrlPath() + `/api-v2/action?game_id=${gameId}&user_id=${userId}&mode=${demo}&action=spin&session_uuid=${sessionUuid}&token=${token}&linesInGame=${lines}&lineBet=${betline}&platform_id=${platformId}`);
 
+
+            // dataSpinRequest = {"stateData":{"screen":"featureGame","isWin":true,"isWinOnMain":true,"isWinOnBonus":true,"isWinOnFeatureGame":false,"isDropFeatureGame":true,"isEndFeatureGame":false,"moveNumberInFeatureGame":0,"prevScreen":"mainGame"},"balanceData":{"balance":10100,"totalPayoff":200,"payoffByLines":0,"payoffByBonus":200,"totalWinningsInFeatureGame":0},"sessionData":{"eventId":null,"userId":1,"gameId":6,"mode":"demo","sessionUuid":"0fd446e0-030c-11ea-9344-1fd7f7246bde"},"logicData":{"countSymbolsInGame":11,"countOfMovesInFeatureGame":12,"lineBet":5,"linesInGame":20,"table":[3,8,10,3,6,2,6,7,8,10,5,7,5,6,10],"winningLines":[],"payoffsForBonus":[{"symbol":10,"count":3,"winning":200}],"payoffsForLines":[],"winningCells":[],"multiplier":2},"longData":{"stateData":{"screen":"featureGame","isWin":true,"isWinOnMain":true,"isWinOnBonus":true,"isWinOnFeatureGame":false,"isDropFeatureGame":true,"isEndFeatureGame":false,"moveNumberInFeatureGame":0,"prevScreen":"mainGame"},"balanceData":{"balance":10100,"totalPayoff":200,"payoffByLines":0,"payoffByBonus":200,"totalWinningsInFeatureGame":0},"logicData":{"countSymbolsInGame":11,"countOfMovesInFeatureGame":12,"lineBet":5,"linesInGame":20,"table":[3,8,10,3,6,2,6,7,8,10,5,7,5,6,10],"winningLines":[],"payoffsForBonus":[{"symbol":10,"count":3,"winning":200}],"payoffsForLines":[],"winningCells":[],"multiplier":2}}}
+            // parseSpinAnswer(dataSpinRequest);
             function sendMsg() {
                 $.ajax({
                     type: "get",
@@ -1497,12 +1499,14 @@ function game1() {
                         }
                     },
                     error: function (xhr, ajaxOptions, thrownError) {
-                        // var errorText = '//ошибка 30';
-                        // console.log(errorText);
-                        // error_bg.visible = true;
-                        // errorStatus = true;
-                        sendMsg(gamename, sessionName, betline, lines);
-                        // setTimeout("reconnectSpin(gamename, sessionName, betline, lines)", 100);
+                        if (!window.navigator.onLine) {
+                            sendMsg(gamename, sessionName, betline, lines);
+                        } else {
+                            var errorText = '//ошибка 30';
+                            console.log(errorText);
+                            error_bg.visible = true;
+                            errorStatus = true;
+                        }
                     }
                 });
             }

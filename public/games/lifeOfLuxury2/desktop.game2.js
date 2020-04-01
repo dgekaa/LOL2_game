@@ -538,7 +538,6 @@ function game2() {
                 dataType: 'html',
                 success: function (data) {
                     console.log(data);
-                    console.log(JSON.parse(data));
                     if (IsJsonString(data)) {
                         dataSpinRequest = JSON.parse(data);
                         if (dataSpinRequest.status !== 'false') {
