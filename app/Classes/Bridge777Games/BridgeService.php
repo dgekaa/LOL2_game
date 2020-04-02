@@ -173,6 +173,8 @@ class BridgeService
             $url = "https://play777games.com/exit";
         } elseif ($platformId === 2) {
             $url = "https://play.devbet.live/exit";
+        } elseif ($platformId === 3) {
+            $url = "https://donateandplay.com/exit";
         }
 
         // отправка запроса на 777games
