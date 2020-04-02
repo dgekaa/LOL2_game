@@ -502,6 +502,24 @@ class UserStatisticsWorkerSpinInstruction implements IInstruction
         return $dataPool;
     }
 
+    public function getStatisticOfDiamondsInMainGame(IDataPool $dataPool, IToolsPool $toolsPool)
+    {
+        $spinDiamonds = 0;
+        foreach ($dataPool->logicData->table as $symbol) {
+            if ($symbol == 0) {
+                $spinDiamonds++;
+            }
+        }
+
+        if (! array_key_exists($spinDiamonds, $dataPool->userStatisticsData->diamondsInMainGame)) {
+            $dataPool->userStatisticsData->diamondsInMainGame[(string) $spinDiamonds] = 1;
+        } else {
+            $dataPool->userStatisticsData->diamondsInMainGame[(string) $spinDiamonds]++;
+        }
+
+        return $dataPool;
+    }
+
     /**
      * Статистика кол-ва бонусных символов выпадающих за ход
      *

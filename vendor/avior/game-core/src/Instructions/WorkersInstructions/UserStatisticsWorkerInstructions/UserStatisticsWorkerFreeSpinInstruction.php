@@ -11,6 +11,39 @@ use Avior\GameCore\Base\IToolsPool;
  */
 class UserStatisticsWorkerFreeSpinInstruction implements IInstruction
 {
+
+    public function getStatisticOfWinBonusCombinationsInFeatureGame(
+        IDataPool $dataPool,
+        IToolsPool $toolsPool
+    ): IDataPool {
+        $dataPool->userStatisticsData->statisticOfWinBonusCombinationsInFeatureGame = $toolsPool->statisticsTools->statisticsCalculatorTool
+            ->calculateStatisticOfWinBonusCombinationsInFeatureGame(
+                $dataPool->userStatisticsData->statisticOfWinBonusCombinationsInFeatureGame,
+                $dataPool->logicData->payoffsForBonus,
+                $dataPool->logicData->table
+            );
+
+        return $dataPool;
+    }
+
+    public function getStatisticOfDiamondsInFeatureGame(IDataPool $dataPool, IToolsPool $toolsPool)
+    {
+        $spinDiamonds = 0;
+        foreach ($dataPool->logicData->table as $symbol) {
+            if ($symbol == 0) {
+                $spinDiamonds++;
+            }
+        }
+
+        if (! array_key_exists($spinDiamonds, $dataPool->userStatisticsData->diamondsInFeatureGame)) {
+            $dataPool->userStatisticsData->diamondsInFeatureGame[(string) $spinDiamonds] = 1;
+        } else {
+            $dataPool->userStatisticsData->diamondsInFeatureGame[(string) $spinDiamonds]++;
+        }
+
+        return $dataPool;
+    }
+
     /**
      * Вычисление общего выигрыша
      *

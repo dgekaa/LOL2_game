@@ -200,7 +200,118 @@
 
                     Minimum number of diamonds from the freespins game @if (isset($data->userStatisticsData->minDroppendDiamandsInFeatureGame)) {{$data->userStatisticsData->minDroppendDiamandsInFeatureGame}} @else 0 @endif <br>
                     Maximum number of diamonds from the freespins game @if (isset($data->userStatisticsData->maxDroppendDiamandsInFeatureGame)) {{$data->userStatisticsData->maxDroppendDiamandsInFeatureGame}} @else 0 @endif <br>
+                    <br><br>
 
+                    @if (isset($data->userStatisticsData->droppedBonusSymbolsInOneSpinInMainGame))
+                    <table border="1" cellspacing="2" width="500">
+                            <tr>
+                                <td>
+                                    Coins in the main game
+                                </td>
+                                <td>
+                                    {{ $data->userStatisticsData->statisticsOfDroppedSymbolsInMainGame[10] }}
+                                </td>
+                                <td>
+                                    Coins in the FS
+                                </td>
+                                <td>
+                                    {{ $data->userStatisticsData->statisticsOfDroppedSymbolsInFeatureGame[10] }}
+                                </td>
+                            </tr>
+                            @for($key = 5; $key > 0; $key--)
+                                <tr>
+                                    <td>
+                                        {{$key}} Coins
+                                    </td>
+                                    <td>
+                                        {{$data->userStatisticsData->droppedBonusSymbolsInOneSpinInMainGame[$key]}}
+                                    </td>
+                                    <td>
+                                        {{$key}} Coins
+                                    </td>
+                                    <td>
+                                        {{ $data->userStatisticsData->droppedBonusSymbolsInOneSpinInFeatureGame[$key] }}
+                                    </td>
+                                </tr>
+                            @endfor
+                        <tr>
+                            <td colspan="4">&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Diamonds in the main game
+                            </td>
+                            <td>
+                                {{ array_sum($data->userStatisticsData->statisticOfWinBonusCombinations[0]) }}
+                            </td>
+                            <td>
+                                Diamonds in the FS
+                            </td>
+                            <td>
+                                {{ array_sum($data->userStatisticsData->statisticOfWinBonusCombinationsInFeatureGame[0]) }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                3 Diamonds
+                            </td>
+                            <td>
+                                {{ $data->userStatisticsData->statisticOfWinBonusCombinations[0][3] }}
+                            </td>
+                            <td>
+                                3 Diamonds
+                            </td>
+                            <td>
+                                {{ $data->userStatisticsData->statisticOfWinBonusCombinationsInFeatureGame[0][3] }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                2 Diamonds
+                            </td>
+                            <td>
+                                {{ $data->userStatisticsData->statisticOfWinBonusCombinations[0][2] }}
+                            </td>
+                            <td>
+                                2 Diamonds
+                            </td>
+                            <td>
+                                {{ $data->userStatisticsData->statisticOfWinBonusCombinationsInFeatureGame[0][2] }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                1 Diamonds
+                            </td>
+                            <td>
+                                {{ $data->userStatisticsData->statisticOfWinBonusCombinations[0][1] }}
+                            </td>
+                            <td>
+                                1 Diamonds
+                            </td>
+                            <td>
+                                {{ $data->userStatisticsData->statisticOfWinBonusCombinationsInFeatureGame[0][1] }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="4">&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Min Diamonds Per One FS Game
+                            </td>
+                            <td>
+                                @if (isset($data->userStatisticsData->minDroppendDiamandsInFeatureGame)) {{$data->userStatisticsData->minDroppendDiamandsInFeatureGame}} @else 0 @endif
+                            </td>
+                            <td>
+                                Max Diamonds Per One FS Game
+                            </td>
+                            <td>
+                                @if (isset($data->userStatisticsData->maxDroppendDiamandsInFeatureGame)) {{$data->userStatisticsData->maxDroppendDiamandsInFeatureGame}} @else 0 @endif
+                            </td>
+                        </tr>
+                    </table>
+                    @endif
                 </div>
             </div>
         </div>
