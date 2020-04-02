@@ -211,12 +211,6 @@
                                 <td>
                                     {{ $data->userStatisticsData->statisticsOfDroppedSymbolsInMainGame[10] }}
                                 </td>
-                                <td>
-                                    Coins in the FS
-                                </td>
-                                <td>
-                                    {{ $data->userStatisticsData->statisticsOfDroppedSymbolsInFeatureGame[10] }}
-                                </td>
                             </tr>
                             @for($key = 5; $key > 0; $key--)
                                 <tr>
@@ -226,12 +220,6 @@
                                     <td>
                                         {{$data->userStatisticsData->droppedBonusSymbolsInOneSpinInMainGame[$key]}}
                                     </td>
-                                    <td>
-                                        {{$key}} Coins
-                                    </td>
-                                    <td>
-                                        {{ $data->userStatisticsData->droppedBonusSymbolsInOneSpinInFeatureGame[$key] }}
-                                    </td>
                                 </tr>
                             @endfor
                         <tr>
@@ -239,11 +227,45 @@
                         </tr>
                         <tr>
                             <td>
+                                Coins in the FS
+                            </td>
+                            <td>
+                                {{ $data->userStatisticsData->statisticsOfDroppedSymbolsInFeatureGame[10] }}
+                            </td>
+                        </tr>
+                        @for($key = 5; $key > 0; $key--)
+                            <tr>
+                                <td>
+                                    {{$key}} Coins
+                                </td>
+                                <td>
+                                    {{ $data->userStatisticsData->droppedBonusSymbolsInOneSpinInFeatureGame[$key] }}
+                                </td>
+                            </tr>
+                        @endfor
+                        <tr>
+                            <td colspan="4">&nbsp;</td>
+                        <tr>
+                            <td>
                                 Diamonds in the main game
                             </td>
                             <td>
                                 {{ array_sum($data->userStatisticsData->statisticOfWinBonusCombinations[0]) }}
                             </td>
+                        </tr>
+                        @for($key = 3; $key > 0; $key--)
+                            <tr>
+                                <td>
+                                    {{ $key }} Diamonds
+                                </td>
+                                <td>
+                                    {{ $data->userStatisticsData->statisticOfWinBonusCombinations[0][$key] }}
+                                </td>
+                            </tr>
+                        @endfor
+                            <td colspan="4">&nbsp;</td>
+                        </tr>
+                        <tr>
                             <td>
                                 Diamonds in the FS
                             </td>
@@ -251,48 +273,16 @@
                                 {{ array_sum($data->userStatisticsData->statisticOfWinBonusCombinationsInFeatureGame[0]) }}
                             </td>
                         </tr>
+                        @for($key = 3; $key > 0; $key--)
                         <tr>
                             <td>
-                                3 Diamonds
+                                {{ $key }} Diamonds
                             </td>
                             <td>
-                                {{ $data->userStatisticsData->statisticOfWinBonusCombinations[0][3] }}
-                            </td>
-                            <td>
-                                3 Diamonds
-                            </td>
-                            <td>
-                                {{ $data->userStatisticsData->statisticOfWinBonusCombinationsInFeatureGame[0][3] }}
+                                {{ $data->userStatisticsData->statisticOfWinBonusCombinationsInFeatureGame[0][$key] }}
                             </td>
                         </tr>
-                        <tr>
-                            <td>
-                                2 Diamonds
-                            </td>
-                            <td>
-                                {{ $data->userStatisticsData->statisticOfWinBonusCombinations[0][2] }}
-                            </td>
-                            <td>
-                                2 Diamonds
-                            </td>
-                            <td>
-                                {{ $data->userStatisticsData->statisticOfWinBonusCombinationsInFeatureGame[0][2] }}
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                1 Diamonds
-                            </td>
-                            <td>
-                                {{ $data->userStatisticsData->statisticOfWinBonusCombinations[0][1] }}
-                            </td>
-                            <td>
-                                1 Diamonds
-                            </td>
-                            <td>
-                                {{ $data->userStatisticsData->statisticOfWinBonusCombinationsInFeatureGame[0][1] }}
-                            </td>
-                        </tr>
+                        @endfor
                         <tr>
                             <td colspan="4">&nbsp;</td>
                         </tr>
@@ -303,6 +293,8 @@
                             <td>
                                 @if (isset($data->userStatisticsData->minDroppendDiamandsInFeatureGame)) {{$data->userStatisticsData->minDroppendDiamandsInFeatureGame}} @else 0 @endif
                             </td>
+                        </tr>
+                        <tr>
                             <td>
                                 Max Diamonds Per One FS Game
                             </td>
