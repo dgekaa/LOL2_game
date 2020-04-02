@@ -13,10 +13,8 @@
 
         var needUrlPath = '';
         if (location.href.indexOf('/games/') !== -1 && location.href.indexOf('public') !== -1) {
-            console.log(1)
             needUrlPath = location.href.substring(0, location.href.indexOf('://')) + '://' + location.hostname + location.pathname;
         } else if (location.href.indexOf('/game/') !== -1) {
-            console.log(2323)
             var gamename = location.href.substring(location.href.indexOf('/game/') + 6);
             needUrlPath = location.href.substring(0, location.href.indexOf('/game/')) + '/games/' + gamename;
         } else if (location.href.indexOf('public') === -1 && location.href.indexOf('/games/') !== -1) {

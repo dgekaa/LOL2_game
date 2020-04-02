@@ -20,9 +20,10 @@ function game2() {
         colorLine: ['#009800', '#fffc00', '#0004ff', '#ff0000', '#ff00d1', '#00fa6d', '#89ff00', '#ff7f00', '#9400ff', '#0004ff', '#009300', '#ff3900', '#ff3900', '#9400ff', '#89ff00']
     };
 
-    game2.preload = function() {};
+    game2.preload = function () {
+    };
 
-    game2.create = function() {
+    game2.create = function () {
         if (game.sound.usingWebAudio &&
             game.sound.context.state === 'suspended') {
             game.input.onTap.addOnce(game.sound.context.resume, game.sound.context);
@@ -30,7 +31,7 @@ function game2() {
         if (this.game.device.android && this.game.device.chrome && this.game.device.chromeVersion >= 55) {
             this.game.sound.setTouchLock();
             this.game.sound.touchLocked = true;
-            this.game.input.touch.addTouchLockCallback(function() {
+            this.game.input.touch.addTouchLockCallback(function () {
                 if (this.noAudio || !this.touchLocked || this._unlockSource !== null) {
                     return true;
                 }
@@ -149,11 +150,11 @@ function game2() {
             star = game.add.sprite(coordX, coordY, 'star_anim');
             star.anchor.setTo(0.5, 0.5);
             star.angle = randomNumber(0, 360);
-            star.animations.add('anim', [5, 4, 3, 2, 1, 0], 5, false).play().onComplete.add(function() {
+            star.animations.add('anim', [5, 4, 3, 2, 1, 0], 5, false).play().onComplete.add(function () {
                 star.destroy();
             })
             slotLayer1Group.add(star);
-            setTimeout(function() {
+            setTimeout(function () {
                 if (createdStarsStatus) {
                     createdStars();
                 }
@@ -166,17 +167,18 @@ function game2() {
             let star;
             star = game.add.sprite(coordX, coordY, 'star_anim_mini');
             star.angle = randomNumber(0, 360);
-            star.animations.add('anim', [], 4, false).play().onComplete.add(function() {
+            star.animations.add('anim', [], 4, false).play().onComplete.add(function () {
                 star.destroy();
             })
 
             slotLayer4Group.add(star);
-            setTimeout(function() {
+            setTimeout(function () {
                 if (createdStarsMiniStatus) {
                     createdStarsMini();
                 }
             }, 30)
         }
+
         multiplier = game.add.sprite(147, -69, 'multiplier');
         spins_remaining = game.add.sprite(-238, 5, 'spins_remaining');
         bonus = game.add.sprite(1024, 5, 'bonus');
@@ -363,20 +365,20 @@ function game2() {
         }
 
         function hideLines() {
-            game2.lineArr.forEach(function(line) {
+            game2.lineArr.forEach(function (line) {
                 line.visible = false;
                 line.tint = 0xffffff;
             });
         };
 
         function hideLinesCircle() {
-            game2.circleArr.forEach(function(line) {
+            game2.circleArr.forEach(function (line) {
                 line.visible = false;
             });
         };
 
         function hideLinesCircleText() {
-            game2.textArr.forEach(function(line) {
+            game2.textArr.forEach(function (line) {
                 line.visible = false;
             });
         };
@@ -393,6 +395,7 @@ function game2() {
                 squareArrFreespin[i].tint = 0xffffff;
             }
         }
+
         scorePosions = [
             [160, 57, 38],
             [160, 81, 18],
@@ -425,17 +428,17 @@ function game2() {
         freesponFinishBGText = game.add.sprite(75, 125 + 94, 'freesponFinishBGText');
         freesponFinishBGText.visible = false;
         big_red_border = game.add.sprite(497, 343, 'coin_big_anim')
-        setTimeout(function() {
-            game.add.tween(freespinStartBG).to({ alpha: 0 }, 1000, "Linear", true).onComplete.add(function() {
+        setTimeout(function () {
+            game.add.tween(freespinStartBG).to({alpha: 0}, 1000, "Linear", true).onComplete.add(function () {
                 big_red_border.visible = false;
                 freesponStartBGText.visible = false;
                 moveBgOnBottom();
-                setTimeout(function() {
+                setTimeout(function () {
                     freeSpinStart();
                 }, 2500);
             })
         }, 1000);
-        big_red_border.animations.add('anim', [], 50, false).play().onComplete.add(function() {
+        big_red_border.animations.add('anim', [], 50, false).play().onComplete.add(function () {
 
         })
         big_red_border.anchor.setTo(0.5, 0.5);
@@ -473,19 +476,19 @@ function game2() {
         }
 
         function moveElementOnBottom(elem) {
-            game.add.tween(elem).to({ y: elem.position.y + 94 }, 500, "Linear", true);
+            game.add.tween(elem).to({y: elem.position.y + 94}, 500, "Linear", true);
         }
 
         function moveElementOnCenter(elem) {
-            game.add.tween(elem).to({ y: elem.position.y + 204 }, 500, "Linear", true);
+            game.add.tween(elem).to({y: elem.position.y + 204}, 500, "Linear", true);
         }
 
         function moveElementOnLeftSide(elem) {
-            game.add.tween(elem).to({ x: elem.position.x + 238 }, 500, "Linear", true);
+            game.add.tween(elem).to({x: elem.position.x + 238}, 500, "Linear", true);
         }
 
         function moveElementOnRightSide(elem) {
-            game.add.tween(elem).to({ x: elem.position.x - 244 }, 500, "Linear", true);
+            game.add.tween(elem).to({x: elem.position.x - 244}, 500, "Linear", true);
         }
 
         function freeSpinStart() {
@@ -523,74 +526,59 @@ function game2() {
             startspin(3);
             startspin(4);
         }
+
         var errorStatus = false;
 
         function requestSpin(gamename, sessionName, betline, lines) {
-            console.log(getNeedUrlPath() + `/api-v2/action?game_id=${gameId}&user_id=${userId}&mode=${demo}&action=free_spin&session_uuid=${sessionUuid}&token=${token}&linesInGame=${lines}&lineBet=${betline}&platform_id=${platformId}`);
-
-            if (window.navigator.onLine) {
-                $.ajax({
-                    type: "get",
-                    url: getNeedUrlPath() + `/api-v2/action?game_id=${gameId}&user_id=${userId}&mode=${demo}&action=free_spin&session_uuid=${sessionUuid}&token=${token}&linesInGame=${lines}&lineBet=${betline}&platform_id=${platformId}`,
-                    dataType: 'html',
-                    success: function (data) {
-                        console.log(data);
-                        console.log(JSON.parse(data));
-                        if (IsJsonString(data)) {
-                            dataSpinRequest = JSON.parse(data);
-                            if (dataSpinRequest.status !== 'false') {
-                                parseSpinAnswer(dataSpinRequest);
-                            } else {
-                                errorStatus = true;
-                                switch (dataSpinRequest.message) {
-                                    case 'FirstMoveFundsException':
-                                        error_bg.visible = true;
-                                        break;
-                                    case 'BetPlacingAbortException':
-                                        establishing_bg.visible = true;
-                                        setTimeout("BetPlacingAbortExceptionFunc(gamename, sessionName, betline, lines, dataSpinRequest.betPlacingAbortExceptionID)", 3000);
-                                        break;
-                                    case 'moveFundsException':
-                                        establishing_bg.visible = true;
-                                        setTimeout("moveFundsExceptionFunc(gamename, sessionName, betline, lines, dataSpinRequest.moveFundsExceptionID)", 3000);
-                                        break;
-                                    case 'low balance':
-                                        error_bg.visible = true;
-                                        break;
-                                    case 'UnauthenticatedException':
-                                        error_bg.visible = true;
-                                        break;
-                                }
-                            }
+            $.ajax({
+                type: "get",
+                url: getNeedUrlPath() + `/api-v2/action?game_id=${gameId}&user_id=${userId}&mode=${demo}&action=free_spin&session_uuid=${sessionUuid}&token=${token}&linesInGame=${lines}&lineBet=${betline}&platform_id=${platformId}`,
+                dataType: 'html',
+                success: function (data) {
+                    console.log(data);
+                    if (IsJsonString(data)) {
+                        dataSpinRequest = JSON.parse(data);
+                        if (dataSpinRequest.status !== 'false') {
+                            parseSpinAnswer(dataSpinRequest);
                         } else {
-                            console.log('json format error');
-                            error_bg.visible = true;
                             errorStatus = true;
+                            switch (dataSpinRequest.message) {
+                                case 'FirstMoveFundsException':
+                                    error_bg.visible = true;
+                                    break;
+                                case 'BetPlacingAbortException':
+                                    establishing_bg.visible = true;
+                                    setTimeout("BetPlacingAbortExceptionFunc(gamename, sessionName, betline, lines, dataSpinRequest.betPlacingAbortExceptionID)", 3000);
+                                    break;
+                                case 'moveFundsException':
+                                    establishing_bg.visible = true;
+                                    setTimeout("moveFundsExceptionFunc(gamename, sessionName, betline, lines, dataSpinRequest.moveFundsExceptionID)", 3000);
+                                    break;
+                                case 'low balance':
+                                    error_bg.visible = true;
+                                    break;
+                                case 'UnauthenticatedException':
+                                    error_bg.visible = true;
+                                    break;
+                            }
                         }
-                    },
-                    error: function (xhr, ajaxOptions, thrownError) {
-                        if (freeSpinCount !== 10) {
-                            var errorText = '//ошибка 30';
-                            console.log(errorText);
-                            reconnectSpin(gamename, sessionName, betline, lines);
-                            // setTimeout("requestSpin(gamename, sessionName, betline, lines)", 100);
-                        } else {
-                            requestSpin(gamename, sessionName, betline, lines);
-                        }
+                    } else {
+                        console.log('json format error');
+                        error_bg.visible = true;
+                        errorStatus = true;
                     }
-                });
-            } else {
-                autoPlay.loadTexture('autoPlay');
-                $("#spin").removeClass('auto');
-                autostart = false;
-                showButtons();
-
-                middlespin(0);
-                middlespin(1);
-                middlespin(2);
-                middlespin(3);
-                middlespin(4);
-            }
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    let timerId = setTimeout(function tick() {
+                        if (window.navigator.onLine) {
+                            requestSpin(gamename, sessionName, betline, lines);
+                            clearTimeout(timerId)
+                        } else {
+                            timerId = setTimeout(tick, 1000);
+                        }
+                    }, 1000);
+                }
+            });
         }
 
         function moveFundsExceptionFunc(gamename, sessionName, betline, lines, moveFundsExceptionID) {
@@ -600,7 +588,7 @@ function game2() {
                 type: "get",
                 url: getNeedUrlPath() + '/moveFundsException?moveFundsExceptionID=' + moveFundsExceptionID + '&platform_id=' + platformId,
                 dataType: 'html',
-                success: function(data) {
+                success: function (data) {
                     console.log(data);
                     if (IsJsonString(data)) {
                         dataSpinRequest = JSON.parse(data);
@@ -634,7 +622,7 @@ function game2() {
                         errorStatus = true;
                     }
                 },
-                error: function(xhr, ajaxOptions, thrownError) {
+                error: function (xhr, ajaxOptions, thrownError) {
                     var errorText = '//ошибка 30';
                     console.log(errorText);
                     error_bg.visible = true;
@@ -650,7 +638,7 @@ function game2() {
                 type: "get",
                 url: getNeedUrlPath() + '/betPlacingAbort?betPlacingAbortExceptionID=' + moveFundsExceptionID + '&platform_id=' + platformId,
                 dataType: 'html',
-                success: function(data) {
+                success: function (data) {
                     console.log(data);
                     if (IsJsonString(data)) {
                         dataSpinRequest = JSON.parse(data);
@@ -684,7 +672,7 @@ function game2() {
                         errorStatus = true;
                     }
                 },
-                error: function(xhr, ajaxOptions, thrownError) {
+                error: function (xhr, ajaxOptions, thrownError) {
                     var errorText = '//ошибка 30';
                     console.log(errorText);
                     error_bg.visible = true;
@@ -694,17 +682,15 @@ function game2() {
         }
 
         function reconnectSpin(gamename, sessionName, betline, lines) {
-            if (!window.navigator.onLine) return;
-
             $.ajax({
                 type: "get",
                 url: getNeedUrlPath() + '/reconnect',
                 dataType: 'html',
-                success: function(data) {
+                success: function (data) {
                     console.log('reconect : true');
                     requestSpin(gamename, sessionName, betline, lines);
                 },
-                error: function(xhr, ajaxOptions, thrownError) {
+                error: function (xhr, ajaxOptions, thrownError) {
                     var errorText = '//ошибка переподкючения';
                     console.log(errorText);
                     reconnectSpin(gamename, sessionName, betline, lines);
@@ -712,6 +698,7 @@ function game2() {
                 }
             });
         }
+
         var payoffByBonus;
 
         function parseSpinAnswer(dataSpinRequest) {
@@ -745,8 +732,8 @@ function game2() {
                 }
                 for (key in dataArray.longData.logicData.table) {
                     if (dataArray.longData.logicData.table[key] === 10 || dataArray.longData.logicData.table[key] === 0) {
-                    wcvWinValuesArrayOld.push(+(key));
-                }
+                        wcvWinValuesArrayOld.push(+(key));
+                    }
                 }
                 winCellInfoOld = dataArray.longData.logicData['winningCells'];
                 wlValuesFS = dataArray.longData.logicData['payoffsForBonus'];
@@ -760,13 +747,13 @@ function game2() {
         }
 
         function startspin(number) {
-            game.add.tween(game2.cell[1 + number * 3]).to({ y: game2.cell[1 + number * 3].position.y - 30 }, 200, Phaser.Easing.LINEAR, true).onComplete.add(function() {
+            game.add.tween(game2.cell[1 + number * 3]).to({y: game2.cell[1 + number * 3].position.y - 30}, 200, Phaser.Easing.LINEAR, true).onComplete.add(function () {
                 game2.cell[1 + number * 3].visible = false;
             });
-            game.add.tween(game2.cell[2 + number * 3]).to({ y: game2.cell[2 + number * 3].position.y - 30 }, 200, Phaser.Easing.LINEAR, true).onComplete.add(function() {
+            game.add.tween(game2.cell[2 + number * 3]).to({y: game2.cell[2 + number * 3].position.y - 30}, 200, Phaser.Easing.LINEAR, true).onComplete.add(function () {
                 game2.cell[2 + number * 3].visible = false;
             });
-            game.add.tween(game2.cell[3 + number * 3]).to({ y: game2.cell[3 + number * 3].position.y - 30 }, 200, Phaser.Easing.LINEAR, true).onComplete.add(function() {
+            game.add.tween(game2.cell[3 + number * 3]).to({y: game2.cell[3 + number * 3].position.y - 30}, 200, Phaser.Easing.LINEAR, true).onComplete.add(function () {
                 game2.cell[3 + number * 3].visible = false;
                 game2.bars[number].visible = true;
                 if (number == 0) {
@@ -791,7 +778,7 @@ function game2() {
 
         function middlespin(number) {
             if (number == 0) {
-                setTimeout(function() {
+                setTimeout(function () {
                     game2.spinStatus1 = false;
                     game2.bars[0].visible = false;
                     game2.cell[1 + 3 * 0].visible = true;
@@ -810,7 +797,7 @@ function game2() {
                 }, 900);
             }
             if (number == 1) {
-                setTimeout(function() {
+                setTimeout(function () {
                     game2.spinStatus2 = false;
                     game2.bars[0].visible = false;
                     game2.cell[1 + 3 * 0].visible = true;
@@ -837,7 +824,7 @@ function game2() {
                 }, 1350);
             }
             if (number == 2) {
-                setTimeout(function() {
+                setTimeout(function () {
                     game2.spinStatus3 = false;
                     game2.bars[0].visible = false;
                     game2.cell[1 + 3 * 0].visible = true;
@@ -872,7 +859,7 @@ function game2() {
                 }, 1800);
             }
             if (number == 3) {
-                setTimeout(function() {
+                setTimeout(function () {
                     game2.spinStatus4 = false;
                     game2.bars[0].visible = false;
                     game2.cell[1 + 3 * 0].visible = true;
@@ -915,7 +902,7 @@ function game2() {
                 }, 2250);
             }
             if (number == 4) {
-                setTimeout(function() {
+                setTimeout(function () {
                     game2.spinStatus5 = false;
                     game2.bars[0].visible = false;
                     game2.cell[1 + 3 * 0].visible = true;
@@ -971,9 +958,11 @@ function game2() {
             game2.cell[1 + number * 3].position.y = 127 + 30 + 94;
             game2.cell[2 + number * 3].position.y = 276 + 30 + 94;
             game2.cell[3 + number * 3].position.y = 425 + 30 + 94;
-            game.add.tween(game2.cell[1 + number * 3]).to({ y: game2.cell[1 + number * 3].position.y - 30 }, 200, Phaser.Easing.LINEAR, true).onComplete.add(function() {});
-            game.add.tween(game2.cell[2 + number * 3]).to({ y: game2.cell[2 + number * 3].position.y - 30 }, 200, Phaser.Easing.LINEAR, true).onComplete.add(function() {});
-            game.add.tween(game2.cell[3 + number * 3]).to({ y: game2.cell[3 + number * 3].position.y - 30 }, 200, Phaser.Easing.LINEAR, true).onComplete.add(function() {
+            game.add.tween(game2.cell[1 + number * 3]).to({y: game2.cell[1 + number * 3].position.y - 30}, 200, Phaser.Easing.LINEAR, true).onComplete.add(function () {
+            });
+            game.add.tween(game2.cell[2 + number * 3]).to({y: game2.cell[2 + number * 3].position.y - 30}, 200, Phaser.Easing.LINEAR, true).onComplete.add(function () {
+            });
+            game.add.tween(game2.cell[3 + number * 3]).to({y: game2.cell[3 + number * 3].position.y - 30}, 200, Phaser.Easing.LINEAR, true).onComplete.add(function () {
 
                 if (number == 4) {
                     slotLayer3Group.add(topLabel);
@@ -992,6 +981,7 @@ function game2() {
                 }
             });
         }
+
         var briArr = [];
         var briStatus = false;
         var curBri = 0;
@@ -1043,14 +1033,14 @@ function game2() {
                     if (briStatus) {
                         briAnim(briArr);
                     } else {
-                        setTimeout(function() {
+                        setTimeout(function () {
                             freeSpinStart();
                         }, 2500);
                     }
                 } else {
-                    setTimeout(function() {
+                    setTimeout(function () {
                         // blackBg.visible = true;
-                        setTimeout(function() {
+                        setTimeout(function () {
                             finishFreespins();
                         }, 2000);
                         // game.add.tween(blackBg).to({ alpha: 1 }, 1000, "Linear", true).onComplete.add(function() {
@@ -1067,7 +1057,7 @@ function game2() {
 
         function showWinFreeSpin(wcvFreeSpinWinValuesArray) {
             console.log(wcvFreeSpinWinValuesArray)
-            wcvFreeSpinWinValuesArray.forEach(function(cell, i) {
+            wcvFreeSpinWinValuesArray.forEach(function (cell, i) {
                 squareArrFreespin[cell + 1].visible = true;
             });
             if (afterDropFeatureGame) {
@@ -1077,7 +1067,7 @@ function game2() {
             if (!afterDropFeatureGame) {
                 bottomText.visible = true;
                 bottomText.setText("BONUS RETRIGGERED");
-                setTimeout(function() {
+                setTimeout(function () {
                     flickWin(wcvFreeSpinWinValuesArray);
                 }, 1000);
             } else {
@@ -1089,52 +1079,52 @@ function game2() {
             if (stopWinAnim == true) {
                 return;
             }
-            wcvFreeSpinWinValuesArray.forEach(function(cell, i) {
+            wcvFreeSpinWinValuesArray.forEach(function (cell, i) {
                 squareArrFreespin[cell + 1].tint = 0x999999;
             });
-            setTimeout(function() {
+            setTimeout(function () {
                 if (stopWinAnim == true) {
-                    wcvFreeSpinWinValuesArray.forEach(function(cell, i) {
+                    wcvFreeSpinWinValuesArray.forEach(function (cell, i) {
                         squareArrFreespin[cell + 1].tint = 0xffffff;
                     });
                     return;
                 }
-                wcvFreeSpinWinValuesArray.forEach(function(cell, i) {
+                wcvFreeSpinWinValuesArray.forEach(function (cell, i) {
                     squareArrFreespin[cell + 1].tint = 0xffffff;
                 });
                 if (afterDropFeatureGame) {
                     winText.visible = true;
                 }
-                setTimeout(function() {
+                setTimeout(function () {
                     if (stopWinAnim == true) {
                         return;
                     }
-                    wcvFreeSpinWinValuesArray.forEach(function(cell, i) {
+                    wcvFreeSpinWinValuesArray.forEach(function (cell, i) {
                         squareArrFreespin[cell + 1].tint = 0x999999;
                     });
                     if (afterDropFeatureGame) {
                         winText.visible = false;
                     }
-                    setTimeout(function() {
+                    setTimeout(function () {
                         if (stopWinAnim == true) {
-                            wcvFreeSpinWinValuesArray.forEach(function(cell, i) {
+                            wcvFreeSpinWinValuesArray.forEach(function (cell, i) {
                                 squareArrFreespin[cell + 1].tint = 0xffffff;
                             });
                             return;
                         }
-                        wcvFreeSpinWinValuesArray.forEach(function(cell, i) {
+                        wcvFreeSpinWinValuesArray.forEach(function (cell, i) {
                             squareArrFreespin[cell + 1].tint = 0xffffff;
                         });
                         if (afterDropFeatureGame) {
                             winText.visible = true;
                         }
-                        setTimeout(function() {
+                        setTimeout(function () {
                             if (stopWinAnim == true) {
                                 return;
                             }
                             if (afterDropFeatureGame) {
                                 if (winWithoutCoin > 0) {
-                                    wcvFreeSpinWinValuesArray.forEach(function(cell, i) {
+                                    wcvFreeSpinWinValuesArray.forEach(function (cell, i) {
                                         squareArrFreespin[cell + 1].visible = false;
                                     });
                                     showWin(wlWinValuesArray, winCellInfo);
@@ -1142,7 +1132,7 @@ function game2() {
                                     flickWin(wcvFreeSpinWinValuesArray);
                                 }
                             } else {
-                                wcvFreeSpinWinValuesArray.forEach(function(cell, i) {
+                                wcvFreeSpinWinValuesArray.forEach(function (cell, i) {
                                     squareArrFreespin[cell + 1].visible = false;
                                 });
                                 additionalBonus();
@@ -1156,22 +1146,23 @@ function game2() {
         function additionalBonus() {
             freesponStartBGAdditionalBonus.visible = true;
             freesponStartBGAdditionalBonus.alpha = 0;
-            game.add.tween(freesponStartBGAdditionalBonus).to({ alpha: 1 }, 1000, "Linear", true).onComplete.add(function() {
+            game.add.tween(freesponStartBGAdditionalBonus).to({alpha: 1}, 1000, "Linear", true).onComplete.add(function () {
                 freeSpinCount = freeSpinCount + 12;
                 allFreeSpinCount = allFreeSpinCount + 12;
                 spinsLeft.setText(freeSpinCount)
-                setTimeout(function() {
-                    game.add.tween(freesponStartBGAdditionalBonus).to({ alpha: 0 }, 1000, "Linear", true).onComplete.add(function() {
+                setTimeout(function () {
+                    game.add.tween(freesponStartBGAdditionalBonus).to({alpha: 0}, 1000, "Linear", true).onComplete.add(function () {
                         freesponStartBGAdditionalBonus.visible = false;
                         afterDropFeatureGame = true;
                         showWinFreeSpin(wcvFreeSpinWinValuesArray);
-                        setTimeout(function() {
+                        setTimeout(function () {
                             updateBalance();
                         }, 2000);
                     })
                 }, 2500);
             })
         }
+
         var cellPos = [
             [77, 127],
             [77, 276],
@@ -1191,8 +1182,8 @@ function game2() {
         ];
 
         function briAnim(briArr) {
-            setTimeout(function() {
-                setTimeout(function() {
+            setTimeout(function () {
+                setTimeout(function () {
                     briSoundAudio.play();
                 }, 400);
                 switch (briArr[curBri]) {
@@ -1202,10 +1193,22 @@ function game2() {
                         firstBri.animations.add('anim', [], 6, true).play();
                         firstBri.scale.x = 0.35;
                         firstBri.scale.y = 0.35;
-                        game.add.tween(firstBri.scale).to({ x: 1.2, y: 1.2 }, 900.00, Phaser.Easing.Linear.None, true, 0, 1000, true);
-                        game.add.tween(firstBri).to({ x: firstBri.position.x + 94, y: firstBri.position.y + 204 }, 220 * 3, Phaser.Easing.LINEAR, true).onComplete.add(function() {
-                            game.add.tween(firstBri).to({ x: firstBri.position.x + 45, y: firstBri.position.y + 32 }, 50 * 3, Phaser.Easing.LINEAR, true).onComplete.add(function() {
-                                game.add.tween(firstBri).to({ x: firstBri.position.x + 48, y: firstBri.position.y - 26 }, 50 * 3, Phaser.Easing.LINEAR, true).onComplete.add(function() {
+                        game.add.tween(firstBri.scale).to({
+                            x: 1.2,
+                            y: 1.2
+                        }, 900.00, Phaser.Easing.Linear.None, true, 0, 1000, true);
+                        game.add.tween(firstBri).to({
+                            x: firstBri.position.x + 94,
+                            y: firstBri.position.y + 204
+                        }, 220 * 3, Phaser.Easing.LINEAR, true).onComplete.add(function () {
+                            game.add.tween(firstBri).to({
+                                x: firstBri.position.x + 45,
+                                y: firstBri.position.y + 32
+                            }, 50 * 3, Phaser.Easing.LINEAR, true).onComplete.add(function () {
+                                game.add.tween(firstBri).to({
+                                    x: firstBri.position.x + 48,
+                                    y: firstBri.position.y - 26
+                                }, 50 * 3, Phaser.Easing.LINEAR, true).onComplete.add(function () {
                                     firstBri.destroy();
                                     animCentrBri();
                                 });
@@ -1218,10 +1221,22 @@ function game2() {
                         firstBri.animations.add('anim', [], 6, true).play();
                         firstBri.scale.x = 0.35;
                         firstBri.scale.y = 0.35;
-                        game.add.tween(firstBri.scale).to({ x: 1.2, y: 1.2 }, 900.00, Phaser.Easing.Linear.None, true, 0, 1000, true);
-                        game.add.tween(firstBri).to({ x: firstBri.position.x + 131, y: firstBri.position.y + 82 }, 150 * 3, Phaser.Easing.LINEAR, true).onComplete.add(function() {
-                            game.add.tween(firstBri).to({ x: firstBri.position.x + 100, y: firstBri.position.y + 0 }, 100 * 3, Phaser.Easing.LINEAR, true).onComplete.add(function() {
-                                game.add.tween(firstBri).to({ x: firstBri.position.x - 46, y: firstBri.position.y - 27 }, 50 * 3, Phaser.Easing.LINEAR, true).onComplete.add(function() {
+                        game.add.tween(firstBri.scale).to({
+                            x: 1.2,
+                            y: 1.2
+                        }, 900.00, Phaser.Easing.Linear.None, true, 0, 1000, true);
+                        game.add.tween(firstBri).to({
+                            x: firstBri.position.x + 131,
+                            y: firstBri.position.y + 82
+                        }, 150 * 3, Phaser.Easing.LINEAR, true).onComplete.add(function () {
+                            game.add.tween(firstBri).to({
+                                x: firstBri.position.x + 100,
+                                y: firstBri.position.y + 0
+                            }, 100 * 3, Phaser.Easing.LINEAR, true).onComplete.add(function () {
+                                game.add.tween(firstBri).to({
+                                    x: firstBri.position.x - 46,
+                                    y: firstBri.position.y - 27
+                                }, 50 * 3, Phaser.Easing.LINEAR, true).onComplete.add(function () {
                                     firstBri.destroy();
                                     animCentrBri();
                                 });
@@ -1234,10 +1249,22 @@ function game2() {
                         firstBri.animations.add('anim', [], 6, true).play();
                         firstBri.scale.x = 0.35;
                         firstBri.scale.y = 0.35;
-                        game.add.tween(firstBri.scale).to({ x: 1.2, y: 1.2 }, 900.00, Phaser.Easing.Linear.None, true, 0, 1000, true);
-                        game.add.tween(firstBri).to({ x: firstBri.position.x + 225, y: firstBri.position.y - 61 }, 230 * 3, Phaser.Easing.LINEAR, true).onComplete.add(function() {
-                            game.add.tween(firstBri).to({ x: firstBri.position.x + 8, y: firstBri.position.y - 25 }, 20 * 3, Phaser.Easing.LINEAR, true).onComplete.add(function() {
-                                game.add.tween(firstBri).to({ x: firstBri.position.x - 50, y: firstBri.position.y - 25 }, 50 * 3, Phaser.Easing.LINEAR, true).onComplete.add(function() {
+                        game.add.tween(firstBri.scale).to({
+                            x: 1.2,
+                            y: 1.2
+                        }, 900.00, Phaser.Easing.Linear.None, true, 0, 1000, true);
+                        game.add.tween(firstBri).to({
+                            x: firstBri.position.x + 225,
+                            y: firstBri.position.y - 61
+                        }, 230 * 3, Phaser.Easing.LINEAR, true).onComplete.add(function () {
+                            game.add.tween(firstBri).to({
+                                x: firstBri.position.x + 8,
+                                y: firstBri.position.y - 25
+                            }, 20 * 3, Phaser.Easing.LINEAR, true).onComplete.add(function () {
+                                game.add.tween(firstBri).to({
+                                    x: firstBri.position.x - 50,
+                                    y: firstBri.position.y - 25
+                                }, 50 * 3, Phaser.Easing.LINEAR, true).onComplete.add(function () {
                                     firstBri.destroy();
                                     animCentrBri();
                                 });
@@ -1250,10 +1277,22 @@ function game2() {
                         firstBri.animations.add('anim', [], 6, true).play();
                         firstBri.scale.x = 0.35;
                         firstBri.scale.y = 0.35;
-                        game.add.tween(firstBri.scale).to({ x: 1.2, y: 1.2 }, 900.00, Phaser.Easing.Linear.None, true, 0, 1000, true);
-                        game.add.tween(firstBri).to({ x: firstBri.position.x + 81, y: firstBri.position.y + 187 }, 200 * 3, Phaser.Easing.LINEAR, true).onComplete.add(function() {
-                            game.add.tween(firstBri).to({ x: firstBri.position.x - 52, y: firstBri.position.y + 33 }, 60 * 3, Phaser.Easing.LINEAR, true).onComplete.add(function() {
-                                game.add.tween(firstBri).to({ x: firstBri.position.x - 31, y: firstBri.position.y - 26 }, 40 * 3, Phaser.Easing.LINEAR, true).onComplete.add(function() {
+                        game.add.tween(firstBri.scale).to({
+                            x: 1.2,
+                            y: 1.2
+                        }, 900.00, Phaser.Easing.Linear.None, true, 0, 1000, true);
+                        game.add.tween(firstBri).to({
+                            x: firstBri.position.x + 81,
+                            y: firstBri.position.y + 187
+                        }, 200 * 3, Phaser.Easing.LINEAR, true).onComplete.add(function () {
+                            game.add.tween(firstBri).to({
+                                x: firstBri.position.x - 52,
+                                y: firstBri.position.y + 33
+                            }, 60 * 3, Phaser.Easing.LINEAR, true).onComplete.add(function () {
+                                game.add.tween(firstBri).to({
+                                    x: firstBri.position.x - 31,
+                                    y: firstBri.position.y - 26
+                                }, 40 * 3, Phaser.Easing.LINEAR, true).onComplete.add(function () {
                                     firstBri.destroy();
                                     animCentrBri();
                                 });
@@ -1266,9 +1305,12 @@ function game2() {
                         firstBri.animations.add('anim', [], 6, true).play();
                         firstBri.scale.x = 0.35;
                         firstBri.scale.y = 0.35;
-                        game.add.tween(firstBri.scale).to({ x: 1.2, y: 1.2 }, 900.00, Phaser.Easing.Linear.None, true, 0, 1000, true);
-                        game.add.tween(firstBri).to({ y: firstBri.position.y + 50 }, 400, Phaser.Easing.LINEAR, true).onComplete.add(function() {
-                            game.add.tween(firstBri).to({ y: firstBri.position.y - 50 }, 500, Phaser.Easing.LINEAR, true).onComplete.add(function() {
+                        game.add.tween(firstBri.scale).to({
+                            x: 1.2,
+                            y: 1.2
+                        }, 900.00, Phaser.Easing.Linear.None, true, 0, 1000, true);
+                        game.add.tween(firstBri).to({y: firstBri.position.y + 50}, 400, Phaser.Easing.LINEAR, true).onComplete.add(function () {
+                            game.add.tween(firstBri).to({y: firstBri.position.y - 50}, 500, Phaser.Easing.LINEAR, true).onComplete.add(function () {
                                 firstBri.destroy();
                                 animCentrBri();
                             });
@@ -1280,11 +1322,26 @@ function game2() {
                         firstBri.animations.add('anim', [], 6, true).play();
                         firstBri.scale.x = 0.35;
                         firstBri.scale.y = 0.35;
-                        game.add.tween(firstBri.scale).to({ x: 1.2, y: 1.2 }, 900.00, Phaser.Easing.Linear.None, true, 0, 1000, true);
-                        game.add.tween(firstBri).to({ x: firstBri.position.x - 76, y: firstBri.position.y - 130 }, 150 * 3, Phaser.Easing.LINEAR, true).onComplete.add(function() {
-                            game.add.tween(firstBri).to({ x: firstBri.position.x + 73, y: firstBri.position.y - 31 }, 80 * 3, Phaser.Easing.LINEAR, true).onComplete.add(function() {
-                                game.add.tween(firstBri).to({ x: firstBri.position.x + 25, y: firstBri.position.y - 25 }, 35 * 3, Phaser.Easing.LINEAR, true).onComplete.add(function() {
-                                    game.add.tween(firstBri).to({ x: firstBri.position.x - 25, y: firstBri.position.y - 25 }, 35 * 3, Phaser.Easing.LINEAR, true).onComplete.add(function() {
+                        game.add.tween(firstBri.scale).to({
+                            x: 1.2,
+                            y: 1.2
+                        }, 900.00, Phaser.Easing.Linear.None, true, 0, 1000, true);
+                        game.add.tween(firstBri).to({
+                            x: firstBri.position.x - 76,
+                            y: firstBri.position.y - 130
+                        }, 150 * 3, Phaser.Easing.LINEAR, true).onComplete.add(function () {
+                            game.add.tween(firstBri).to({
+                                x: firstBri.position.x + 73,
+                                y: firstBri.position.y - 31
+                            }, 80 * 3, Phaser.Easing.LINEAR, true).onComplete.add(function () {
+                                game.add.tween(firstBri).to({
+                                    x: firstBri.position.x + 25,
+                                    y: firstBri.position.y - 25
+                                }, 35 * 3, Phaser.Easing.LINEAR, true).onComplete.add(function () {
+                                    game.add.tween(firstBri).to({
+                                        x: firstBri.position.x - 25,
+                                        y: firstBri.position.y - 25
+                                    }, 35 * 3, Phaser.Easing.LINEAR, true).onComplete.add(function () {
                                         firstBri.destroy();
                                         animCentrBri();
                                     });
@@ -1298,10 +1355,22 @@ function game2() {
                         firstBri.animations.add('anim', [], 6, true).play();
                         firstBri.scale.x = 0.35;
                         firstBri.scale.y = 0.35;
-                        game.add.tween(firstBri.scale).to({ x: 1.2, y: 1.2 }, 900.00, Phaser.Easing.Linear.None, true, 0, 1000, true);
-                        game.add.tween(firstBri).to({ x: firstBri.position.x - 94, y: firstBri.position.y + 204 }, 220 * 3, Phaser.Easing.LINEAR, true).onComplete.add(function() {
-                            game.add.tween(firstBri).to({ x: firstBri.position.x - 45, y: firstBri.position.y + 32 }, 50 * 3, Phaser.Easing.LINEAR, true).onComplete.add(function() {
-                                game.add.tween(firstBri).to({ x: firstBri.position.x - 48, y: firstBri.position.y - 26 }, 50 * 3, Phaser.Easing.LINEAR, true).onComplete.add(function() {
+                        game.add.tween(firstBri.scale).to({
+                            x: 1.2,
+                            y: 1.2
+                        }, 900.00, Phaser.Easing.Linear.None, true, 0, 1000, true);
+                        game.add.tween(firstBri).to({
+                            x: firstBri.position.x - 94,
+                            y: firstBri.position.y + 204
+                        }, 220 * 3, Phaser.Easing.LINEAR, true).onComplete.add(function () {
+                            game.add.tween(firstBri).to({
+                                x: firstBri.position.x - 45,
+                                y: firstBri.position.y + 32
+                            }, 50 * 3, Phaser.Easing.LINEAR, true).onComplete.add(function () {
+                                game.add.tween(firstBri).to({
+                                    x: firstBri.position.x - 48,
+                                    y: firstBri.position.y - 26
+                                }, 50 * 3, Phaser.Easing.LINEAR, true).onComplete.add(function () {
                                     firstBri.destroy();
                                     animCentrBri();
                                 });
@@ -1314,10 +1383,22 @@ function game2() {
                         firstBri.animations.add('anim', [], 6, true).play();
                         firstBri.scale.x = 0.35;
                         firstBri.scale.y = 0.35;
-                        game.add.tween(firstBri.scale).to({ x: 1.2, y: 1.2 }, 900.00, Phaser.Easing.Linear.None, true, 0, 1000, true);
-                        game.add.tween(firstBri).to({ x: firstBri.position.x - 131, y: firstBri.position.y + 82 }, 150 * 3, Phaser.Easing.LINEAR, true).onComplete.add(function() {
-                            game.add.tween(firstBri).to({ x: firstBri.position.x - 100, y: firstBri.position.y + 0 }, 100 * 3, Phaser.Easing.LINEAR, true).onComplete.add(function() {
-                                game.add.tween(firstBri).to({ x: firstBri.position.x + 46, y: firstBri.position.y - 27 }, 50 * 3, Phaser.Easing.LINEAR, true).onComplete.add(function() {
+                        game.add.tween(firstBri.scale).to({
+                            x: 1.2,
+                            y: 1.2
+                        }, 900.00, Phaser.Easing.Linear.None, true, 0, 1000, true);
+                        game.add.tween(firstBri).to({
+                            x: firstBri.position.x - 131,
+                            y: firstBri.position.y + 82
+                        }, 150 * 3, Phaser.Easing.LINEAR, true).onComplete.add(function () {
+                            game.add.tween(firstBri).to({
+                                x: firstBri.position.x - 100,
+                                y: firstBri.position.y + 0
+                            }, 100 * 3, Phaser.Easing.LINEAR, true).onComplete.add(function () {
+                                game.add.tween(firstBri).to({
+                                    x: firstBri.position.x + 46,
+                                    y: firstBri.position.y - 27
+                                }, 50 * 3, Phaser.Easing.LINEAR, true).onComplete.add(function () {
                                     firstBri.destroy();
                                     animCentrBri();
                                 });
@@ -1330,10 +1411,22 @@ function game2() {
                         firstBri.animations.add('anim', [], 6, true).play();
                         firstBri.scale.x = 0.35;
                         firstBri.scale.y = 0.35;
-                        game.add.tween(firstBri.scale).to({ x: 1.2, y: 1.2 }, 900.00, Phaser.Easing.Linear.None, true, 0, 1000, true);
-                        game.add.tween(firstBri).to({ x: firstBri.position.x - 225, y: firstBri.position.y - 61 }, 230 * 3, Phaser.Easing.LINEAR, true).onComplete.add(function() {
-                            game.add.tween(firstBri).to({ x: firstBri.position.x - 8, y: firstBri.position.y - 25 }, 20 * 3, Phaser.Easing.LINEAR, true).onComplete.add(function() {
-                                game.add.tween(firstBri).to({ x: firstBri.position.x + 50, y: firstBri.position.y - 25 }, 50 * 3, Phaser.Easing.LINEAR, true).onComplete.add(function() {
+                        game.add.tween(firstBri.scale).to({
+                            x: 1.2,
+                            y: 1.2
+                        }, 900.00, Phaser.Easing.Linear.None, true, 0, 1000, true);
+                        game.add.tween(firstBri).to({
+                            x: firstBri.position.x - 225,
+                            y: firstBri.position.y - 61
+                        }, 230 * 3, Phaser.Easing.LINEAR, true).onComplete.add(function () {
+                            game.add.tween(firstBri).to({
+                                x: firstBri.position.x - 8,
+                                y: firstBri.position.y - 25
+                            }, 20 * 3, Phaser.Easing.LINEAR, true).onComplete.add(function () {
+                                game.add.tween(firstBri).to({
+                                    x: firstBri.position.x + 50,
+                                    y: firstBri.position.y - 25
+                                }, 50 * 3, Phaser.Easing.LINEAR, true).onComplete.add(function () {
                                     firstBri.destroy();
                                     animCentrBri();
                                 });
@@ -1347,10 +1440,13 @@ function game2() {
         function animCentrBri() {
             secondBri = game.add.sprite(334 + 178, 296 + 149, 'bri_big_anim_middle');
             secondBri.anchor.setTo(0.5, 0.5);
-            secondBri.animations.add('anim', [0, 1, 2, 3, 0, 1, 2, 3], 7, false).play().onComplete.add(function() {
+            secondBri.animations.add('anim', [0, 1, 2, 3, 0, 1, 2, 3], 7, false).play().onComplete.add(function () {
                 secondBri.animations.add('anim', [0, 1, 2, 3, 0, 1, 2, 3], 7, false).play();
                 let secondBriX = -(77 - 11 * ((mulFreespin + 1) % 10));
-                game.add.tween(secondBri).to({ x: 512 + secondBriX, y: 435 }, Math.abs(secondBriX) * 2, Phaser.Easing.LINEAR, true).onComplete.add(function() {
+                game.add.tween(secondBri).to({
+                    x: 512 + secondBriX,
+                    y: 435
+                }, Math.abs(secondBriX) * 2, Phaser.Easing.LINEAR, true).onComplete.add(function () {
                     secondBri.destroy();
                     thirdBri = game.add.sprite(334 + 178 + secondBriX, 435, 'bri_big_anim_finish');
                     thirdBri.anchor.setTo(0.5, 0.5);
@@ -1367,8 +1463,11 @@ function game2() {
                     } else {
                         longX = 189;
                     }
-                    game.add.tween(thirdBri.scale).to({ x: 0.14, y: 0.14 }, 900, Phaser.Easing.LINEAR, true);
-                    game.add.tween(thirdBri).to({ x: longX, y: longY }, 900, Phaser.Easing.LINEAR, true).onComplete.add(function() {
+                    game.add.tween(thirdBri.scale).to({x: 0.14, y: 0.14}, 900, Phaser.Easing.LINEAR, true);
+                    game.add.tween(thirdBri).to({
+                        x: longX,
+                        y: longY
+                    }, 900, Phaser.Easing.LINEAR, true).onComplete.add(function () {
                         thirdBri.destroy();
                         if (mulFreespin % 10 === 0) {
                             multiBriText.visible = true;
@@ -1383,26 +1482,26 @@ function game2() {
                         multiplierText.setText(mulFreespin);
                         multiplierText.visible = false;
                         freeSpinMulti.play();
-                        setTimeout(function() {
+                        setTimeout(function () {
                             multiplierText.visible = true;
-                            setTimeout(function() {
+                            setTimeout(function () {
                                 multiplierText.visible = false;
-                                setTimeout(function() {
+                                setTimeout(function () {
                                     multiplierText.visible = true;
-                                    setTimeout(function() {
+                                    setTimeout(function () {
                                         multiplierText.visible = false;
-                                        setTimeout(function() {
+                                        setTimeout(function () {
                                             multiplierText.visible = true;
-                                            setTimeout(function() {
+                                            setTimeout(function () {
                                                 multiplierText.visible = false;
-                                                setTimeout(function() {
+                                                setTimeout(function () {
                                                     multiplierText.visible = true;
-                                                    setTimeout(function() {
+                                                    setTimeout(function () {
                                                         multiplierText.visible = false;
-                                                        setTimeout(function() {
+                                                        setTimeout(function () {
                                                             multiplierText.visible = true;
                                                             if (briArr.length === curBri + 1) {
-                                                                setTimeout(function() {
+                                                                setTimeout(function () {
                                                                     if (freeSpinCount > 0) {
                                                                         freeSpinStart();
                                                                     }
@@ -1485,7 +1584,7 @@ function game2() {
                 squareArrImg[lineNumber - 1][i - 1].visible = true;
                 game2.copyCell[squareArr[lineNumber - 1][i - 1]].visible = true;
             }
-            setTimeout(function() {
+            setTimeout(function () {
                 if (stopWinAnim == true) {
                     return;
                 }
@@ -1494,7 +1593,7 @@ function game2() {
                 for (var i = 1; i <= sizeLine; ++i) {
                     squareArrImg[lineNumber - 1][i - 1].tint = 0x999999;
                 }
-                setTimeout(function() {
+                setTimeout(function () {
                     if (stopWinAnim == true) {
                         return;
                     }
@@ -1503,7 +1602,7 @@ function game2() {
                         squareArrImg[lineNumber - 1][i - 1].tint = 0xffffff;
                     }
                     winText.visible = true;
-                    setTimeout(function() {
+                    setTimeout(function () {
                         if (stopWinAnim == true) {
                             return;
                         }
@@ -1512,7 +1611,7 @@ function game2() {
                         for (var i = 1; i <= sizeLine; ++i) {
                             squareArrImg[lineNumber - 1][i - 1].tint = 0x999999;
                         }
-                        setTimeout(function() {
+                        setTimeout(function () {
                             if (stopWinAnim == true) {
                                 return;
                             }
@@ -1672,6 +1771,7 @@ function game2() {
             multiBriText.anchor.setTo(0.5, 0.5);
             multiBriText.visible = false;
         }
+
         var helpPageCurent = 1;
         var paytablePageCurent = 1;
 
@@ -1683,12 +1783,12 @@ function game2() {
             return_to_game = game.add.sprite(883, 506, 'return');
             return_to_game.inputEnabled = true;
             return_to_game.input.useHandCursor = true;
-            return_to_game.events.onInputDown.add(function(click, pointer) {
+            return_to_game.events.onInputDown.add(function (click, pointer) {
                 if (pointer.button !== 0 && pointer.button !== undefined)
                     return;
                 return_to_game.loadTexture('return_p');
             });
-            return_to_game.events.onInputUp.add(function(click, pointer) {
+            return_to_game.events.onInputUp.add(function (click, pointer) {
                 if (pointer.button !== 0 && pointer.button !== undefined)
                     return;
                 return_to_game.loadTexture('return');
@@ -1703,12 +1803,12 @@ function game2() {
             help_next = game.add.sprite(883, 85, 'moreHelp');
             help_next.inputEnabled = true;
             help_next.input.useHandCursor = true;
-            help_next.events.onInputDown.add(function(click, pointer) {
+            help_next.events.onInputDown.add(function (click, pointer) {
                 if (pointer.button !== 0 && pointer.button !== undefined)
                     return;
                 help_next.loadTexture('moreHelp_p');
             });
-            help_next.events.onInputUp.add(function(click, pointer) {
+            help_next.events.onInputUp.add(function (click, pointer) {
                 if (pointer.button !== 0 && pointer.button !== undefined)
                     return;
                 help_next.loadTexture('moreHelp');
@@ -1718,12 +1818,12 @@ function game2() {
             paytable_next = game.add.sprite(883, 85, 'moreHelp');
             paytable_next.inputEnabled = true;
             paytable_next.input.useHandCursor = true;
-            paytable_next.events.onInputDown.add(function(click, pointer) {
+            paytable_next.events.onInputDown.add(function (click, pointer) {
                 if (pointer.button !== 0 && pointer.button !== undefined)
                     return;
                 paytable_next.loadTexture('moreHelp_p');
             });
-            paytable_next.events.onInputUp.add(function(click, pointer) {
+            paytable_next.events.onInputUp.add(function (click, pointer) {
                 if (pointer.button !== 0 && pointer.button !== undefined)
                     return;
                 paytable_next.loadTexture('moreHelp');
@@ -1775,7 +1875,7 @@ function game2() {
                 maxBetSpin.input.useHandCursor = false;
                 maxBetSpin.visible = false;
             } else {
-                buttonsArray.forEach(function(item) {
+                buttonsArray.forEach(function (item) {
                     item[0].inputEnabled = false;
                     item[0].input.useHandCursor = false;
                 })
@@ -1810,12 +1910,13 @@ function game2() {
                 maxBetSpin.visible = true;
 
             } else {
-                buttonsArray.forEach(function(item) {
+                buttonsArray.forEach(function (item) {
                     item[0].inputEnabled = true;
                     item[0].input.useHandCursor = true;
                 })
             }
         }
+
         var allwinUpd = 0;
         game2.ticker = game.add.tileSprite(0, 799, 1154, 31, 'ticker');
 
@@ -1825,7 +1926,7 @@ function game2() {
             allwinUpd = allWin;
             balanceSongAudio.play();
             balanceUpdateStatus2 = true;
-            (function() {
+            (function () {
                 if (x < allwinUpd) {
                     interval = 1000 / 20;
                     if (allwinUpd > 10000) {
@@ -1848,7 +1949,7 @@ function game2() {
                     allWinOld = allWinOld + allwinUpd;
                     bonusText.setText(allWinOld);
                     bottomText.visible = false;
-                    setTimeout(function() {
+                    setTimeout(function () {
                         if (freeSpinCount > 0) {
                             if (briStatus) {
                                 bottomText.visible = true;
@@ -1879,7 +1980,7 @@ function game2() {
             allwinUpd = allWinOld;
             balanceSongAudio.play();
             balanceUpdateStatus2 = true;
-            (function() {
+            (function () {
                 if (x < allwinUpd) {
                     interval = 1000 / 20;
                     if (allwinUpd > 10000) {
@@ -1911,7 +2012,7 @@ function game2() {
                     paid.setText(allWinOld);
                     winTextCenter.setText(allWinOld);
                     bottomText.visible = false;
-                    setTimeout(function() {
+                    setTimeout(function () {
                         freeSpinBgSong.stop();
                         briFinishSound.play();
                         closeFreespins();
@@ -1921,17 +2022,17 @@ function game2() {
         }
 
         function closeFreespins() {
-            setTimeout(function() {
+            setTimeout(function () {
                 winTextCenter.visible = false;
                 createdStarsStatus = false;
                 createdStarsMiniStatus = false;
-                game.add.tween(freespinStartBG).to({ alpha: 0 }, 1000, "Linear", true).onComplete.add(function() {
+                game.add.tween(freespinStartBG).to({alpha: 0}, 1000, "Linear", true).onComplete.add(function () {
                     big_red_border.visible = false;
                     freesponFinishBGText.visible = false;
                     briLeft.visible = false;
                     briRight.visible = false;
                     moveBgOnTop();
-                    setTimeout(function() {
+                    setTimeout(function () {
                         afterFreespinStatus = true;
                         game.state.start('game1');
                     }, 1000);
@@ -1956,7 +2057,7 @@ function game2() {
             briRight = game.add.sprite(784, 475, 'bri_anim_freespin');
             briRight.animations.add('anim', [], 8, true).play();
 
-            game.add.tween(freespinStartBG).to({ alpha: 1 }, 1000, "Linear", true).onComplete.add(function() {
+            game.add.tween(freespinStartBG).to({alpha: 1}, 1000, "Linear", true).onComplete.add(function () {
                 winTextCenter = game.add.text(513, 535, '0', {
                     font: '99px "AmazoneBT-Regular"',
                     fill: '#ff4921',
@@ -2012,24 +2113,24 @@ function game2() {
         }
 
         function moveElementFromBottom(elem) {
-            game.add.tween(elem).to({ y: elem.position.y - 94 }, 500, "Linear", true);
+            game.add.tween(elem).to({y: elem.position.y - 94}, 500, "Linear", true);
         }
 
         function moveElementFromCenter(elem) {
-            game.add.tween(elem).to({ y: elem.position.y - 204 }, 500, "Linear", true);
+            game.add.tween(elem).to({y: elem.position.y - 204}, 500, "Linear", true);
         }
 
         function moveElementFromLeftSide(elem) {
-            game.add.tween(elem).to({ x: elem.position.x - 238 }, 500, "Linear", true);
+            game.add.tween(elem).to({x: elem.position.x - 238}, 500, "Linear", true);
         }
 
         function moveElementFromRightSide(elem) {
-            game.add.tween(elem).to({ x: elem.position.x + 244 }, 500, "Linear", true);
+            game.add.tween(elem).to({x: elem.position.x + 244}, 500, "Linear", true);
         }
     };
 
 
-    game2.update = function() {
+    game2.update = function () {
         if (cursorAnimSprite !== null) {
             cursorAnimSprite.position.x = game.input.x;
             cursorAnimSprite.position.y = game.input.y;
@@ -2048,7 +2149,8 @@ function game2() {
         }
         if (game2.spinStatus5) {
             game2.bars[4].tilePosition.y += 40;
-        };
+        }
+        ;
         game2.ticker.tilePosition.x += 0.5;
     };
 
