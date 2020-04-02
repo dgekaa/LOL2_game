@@ -468,6 +468,29 @@ class StatisticsCalculatorTool implements ITool
         return $statisticOfWinBonusCombinations;
     }
 
+    public function calculateStatisticOfWinBonusCombinationsInFeatureGame(
+        array $statisticOfWinBonusCombinationsInFeatureGame, // [кол-во_символов_в_комбинации => [кол-во_джокеров_в_комбинации => кол-во_выпадений]]
+        array $payoffsForBonus, // [['symbol' => , 'count' => , 'winning' => ], ...]
+        array $table
+    ): array {
+        $jockerCounter = 0;
+        foreach ($table as $symbol) {
+            if ($symbol === 0) {
+                $jockerCounter += 1;
+
+                if (empty($payoffsForBonus)) {
+                    $statisticOfWinBonusCombinationsInFeatureGame[0][$jockerCounter] += 1;
+                }
+            }
+        }
+
+        foreach ($payoffsForBonus as $payoffForBonus) {
+            $statisticOfWinBonusCombinationsInFeatureGame[$payoffForBonus['count']][$jockerCounter] += 1;
+        }
+
+        return $statisticOfWinBonusCombinationsInFeatureGame;
+    }
+
     public function calculateDroppedBonusSymbolsInOneSpin(
         array $droppedBonusSymbolsInOneSpin,
         array $table

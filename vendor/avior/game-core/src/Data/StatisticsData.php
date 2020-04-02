@@ -126,6 +126,10 @@ class StatisticsData implements IData
     * статистика выигршных комбинаций из-за которых началась featureGame */
     public $statisticOfWinBonusCombinations = [[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0]];
 
+    public $statisticOfWinBonusCombinationsInFeatureGame = [[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0]];
+
+    public $diamondsInMainGame = [];
+    public $diamondsInFeatureGame = [];
 
     /** @var array [кол-во_бонусных_сомволов_выпавших_за_ход => кол-во_выпадений]
     * статистика кол-ва бонусных символов выпадающих за ход */

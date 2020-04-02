@@ -98,6 +98,9 @@ class BridgeController extends Controller
         if ($platformId === 2 || $platformId === '2') {
             $url = 'https://play.devbet.live/';
         }
+        if ($platformId === 3 || $platformId === '3') {
+            $url = 'https://donateandplay.com/';
+        }
 
         $responseGetBalance = Curl::to("{$url}getBalance?token={$token}&userId={$userId}&gameId={$gameId}&platformId={$platformId}")
         ->post();
@@ -136,6 +139,9 @@ class BridgeController extends Controller
 
         if ($platformId === 2 || $platformId === '2') {
             $url = 'https://play.devbet.live/';
+        }
+        if ($platformId === 3 || $platformId === '3') {
+            $url = 'https://donateandplay.com/';
         }
 
         $platformId = 1;
