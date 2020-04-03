@@ -97,7 +97,7 @@
                         @endforeach
                         <br>
                         @foreach ($data->userStatisticsData->statisticOfWinCombinationsInMainGame[9] as $key => $count)
-                            @if($key > 2)
+                            @if($key > 1)
                                 Yacht ({{$key}}) {{$count}}<br>
                             @endif
                         @endforeach
