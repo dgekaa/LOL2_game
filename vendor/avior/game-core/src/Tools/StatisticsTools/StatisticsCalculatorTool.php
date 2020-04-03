@@ -495,7 +495,7 @@ class StatisticsCalculatorTool implements ITool
     {
         $spinDiamonds = 0;
         foreach ($table as $symbol) {
-            if ($symbol == 0) {
+            if ($symbol === 0) {
                 $spinDiamonds++;
             }
         }

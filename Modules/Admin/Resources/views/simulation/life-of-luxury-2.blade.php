@@ -253,8 +253,13 @@
                                 @php
                                     $diamondsInMainGame = json_decode(json_encode($data->userStatisticsData->diamondsInMainGame), true);
                                     unset($diamondsInMainGame[0]);
+
+                                    $diamondsSumInMainGame = 0;
+                                    foreach ($diamondsInMainGame as $key => $diamond) {
+                                        $diamondsSumInMainGame += $diamond * $key;
+                                    }
                                 @endphp
-                                {{ array_sum($diamondsInMainGame) }}
+                                {{ $diamondsSumInMainGame }}
                             </td>
                         </tr>
                         @for($key = 3; $key > 0; $key--)
@@ -277,8 +282,13 @@
                                 @php
                                     $diamondsInFeatureGame = json_decode(json_encode($data->userStatisticsData->diamondsInFeatureGame), true);
                                     unset($diamondsInFeatureGame[0]);
+
+                                    $diamondsSumInFeatureGame = 0;
+                                    foreach ($diamondsInFeatureGame as $key => $diamond) {
+                                        $diamondsSumInFeatureGame += $diamond * $key;
+                                    }
                                 @endphp
-                                {{ array_sum($diamondsInFeatureGame) }}
+                                {{ $diamondsSumInFeatureGame }}
                             </td>
                         </tr>
                         @for($key = 3; $key > 0; $key--)
