@@ -190,11 +190,12 @@
                         2 coins + 1 diamonds: {{$data->userStatisticsData->statisticOfWinBonusCombinations[3][1]}}<br>
                         1 coins + 2 diamonds: {{$data->userStatisticsData->statisticOfWinBonusCombinations[3][2]}}<br>
                         <br>
-                        5 diamonds: {{ $data->userStatisticsData->statisticOfWinBonusCombinations[0][0] }}<br>
-                        0 coins + 1 diamonds: {{ $data->userStatisticsData->statisticOfWinBonusCombinations[0][1] }}<br>
-                        0 coins + 2 diamonds: {{ $data->userStatisticsData->statisticOfWinBonusCombinations[0][2] }}<br>
-                        0 coins + 3 diamonds: {{ $data->userStatisticsData->statisticOfWinBonusCombinations[0][3] }}<br>
-                        0 coins + 4 diamonds: {{ $data->userStatisticsData->statisticOfWinBonusCombinations[0][4] }}<br>
+                        @php
+                            $diamondsWithZeroCoins = json_decode(json_encode($data->userStatisticsData->diamondsWithZeroCoins), true);
+                        @endphp
+                        @for ($key = 1; $key < 4; $key++)
+                            0 coins + {{ $key }} diamonds: {{ array_key_exists($key, $diamondsWithZeroCoins) ? $diamondsWithZeroCoins[$key] : 0 }}<br>
+                        @endfor
                         <br>
                     @endif
 

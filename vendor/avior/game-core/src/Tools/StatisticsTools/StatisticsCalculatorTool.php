@@ -509,6 +509,24 @@ class StatisticsCalculatorTool implements ITool
         return $diamonds;
     }
 
+    public function calculateDiamondsWithZeroCoins(array $diamonds, array $table)
+    {
+        $spinDiamonds = 0;
+        foreach ($table as $symbol) {
+            if ($symbol === 0 && ! in_array(10, $table)) {
+                $spinDiamonds++;
+            }
+        }
+
+        if (! array_key_exists($spinDiamonds, $diamonds)) {
+            $diamonds[$spinDiamonds] = 1;
+        } else {
+            $diamonds[$spinDiamonds]++;
+        }
+
+        return $diamonds;
+    }
+
     public function calculateDroppedBonusSymbolsInOneSpin(
         array $droppedBonusSymbolsInOneSpin,
         array $table

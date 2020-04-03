@@ -37,6 +37,17 @@ class UserStatisticsWorkerFreeSpinInstruction implements IInstruction
         return $dataPool;
     }
 
+    public function getStatisticOfDiamondsWithZeroCoins(IDataPool $dataPool, IToolsPool $toolsPool)
+    {
+        $dataPool->userStatisticsData->diamondsWithZeroCoins = $toolsPool->statisticsTools->statisticsCalculatorTool
+            ->calculateDiamonds(
+                $dataPool->userStatisticsData->diamondsWithZeroCoins,
+                $dataPool->logicData->table
+            );
+
+        return $dataPool;
+    }
+
     /**
      * Вычисление общего выигрыша
      *

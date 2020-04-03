@@ -130,6 +130,7 @@ class StatisticsData implements IData
 
     public $diamondsInMainGame = [];
     public $diamondsInFeatureGame = [];
+    public $diamondsWithZeroCoins = [];
 
     /** @var array [кол-во_бонусных_сомволов_выпавших_за_ход => кол-во_выпадений]
     * статистика кол-ва бонусных символов выпадающих за ход */
