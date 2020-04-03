@@ -97,7 +97,7 @@
                         @endforeach
                         <br>
                         @foreach ($data->userStatisticsData->statisticOfWinCombinationsInMainGame[9] as $key => $count)
-                            @if($key > 2)
+                            @if($key > 1)
                                 Yacht ({{$key}}) {{$count}}<br>
                             @endif
                         @endforeach
@@ -250,7 +250,16 @@
                                 Diamonds in the main game
                             </td>
                             <td>
-                                {{ array_sum($data->userStatisticsData->statisticOfWinBonusCombinations[0]) }}
+                                @php
+                                    $diamondsInMainGame = json_decode(json_encode($data->userStatisticsData->diamondsInMainGame), true);
+                                    unset($diamondsInMainGame[0]);
+
+                                    $diamondsSumInMainGame = 0;
+                                    foreach ($diamondsInMainGame as $key => $diamond) {
+                                        $diamondsSumInMainGame += $diamond * $key;
+                                    }
+                                @endphp
+                                {{ $diamondsSumInMainGame }}
                             </td>
                         </tr>
                         @for($key = 3; $key > 0; $key--)
@@ -259,29 +268,38 @@
                                     {{ $key }} Diamonds
                                 </td>
                                 <td>
-                                    {{ $data->userStatisticsData->statisticOfWinBonusCombinations[0][$key] }}
+                                    {{ array_key_exists($key, $diamondsInMainGame) ? $diamondsInMainGame[$key] : 0 }}
                                 </td>
                             </tr>
                         @endfor
-                            <td colspan="4">&nbsp;</td>
+                        <td colspan="4">&nbsp;</td>
                         </tr>
                         <tr>
                             <td>
                                 Diamonds in the FS
                             </td>
                             <td>
-                                {{ array_sum($data->userStatisticsData->statisticOfWinBonusCombinationsInFeatureGame[0]) }}
+                                @php
+                                    $diamondsInFeatureGame = json_decode(json_encode($data->userStatisticsData->diamondsInFeatureGame), true);
+                                    unset($diamondsInFeatureGame[0]);
+
+                                    $diamondsSumInFeatureGame = 0;
+                                    foreach ($diamondsInFeatureGame as $key => $diamond) {
+                                        $diamondsSumInFeatureGame += $diamond * $key;
+                                    }
+                                @endphp
+                                {{ $diamondsSumInFeatureGame }}
                             </td>
                         </tr>
                         @for($key = 3; $key > 0; $key--)
-                        <tr>
-                            <td>
-                                {{ $key }} Diamonds
-                            </td>
-                            <td>
-                                {{ $data->userStatisticsData->statisticOfWinBonusCombinationsInFeatureGame[0][$key] }}
-                            </td>
-                        </tr>
+                            <tr>
+                                <td>
+                                    {{ $key }} Diamonds
+                                </td>
+                                <td>
+                                    {{ array_key_exists($key, $diamondsInFeatureGame) ? $diamondsInFeatureGame[$key] : 0 }}
+                                </td>
+                            </tr>
                         @endfor
                         <tr>
                             <td colspan="4">&nbsp;</td>

@@ -28,18 +28,11 @@ class UserStatisticsWorkerFreeSpinInstruction implements IInstruction
 
     public function getStatisticOfDiamondsInFeatureGame(IDataPool $dataPool, IToolsPool $toolsPool)
     {
-        $spinDiamonds = 0;
-        foreach ($dataPool->logicData->table as $symbol) {
-            if ($symbol == 0) {
-                $spinDiamonds++;
-            }
-        }
-
-        if (! array_key_exists($spinDiamonds, $dataPool->userStatisticsData->diamondsInFeatureGame)) {
-            $dataPool->userStatisticsData->diamondsInFeatureGame[(string) $spinDiamonds] = 1;
-        } else {
-            $dataPool->userStatisticsData->diamondsInFeatureGame[(string) $spinDiamonds]++;
-        }
+        $dataPool->userStatisticsData->diamondsInFeatureGame = $toolsPool->statisticsTools->statisticsCalculatorTool
+            ->calculateDiamonds(
+                $dataPool->userStatisticsData->diamondsInFeatureGame,
+                $dataPool->logicData->table
+            );
 
         return $dataPool;
     }

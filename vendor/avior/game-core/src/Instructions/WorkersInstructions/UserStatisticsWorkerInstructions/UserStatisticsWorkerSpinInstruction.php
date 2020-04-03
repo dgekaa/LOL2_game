@@ -504,18 +504,11 @@ class UserStatisticsWorkerSpinInstruction implements IInstruction
 
     public function getStatisticOfDiamondsInMainGame(IDataPool $dataPool, IToolsPool $toolsPool)
     {
-        $spinDiamonds = 0;
-        foreach ($dataPool->logicData->table as $symbol) {
-            if ($symbol == 0) {
-                $spinDiamonds++;
-            }
-        }
-
-        if (! array_key_exists($spinDiamonds, $dataPool->userStatisticsData->diamondsInMainGame)) {
-            $dataPool->userStatisticsData->diamondsInMainGame[(string) $spinDiamonds] = 1;
-        } else {
-            $dataPool->userStatisticsData->diamondsInMainGame[(string) $spinDiamonds]++;
-        }
+        $dataPool->userStatisticsData->diamondsInMainGame = $toolsPool->statisticsTools->statisticsCalculatorTool
+            ->calculateDiamonds(
+                $dataPool->userStatisticsData->diamondsInMainGame,
+                $dataPool->logicData->table
+            );
 
         return $dataPool;
     }
