@@ -114,10 +114,6 @@ function game1() {
         colorLine: ['#009800', '#fffc00', '#0004ff', '#ff0000', '#ff00d1', '#00fa6d', '#89ff00', '#ff7f00', '#9400ff', '#0004ff', '#009300', '#ff3900', '#ff3900', '#9400ff', '#89ff00']
     };
 
-    game1.preload = function () {
-        game.load.image('watermark', 'img/watermark.png');
-    };
-
     game1.create = function () {
         if (game.sound.usingWebAudio &&
             game.sound.context.state === 'suspended') {
@@ -2716,7 +2712,7 @@ function game1() {
             checkBalance();
             firstStartGame = false;
             document.body.querySelector('canvas').addEventListener("keyup", function (event) {
-                if (event.keyCode === 32 && window.navigator.onLine) {
+                if (event.keyCode === 32) {
                     if (!errorStatus) {
                         if (curGame === 1) {
                             if (startButton.visible) {
@@ -2855,14 +2851,7 @@ function game1() {
             } else {
                 checkScore();
             }
-        }
-        ;
-
-        if (demo === 'demo') {
-            var watermark = game.add.sprite(0, 0, 'watermark');
-            watermark.alpha = 0.2;
-        }
-
+        };
     };
 
     game1.update = function () {

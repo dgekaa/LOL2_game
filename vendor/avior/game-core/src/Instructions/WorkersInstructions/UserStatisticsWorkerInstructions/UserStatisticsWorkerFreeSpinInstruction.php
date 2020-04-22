@@ -11,43 +11,6 @@ use Avior\GameCore\Base\IToolsPool;
  */
 class UserStatisticsWorkerFreeSpinInstruction implements IInstruction
 {
-
-    public function getStatisticOfWinBonusCombinationsInFeatureGame(
-        IDataPool $dataPool,
-        IToolsPool $toolsPool
-    ): IDataPool {
-        $dataPool->userStatisticsData->statisticOfWinBonusCombinationsInFeatureGame = $toolsPool->statisticsTools->statisticsCalculatorTool
-            ->calculateStatisticOfWinBonusCombinationsInFeatureGame(
-                $dataPool->userStatisticsData->statisticOfWinBonusCombinationsInFeatureGame,
-                $dataPool->logicData->payoffsForBonus,
-                $dataPool->logicData->table
-            );
-
-        return $dataPool;
-    }
-
-    public function getStatisticOfDiamondsInFeatureGame(IDataPool $dataPool, IToolsPool $toolsPool)
-    {
-        $dataPool->userStatisticsData->diamondsInFeatureGame = $toolsPool->statisticsTools->statisticsCalculatorTool
-            ->calculateDiamonds(
-                $dataPool->userStatisticsData->diamondsInFeatureGame,
-                $dataPool->logicData->table
-            );
-
-        return $dataPool;
-    }
-
-    public function getStatisticOfDiamondsWithZeroCoins(IDataPool $dataPool, IToolsPool $toolsPool)
-    {
-        $dataPool->userStatisticsData->diamondsWithZeroCoins = $toolsPool->statisticsTools->statisticsCalculatorTool
-            ->calculateDiamonds(
-                $dataPool->userStatisticsData->diamondsWithZeroCoins,
-                $dataPool->logicData->table
-            );
-
-        return $dataPool;
-    }
-
     /**
      * Вычисление общего выигрыша
      *
