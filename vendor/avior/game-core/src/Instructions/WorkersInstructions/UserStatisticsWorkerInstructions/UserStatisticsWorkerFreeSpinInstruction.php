@@ -11,6 +11,7 @@ use Avior\GameCore\Base\IToolsPool;
  */
 class UserStatisticsWorkerFreeSpinInstruction implements IInstruction
 {
+
     /**
      * Вычисление общего выигрыша
      *

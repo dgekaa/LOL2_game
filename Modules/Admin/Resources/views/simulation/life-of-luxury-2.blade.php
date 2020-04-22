@@ -97,7 +97,7 @@
                         @endforeach
                         <br>
                         @foreach ($data->userStatisticsData->statisticOfWinCombinationsInMainGame[9] as $key => $count)
-                            @if($key > 2)
+                            @if($key > 1)
                                 Yacht ({{$key}}) {{$count}}<br>
                             @endif
                         @endforeach
@@ -190,17 +190,139 @@
                         2 coins + 1 diamonds: {{$data->userStatisticsData->statisticOfWinBonusCombinations[3][1]}}<br>
                         1 coins + 2 diamonds: {{$data->userStatisticsData->statisticOfWinBonusCombinations[3][2]}}<br>
                         <br>
-                        5 diamonds: {{ $data->userStatisticsData->statisticOfWinBonusCombinations[0][0] }}<br>
-                        0 coins + 1 diamonds: {{ $data->userStatisticsData->statisticOfWinBonusCombinations[0][1] }}<br>
-                        0 coins + 2 diamonds: {{ $data->userStatisticsData->statisticOfWinBonusCombinations[0][2] }}<br>
-                        0 coins + 3 diamonds: {{ $data->userStatisticsData->statisticOfWinBonusCombinations[0][3] }}<br>
-                        0 coins + 4 diamonds: {{ $data->userStatisticsData->statisticOfWinBonusCombinations[0][4] }}<br>
+                        @php
+                            $diamondsWithZeroCoins = json_decode(json_encode($data->userStatisticsData->diamondsWithZeroCoins), true);
+                        @endphp
+                        @for ($key = 1; $key < 4; $key++)
+                            0 coins + {{ $key }} diamonds: {{ array_key_exists($key, $diamondsWithZeroCoins) ? $diamondsWithZeroCoins[$key] : 0 }}<br>
+                        @endfor
                         <br>
                     @endif
 
                     Minimum number of diamonds from the freespins game @if (isset($data->userStatisticsData->minDroppendDiamandsInFeatureGame)) {{$data->userStatisticsData->minDroppendDiamandsInFeatureGame}} @else 0 @endif <br>
                     Maximum number of diamonds from the freespins game @if (isset($data->userStatisticsData->maxDroppendDiamandsInFeatureGame)) {{$data->userStatisticsData->maxDroppendDiamandsInFeatureGame}} @else 0 @endif <br>
+                    <br><br>
 
+                    @if (isset($data->userStatisticsData->droppedBonusSymbolsInOneSpinInMainGame))
+                    <table border="1" cellspacing="2" width="500">
+                            <tr>
+                                <td>
+                                    Coins in the main game
+                                </td>
+                                <td>
+                                    {{ $data->userStatisticsData->statisticsOfDroppedSymbolsInMainGame[10] }}
+                                </td>
+                            </tr>
+                            @for($key = 5; $key > 0; $key--)
+                                <tr>
+                                    <td>
+                                        {{$key}} Coins
+                                    </td>
+                                    <td>
+                                        {{$data->userStatisticsData->droppedBonusSymbolsInOneSpinInMainGame[$key]}}
+                                    </td>
+                                </tr>
+                            @endfor
+                        <tr>
+                            <td colspan="4">&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Coins in the FS
+                            </td>
+                            <td>
+                                {{ $data->userStatisticsData->statisticsOfDroppedSymbolsInFeatureGame[10] }}
+                            </td>
+                        </tr>
+                        @for($key = 5; $key > 0; $key--)
+                            <tr>
+                                <td>
+                                    {{$key}} Coins
+                                </td>
+                                <td>
+                                    {{ $data->userStatisticsData->droppedBonusSymbolsInOneSpinInFeatureGame[$key] }}
+                                </td>
+                            </tr>
+                        @endfor
+                        <tr>
+                            <td colspan="4">&nbsp;</td>
+                        <tr>
+                            <td>
+                                Diamonds in the main game
+                            </td>
+                            <td>
+                                @php
+                                    $diamondsInMainGame = json_decode(json_encode($data->userStatisticsData->diamondsInMainGame), true);
+                                    unset($diamondsInMainGame[0]);
+
+                                    $diamondsSumInMainGame = 0;
+                                    foreach ($diamondsInMainGame as $key => $diamond) {
+                                        $diamondsSumInMainGame += $diamond * $key;
+                                    }
+                                @endphp
+                                {{ $diamondsSumInMainGame }}
+                            </td>
+                        </tr>
+                        @for($key = 3; $key > 0; $key--)
+                            <tr>
+                                <td>
+                                    {{ $key }} Diamonds
+                                </td>
+                                <td>
+                                    {{ array_key_exists($key, $diamondsInMainGame) ? $diamondsInMainGame[$key] : 0 }}
+                                </td>
+                            </tr>
+                        @endfor
+                        <td colspan="4">&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Diamonds in the FS
+                            </td>
+                            <td>
+                                @php
+                                    $diamondsInFeatureGame = json_decode(json_encode($data->userStatisticsData->diamondsInFeatureGame), true);
+                                    unset($diamondsInFeatureGame[0]);
+
+                                    $diamondsSumInFeatureGame = 0;
+                                    foreach ($diamondsInFeatureGame as $key => $diamond) {
+                                        $diamondsSumInFeatureGame += $diamond * $key;
+                                    }
+                                @endphp
+                                {{ $diamondsSumInFeatureGame }}
+                            </td>
+                        </tr>
+                        @for($key = 3; $key > 0; $key--)
+                            <tr>
+                                <td>
+                                    {{ $key }} Diamonds
+                                </td>
+                                <td>
+                                    {{ array_key_exists($key, $diamondsInFeatureGame) ? $diamondsInFeatureGame[$key] : 0 }}
+                                </td>
+                            </tr>
+                        @endfor
+                        <tr>
+                            <td colspan="4">&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Min Diamonds Per One FS Game
+                            </td>
+                            <td>
+                                @if (isset($data->userStatisticsData->minDroppendDiamandsInFeatureGame)) {{$data->userStatisticsData->minDroppendDiamandsInFeatureGame}} @else 0 @endif
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Max Diamonds Per One FS Game
+                            </td>
+                            <td>
+                                @if (isset($data->userStatisticsData->maxDroppendDiamandsInFeatureGame)) {{$data->userStatisticsData->maxDroppendDiamandsInFeatureGame}} @else 0 @endif
+                            </td>
+                        </tr>
+                    </table>
+                    @endif
                 </div>
             </div>
         </div>

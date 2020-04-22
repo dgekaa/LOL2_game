@@ -2712,7 +2712,7 @@ function game1() {
             checkBalance();
             firstStartGame = false;
             document.body.querySelector('canvas').addEventListener("keyup", function (event) {
-                if (event.keyCode === 32) {
+                if (event.keyCode === 32 && window.navigator.onLine) {
                     if (!errorStatus) {
                         if (curGame === 1) {
                             if (startButton.visible) {
