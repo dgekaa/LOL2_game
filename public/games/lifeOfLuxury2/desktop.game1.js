@@ -187,7 +187,7 @@ function game1() {
             [788, 276],
             [788, 425]
         ];
-        // info = [7, 1, 2, 3, 4, 5, 6, 7, 0, 9, 10, 1, 2, 3, 1];
+        // info = [7, 1, 2, 3, 4, 5, 6, 7, 3, 9, 9, 1, 2, 3, 1];
         animCoinArray = [
             [0, 1, 2, 3, 4, 5, 6, 7],
             [2, 3, 4, 5, 6, 7, 0, 1],
@@ -1412,7 +1412,6 @@ function game1() {
                         squareArrFreespin[i].visible = false;
                         squareArrFreespin[i].tint = 0xffffff;
                     }
-                    freeSpinBgSong.play();
                     freespinStartBG.visible = true;
                     freesponStartBGText.visible = true;
                     freespinStartBG.alpha = 0;
@@ -2313,6 +2312,78 @@ function game1() {
             }
             winSound.loop = true;
             winSound.play();
+            cost
+            f = {
+                "stateData": {
+                    "screen": "featureGame",
+                    "isWin": true,
+                    "isWinOnMain": true,
+                    "isWinOnBonus": true,
+                    "isWinOnFeatureGame": false,
+                    "isDropFeatureGame": true,
+                    "isEndFeatureGame": false,
+                    "moveNumberInFeatureGame": 0,
+                    "prevScreen": "mainGame"
+                },
+                "balanceData": {
+                    "balance": 75,
+                    "totalPayoff": 40,
+                    "payoffByLines": 0,
+                    "payoffByBonus": 40,
+                    "totalWinningsInFeatureGame": 0
+                },
+                "sessionData": {
+                    "eventId": "c01db2d0-89ea-11ea-817b-ad3a179e1746",
+                    "userId": 536,
+                    "gameId": 6,
+                    "mode": "full",
+                    "sessionUuid": "74d564a0-7e52-11ea-be05-c3258778acb6"
+                },
+                "logicData": {
+                    "countSymbolsInGame": 11,
+                    "countOfMovesInFeatureGame": 12,
+                    "lineBet": 1,
+                    "linesInGame": 20,
+                    "table": [6, 8, 10, 5, 3, 10, 8, 2, 9, 2, 5, 10, 9, 1, 6],
+                    "winningLines": [],
+                    "payoffsForBonus": [{"symbol": 10, "count": 3, "winning": 40}],
+                    "payoffsForLines": [],
+                    "winningCells": [],
+                    "multiplier": 2
+                },
+                "longData": {
+                    "stateData": {
+                        "screen": "featureGame",
+                        "isWin": true,
+                        "isWinOnMain": true,
+                        "isWinOnBonus": true,
+                        "isWinOnFeatureGame": false,
+                        "isDropFeatureGame": true,
+                        "isEndFeatureGame": false,
+                        "moveNumberInFeatureGame": 0,
+                        "prevScreen": "mainGame"
+                    },
+                    "balanceData": {
+                        "balance": 75,
+                        "totalPayoff": 40,
+                        "payoffByLines": 0,
+                        "payoffByBonus": 40,
+                        "totalWinningsInFeatureGame": 0
+                    },
+                    "logicData": {
+                        "countSymbolsInGame": 11,
+                        "countOfMovesInFeatureGame": 12,
+                        "lineBet": 1,
+                        "linesInGame": 20,
+                        "table": [6, 8, 10, 5, 3, 10, 8, 2, 9, 2, 5, 10, 9, 1, 6],
+                        "winningLines": [],
+                        "payoffsForBonus": [{"symbol": 10, "count": 3, "winning": 40}],
+                        "payoffsForLines": [],
+                        "winningCells": [],
+                        "multiplier": 2
+                    }
+                }
+            }
             allwinUpd = +allWin;
             spinStatus = false;
             balanceUpdateStatus = true;
@@ -2851,7 +2922,8 @@ function game1() {
             } else {
                 checkScore();
             }
-        };
+        }
+        ;
     };
 
     game1.update = function () {

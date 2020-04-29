@@ -1157,7 +1157,6 @@ var freeSpinCountInit, mulFreespinInit, allWinOldInit, allFreeSpinCountInit;
 var wlValuesFS;
 
 function requestState(data) {
-    console.log(data)
     game1();
     game2();
     if (preloaderStatus) {

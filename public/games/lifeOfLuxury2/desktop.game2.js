@@ -57,6 +57,11 @@ function game2() {
 
             }, this.game.sound, true);
         }
+        coinSound1 = game.add.audio('coin1');
+        coinSound2 = game.add.audio('coin2');
+        coinSound3 = game.add.audio('coin3');
+        coinSound4 = game.add.audio('coin4');
+        coinSound5 = game.add.audio('coin5');
         curGame = 2;
         var mulFreespin = 2;
         var mulFreespinOld = 2;
@@ -73,6 +78,7 @@ function game2() {
         var balanceSongAudio = game.add.audio('balanceSong');
         balanceSongAudio.loop = true;
         var briSoundAudio = game.add.audio('briSound');
+        freeSpinBgSong.play();
         var cellPos = [
             [77, 127],
             [77, 276],
@@ -93,7 +99,8 @@ function game2() {
         for (var i = 1; i <= 15; ++i) {
             game.add.sprite(cellPos[i - 1][0], cellPos[i - 1][1], 'emptyCell');
         }
-        // info = [5, 1, 2, 3, 4, 5, 6, 7, 1, 9, 6, 4, 2, 3, 1];
+        info = [7, 1, 2, 3, 4, 5, 6, 7, 3, 9, 9, 1, 2, 3, 1];
+        info.sort(() => Math.random() - 0.5);
         bg = game.add.sprite(0, 0, 'game.background2');
 
         slotLayer1Group = game.add.group();
@@ -711,6 +718,7 @@ function game2() {
         }
 
         var payoffByBonus;
+        var coinCount = 0;
 
         function parseSpinAnswer(dataSpinRequest) {
             console.log(`Win : ${dataSpinRequest.stateData.isWin}`)
@@ -749,6 +757,7 @@ function game2() {
                 winCellInfoOld = dataArray.longData.logicData['winningCells'];
                 wlValuesFS = dataArray.longData.logicData['payoffsForBonus'];
             }
+            coinCount = 0;
             info = dataArray.logicData.table;
             middlespin(0);
             middlespin(1);
@@ -799,6 +808,11 @@ function game2() {
                     game2.cell[1].loadTexture('cell' + info[0] + '_f');
                     game2.cell[2].loadTexture('cell' + info[1] + '_f');
                     game2.cell[3].loadTexture('cell' + info[2] + '_f');
+                    if (info[0] == 10 || info[1] == 10 || info[2] == 10) {
+                        coinCount = coinCount + 1;
+                        coinSound1.play();
+                    }
+
                     if (info[0] == 0 || info[1] == 0 || info[2] == 0) {
                         briShow.play();
                     } else {
@@ -826,6 +840,15 @@ function game2() {
                     game2.cell[4].loadTexture('cell' + info[3] + '_f');
                     game2.cell[5].loadTexture('cell' + info[4] + '_f');
                     game2.cell[6].loadTexture('cell' + info[5] + '_f');
+                    if (info[3] == 10 || info[4] == 10 || info[5] == 10 || info[3] == 0 || info[4] == 0 || info[5] == 0) {
+                        coinCount = coinCount + 1;
+                        if (coinCount === 1) {
+                            coinSound1.play();
+                        } else {
+                            coinSound2.play();
+                        }
+                    }
+
                     if (info[3] == 0 || info[4] == 0 || info[5] == 0) {
                         briShow.play();
                     } else {
@@ -865,6 +888,17 @@ function game2() {
                         briShow.play();
                     } else {
                         finishSpinSound3.play();
+                    }
+
+                    if (info[6] == 10 || info[7] == 10 || info[8] == 10 || info[6] == 0 || info[7] == 0 || info[8] == 0) {
+                        coinCount = coinCount + 1;
+                        if (coinCount === 1) {
+                            coinSound1.play();
+                        } else if (coinCount === 2) {
+                            coinSound2.play();
+                        } else {
+                            coinSound3.play();
+                        }
                     }
                     endspin(number);
                 }, 1800);
@@ -908,6 +942,19 @@ function game2() {
                         briShow.play();
                     } else {
                         finishSpinSound4.play();
+                    }
+
+                    if (info[9] == 10 || info[10] == 10 || info[11] == 10 || info[9] == 0 || info[10] == 0 || info[11] == 0) {
+                        coinCount = coinCount + 1;
+                        if (coinCount === 1) {
+                            coinSound1.play();
+                        } else if (coinCount === 2) {
+                            coinSound2.play();
+                        } else if (coinCount === 3) {
+                            coinSound3.play();
+                        } else {
+                            coinSound4.play();
+                        }
                     }
                     endspin(number);
                 }, 2250);
@@ -959,6 +1006,21 @@ function game2() {
                         briShow.play();
                     } else {
                         finishSpinSound5.play();
+                    }
+
+                    if (info[12] == 10 || info[13] == 10 || info[14] == 10) {
+                        coinCount = coinCount + 1;
+                        if (coinCount === 1) {
+                            coinSound1.play();
+                        } else if (coinCount === 2) {
+                            coinSound2.play();
+                        } else if (coinCount === 3) {
+                            coinSound3.play();
+                        } else if (coinCount === 4) {
+                            coinSound4.play();
+                        } else {
+                            coinSound5.play();
+                        }
                     }
                     endspin(number);
                 }, 2700);
