@@ -503,7 +503,27 @@ class UserStatisticsWorkerSpinInstruction implements IInstruction
         return $dataPool;
     }
 
+    public function getStatisticOfDiamondsInMainGame(IDataPool $dataPool, IToolsPool $toolsPool)
+    {
+        $dataPool->userStatisticsData->diamondsInMainGame = $toolsPool->statisticsTools->statisticsCalculatorTool
+            ->calculateDiamonds(
+                $dataPool->userStatisticsData->diamondsInMainGame,
+                $dataPool->logicData->table
+            );
 
+        return $dataPool;
+    }
+
+    public function getStatisticOfDiamondsWithZeroCoins(IDataPool $dataPool, IToolsPool $toolsPool)
+    {
+        $dataPool->userStatisticsData->diamondsWithZeroCoins = $toolsPool->statisticsTools->statisticsCalculatorTool
+            ->calculateDiamonds(
+                $dataPool->userStatisticsData->diamondsWithZeroCoins,
+                $dataPool->logicData->table
+            );
+
+        return $dataPool;
+    }
 	
     /**
      * Статистика кол-ва бонусных символов выпадающих за ход
