@@ -1,3 +1,29 @@
+## Разворачивание проекта:
+1. Клонируем проект
+`git clone https://hriz256@bitbucket.org/sergeikurbako/play777games.git .`
+2. Я обычно руками копирую в корень проекта composer.phar (https://getcomposer.org/composer-stable.phar, при желании его же можно поставить глобально на сервак)
+3. На всякий случай запускаем команду чтобы обновить локальный composer до последней версии
+`composer self-update`
+4. Ставим пакеты для php
+`composer install`
+5. Ставим пакеты для NPM
+`npm i`
+6. Компилируем Front
+`npm run prod`
+7. Копируем .env.example и называем новый файл .env
+8. В .env прописываем доступы к БД (параметры DB_DATABASE, DB_USERNAME, DB_PASSWORD). Если надо меняем APP_URL
+9. Запсукам команду для генерации ключа
+`php artisan key:generate`
+10. Запускаем команду для кеширования конфигов
+`php artisan config:cache`
+11. Выполняем миграции
+`php artisan migrate`
+12. Выполняем сидеры
+`php artisan db:seed`
+###### Готово!
+
+- - - -
+
 <p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
 
 <p align="center">
