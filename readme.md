@@ -21,6 +21,7 @@
 `php artisan migrate`
 13. Выполняем сидеры
 `php artisan db:seed`
+14. Переходим по url http://play777games/games/lifeOfLuxury2/ и проверяем работоспособность (если нужно, заменить домен на свой)
 ###### Готово!
 
 - - - -
