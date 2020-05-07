@@ -488,7 +488,6 @@ class UserStatisticsWorkerSpinInstruction implements IInstruction
      *
      * @return IDataPool             [description]
      */
-
     public function getStatisticOfWinBonusCombinations(
         IDataPool $dataPool,
         IToolsPool $toolsPool
@@ -524,7 +523,7 @@ class UserStatisticsWorkerSpinInstruction implements IInstruction
 
         return $dataPool;
     }
-	
+
     /**
      * Статистика кол-ва бонусных символов выпадающих за ход
      *

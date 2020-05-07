@@ -98,7 +98,6 @@ class BridgeController extends Controller
         if ($platformId === 2 || $platformId === '2') {
             $url = 'https://play.devbet.live/';
         }
-
         if ($platformId === 3 || $platformId === '3') {
             $url = 'https://donateandplay.com/';
         }
@@ -141,7 +140,6 @@ class BridgeController extends Controller
         if ($platformId === 2 || $platformId === '2') {
             $url = 'https://play.devbet.live/';
         }
-
         if ($platformId === 3 || $platformId === '3') {
             $url = 'https://donateandplay.com/';
         }

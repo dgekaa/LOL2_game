@@ -30,7 +30,7 @@ class UserStatisticsWorkerFreeSpinInstruction implements IInstruction
     {
         $dataPool->userStatisticsData->diamondsInFeatureGame = $toolsPool->statisticsTools->statisticsCalculatorTool
             ->calculateDiamonds(
-                $dataPool->userStatisticsData->diamondsInFeatureGame,
+                (array)$dataPool->userStatisticsData->diamondsInFeatureGame,
                 $dataPool->logicData->table
             );
 
@@ -41,7 +41,7 @@ class UserStatisticsWorkerFreeSpinInstruction implements IInstruction
     {
         $dataPool->userStatisticsData->diamondsWithZeroCoins = $toolsPool->statisticsTools->statisticsCalculatorTool
             ->calculateDiamonds(
-                $dataPool->userStatisticsData->diamondsWithZeroCoins,
+                (array)$dataPool->userStatisticsData->diamondsWithZeroCoins,
                 $dataPool->logicData->table
             );
 
