@@ -25,7 +25,7 @@ class EndActionSpinObserver implements IObserver
     {
         if ($event->name === 'endActionSpin') {
             // обновление eventId
-            $event->dataPool->sessionData->eventId = Uuid::generate()->string;
+            $event->dataPool->sessionData->eventId = (new \App\Models\LastEvent)->getEventId();
 
             // отправка данных о снятии денег на 777games в основной игре
             $response = BridgeService::sendStartSpinMoveFunds(

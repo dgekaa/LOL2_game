@@ -64,12 +64,14 @@ class BridgeController extends Controller
     public static function addCreadit(
         Request $request
     ): string {
+        $transactionId = (new \App\Models\LastEvent)->getTransactionId();
+
         $requestData = array(
             'token' => $request->input('token'),
             'userId' => $request->input('userId'),
             'gameId' => $request->input('gameId'),
             'platformId' => (int) $request->input('platform_id'),
-            'transactionId' => Uuid::generate()->string,
+            'transactionId' => $transactionId,
             'direction' => 'debit',
             'eventType' => 'BetPlacing',
             'amount' => 0,

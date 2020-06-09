@@ -63,9 +63,11 @@ class BridgeService
         // преобразование ставки из центов в доллары
         $bet /= 100;
 
+        $transactionId = (new \App\Models\LastEvent)->getTransactionId();
+
         $params = [
             'eventId' => $eventId,
-            'transactionId' => Uuid::generate()->string,
+            'transactionId' => $transactionId,
             'token' => $token,
             'userId' => $userId,
             'gameId' => $gameId,
@@ -121,13 +123,15 @@ class BridgeService
         // преобразование общего выигрыша из центов в доллары
         $totalPayoff /= 100;
 
+        $transactionId = (new \App\Models\LastEvent)->getTransactionId();
+
         $params = [
             'eventId' => $eventId,
             'token' => $token,
             'userId' => $userId,
             'gameId' => $gameId,
             'platformId' => $platformId,
-            'transactionId' => Uuid::generate()->string,
+            'transactionId' => $transactionId,
             'direction' => 'credit',
             'eventType' => $eventType,
             'amount' => $totalPayoff,
