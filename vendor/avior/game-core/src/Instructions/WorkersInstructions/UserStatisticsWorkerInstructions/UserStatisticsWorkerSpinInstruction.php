@@ -506,7 +506,7 @@ class UserStatisticsWorkerSpinInstruction implements IInstruction
     {
         $dataPool->userStatisticsData->diamondsInMainGame = $toolsPool->statisticsTools->statisticsCalculatorTool
             ->calculateDiamonds(
-                $dataPool->userStatisticsData->diamondsInMainGame,
+                (array)$dataPool->userStatisticsData->diamondsInMainGame,
                 $dataPool->logicData->table
             );
 
@@ -517,7 +517,7 @@ class UserStatisticsWorkerSpinInstruction implements IInstruction
     {
         $dataPool->userStatisticsData->diamondsWithZeroCoins = $toolsPool->statisticsTools->statisticsCalculatorTool
             ->calculateDiamonds(
-                $dataPool->userStatisticsData->diamondsWithZeroCoins,
+                (array)$dataPool->userStatisticsData->diamondsWithZeroCoins,
                 $dataPool->logicData->table
             );
 
