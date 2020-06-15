@@ -868,6 +868,7 @@ function game1() {
 
 
         function parseSpinAnswer(dataSpinRequest) {
+            console.log(dataSpinRequest)
             console.log(`Win : ${dataSpinRequest.stateData.isWin}`)
 
             dataArray = dataSpinRequest;
@@ -1253,6 +1254,7 @@ function game1() {
                 }
             }
             if (dataSpinRequest.stateData.isWinOnBonus) {
+                topLabel.key !== 'top_label_1' && animTopLabel('top_label_1');
                 hideButtons();
                 briWinSound.play();
                 winBonusValue = winOldTrigerFreeSpin - winWithoutCoin;
@@ -1377,24 +1379,26 @@ function game1() {
                 if (!afterFreespinStatus) {
                     if (info[cell] === 10) {
                         coinAnimArr[cell + 1].visible = true;
-                        coinAnimArr[cell + 1].animations.add('coin_anim', [], 30, false).play().onComplete.add(function () {
+                        coinAnimArr[cell + 1].animations.add('coin_anim', [], 25, false).play().onComplete.add(function () {
                             coinAnimArr[cell + 1].visible = false;
                         });
                     }
                     if (info[cell] === 0) {
                         briAnimArr[cell + 1].visible = true;
-                        briAnimArr[cell + 1].animations.add('coin_anim', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], 15, false).play().onComplete.add(function () {
+                        briAnimArr[cell + 1].animations.add('coin_anim', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], 10, false).play().onComplete.add(function () {
                             briAnimArr[cell + 1].visible = false;
                         });
                     }
                 }
             });
-            winText.visible = false;
+            // winText.visible = false;
             if (afterFreespinStatus) {
                 winText.visible = true;
-                winText.setText('Trigger Pay \n' + +winOldTrigerFreeSpin.toFixed());
+                winText.setText('Bonus Pay \n' + +winOldTrigerFreeSpin.toFixed());
             }
             if (!afterFreespinStatus) {
+                winText.visible = true;
+                winText.setText('Trigger Pay \n' + +winOldTrigerFreeSpin.toFixed());
                 bottomText.visible = true;
                 bottomText.setText("BONUS!");
                 bottomText.fontSize = 35;
@@ -1406,6 +1410,8 @@ function game1() {
             }
             if (!afterFreespinStatus) {
                 setTimeout(function () {
+                    freeSpinBgSong.play();
+
                     stopWinAnim = true;
                     for (var i = 1; i <= 15; ++i) {
                         game1.copyCell[i].visible = false;
@@ -1455,8 +1461,92 @@ function game1() {
                             dataSpinRequest = JSON.parse(data);
                             //freespin
                             // if (activateFreeSpins)
-                            // dataSpinRequest = { "info": [5, 2, 10, 10, 1, 3, 10, 5, 2, 2, 9, 6, 9, 3, 1], "allWin": 3, "betLine": "0.1", "linesInGame": "15", "winCellInfo": [false, false, 10, 10, false, false, false, false, false, 10, false, false, false, false, false], "wl": [], "status": true, "balance": 96.0, "rope": { "count": 12, "mul": 2, "allWin": 3 }, "winBonusSymbolsData": [3, 2], "freeSpinData": { "count": 10, "mul": 2, "allWin": 3 }, "check0FreeSpin": false, "info_for_api": ["Ring", "Silver", "Coin", "Coin", "Plane", "Dollar", "Dollar", "Ring", "Silver", "Coin", "Yacht", "Watch", "Yacht", "Dollar", "Plane"], "winLinesData": [] }
 
+                            // dataSpinRequest = {
+                            //     "stateData": {
+                            //         "screen": "featureGame",
+                            //         "isWin": true,
+                            //         "isWinOnMain": true,
+                            //         "isWinOnBonus": true,
+                            //         "isWinOnFeatureGame": false,
+                            //         "isDropFeatureGame": true,
+                            //         "isEndFeatureGame": false,
+                            //         "moveNumberInFeatureGame": 0,
+                            //         "prevScreen": "mainGame"
+                            //     },
+                            //     "balanceData": {
+                            //         "balance": 10080,
+                            //         "totalPayoff": 100,
+                            //         "payoffByLines": 20,
+                            //         "payoffByBonus": 80,
+                            //         "totalWinningsInFeatureGame": 0
+                            //     },
+                            //     "sessionData": {
+                            //         "eventId": null,
+                            //         "userId": 1,
+                            //         "gameId": 6,
+                            //         "mode": "demo",
+                            //         "sessionUuid": "0fd446e0-030c-11ea-9344-1fd7f7246bde"
+                            //     },
+                            //     "logicData": {
+                            //         "countSymbolsInGame": 11,
+                            //         "countOfMovesInFeatureGame": 12,
+                            //         "lineBet": 1,
+                            //         "linesInGame": 20,
+                            //         "table": [2, 10, 9, 1, 4, 9, 5, 6, 3, 9, 9, 1, 6, 4, 8],
+                            //         "winningLines": [{
+                            //             "lineNumber": 2,
+                            //             "symbol": 9,
+                            //             "winCellCount": 2
+                            //         }, {"lineNumber": 8, "symbol": 9, "winCellCount": 2}],
+                            //         "payoffsForBonus": [{"symbol": 10, "count": 3, "winning": 80}],
+                            //         "payoffsForLines": [{"lineNumber": 2, "winValue": 10}, {
+                            //             "lineNumber": 8,
+                            //             "winValue": 10
+                            //         }],
+                            //         "winningCells": {"2": 9, "5": 0},
+                            //         "multiplier": 2
+                            //     },
+                            //     "longData": {
+                            //         "stateData": {
+                            //             "screen": "featureGame",
+                            //             "isWin": true,
+                            //             "isWinOnMain": true,
+                            //             "isWinOnBonus": true,
+                            //             "isWinOnFeatureGame": false,
+                            //             "isDropFeatureGame": true,
+                            //             "isEndFeatureGame": false,
+                            //             "moveNumberInFeatureGame": 0,
+                            //             "prevScreen": "mainGame"
+                            //         },
+                            //         "balanceData": {
+                            //             "balance": 10080,
+                            //             "totalPayoff": 100,
+                            //             "payoffByLines": 20,
+                            //             "payoffByBonus": 80,
+                            //             "totalWinningsInFeatureGame": 0
+                            //         },
+                            //         "logicData": {
+                            //             "countSymbolsInGame": 11,
+                            //             "countOfMovesInFeatureGame": 12,
+                            //             "lineBet": 1,
+                            //             "linesInGame": 20,
+                            //             "table": [2, 10, 9, 1, 4, 0, 5, 6, 3, 9, 0, 1, 6, 4, 8],
+                            //             "winningLines": [{
+                            //                 "lineNumber": 2,
+                            //                 "symbol": 9,
+                            //                 "winCellCount": 2
+                            //             }, {"lineNumber": 8, "symbol": 9, "winCellCount": 2}],
+                            //             "payoffsForBonus": [{"symbol": 10, "count": 3, "winning": 80}],
+                            //             "payoffsForLines": [{"lineNumber": 2, "winValue": 10}, {
+                            //                 "lineNumber": 8,
+                            //                 "winValue": 10
+                            //             }],
+                            //             "winningCells": {"2": 9, "5": 0},
+                            //             "multiplier": 2
+                            //         }
+                            //     }
+                            // }
 
                             if (dataSpinRequest.status !== 'false') {
                                 isGetResponse = true;
@@ -1726,11 +1816,11 @@ function game1() {
             if (afterFreespinStatus) {
                 winText.visible = true;
             }
-            console.log(wlValues[lineflash])
+
             if (wlValues[lineflash]) {
-                winText.setText('Trigger Pay \n' + wlValues[lineflash].winValue);
+                winText.setText('Line Pay \n' + wlValues[lineflash].winValue);
             } else {
-                winText.setText('Trigger Pay \n' + wlValuesFS.winning);
+                winText.setText('Line Pay \n' + wlValuesFS.winning);
             }
             if (info[squareArr[wlWinValuesArray[lineflash] - 1][0] - 1] !== 0) {
                 trigerLine = info[squareArr[wlWinValuesArray[lineflash] - 1][0] - 1];
@@ -1815,7 +1905,7 @@ function game1() {
                     for (var i = 1; i <= sizeLine; ++i) {
                         if (info[squareArr[wlWinValuesArray[lineflash] - 1][i - 1] - 1] === 0) {
                             briAnimArr[squareArr[wlWinValuesArray[lineflash] - 1][i - 1]].visible = true;
-                            briAnimArr[squareArr[wlWinValuesArray[lineflash] - 1][i - 1]].animations.add('scatters_anim', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], 15, false).play().onComplete.add(function () {
+                            briAnimArr[squareArr[wlWinValuesArray[lineflash] - 1][i - 1]].animations.add('scatters_anim', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], 12, false).play().onComplete.add(function () {
                                 for (var i = 1; i <= 15; ++i) {
                                     briAnimArr[i].visible = false;
                                 }
@@ -1829,15 +1919,18 @@ function game1() {
                     if (sizeLine >= 3) {
                         if (info[squareArr[wlWinValuesArray[lineflash] - 1][i - 1] - 1] === 4) {
                             carAnimArr[squareArr[wlWinValuesArray[lineflash] - 1][i - 1]].visible = true;
-                            carAnimArr[squareArr[wlWinValuesArray[lineflash] - 1][i - 1]].animations.add('scatters_anim', [4, 3, 2, 1, 0], 7, false).play().onComplete.add(function () {
+                            carAnimArr[squareArr[wlWinValuesArray[lineflash] - 1][i - 1]].animations.add('scatters_anim', [4, 3, 2, 1, 0], 5, false).play().onComplete.add(function () {
                                 for (var i = 1; i <= 15; ++i) {
                                     carAnimArr[i].visible = false;
                                 }
                             });
                         }
+                    }
+
+                    if (sizeLine >= 2) {
                         if (info[squareArr[wlWinValuesArray[lineflash] - 1][i - 1] - 1] === 1) {
                             planeAnimArr[squareArr[wlWinValuesArray[lineflash] - 1][i - 1]].visible = true;
-                            planeAnimArr[squareArr[wlWinValuesArray[lineflash] - 1][i - 1]].animations.add('scatters_anim', [6, 5, 4, 3, 2, 1, 0], 7, false).play().onComplete.add(function () {
+                            planeAnimArr[squareArr[wlWinValuesArray[lineflash] - 1][i - 1]].animations.add('scatters_anim', [6, 5, 4, 3, 2, 1, 0], 5, false).play().onComplete.add(function () {
                                 for (var i = 1; i <= 15; ++i) {
                                     planeAnimArr[i].visible = false;
                                 }
@@ -1845,7 +1938,7 @@ function game1() {
                         }
                         if (info[squareArr[wlWinValuesArray[lineflash] - 1][i - 1] - 1] === 9) {
                             katerAnimArr[squareArr[wlWinValuesArray[lineflash] - 1][i - 1]].visible = true;
-                            katerAnimArr[squareArr[wlWinValuesArray[lineflash] - 1][i - 1]].animations.add('scatters_anim', [4, 3, 2, 1, 0], 7, false).play().onComplete.add(function () {
+                            katerAnimArr[squareArr[wlWinValuesArray[lineflash] - 1][i - 1]].animations.add('scatters_anim', [4, 3, 2, 1, 0], 5, false).play().onComplete.add(function () {
                                 for (var i = 1; i <= 15; ++i) {
                                     katerAnimArr[i].visible = false;
                                 }
@@ -1969,11 +2062,11 @@ function game1() {
                                         showWin(wlWinValuesArray, winCellInfo)
                                     }
                                 }
-                            }, 500);
-                        }, 200);
-                    }, 500);
-                }, 200);
-            }, 500);
+                            }, 825);
+                        }, 400);
+                    }, 825);
+                }, 400);
+            }, 825);
         };
 
         function upLines() {
@@ -2860,11 +2953,11 @@ function game1() {
                 clearTimeout(i)
             });
 
-            globalMiddleSpin(0, 0);
-            globalMiddleSpin(1, 0);
-            globalMiddleSpin(2, 0);
-            globalMiddleSpin(3, 0);
-            globalMiddleSpin(4, 0);
+            game1.spinStatus1 && globalMiddleSpin(0, 0);
+            game1.spinStatus2 && globalMiddleSpin(1, 0);
+            game1.spinStatus3 && globalMiddleSpin(2, 0);
+            game1.spinStatus4 && globalMiddleSpin(3, 0);
+            game1.spinStatus5 && globalMiddleSpin(4, 0);
             doItOnce = false;
         }
 

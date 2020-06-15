@@ -78,7 +78,6 @@ function game2() {
         var balanceSongAudio = game.add.audio('balanceSong');
         balanceSongAudio.loop = true;
         var briSoundAudio = game.add.audio('briSound');
-        freeSpinBgSong.play();
         var cellPos = [
             [77, 127],
             [77, 276],
@@ -1263,7 +1262,7 @@ function game2() {
                     case 3:
                         firstBri = game.add.sprite(334, 296, 'bri_big_anim_start');
                         firstBri.anchor.setTo(0.5, 0.5);
-                        firstBri.animations.add('anim', [], 6, true).play();
+                        firstBri.animations.add('anim', [], 5, true).play();
                         firstBri.scale.x = 0.35;
                         firstBri.scale.y = 0.35;
                         game.add.tween(firstBri.scale).to({
@@ -1291,7 +1290,7 @@ function game2() {
                     case 4:
                         firstBri = game.add.sprite(334, 296 + 149, 'bri_big_anim_start');
                         firstBri.anchor.setTo(0.5, 0.5);
-                        firstBri.animations.add('anim', [], 6, true).play();
+                        firstBri.animations.add('anim', [], 5, true).play();
                         firstBri.scale.x = 0.35;
                         firstBri.scale.y = 0.35;
                         game.add.tween(firstBri.scale).to({
@@ -1319,7 +1318,7 @@ function game2() {
                     case 5:
                         firstBri = game.add.sprite(334, 296 + 149 + 149, 'bri_big_anim_start');
                         firstBri.anchor.setTo(0.5, 0.5);
-                        firstBri.animations.add('anim', [], 6, true).play();
+                        firstBri.animations.add('anim', [], 5, true).play();
                         firstBri.scale.x = 0.35;
                         firstBri.scale.y = 0.35;
                         game.add.tween(firstBri.scale).to({
@@ -1347,7 +1346,7 @@ function game2() {
                     case 6:
                         firstBri = game.add.sprite(334 + 178, 296, 'bri_big_anim_start');
                         firstBri.anchor.setTo(0.5, 0.5);
-                        firstBri.animations.add('anim', [], 6, true).play();
+                        firstBri.animations.add('anim', [], 5, true).play();
                         firstBri.scale.x = 0.35;
                         firstBri.scale.y = 0.35;
                         game.add.tween(firstBri.scale).to({
@@ -1375,7 +1374,7 @@ function game2() {
                     case 7:
                         firstBri = game.add.sprite(334 + 178, 296 + 149, 'bri_big_anim_start');
                         firstBri.anchor.setTo(0.5, 0.5);
-                        firstBri.animations.add('anim', [], 6, true).play();
+                        firstBri.animations.add('anim', [], 5, true).play();
                         firstBri.scale.x = 0.35;
                         firstBri.scale.y = 0.35;
                         game.add.tween(firstBri.scale).to({
@@ -1392,7 +1391,7 @@ function game2() {
                     case 8:
                         firstBri = game.add.sprite(334 + 178, 296 + 149 + 149, 'bri_big_anim_start');
                         firstBri.anchor.setTo(0.5, 0.5);
-                        firstBri.animations.add('anim', [], 6, true).play();
+                        firstBri.animations.add('anim', [], 5, true).play();
                         firstBri.scale.x = 0.35;
                         firstBri.scale.y = 0.35;
                         game.add.tween(firstBri.scale).to({
@@ -1425,7 +1424,7 @@ function game2() {
                     case 9:
                         firstBri = game.add.sprite(334 + 178 + 178, 296, 'bri_big_anim_start');
                         firstBri.anchor.setTo(0.5, 0.5);
-                        firstBri.animations.add('anim', [], 6, true).play();
+                        firstBri.animations.add('anim', [], 5, true).play();
                         firstBri.scale.x = 0.35;
                         firstBri.scale.y = 0.35;
                         game.add.tween(firstBri.scale).to({
@@ -1453,7 +1452,7 @@ function game2() {
                     case 10:
                         firstBri = game.add.sprite(334 + 178 + 178, 296 + 149, 'bri_big_anim_start');
                         firstBri.anchor.setTo(0.5, 0.5);
-                        firstBri.animations.add('anim', [], 6, true).play();
+                        firstBri.animations.add('anim', [], 5, true).play();
                         firstBri.scale.x = 0.35;
                         firstBri.scale.y = 0.35;
                         game.add.tween(firstBri.scale).to({
@@ -1481,7 +1480,7 @@ function game2() {
                     case 11:
                         firstBri = game.add.sprite(334 + 178 + 178, 296 + 149 + 149, 'bri_big_anim_start');
                         firstBri.anchor.setTo(0.5, 0.5);
-                        firstBri.animations.add('anim', [], 6, true).play();
+                        firstBri.animations.add('anim', [], 5, true).play();
                         firstBri.scale.x = 0.35;
                         firstBri.scale.y = 0.35;
                         game.add.tween(firstBri.scale).to({
@@ -1513,8 +1512,8 @@ function game2() {
         function animCentrBri() {
             secondBri = game.add.sprite(334 + 178, 296 + 149, 'bri_big_anim_middle');
             secondBri.anchor.setTo(0.5, 0.5);
-            secondBri.animations.add('anim', [0, 1, 2, 3, 0, 1, 2, 3], 7, false).play().onComplete.add(function () {
-                secondBri.animations.add('anim', [0, 1, 2, 3, 0, 1, 2, 3], 7, false).play();
+            secondBri.animations.add('anim', [0, 1, 2, 3, 0, 1, 2, 3], 6, false).play().onComplete.add(function () {
+                secondBri.animations.add('anim', [0, 1, 2, 3, 0, 1, 2, 3], 6, false).play();
                 let secondBriX = -(77 - 11 * ((mulFreespin + 1) % 10));
                 game.add.tween(secondBri).to({
                     x: 512 + secondBriX,
@@ -1525,7 +1524,7 @@ function game2() {
                     thirdBri.anchor.setTo(0.5, 0.5);
                     thirdBri.scale.x = 1.2;
                     thirdBri.scale.y = 1.2;
-                    thirdBri.animations.add('anim', [], 8, true).play();
+                    thirdBri.animations.add('anim', [], 7, true).play();
                     let longX;
                     let longY = 171;
                     if (mulFreespin < 29) {
