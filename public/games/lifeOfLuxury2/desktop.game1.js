@@ -836,6 +836,7 @@ function game1() {
         session_bg.visible = false;
         error_bg = game.add.sprite(0, 0, 'error_bg');
         error_bg.visible = false;
+
         if (afterFreespinStatus) {
             wlValues = wlValuesOld;
             winWithoutCoin = winWithoutCoinOld;
@@ -889,6 +890,7 @@ function game1() {
                 infoOld = dataArray.logicData.table;
                 mulFreespin = dataArray.logicData.multiplier;
                 wlValuesOld = dataArray.logicData['payoffsForLines'];
+                console.log(wlValuesOld)
                 balanceOld = dataArray.balanceData['balance'] - dataArray.balanceData['totalPayoff'];
             }
             if (realSpinStatus) {
@@ -1394,11 +1396,11 @@ function game1() {
             // winText.visible = false;
             if (afterFreespinStatus) {
                 winText.visible = true;
-                winText.setText('Bonus Pay \n' + +winOldTrigerFreeSpin.toFixed());
+                winText.setText('Bonus Pay \n' + winOldTrigerFreeSpin.toFixed());
             }
             if (!afterFreespinStatus) {
-                winText.visible = true;
-                winText.setText('Trigger Pay \n' + +winOldTrigerFreeSpin.toFixed());
+                // winText.visible = true;
+                // winText.setText('Trigger Pay \n' + +winOldTrigerFreeSpin.toFixed());
                 bottomText.visible = true;
                 bottomText.setText("BONUS!");
                 bottomText.fontSize = 35;
@@ -1852,6 +1854,7 @@ function game1() {
                     otherSound = true;
                 }
             }
+            console.log(wlWinValuesArray[lineflash] - 1, squareArr[wlWinValuesArray[lineflash] - 1][0], 'car')
             if (info[squareArr[wlWinValuesArray[lineflash] - 1][0] - 1] === 4 & (info[squareArr[wlWinValuesArray[lineflash] - 1][2] - 1] === 0 || info[squareArr[wlWinValuesArray[lineflash] - 1][2] - 1] === 4)) {
                 if (firstAroundAnim) {
                     if (!afterFreespinStatus) {
@@ -1929,6 +1932,10 @@ function game1() {
 
                     if (sizeLine >= 2) {
                         if (info[squareArr[wlWinValuesArray[lineflash] - 1][i - 1] - 1] === 1) {
+                            if (sizeLine === 2) {
+                                planeSong.play();
+                            }
+
                             planeAnimArr[squareArr[wlWinValuesArray[lineflash] - 1][i - 1]].visible = true;
                             planeAnimArr[squareArr[wlWinValuesArray[lineflash] - 1][i - 1]].animations.add('scatters_anim', [6, 5, 4, 3, 2, 1, 0], 5, false).play().onComplete.add(function () {
                                 for (var i = 1; i <= 15; ++i) {
@@ -1937,6 +1944,10 @@ function game1() {
                             });
                         }
                         if (info[squareArr[wlWinValuesArray[lineflash] - 1][i - 1] - 1] === 9) {
+                            if (sizeLine === 2) {
+                                katerSong.play();
+                            }
+
                             katerAnimArr[squareArr[wlWinValuesArray[lineflash] - 1][i - 1]].visible = true;
                             katerAnimArr[squareArr[wlWinValuesArray[lineflash] - 1][i - 1]].animations.add('scatters_anim', [4, 3, 2, 1, 0], 5, false).play().onComplete.add(function () {
                                 for (var i = 1; i <= 15; ++i) {
@@ -2062,11 +2073,11 @@ function game1() {
                                         showWin(wlWinValuesArray, winCellInfo)
                                     }
                                 }
-                            }, 825);
-                        }, 400);
-                    }, 825);
-                }, 400);
-            }, 825);
+                            }, 500);
+                        }, 200);
+                    }, 500);
+                }, 200);
+            }, 500);
         };
 
         function upLines() {
