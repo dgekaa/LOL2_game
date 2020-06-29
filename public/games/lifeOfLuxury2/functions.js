@@ -1167,7 +1167,7 @@ function requestState(data) {
     lines = data.logicData.linesInGame;
     bet = lines * betline;
     firstRequest = true;
-    balance = (data.balanceData.balance).toFixed() - data.balanceData.totalWinningsInFeatureGame;
+    balance = 1000
     info = data.logicData.table;
     sessionUuid = data.sessionData.sessionUuid;
     const { sessionData: { mode } } = data;

@@ -739,6 +739,7 @@ function game2() {
 
             console.log(dataArray.logicData.multiplier, mulFreespin, 'mulFreespin')
             totalWinningsInFeatureGame = dataArray.balanceData['totalWinningsInFeatureGame'];
+            mulFreespin = mulFreespinOld = dataArray.logicData.multiplier;
 
             if (dataSpinRequest.longData) {
                 winOldTrigerFreeSpin = dataArray.longData.balanceData['totalPayoff'];
@@ -1531,9 +1532,7 @@ function game2() {
                     thirdBri.animations.add('anim', [], 7, true).play();
                     let longX;
                     let longY = 171;
-                    if (mulFreespin < 29) {
-                        mulFreespin = mulFreespin + 1;
-                    }
+
                     if (mulFreespin % 10 !== 0) {
                         longX = 189 + 44 * (mulFreespin % 10);
                     } else {
@@ -1555,7 +1554,7 @@ function game2() {
                         } else {
                             briMulti[mulFreespin % 10].visible = true;
                         }
-                        multiplierText.setText(mulFreespin);
+                        multiplierText.setText(mulFreespinOld);
                         multiplierText.visible = false;
                         freeSpinMulti.play();
                         setTimeout(function () {
@@ -1611,7 +1610,7 @@ function game2() {
             if (!dataSpinRequest.stateData.isDropFeatureGame) {
                 bottomText.setText(allWin + " Credits Won");
             }
-            winText.setText('Line Pay \n' + (wlValues[lineflash].winValue / mulFreespinOld) + " x " + mulFreespinOld + " = " + wlValues[lineflash].winValue);
+            winText.setText('Line Pay \n' + (wlValues[lineflash].winValue / mulFreespinOld) + " x " + mulFreespinOld + " = " + wlValues[lineflash].winValue.toFixed(1));
             if (info[squareArr[wlWinValuesArray[lineflash] - 1][0] - 1] !== 0) {
                 trigerLine = info[squareArr[wlWinValuesArray[lineflash] - 1][0] - 1];
             } else if (info[squareArr[wlWinValuesArray[lineflash] - 1][1] - 1] !== 0) {
