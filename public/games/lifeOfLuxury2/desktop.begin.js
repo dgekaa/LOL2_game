@@ -20,8 +20,11 @@ var dcard2;
 var select;
 var allWinOld = 0;
 var winOldTrigerFreeSpin = 0;
+var triggerPay = 0;
 var afterFreespinStatus = false;
 var infoOld = [];
+var infoOldOnlyForThisWindow = [];
+var totalWinningsInFeatureGame = 0;
 var wcvWinValuesArrayOld;
 var topAnim = false;
 //звуки и полноэкранный режим

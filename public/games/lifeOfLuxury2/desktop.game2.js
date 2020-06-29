@@ -736,6 +736,10 @@ function game2() {
             if (realSpinStatus) {
                 realSpinStatus = false;
             }
+
+            console.log(dataArray.logicData.multiplier, mulFreespin, 'mulFreespin')
+            totalWinningsInFeatureGame = dataArray.balanceData['totalWinningsInFeatureGame'];
+
             if (dataSpinRequest.longData) {
                 winOldTrigerFreeSpin = dataArray.longData.balanceData['totalPayoff'];
                 infoOld = dataArray.longData.logicData.table;
@@ -1064,7 +1068,7 @@ function game2() {
         function checkWin() {
             curBri = 0;
             wlWinValuesArray = [];
-            wcvWinValuesArray = [];
+            // wcvWinValuesArray = [];
             briArr = [];
             briStatus = false;
             winWithoutCoin = 0;
@@ -1075,9 +1079,9 @@ function game2() {
                 winWithoutCoin = winWithoutCoin + wlValues[key].winValue;
                 wlWinValuesArray.push(wlValues[key].lineNumber + 1);
             }
-            for (key in winCellInfo) {
-                wcvWinValuesArray.push(+(key));
-            }
+            // for (key in winCellInfo) {
+            //     wcvWinValuesArray.push(+(key));
+            // }
             for (key in info) {
                 if (info[key] === 0) {
                     briStatus = true;

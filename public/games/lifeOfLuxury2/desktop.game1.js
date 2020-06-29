@@ -1,5 +1,7 @@
 var game = new Phaser.Game(1024, 800, Phaser.AUTO, '', 'ld29', null, false, false);
 var game1;
+var triggerShow = 0;
+var isTriggerPay = true;
 var startFunc;
 var stopUB;
 var balanceUpdateStatus = false;
@@ -847,10 +849,10 @@ function game1() {
             bottomText.setText(allWin + ' Credits Won');
             bottomText.fontSize = 35;
             paid.setText(allWinOld);
-            info = infoOld;
+            info = infoOldOnlyForThisWindow;
             for (var i = 1; i <= 15; ++i) {
-                game1.cell[i].loadTexture('cell' + infoOld[i - 1]);
-                game1.copyCell[i].loadTexture('cell' + infoOld[i - 1]);
+                game1.cell[i].loadTexture('cell' + infoOldOnlyForThisWindow[i - 1]);
+                game1.copyCell[i].loadTexture('cell' + infoOldOnlyForThisWindow[i - 1]);
             }
             showWinFreeSpin(wcvWinValuesArrayOld);
             updateBalance();
@@ -886,8 +888,9 @@ function game1() {
             allWin = dataArray.balanceData['payoffByLines'];
             if (dataSpinRequest.stateData.isWinOnBonus) {
                 allWin = dataArray.balanceData['totalPayoff'];
-                winOldTrigerFreeSpin = dataArray.balanceData['totalPayoff'];
+                triggerPay = winOldTrigerFreeSpin = dataArray.balanceData['totalPayoff'];
                 infoOld = dataArray.logicData.table;
+                infoOldOnlyForThisWindow = dataArray.logicData.table;
                 mulFreespin = dataArray.logicData.multiplier;
                 wlValuesOld = dataArray.logicData['payoffsForLines'];
                 console.log(wlValuesOld)
@@ -1263,6 +1266,7 @@ function game1() {
                 stopWinAnim = false;
                 wcvWinValuesArray = [];
                 bottomText.setText(allWin + " Credits Won");
+                bottomText.setText(allWin + " Credits Won");
                 bottomText.fontSize = 35;
                 for (key in info) {
                     if (info[key] === 10 || info[key] === 0) {
@@ -1396,7 +1400,18 @@ function game1() {
             // winText.visible = false;
             if (afterFreespinStatus) {
                 winText.visible = true;
-                winText.setText('Bonus Pay \n' + winOldTrigerFreeSpin.toFixed());
+
+                if (triggerShow % 2 === 0) {
+                    isTriggerPay = !isTriggerPay;
+                }
+
+                if (isTriggerPay) {
+                    winText.setText('Trigger Pay \n' + triggerPay.toFixed());
+                } else {
+                    winText.setText('Bonus Pay \n' + totalWinningsInFeatureGame.toFixed());
+                }
+
+                triggerShow++
             }
             if (!afterFreespinStatus) {
                 // winText.visible = true;
@@ -1528,25 +1543,6 @@ function game1() {
                             //             "payoffByBonus": 80,
                             //             "totalWinningsInFeatureGame": 0
                             //         },
-                            //         "logicData": {
-                            //             "countSymbolsInGame": 11,
-                            //             "countOfMovesInFeatureGame": 12,
-                            //             "lineBet": 1,
-                            //             "linesInGame": 20,
-                            //             "table": [2, 10, 9, 1, 4, 0, 5, 6, 3, 9, 0, 1, 6, 4, 8],
-                            //             "winningLines": [{
-                            //                 "lineNumber": 2,
-                            //                 "symbol": 9,
-                            //                 "winCellCount": 2
-                            //             }, {"lineNumber": 8, "symbol": 9, "winCellCount": 2}],
-                            //             "payoffsForBonus": [{"symbol": 10, "count": 3, "winning": 80}],
-                            //             "payoffsForLines": [{"lineNumber": 2, "winValue": 10}, {
-                            //                 "lineNumber": 8,
-                            //                 "winValue": 10
-                            //             }],
-                            //             "winningCells": {"2": 9, "5": 0},
-                            //             "multiplier": 2
-                            //         }
                             //     }
                             // }
 
@@ -1759,6 +1755,17 @@ function game1() {
                 });
                 if (afterFreespinStatus) {
                     winText.visible = true;
+                    if (triggerShow % 2 === 0) {
+                        isTriggerPay = !isTriggerPay;
+                    }
+
+                    if (isTriggerPay) {
+                        winText.setText('Trigger Pay \n' + triggerPay.toFixed());
+                    } else {
+                        winText.setText('Bonus Pay \n' + totalWinningsInFeatureGame.toFixed());
+                    }
+
+                    triggerShow++
                 }
                 setTimeout(function () {
                     if (stopWinAnim == true) {
@@ -1782,6 +1789,17 @@ function game1() {
                         });
                         if (afterFreespinStatus) {
                             winText.visible = true;
+                            if (triggerShow % 2 === 0) {
+                                isTriggerPay = !isTriggerPay;
+                            }
+
+                            if (isTriggerPay) {
+                                winText.setText('Trigger Pay \n' + triggerPay.toFixed());
+                            } else {
+                                winText.setText('Bonus Pay \n' + totalWinningsInFeatureGame.toFixed());
+                            }
+
+                            triggerShow++
                         }
                         setTimeout(function () {
                             if (stopWinAnim == true) {
