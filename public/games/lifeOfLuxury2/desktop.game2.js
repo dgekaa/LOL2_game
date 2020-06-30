@@ -63,6 +63,7 @@ function game2() {
         coinSound4 = game.add.audio('coin4');
         coinSound5 = game.add.audio('coin5');
         curGame = 2;
+        var indexPos = 2;
         var mulFreespin = 2;
         var mulFreespinOld = 2;
         var freeSpinCount = 12;
@@ -1223,6 +1224,11 @@ function game2() {
         function additionalBonus() {
             freesponStartBGAdditionalBonus.visible = true;
             freesponStartBGAdditionalBonus.alpha = 0;
+
+            indexPos = mulFreespin;
+            multiplierText.setText(mulFreespin);
+            briMulti.slice(mulFreespin).forEach(bri => bri.visible = false);
+
             game.add.tween(freesponStartBGAdditionalBonus).to({alpha: 1}, 1000, "Linear", true).onComplete.add(function () {
                 freeSpinCount = freeSpinCount + 12;
                 allFreeSpinCount = allFreeSpinCount + 12;
@@ -1552,8 +1558,9 @@ function game2() {
                                 briMulti[10].visible = true;
                             }
                         } else {
-                            briMulti[mulFreespin % 10].visible = true;
+                            briMulti[++indexPos % 10].visible = true;
                         }
+
                         multiplierText.setText(mulFreespin);
                         multiplierText.visible = false;
                         freeSpinMulti.play();
