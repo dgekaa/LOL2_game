@@ -1225,7 +1225,7 @@ function game2() {
             freesponStartBGAdditionalBonus.visible = true;
             freesponStartBGAdditionalBonus.alpha = 0;
 
-            indexPos = mulFreespin;
+            indexPos = 2;
             multiplierText.setText(mulFreespin);
             briMulti.slice(mulFreespin).forEach(bri => bri.visible = false);
 
@@ -1525,7 +1525,8 @@ function game2() {
             secondBri.anchor.setTo(0.5, 0.5);
             secondBri.animations.add('anim', [0, 1, 2, 3, 0, 1, 2, 3], 6, false).play().onComplete.add(function () {
                 secondBri.animations.add('anim', [0, 1, 2, 3, 0, 1, 2, 3], 6, false).play();
-                let secondBriX = -(77 - 11 * ((mulFreespin + 1) % 10));
+                indexPos++;
+                let secondBriX = -(77 - 11 * ((indexPos + 1) % 10));
                 game.add.tween(secondBri).to({
                     x: 512 + secondBriX,
                     y: 435
@@ -1558,7 +1559,7 @@ function game2() {
                                 briMulti[10].visible = true;
                             }
                         } else {
-                            briMulti[++indexPos % 10].visible = true;
+                            briMulti[indexPos % 10].visible = true;
                         }
 
                         multiplierText.setText(mulFreespin);
