@@ -739,7 +739,7 @@ function game2() {
 
             console.log(dataArray.logicData.multiplier, mulFreespin, 'mulFreespin')
             totalWinningsInFeatureGame = dataArray.balanceData['totalWinningsInFeatureGame'];
-            mulFreespin = mulFreespinOld = dataArray.logicData.multiplier;
+            mulFreespin = dataArray.logicData.multiplier;
 
             if (dataSpinRequest.longData) {
                 winOldTrigerFreeSpin = dataArray.longData.balanceData['totalPayoff'];
@@ -1554,7 +1554,7 @@ function game2() {
                         } else {
                             briMulti[mulFreespin % 10].visible = true;
                         }
-                        multiplierText.setText(mulFreespinOld);
+                        multiplierText.setText(mulFreespin);
                         multiplierText.visible = false;
                         freeSpinMulti.play();
                         setTimeout(function () {
@@ -1610,7 +1610,7 @@ function game2() {
             if (!dataSpinRequest.stateData.isDropFeatureGame) {
                 bottomText.setText(allWin + " Credits Won");
             }
-            winText.setText('Line Pay \n' + (wlValues[lineflash].winValue / mulFreespinOld) + " x " + mulFreespinOld + " = " + wlValues[lineflash].winValue.toFixed(1));
+            winText.setText('Line Pay \n' + (wlValues[lineflash].winValue / mulFreespinOld) + " x " + mulFreespinOld + " = " + wlValues[lineflash].winValue);
             if (info[squareArr[wlWinValuesArray[lineflash] - 1][0] - 1] !== 0) {
                 trigerLine = info[squareArr[wlWinValuesArray[lineflash] - 1][0] - 1];
             } else if (info[squareArr[wlWinValuesArray[lineflash] - 1][1] - 1] !== 0) {
