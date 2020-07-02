@@ -60,22 +60,22 @@
             </div>
             <div class="col-6">
                 <div class="work_space">
-                    Total bet = @if (isset($data->userStatisticsData->loss)) {{$data->userStatisticsData->loss}} @else 0 @endif <br>
-                    Total win = @if (isset($data->userStatisticsData->winnings)) {{$data->userStatisticsData->winnings}} @else 0 @endif<br><br> <!-- total winnings in the main game -->
-                    Spins Count = @if (isset($data->userStatisticsData->spinCountInMainGame)) {{$data->userStatisticsData->spinCountInMainGame}} @else 0 @endif <br>
-                    Win Spins Count = @if (isset($data->userStatisticsData->winSpinCountInMainGame)) {{$data->userStatisticsData->winSpinCountInMainGame}} @else 0 @endif<br>
-                    Lose Spins Count = @if (isset($data->userStatisticsData->loseSpinCountInMainGame)) {{$data->userStatisticsData->loseSpinCountInMainGame}} @else 0 @endif<br>
-                    Win Spins Amount = @if (isset($data->userStatisticsData->winningsOnMainGame)) {{$data->userStatisticsData->winningsOnMainGame}} @else 0 @endif<br>
-                    Win spin % = @if (isset($data->userStatisticsData->percentWinSpinsInMainGame)) {{$data->userStatisticsData->percentWinSpinsInMainGame}} @else 0 @endif
+                    Total bet $ = @if (isset($data->userStatisticsData->loss)) {{ number_format($data->userStatisticsData->loss / 100, 2, '.', ' ') }} @else 0 @endif <br>
+                    Total win $ = @if (isset($data->userStatisticsData->winnings)) {{ number_format($data->userStatisticsData->winnings / 100, 2, '.', ' ') }} @else 0 @endif<br><br> <!-- total winnings in the main game -->
+                    Spins Count = @if (isset($data->userStatisticsData->spinCountInMainGame)) {{ number_format($data->userStatisticsData->spinCountInMainGame, 0, '.', ' ') }} @else 0 @endif <br>
+                    Win Spins Count = @if (isset($data->userStatisticsData->winSpinCountInMainGame)) {{ number_format($data->userStatisticsData->winSpinCountInMainGame, 0, '.', ' ') }} @else 0 @endif<br>
+                    Lose Spins Count = @if (isset($data->userStatisticsData->loseSpinCountInMainGame)) {{ number_format($data->userStatisticsData->loseSpinCountInMainGame, 0, '.', ' ') }} @else 0 @endif<br>
+                    Win Spins Amount = @if (isset($data->userStatisticsData->winningsOnMainGame)) {{ number_format($data->userStatisticsData->winningsOnMainGame, 0, '.', ' ') }} @else 0 @endif<br>
+                    Win spin % = @if (isset($data->userStatisticsData->percentWinSpinsInMainGame)) {{ number_format($data->userStatisticsData->percentWinSpinsInMainGame, 4, '.', ' ') }} @else 0 @endif
                     <br>
                     <br>
-                    Free Spins Count = @if (isset($data->userStatisticsData->featureGamesDropped)) {{$data->userStatisticsData->featureGamesDropped}} @else 0 @endif<br>
-                    Free Spins Amount = @if (isset($data->userStatisticsData->winningsOnFeatureGame)) {{$data->userStatisticsData->winningsOnFeatureGame}} @else 0 @endif<br>
-                    Win spin % = @if (isset($data->userStatisticsData->percentWinSpinsInFeatureGame)) {{$data->userStatisticsData->percentWinSpinsInFeatureGame}} @else 0 @endif<br><br>
+                    Free Spins Count = @if (isset($data->userStatisticsData->featureGamesDropped)) {{ number_format($data->userStatisticsData->featureGamesDropped, 0, '.', ' ') }} @else 0 @endif<br>
+                    Free Spins Amount = @if (isset($data->userStatisticsData->winningsOnFeatureGame)) {{ number_format($data->userStatisticsData->winningsOnFeatureGame, 0, '.', ' ') }} @else 0 @endif<br>
+                    Win spin % = @if (isset($data->userStatisticsData->percentWinSpinsInFeatureGame)) {{ number_format($data->userStatisticsData->percentWinSpinsInFeatureGame, 4, '.', ' ') }} @else 0 @endif<br><br>
 
-                    PAYOUT = @if (isset($data->userStatisticsData->winPercent)) {{$data->userStatisticsData->winPercent}} @else 0 @endif %<br>
-                    PAYOUT by Spins = @if (isset($data->userStatisticsData->winPercentOnMainGame)) {{$data->userStatisticsData->winPercentOnMainGame}} @else 0 @endif %<br>
-                    PAYOUT by Free Spins = @if (isset($data->userStatisticsData->winPercentOnFeatureGame)) {{$data->userStatisticsData->winPercentOnFeatureGame}} @else 0 @endif %<br>
+                    PAYOUT = @if (isset($data->userStatisticsData->winPercent)) {{ number_format($data->userStatisticsData->winPercent, 4, '.', ' ') }} @else 0 @endif %<br>
+                    PAYOUT by Spins = @if (isset($data->userStatisticsData->winPercentOnMainGame)) {{ number_format($data->userStatisticsData->winPercentOnMainGame, 4, '.', ' ') }} @else 0 @endif %<br>
+                    PAYOUT by Free Spins = @if (isset($data->userStatisticsData->winPercentOnFeatureGame)) {{ number_format($data->userStatisticsData->winPercentOnFeatureGame, 4, '.', ' ') }} @else 0 @endif %<br>
 
                     execution time = @if (isset($data->systemData->executionTime)) {{$data->systemData->executionTime}} @else @endif sec<br><br>
 

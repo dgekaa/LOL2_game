@@ -49,14 +49,6 @@ class BonusCalculatorTool extends CoreBonusCalculatorTool
             $bonusWinnings[] = ['symbol' => 10, 'count' => $coinCounter, 'winning' => $winning];
         }
 
-        // увеличение выигрыша на бонусных символах в два раза за счет алмазов
-        if ($diamandCounter > 0) {
-            foreach ($bonusWinnings as $key => $item) {
-                $item['winning'] *= 2;
-                $bonusWinnings[$key] = $item;
-            }
-        }
-
         return $bonusWinnings;
     }
 
@@ -104,14 +96,6 @@ class BonusCalculatorTool extends CoreBonusCalculatorTool
 
         if ($winning > 0) {
             $bonusWinnings[] = ['symbol' => 10, 'count' => $coinCounter, 'winning' => $winning];
-        }
-
-        // увеличение выигрыша на бонусных символах в два раза за счет алмазов
-        if ($diamandCounter > 0) {
-            foreach ($bonusWinnings as $key => $item) {
-                $item['winning'] *= 2;
-                $bonusWinnings[$key] = $item;
-            }
         }
 
         return $bonusWinnings;
