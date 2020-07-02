@@ -1563,7 +1563,7 @@ function game2() {
                         thirdBri.destroy();
                         if (pos % 10 === 0) {
                             multiBriText.visible = true;
-                            multiBriText.setText(mulFreespin)
+                            multiBriText.setText(pos)
                             for (let i = 1; i <= 9; ++i) {
                                 briMulti[i].visible = false;
                                 briMulti[10].visible = true;
@@ -1572,7 +1572,7 @@ function game2() {
                             briMulti[pos % 10].visible = true;
                         }
 
-                        multiplierText.setText(mulFreespin);
+                        multiplierText.setText(pos);
                         multiplierText.visible = false;
                         countBri--;
                         freeSpinMulti.play();
