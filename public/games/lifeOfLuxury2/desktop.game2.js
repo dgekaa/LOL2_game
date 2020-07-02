@@ -63,7 +63,7 @@ function game2() {
         coinSound4 = game.add.audio('coin4');
         coinSound5 = game.add.audio('coin5');
         curGame = 2;
-        var indexPos = 2;
+        var countBri = 2;
         var mulFreespin = 2;
         var mulFreespinOld = 2;
         var freeSpinCount = 12;
@@ -731,15 +731,20 @@ function game2() {
             // balance = dataArray.balanceData['balance'] - dataArray.balanceData['totalPayoff'];
 
             allWin = dataArray.balanceData['payoffByLines'];
-            if (dataSpinRequest.stateData.isDropFeatureGame) {
-                payoffByBonus = dataArray.balanceData['payoffByBonus'];
-            }
+            payoffByBonus = dataArray.balanceData['payoffByBonus'];
+
             if (realSpinStatus) {
                 realSpinStatus = false;
             }
 
             console.log(dataArray.logicData.multiplier, mulFreespin, 'mulFreespin')
-            totalWinningsInFeatureGame = dataArray.balanceData['totalWinningsInFeatureGame'];
+
+            triggerPay = dataArray.longData.balanceData.payoffByBonus;
+            linePay = dataArray.longData.balanceData.payoffByLines;
+            bonusPay = dataArray.longData.balanceData.totalWinningsInFeatureGame;
+            infoOldOnlyForThisWindow = dataArray.longData.logicData.table;
+            winCellInfo = dataArray.logicData['winningCells'];
+
             mulFreespin = dataArray.logicData.multiplier;
 
             if (dataSpinRequest.longData) {
@@ -1088,6 +1093,7 @@ function game2() {
                 if (info[key] === 0) {
                     briStatus = true;
                     briArr.push(+(key));
+                    countBri = briArr.length;
                 }
             }
             if (dataSpinRequest.stateData.isDropFeatureGame) {
@@ -1225,9 +1231,10 @@ function game2() {
             freesponStartBGAdditionalBonus.visible = true;
             freesponStartBGAdditionalBonus.alpha = 0;
 
-            indexPos = 2;
+            const currentPos = mulFreespin - (briArr.length - 1);
+
             multiplierText.setText(mulFreespin);
-            briMulti.slice(mulFreespin).forEach(bri => bri.visible = false);
+            briMulti.slice(currentPos).forEach(bri => bri.visible = false);
 
             game.add.tween(freesponStartBGAdditionalBonus).to({alpha: 1}, 1000, "Linear", true).onComplete.add(function () {
                 freeSpinCount = freeSpinCount + 12;
@@ -1525,8 +1532,11 @@ function game2() {
             secondBri.anchor.setTo(0.5, 0.5);
             secondBri.animations.add('anim', [0, 1, 2, 3, 0, 1, 2, 3], 6, false).play().onComplete.add(function () {
                 secondBri.animations.add('anim', [0, 1, 2, 3, 0, 1, 2, 3], 6, false).play();
-                indexPos++;
-                let secondBriX = -(77 - 11 * ((indexPos + 1) % 10));
+                const pos = mulFreespin - (countBri - 1);
+
+                console.log(pos, countBri, 'brii')
+
+                let secondBriX = -(77 - 11 * ((pos + 1) % 10));
                 game.add.tween(secondBri).to({
                     x: 512 + secondBriX,
                     y: 435
@@ -1540,8 +1550,8 @@ function game2() {
                     let longX;
                     let longY = 171;
 
-                    if (mulFreespin % 10 !== 0) {
-                        longX = 189 + 44 * (mulFreespin % 10);
+                    if (pos % 10 !== 0) {
+                        longX = 189 + 44 * (pos % 10);
                     } else {
                         longX = 189;
                     }
@@ -1551,7 +1561,7 @@ function game2() {
                         y: longY
                     }, 900, Phaser.Easing.LINEAR, true).onComplete.add(function () {
                         thirdBri.destroy();
-                        if (mulFreespin % 10 === 0) {
+                        if (pos % 10 === 0) {
                             multiBriText.visible = true;
                             multiBriText.setText(mulFreespin)
                             for (let i = 1; i <= 9; ++i) {
@@ -1559,11 +1569,12 @@ function game2() {
                                 briMulti[10].visible = true;
                             }
                         } else {
-                            briMulti[indexPos % 10].visible = true;
+                            briMulti[pos % 10].visible = true;
                         }
 
                         multiplierText.setText(mulFreespin);
                         multiplierText.visible = false;
+                        countBri--;
                         freeSpinMulti.play();
                         setTimeout(function () {
                             multiplierText.visible = true;
@@ -2006,7 +2017,7 @@ function game2() {
         function updateBalance() {
             var x = 0;
             var interval;
-            allwinUpd = allWin;
+            allwinUpd = allWin + payoffByBonus;
             balanceSongAudio.play();
             balanceUpdateStatus2 = true;
             (function () {
