@@ -890,7 +890,6 @@ function game1() {
                 allWin = dataArray.balanceData['totalPayoff'];
                 triggerPay = winOldTrigerFreeSpin = dataArray.balanceData['totalPayoff'];
                 infoOld = dataArray.logicData.table;
-                infoOldOnlyForThisWindow = dataArray.logicData.table;
                 mulFreespin = dataArray.logicData.multiplier;
                 wlValuesOld = dataArray.logicData['payoffsForLines'];
                 console.log(wlValuesOld)
@@ -900,6 +899,7 @@ function game1() {
                 credit.setText(balance);
                 realSpinStatus = false;
             }
+
             coinCount = 0;
             info = dataArray.logicData.table;
             parseAnswerStatus = true;
@@ -1265,8 +1265,7 @@ function game1() {
                 winBonusValue = winOldTrigerFreeSpin - winWithoutCoin;
                 stopWinAnim = false;
                 wcvWinValuesArray = [];
-                bottomText.setText(allWin + " Credits Won");
-                bottomText.setText(allWin + " Credits Won");
+                bottomText.setText(bonusPay + linePay + triggerPay + " Credits Won");
                 bottomText.fontSize = 35;
                 for (key in info) {
                     if (info[key] === 10 || info[key] === 0) {
@@ -1408,7 +1407,7 @@ function game1() {
                 if (isTriggerPay) {
                     winText.setText('Trigger Pay \n' + triggerPay.toFixed());
                 } else {
-                    winText.setText('Bonus Pay \n' + totalWinningsInFeatureGame.toFixed());
+                    winText.setText('Bonus Pay \n' + bonusPay.toFixed());
                 }
 
                 triggerShow++
@@ -1762,7 +1761,7 @@ function game1() {
                     if (isTriggerPay) {
                         winText.setText('Trigger Pay \n' + triggerPay.toFixed());
                     } else {
-                        winText.setText('Bonus Pay \n' + totalWinningsInFeatureGame.toFixed());
+                        winText.setText('Bonus Pay \n' + bonusPay.toFixed());
                     }
 
                     triggerShow++
@@ -1796,7 +1795,7 @@ function game1() {
                             if (isTriggerPay) {
                                 winText.setText('Trigger Pay \n' + triggerPay.toFixed());
                             } else {
-                                winText.setText('Bonus Pay \n' + totalWinningsInFeatureGame.toFixed());
+                                winText.setText('Bonus Pay \n' + bonusPay.toFixed());
                             }
 
                             triggerShow++
