@@ -2954,6 +2954,7 @@ function game1() {
             $('canvas').mouseup(function (e) {
                 if (curGame === 2) {
                     if (balanceUpdateStatus2) {
+                        console.log(1)
                         balanceUpdateStatus2 = false;
                     }
                 }

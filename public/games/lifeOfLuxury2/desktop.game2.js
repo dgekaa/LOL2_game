@@ -737,8 +737,6 @@ function game2() {
                 realSpinStatus = false;
             }
 
-            console.log(dataArray.logicData.multiplier, mulFreespin, 'mulFreespin')
-
             triggerPay = dataArray.longData.balanceData.payoffByBonus;
             linePay = dataArray.longData.balanceData.payoffByLines;
             bonusPay = dataArray.longData.balanceData.totalWinningsInFeatureGame;
@@ -1096,6 +1094,7 @@ function game2() {
                     countBri = briArr.length;
                 }
             }
+            afterDropFeatureGame = false;
             if (dataSpinRequest.stateData.isDropFeatureGame) {
                 briWinSound.play();
                 stopWinAnim = false;
@@ -1219,6 +1218,7 @@ function game2() {
                                 wcvFreeSpinWinValuesArray.forEach(function (cell, i) {
                                     squareArrFreespin[cell + 1].visible = false;
                                 });
+                                console.log('additionalBonus')
                                 additionalBonus();
                             }
                         }, 500);
@@ -2034,8 +2034,8 @@ function game2() {
                     if (balanceUpdateStatus2 === false) {
                         x = allwinUpd;
                     }
-                    setTimeout(arguments.callee, interval);
 
+                    setTimeout(arguments.callee, interval);
                 } else {
                     balanceUpdateStatus2 = false;
                     balanceSongAudio.stop();
@@ -2221,6 +2221,14 @@ function game2() {
         function moveElementFromRightSide(elem) {
             game.add.tween(elem).to({x: elem.position.x + 244}, 500, "Linear", true);
         }
+
+        $('canvas').mouseup(function (e) {
+            if (curGame === 2) {
+                if (balanceUpdateStatus2) {
+                    balanceUpdateStatus2 = false;
+                }
+            }
+        });
     };
 
 
