@@ -22,9 +22,6 @@ class StartFeatureGameObserver extends BaseObserver
                 // изменение текущего номера хода в featureGame
                 $event->dataPool->stateData->moveNumberInFeatureGame = 0;
 
-                // Обнуление кол-ва возможных бесплатных спинов
-                $event->dataPool->logicData->countOfMovesInFeatureGame = $event->dataPool->logicData->startCountOfFreeSpinsInFeatureGame;
-
                 // запись данных которые есть при выпадении фриспинов для хранения до окончания фриспинов
                 $longData = new \stdClass;
                 $longData->stateData = new \stdClass;
@@ -44,9 +41,6 @@ class StartFeatureGameObserver extends BaseObserver
                 // изменение текущего номера хода в featureGame
                 $event->dataPool->stateData->moveNumberInFeatureGame = 0;
             }
-
-            // Обнуление кол-ва возможных бесплатных спинов
-            $event->dataPool->logicData->countOfMovesInFeatureGame = $event->dataPool->logicData->startCountOfFreeSpinsInFeatureGame;
 
             // запись данных которые есть при выпадении фриспинов для хранения до окончания фриспинов
             $longData = new \stdClass;
