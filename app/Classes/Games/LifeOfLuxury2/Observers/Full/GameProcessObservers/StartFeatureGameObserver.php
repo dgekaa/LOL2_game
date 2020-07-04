@@ -54,7 +54,6 @@ class StartFeatureGameObserver extends BaseObserver
             $longData->stateData = $event->dataPool->stateData;
             $longData->balanceData = new \stdClass;
             $longData->balanceData = $event->dataPool->longData->data->balanceData;
-            $longData->balanceData->balance = $event->dataPool->balanceData->balance;
             $longData->balanceData->totalWinningsInFeatureGame = $event->dataPool->balanceData->totalWinningsInFeatureGame;
             $longData->logicData = new \stdClass;
             $longData->logicData = $event->dataPool->longData->data->logicData;
@@ -69,7 +68,6 @@ class StartFeatureGameObserver extends BaseObserver
             $longData->stateData = $event->dataPool->stateData;
             $longData->balanceData = new \stdClass;
             $longData->balanceData = $event->dataPool->longData->data->balanceData;
-            $longData->balanceData->balance = $event->dataPool->balanceData->balance;
             $longData->balanceData->totalWinningsInFeatureGame = $event->dataPool->balanceData->totalWinningsInFeatureGame;
             $longData->logicData = new \stdClass;
             $longData->logicData = $event->dataPool->longData->data->logicData;

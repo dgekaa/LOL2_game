@@ -1233,7 +1233,7 @@ function game2() {
 
             const currentPos = mulFreespin - (briArr.length - 1);
 
-            multiplierText.setText(mulFreespin);
+            multiplierText.setText(currentPos - 1);
             briMulti.slice(currentPos).forEach(bri => bri.visible = false);
 
             game.add.tween(freesponStartBGAdditionalBonus).to({alpha: 1}, 1000, "Linear", true).onComplete.add(function () {
