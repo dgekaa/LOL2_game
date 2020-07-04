@@ -822,6 +822,12 @@ function game1() {
         addScore();
         addinfoPage();
 
+        var eventId = game.add.text(1020, 0, '', {
+            font: '17px Arial',
+            fill: '#fff',
+            fontWeight: 'bold'
+        });
+        eventId.anchor.setTo(1, 0);
         freespinStartBG = game.add.sprite(75, 125, 'freespinStartBG');
         freespinStartBG.visible = false;
         freesponStartBGText = game.add.sprite(75, 125, 'freesponStartBGText');
@@ -886,6 +892,12 @@ function game1() {
             // linesR = dataArray['linesInGame'];
             // betlineR = dataArray['betLine'];
             allWin = dataArray.balanceData['payoffByLines'];
+
+            if (dataArray.sessionData['eventId']) {
+                eventId.setText(`${dataArray['eventId']}`);
+                eventId.visible = true;
+            }
+
             if (dataSpinRequest.stateData.isWinOnBonus) {
                 allWin = dataArray.balanceData['totalPayoff'];
                 triggerPay = winOldTrigerFreeSpin = dataArray.balanceData['totalPayoff'];
@@ -1855,31 +1867,35 @@ function game1() {
             if (info[squareArr[wlWinValuesArray[lineflash] - 1][0] - 1] === 0 || info[squareArr[wlWinValuesArray[lineflash] - 1][1] - 1] === 0) {
                 multiStatus = true;
             }
-            if (info[squareArr[wlWinValuesArray[lineflash] - 1][0] - 1] === 9 & (info[squareArr[wlWinValuesArray[lineflash] - 1][2] - 1] === 0 || info[squareArr[wlWinValuesArray[lineflash] - 1][2] - 1] === 9)) {
-                if (firstAroundAnim) {
-                    if (!afterFreespinStatus) {
-                        katerSong.play();
+
+            if (firstAroundAnim) {
+                if (info[squareArr[wlWinValuesArray[lineflash] - 1][0] - 1] === 9 & (info[squareArr[wlWinValuesArray[lineflash] - 1][2] - 1] === 0 || info[squareArr[wlWinValuesArray[lineflash] - 1][2] - 1] === 9)) {
+                    if (firstAroundAnim) {
+                        if (!afterFreespinStatus) {
+                            katerSong.play();
+                        }
+                        otherSound = true;
                     }
-                    otherSound = true;
+                }
+                if (info[squareArr[wlWinValuesArray[lineflash] - 1][0] - 1] === 1 & (info[squareArr[wlWinValuesArray[lineflash] - 1][2] - 1] === 0 || info[squareArr[wlWinValuesArray[lineflash] - 1][2] - 1] === 1)) {
+                    if (firstAroundAnim) {
+                        if (!afterFreespinStatus) {
+                            planeSong.play();
+                        }
+                        otherSound = true;
+                    }
+                }
+                console.log(wlWinValuesArray[lineflash] - 1, squareArr[wlWinValuesArray[lineflash] - 1][0], 'car')
+                if (info[squareArr[wlWinValuesArray[lineflash] - 1][0] - 1] === 4 & (info[squareArr[wlWinValuesArray[lineflash] - 1][2] - 1] === 0 || info[squareArr[wlWinValuesArray[lineflash] - 1][2] - 1] === 4)) {
+                    if (firstAroundAnim) {
+                        if (!afterFreespinStatus) {
+                            carSong.play();
+                        }
+                        otherSound = true;
+                    }
                 }
             }
-            if (info[squareArr[wlWinValuesArray[lineflash] - 1][0] - 1] === 1 & (info[squareArr[wlWinValuesArray[lineflash] - 1][2] - 1] === 0 || info[squareArr[wlWinValuesArray[lineflash] - 1][2] - 1] === 1)) {
-                if (firstAroundAnim) {
-                    if (!afterFreespinStatus) {
-                        planeSong.play();
-                    }
-                    otherSound = true;
-                }
-            }
-            console.log(wlWinValuesArray[lineflash] - 1, squareArr[wlWinValuesArray[lineflash] - 1][0], 'car')
-            if (info[squareArr[wlWinValuesArray[lineflash] - 1][0] - 1] === 4 & (info[squareArr[wlWinValuesArray[lineflash] - 1][2] - 1] === 0 || info[squareArr[wlWinValuesArray[lineflash] - 1][2] - 1] === 4)) {
-                if (firstAroundAnim) {
-                    if (!afterFreespinStatus) {
-                        carSong.play();
-                    }
-                    otherSound = true;
-                }
-            }
+
             if (info[squareArr[wlWinValuesArray[lineflash] - 1][2] - 1] === 0 || info[squareArr[wlWinValuesArray[lineflash] - 1][2] - 1] === trigerLine) {
                 if (info[squareArr[wlWinValuesArray[lineflash] - 1][2] - 1] === 0) {
                     multiStatus = true;
@@ -1916,65 +1932,63 @@ function game1() {
             }
 
             if (multiStatus) {
-                if (firstAroundAnim) {
-                    if (!otherSound) {
-                        if (!afterFreespinStatus) {
-                            briLineWinSound.play();
-                        }
-                    }
-                    for (var i = 1; i <= sizeLine; ++i) {
-                        if (info[squareArr[wlWinValuesArray[lineflash] - 1][i - 1] - 1] === 0) {
-                            briAnimArr[squareArr[wlWinValuesArray[lineflash] - 1][i - 1]].visible = true;
-                            briAnimArr[squareArr[wlWinValuesArray[lineflash] - 1][i - 1]].animations.add('scatters_anim', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], 12, false).play().onComplete.add(function () {
-                                for (var i = 1; i <= 15; ++i) {
-                                    briAnimArr[i].visible = false;
-                                }
-                            });
-                        }
+                if (!otherSound) {
+                    if (!afterFreespinStatus) {
+                        firstAroundAnim && briLineWinSound.play();
                     }
                 }
-            }
-            if (firstAroundAnim) {
                 for (var i = 1; i <= sizeLine; ++i) {
-                    if (sizeLine >= 3) {
-                        if (info[squareArr[wlWinValuesArray[lineflash] - 1][i - 1] - 1] === 4) {
-                            carAnimArr[squareArr[wlWinValuesArray[lineflash] - 1][i - 1]].visible = true;
-                            carAnimArr[squareArr[wlWinValuesArray[lineflash] - 1][i - 1]].animations.add('scatters_anim', [4, 3, 2, 1, 0], 5, false).play().onComplete.add(function () {
-                                for (var i = 1; i <= 15; ++i) {
-                                    carAnimArr[i].visible = false;
-                                }
-                            });
-                        }
-                    }
-
-                    if (sizeLine >= 2) {
-                        if (info[squareArr[wlWinValuesArray[lineflash] - 1][i - 1] - 1] === 1) {
-                            if (sizeLine === 2) {
-                                planeSong.play();
+                    if (info[squareArr[wlWinValuesArray[lineflash] - 1][i - 1] - 1] === 0) {
+                        briAnimArr[squareArr[wlWinValuesArray[lineflash] - 1][i - 1]].visible = true;
+                        briAnimArr[squareArr[wlWinValuesArray[lineflash] - 1][i - 1]].animations.add('scatters_anim', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], 12, false).play().onComplete.add(function () {
+                            for (var i = 1; i <= 15; ++i) {
+                                briAnimArr[i].visible = false;
                             }
-
-                            planeAnimArr[squareArr[wlWinValuesArray[lineflash] - 1][i - 1]].visible = true;
-                            planeAnimArr[squareArr[wlWinValuesArray[lineflash] - 1][i - 1]].animations.add('scatters_anim', [6, 5, 4, 3, 2, 1, 0], 5, false).play().onComplete.add(function () {
-                                for (var i = 1; i <= 15; ++i) {
-                                    planeAnimArr[i].visible = false;
-                                }
-                            });
-                        }
-                        if (info[squareArr[wlWinValuesArray[lineflash] - 1][i - 1] - 1] === 9) {
-                            if (sizeLine === 2) {
-                                katerSong.play();
-                            }
-
-                            katerAnimArr[squareArr[wlWinValuesArray[lineflash] - 1][i - 1]].visible = true;
-                            katerAnimArr[squareArr[wlWinValuesArray[lineflash] - 1][i - 1]].animations.add('scatters_anim', [4, 3, 2, 1, 0], 5, false).play().onComplete.add(function () {
-                                for (var i = 1; i <= 15; ++i) {
-                                    katerAnimArr[i].visible = false;
-                                }
-                            });
-                        }
+                        });
                     }
                 }
             }
+
+            for (var i = 1; i <= sizeLine; ++i) {
+                if (sizeLine >= 3) {
+                    if (info[squareArr[wlWinValuesArray[lineflash] - 1][i - 1] - 1] === 4) {
+                        carAnimArr[squareArr[wlWinValuesArray[lineflash] - 1][i - 1]].visible = true;
+                        carAnimArr[squareArr[wlWinValuesArray[lineflash] - 1][i - 1]].animations.add('scatters_anim', [4, 3, 2, 1, 0], 5, false).play().onComplete.add(function () {
+                            for (var i = 1; i <= 15; ++i) {
+                                carAnimArr[i].visible = false;
+                            }
+                        });
+                    }
+                }
+
+                if (sizeLine >= 2) {
+                    if (info[squareArr[wlWinValuesArray[lineflash] - 1][i - 1] - 1] === 1) {
+                        if (sizeLine === 2) {
+                            firstAroundAnim && planeSong.play();
+                        }
+
+                        planeAnimArr[squareArr[wlWinValuesArray[lineflash] - 1][i - 1]].visible = true;
+                        planeAnimArr[squareArr[wlWinValuesArray[lineflash] - 1][i - 1]].animations.add('scatters_anim', [6, 5, 4, 3, 2, 1, 0], 5, false).play().onComplete.add(function () {
+                            for (var i = 1; i <= 15; ++i) {
+                                planeAnimArr[i].visible = false;
+                            }
+                        });
+                    }
+                    if (info[squareArr[wlWinValuesArray[lineflash] - 1][i - 1] - 1] === 9) {
+                        if (sizeLine === 2) {
+                            firstAroundAnim && katerSong.play();
+                        }
+
+                        katerAnimArr[squareArr[wlWinValuesArray[lineflash] - 1][i - 1]].visible = true;
+                        katerAnimArr[squareArr[wlWinValuesArray[lineflash] - 1][i - 1]].animations.add('scatters_anim', [4, 3, 2, 1, 0], 5, false).play().onComplete.add(function () {
+                            for (var i = 1; i <= 15; ++i) {
+                                katerAnimArr[i].visible = false;
+                            }
+                        });
+                    }
+                }
+            }
+
             flickLine(sizeLine, wlWinValuesArray[lineflash], wlWinValuesArray);
         }
 
@@ -2090,11 +2104,11 @@ function game1() {
                                         showWin(wlWinValuesArray, winCellInfo)
                                     }
                                 }
-                            }, 500);
-                        }, 200);
-                    }, 500);
-                }, 200);
-            }, 500);
+                            }, 870);
+                        }, 348);
+                    }, 870);
+                }, 348);
+            }, 870);
         };
 
         function upLines() {
