@@ -3063,7 +3063,7 @@ function game1() {
         ;
 
         game1.ticker.tilePosition.x += 0.5;
-        document.body.querySelector('canvas').focus();
+        // document.body.querySelector('canvas').focus();
     };
 
     game.state.add('game1', game1);
