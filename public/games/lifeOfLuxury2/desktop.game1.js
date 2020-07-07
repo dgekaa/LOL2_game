@@ -1968,7 +1968,7 @@ function game1() {
                         }
 
                         planeAnimArr[squareArr[wlWinValuesArray[lineflash] - 1][i - 1]].visible = true;
-                        planeAnimArr[squareArr[wlWinValuesArray[lineflash] - 1][i - 1]].animations.add('scatters_anim', [6, 5, 4, 3, 2, 1, 0], 5, false).play().onComplete.add(function () {
+                        planeAnimArr[squareArr[wlWinValuesArray[lineflash] - 1][i - 1]].animations.add('scatters_anim', [0, 1, 2, 3, 4, 5, 6], 5, false).play().onComplete.add(function () {
                             for (var i = 1; i <= 15; ++i) {
                                 planeAnimArr[i].visible = false;
                             }
@@ -2049,66 +2049,106 @@ function game1() {
                             if (afterFreespinStatus) {
                                 winText.visible = true;
                             }
+                            //
                             setTimeout(function () {
                                 if (stopWinAnim == true) {
                                     return;
                                 }
-                                if (lineflash === wlWinValuesArray.length - 1) {
-                                    firstAroundAnim = false;
-                                    lineflash = 0;
-                                } else {
-                                    lineflash = lineflash + 1;
-                                }
-                                if (wlWinValuesArray.length === 1) {
+                                winText.visible = false;
+                                if (afterFreespinStatus) {
                                     winText.visible = false;
-                                    if (afterFreespinStatus) {
-                                        winText.visible = false;
+                                }
+                                game1.lineArr[lineNumber].tint = 0x999999;
+                                for (var i = 1; i <= sizeLine; ++i) {
+                                    squareArrImg[lineNumber - 1][i - 1].tint = 0x999999;
+                                }
+                                setTimeout(function () {
+                                    if (stopWinAnim == true) {
+                                        return;
                                     }
-                                    game1.lineArr[lineNumber].tint = 0x999999;
+                                    game1.lineArr[lineNumber].tint = 0xffffff;
                                     for (var i = 1; i <= sizeLine; ++i) {
-                                        squareArrImg[lineNumber - 1][i - 1].tint = 0x999999;
+                                        squareArrImg[lineNumber - 1][i - 1].tint = 0xffffff;
+                                    }
+                                    winText.visible = true;
+                                    if (afterFreespinStatus) {
+                                        winText.visible = true;
                                     }
                                     setTimeout(function () {
                                         if (stopWinAnim == true) {
                                             return;
                                         }
-                                        game1.lineArr[lineNumber].tint = 0xffffff;
+                                        game1.lineArr[lineNumber].tint = 0x999999;
                                         for (var i = 1; i <= sizeLine; ++i) {
-                                            squareArrImg[lineNumber - 1][i - 1].tint = 0xffffff;
+                                            squareArrImg[lineNumber - 1][i - 1].tint = 0x999999;
                                         }
+                                        winText.visible = false;
                                         if (afterFreespinStatus) {
-                                            hideLines();
-                                            hideSquare();
-                                            if (lineflash === 0) {
-                                                showWinFreeSpin(wcvWinValuesArrayOld);
-                                            } else {
-                                                showWin(wlWinValuesArrayOld, winCellInfoOld)
+                                            winText.visible = false;
+                                        }
+                                        setTimeout(function () {
+                                            if (stopWinAnim == true) {
+                                                return;
                                             }
-                                        } else {
-                                            showWin(wlWinValuesArray, winCellInfo)
-                                        }
-                                    }, 150);
-                                } else {
-                                    hideLines();
-                                    hideSquare();
-                                    for (var i = 1; i <= sizeLine; ++i) {
-                                        game1.copyCell[squareArr[lineNumber - 1][i - 1]].visible = false;
-                                    }
-                                    if (afterFreespinStatus) {
-                                        if (lineflash === 0) {
-                                            showWinFreeSpin(wcvWinValuesArrayOld);
-                                        } else {
-                                            showWin(wlWinValuesArrayOld, winCellInfoOld)
-                                        }
-                                    } else {
-                                        showWin(wlWinValuesArray, winCellInfo)
-                                    }
-                                }
-                            }, 870);
-                        }, 348);
-                    }, 870);
-                }, 348);
-            }, 870);
+                                            if (lineflash === wlWinValuesArray.length - 1) {
+                                                firstAroundAnim = false;
+                                                lineflash = 0;
+                                            } else {
+                                                lineflash = lineflash + 1;
+                                            }
+                                            if (wlWinValuesArray.length === 1) {
+                                                winText.visible = true;
+                                                if (afterFreespinStatus) {
+                                                    winText.visible = true;
+                                                }
+                                                game1.lineArr[lineNumber].tint = 0xffffff;
+                                                for (var i = 1; i <= sizeLine; ++i) {
+                                                    squareArrImg[lineNumber - 1][i - 1].tint = 0xffffff;
+                                                }
+                                                setTimeout(function () {
+                                                    if (stopWinAnim == true) {
+                                                        return;
+                                                    }
+                                                    game1.lineArr[lineNumber].tint = 0x999999;
+                                                    for (var i = 1; i <= sizeLine; ++i) {
+                                                        squareArrImg[lineNumber - 1][i - 1].tint = 0x999999;
+                                                    }
+                                                    if (afterFreespinStatus) {
+                                                        hideLines();
+                                                        hideSquare();
+                                                        if (lineflash === 0) {
+                                                            showWinFreeSpin(wcvWinValuesArrayOld);
+                                                        } else {
+                                                            showWin(wlWinValuesArrayOld, winCellInfoOld)
+                                                        }
+                                                    } else {
+                                                        showWin(wlWinValuesArray, winCellInfo)
+                                                    }
+                                                }, 150);
+                                            } else {
+                                                hideLines();
+                                                hideSquare();
+                                                for (var i = 1; i <= sizeLine; ++i) {
+                                                    game1.copyCell[squareArr[lineNumber - 1][i - 1]].visible = false;
+                                                }
+                                                if (afterFreespinStatus) {
+                                                    if (lineflash === 0) {
+                                                        showWinFreeSpin(wcvWinValuesArrayOld);
+                                                    } else {
+                                                        showWin(wlWinValuesArrayOld, winCellInfoOld)
+                                                    }
+                                                } else {
+                                                    showWin(wlWinValuesArray, winCellInfo)
+                                                }
+                                            }
+                                        }, 275);
+                                    }, 550);
+                                }, 275);
+                            }, 550);
+                        }, 275);
+                    }, 550);
+                }, 275);
+            }, 550);
         };
 
         function upLines() {

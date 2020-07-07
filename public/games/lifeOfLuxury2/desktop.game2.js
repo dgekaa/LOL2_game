@@ -1714,35 +1714,74 @@ function game2() {
                                 squareArrImg[lineNumber - 1][i - 1].tint = 0xffffff;
                             }
                             winText.visible = true;
-                            // setTimeout(function() {
-                            if (stopWinAnim == true) {
-                                return;
-                            }
-                            hideLines();
-                            hideSquare();
-                            for (var i = 1; i <= sizeLine; ++i) {
-                                game2.copyCell[squareArr[lineNumber - 1][i - 1]].visible = false;
-                            }
-                            if (lineflash === wlWinValuesArray.length - 1) {
-                                firstAroundAnim = false;
-                                lineflash = 0;
-                            } else {
-                                lineflash = lineflash + 1;
-                            }
-                            if (lineflash === 0) {
-                                if (dataSpinRequest.stateData.isDropFeatureGame) {
-                                    showWinFreeSpin(wcvFreeSpinWinValuesArray);
-                                } else {
-                                    showWin(wlWinValuesArray, winCellInfo)
+                            setTimeout(function () {
+                                if (stopWinAnim == true) {
+                                    return;
                                 }
-                            } else {
-                                showWin(wlWinValuesArray, winCellInfo)
-                            }
-                            // }, 500);
-                        }, 200);
-                    }, 500);
-                }, 200);
-            }, 500);
+                                winText.visible = false;
+                                game2.lineArr[lineNumber].tint = 0x999999;
+                                for (var i = 1; i <= sizeLine; ++i) {
+                                    squareArrImg[lineNumber - 1][i - 1].tint = 0x999999;
+                                }
+                                setTimeout(function () {
+                                    if (stopWinAnim == true) {
+                                        return;
+                                    }
+                                    game2.lineArr[lineNumber].tint = 0xffffff;
+                                    for (var i = 1; i <= sizeLine; ++i) {
+                                        squareArrImg[lineNumber - 1][i - 1].tint = 0xffffff;
+                                    }
+                                    winText.visible = true;
+                                    setTimeout(function () {
+                                        if (stopWinAnim == true) {
+                                            return;
+                                        }
+                                        winText.visible = false;
+                                        game2.lineArr[lineNumber].tint = 0x999999;
+                                        for (var i = 1; i <= sizeLine; ++i) {
+                                            squareArrImg[lineNumber - 1][i - 1].tint = 0x999999;
+                                        }
+                                        setTimeout(function () {
+                                            if (stopWinAnim == true) {
+                                                return;
+                                            }
+                                            game2.lineArr[lineNumber].tint = 0xffffff;
+                                            for (var i = 1; i <= sizeLine; ++i) {
+                                                squareArrImg[lineNumber - 1][i - 1].tint = 0xffffff;
+                                            }
+                                            winText.visible = true;
+                                            // setTimeout(function() {
+                                            if (stopWinAnim == true) {
+                                                return;
+                                            }
+                                            hideLines();
+                                            hideSquare();
+                                            for (var i = 1; i <= sizeLine; ++i) {
+                                                game2.copyCell[squareArr[lineNumber - 1][i - 1]].visible = false;
+                                            }
+                                            if (lineflash === wlWinValuesArray.length - 1) {
+                                                firstAroundAnim = false;
+                                                lineflash = 0;
+                                            } else {
+                                                lineflash = lineflash + 1;
+                                            }
+                                            if (lineflash === 0) {
+                                                if (dataSpinRequest.stateData.isDropFeatureGame) {
+                                                    showWinFreeSpin(wcvFreeSpinWinValuesArray);
+                                                } else {
+                                                    showWin(wlWinValuesArray, winCellInfo)
+                                                }
+                                            } else {
+                                                showWin(wlWinValuesArray, winCellInfo)
+                                            }
+                                        }, 275);
+                                    }, 550);
+                                }, 275);
+                            }, 550);
+                        }, 275);
+                    }, 550);
+                }, 275);
+            }, 550);
         };
 
         function upLines() {
