@@ -269,6 +269,7 @@
             if (!featureGameStatus) {
                 game.state.start('game1');
             } else {
+                freeSpinsBegin = true;
                 freeSpinBgSong.play();
                 game.state.start('game2');
             }

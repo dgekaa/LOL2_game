@@ -153,6 +153,7 @@ function game1() {
         if (demo === 'demo') {
             game.scale.setGameSize(1024, 831)
         }
+        freeSpinsBegin = false;
         game1.ticker = game.add.tileSprite(0, 800, 1154, 31, 'ticker');
         checkBalanceTimer = false;
         createdStarsStatus = true;
@@ -1451,6 +1452,7 @@ function game1() {
                     freespinStartBG.alpha = 0;
                     big_red_border.visible = true;
                     big_red_border.animations.add('anim', [], 50, false).play().onComplete.add(function () {
+                        freeSpinsBegin = true;
                         stopWinAnim = true;
                         autostart = false;
                         spinStatus = false;

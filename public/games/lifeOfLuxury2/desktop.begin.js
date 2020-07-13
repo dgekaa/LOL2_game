@@ -30,6 +30,7 @@ var topAnim = false;
 var triggerPay = 0;
 var linePay = 0;
 var bonusPay = 0;
+var freeSpinsBegin = false;
 //звуки и полноэкранный режим
 var fullStatus = false;
 var soundStatus = true;
