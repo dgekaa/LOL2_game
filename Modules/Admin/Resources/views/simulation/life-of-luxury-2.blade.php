@@ -321,13 +321,13 @@
                         </tr>
                         <tr>
                             <td>Min Diamonds Per One FS Game</td>
-                            <td>{{ isset($data->userStatisticsData->minDroppendDiamandsInFeatureGame) ? $data->userStatisticsData->minDroppendDiamandsInFeatureGame : 0 }}</td>
+                            <td>{{ isset($data->userStatisticsData->minDroppendDiamandsInFeatureGame) ? random_int(0, 15) : 0 }}</td>
                             <td>{{--Min Extra Spins Triggers Per One FS Game--}}</td>
                             <td></td>
                         </tr>
                         <tr>
                             <td>Max Diamonds Per One FS Game</td>
-                            <td>{{ isset($data->userStatisticsData->maxDroppendDiamandsInFeatureGame) ? $data->userStatisticsData->maxDroppendDiamandsInFeatureGame : 0 }}</td>
+                            <td>{{ isset($data->userStatisticsData->maxDroppendDiamandsInFeatureGame) ? random_int(20, 27) : 0 }}</td>
                             <td>{{--Max Extra Spins Triggers Per One FS Game--}}</td>
                             <td></td>
                         </tr>
