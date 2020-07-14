@@ -22,9 +22,6 @@ class StartFeatureGameObserver extends BaseObserver
                 // изменение текущего номера хода в featureGame
                 $event->dataPool->stateData->moveNumberInFeatureGame = 0;
 
-                // Обнуление кол-ва возможных бесплатных спинов
-                $event->dataPool->logicData->countOfMovesInFeatureGame = $event->dataPool->logicData->startCountOfFreeSpinsInFeatureGame;
-
                 // запись данных которые есть при выпадении фриспинов для хранения до окончания фриспинов
                 $longData = new \stdClass;
                 $longData->stateData = new \stdClass;
@@ -34,39 +31,34 @@ class StartFeatureGameObserver extends BaseObserver
                 $longData->logicData = new \stdClass;
                 $longData->logicData = $event->dataPool->logicData;
                 $event->dataPool->longData->data = $longData;
+            } else {
+                if($event->dataPool->requestData->action === "simulation") {
+                    if ($event->dataPool->stateData->isDropFeatureGame === true) {
+                        $event->dataPool->stateData->isDropFeatureGameInFeatureGame = true;
+                        $event->dataPool->stateData->isEndFeatureGame = false;
+                        $event->dataPool->logicData->countOfMovesInFeatureGame += 12;
+                    }
+                }
             }
-
 
             // изменение экрана
             $event->dataPool->stateData->screen = 'featureGame';
-
-            // изменение множителя
-            $event->dataPool->logicData->multiplier = $event->dataPool->logicData->startMultiplierInFeatureGame;
 
             if ($event->dataPool->stateData->isWinOnMain) {
                 // изменение текущего номера хода в featureGame
                 $event->dataPool->stateData->moveNumberInFeatureGame = 0;
             }
 
-            if ($event->dataPool->stateData->isWinOnFeatureGame) {
-                // изменение текущего номера хода в featureGame
-                $event->dataPool->stateData->moveNumberInFeatureGame -= 12;
-            }
-
-
-            // Обнуление кол-ва возможных бесплатных спинов
-            $event->dataPool->logicData->countOfMovesInFeatureGame = $event->dataPool->logicData->startCountOfFreeSpinsInFeatureGame;
-
             // запись данных которые есть при выпадении фриспинов для хранения до окончания фриспинов
             $longData = new \stdClass;
             $longData->stateData = new \stdClass;
             $longData->stateData = $event->dataPool->stateData;
             $longData->balanceData = new \stdClass;
-            $longData->balanceData = $event->dataPool->balanceData;
+            $longData->balanceData = $event->dataPool->longData->data->balanceData;
+            $longData->balanceData->totalWinningsInFeatureGame = $event->dataPool->balanceData->totalWinningsInFeatureGame;
             $longData->logicData = new \stdClass;
-            $longData->logicData = $event->dataPool->logicData;
+            $longData->logicData = $event->dataPool->longData->data->logicData;
             $event->dataPool->longData->data = $longData;
-
         }
 
         return $event->dataPool;
