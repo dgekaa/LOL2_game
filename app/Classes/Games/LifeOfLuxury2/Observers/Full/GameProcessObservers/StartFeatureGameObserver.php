@@ -59,6 +59,20 @@ class StartFeatureGameObserver extends BaseObserver
             $longData->logicData = new \stdClass;
             $longData->logicData = $event->dataPool->longData->data->logicData;
             $event->dataPool->longData->data = $longData;
+
+        }
+
+        if ($event->name === 'endFeatureGame' && $event->dataPool->stateData->isEndFeatureGame) {
+            // запись данных которые есть при выпадении фриспинов для хранения до окончания фриспинов
+            $longData = new \stdClass;
+            $longData->stateData = new \stdClass;
+            $longData->stateData = $event->dataPool->stateData;
+            $longData->balanceData = new \stdClass;
+            $longData->balanceData = $event->dataPool->longData->data->balanceData;
+            $longData->balanceData->totalWinningsInFeatureGame = $event->dataPool->balanceData->totalWinningsInFeatureGame;
+            $longData->logicData = new \stdClass;
+            $longData->logicData = $event->dataPool->longData->data->logicData;
+            $event->dataPool->longData->data = $longData;
         }
 
         return $event->dataPool;

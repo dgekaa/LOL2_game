@@ -26,17 +26,6 @@ class EndFeatureGameObserver extends BaseEndFeatureGameObserver
 
                 // обнуление кол-ва возможных бесплатных спинов если они закончились
                 $event->dataPool->logicData->countOfMovesInFeatureGame = 12;
-            } else {
-                // запись данных которые есть при выпадении фриспинов для хранения до окончания фриспинов
-                $longData = new \stdClass;
-                $longData->stateData = new \stdClass;
-                $longData->stateData = $event->dataPool->stateData;
-                $longData->balanceData = new \stdClass;
-                $longData->balanceData = $event->dataPool->longData->data->balanceData;
-                $longData->balanceData->totalWinningsInFeatureGame = $event->dataPool->balanceData->totalWinningsInFeatureGame;
-                $longData->logicData = new \stdClass;
-                $longData->logicData = $event->dataPool->longData->data->logicData;
-                $event->dataPool->longData->data = $longData;
             }
         }
 
