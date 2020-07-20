@@ -308,7 +308,6 @@ function game1() {
             }
             if (numberSpin === 0 || numberSpin === 6 || numberSpin === 12) {
                 createdStarsMiniStatus = true;
-
                 animTopLabel('top_label_1');
             }
             if (numberSpin === 3) {
@@ -333,6 +332,9 @@ function game1() {
                     if (img === 'top_label_1') {
                         createdStarsMini();
                     }
+
+                    console.log(topLabel.key, 'key')
+
                     logoChangeSong.play();
                 });
             });
@@ -956,7 +958,6 @@ function game1() {
                     requestSpin(gamename, sessionUuid, betline, lines);
                     changeTextCur = changeTextCur + 1;
                     if (changeTextCur === changeTextValue) {
-                        topLabel.loadTexture('top_label_' + topLabelValue);
                         if (topLabelValue === 2) {
                             topLabelValue = 1;
                         } else {
@@ -1272,6 +1273,7 @@ function game1() {
                 }
             }
             if (dataSpinRequest.stateData.isWinOnBonus) {
+                console.log('allo')
                 topLabel.key !== 'top_label_1' && animTopLabel('top_label_1');
                 hideButtons();
                 briWinSound.play();
