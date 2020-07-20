@@ -31,8 +31,15 @@ class StartFeatureGameObserver extends BaseObserver
                 $longData->logicData = new \stdClass;
                 $longData->logicData = $event->dataPool->logicData;
                 $event->dataPool->longData->data = $longData;
+            } else {
+                if($event->dataPool->requestData->action === "simulation") {
+                    if ($event->dataPool->stateData->isDropFeatureGame === true) {
+                        $event->dataPool->stateData->isDropFeatureGameInFeatureGame = true;
+                        $event->dataPool->stateData->isEndFeatureGame = false;
+                        $event->dataPool->logicData->countOfMovesInFeatureGame += 12;
+                    }
+                }
             }
-
 
             // изменение экрана
             $event->dataPool->stateData->screen = 'featureGame';
