@@ -65,12 +65,12 @@
                     Spins Count = @if (isset($data->userStatisticsData->spinCountInMainGame)) {{ number_format($data->userStatisticsData->spinCountInMainGame, 0, '.', ' ') }} @else 0 @endif <br>
                     Win Spins Count = @if (isset($data->userStatisticsData->winSpinCountInMainGame)) {{ number_format($data->userStatisticsData->winSpinCountInMainGame, 0, '.', ' ') }} @else 0 @endif<br>
                     Lose Spins Count = @if (isset($data->userStatisticsData->loseSpinCountInMainGame)) {{ number_format($data->userStatisticsData->loseSpinCountInMainGame, 0, '.', ' ') }} @else 0 @endif<br>
-                    Win Spins Amount = @if (isset($data->userStatisticsData->winningsOnMainGame)) {{ number_format($data->userStatisticsData->winningsOnMainGame, 0, '.', ' ') }} @else 0 @endif<br>
+                    Win Spins Amount $ = @if (isset($data->userStatisticsData->winningsOnMainGame)) {{ number_format($data->userStatisticsData->winningsOnMainGame / 100, 0, '.', ' ') }} @else 0 @endif<br>
                     Win spin % = @if (isset($data->userStatisticsData->percentWinSpinsInMainGame)) {{ number_format($data->userStatisticsData->percentWinSpinsInMainGame, 4, '.', ' ') }} @else 0 @endif
                     <br>
                     <br>
                     Free Spins Count = @if (isset($data->userStatisticsData->featureGamesDropped)) {{ number_format($data->userStatisticsData->featureGamesDropped, 0, '.', ' ') }} @else 0 @endif<br>
-                    Free Spins Amount = @if (isset($data->userStatisticsData->winningsOnFeatureGame)) {{ number_format($data->userStatisticsData->winningsOnFeatureGame, 0, '.', ' ') }} @else 0 @endif<br>
+                    Free Spins Amount $ = @if (isset($data->userStatisticsData->winningsOnFeatureGame)) {{ number_format($data->userStatisticsData->winningsOnFeatureGame / 100, 0, '.', ' ') }} @else 0 @endif<br>
                     Win spin % = @if (isset($data->userStatisticsData->percentWinSpinsInFeatureGame)) {{ number_format($data->userStatisticsData->percentWinSpinsInFeatureGame, 4, '.', ' ') }} @else 0 @endif<br><br>
 
                     PAYOUT = @if (isset($data->userStatisticsData->winPercent)) {{ number_format($data->userStatisticsData->winPercent, 4, '.', ' ') }} @else 0 @endif %<br>
@@ -321,13 +321,13 @@
                         </tr>
                         <tr>
                             <td>Min Diamonds Per One FS Game</td>
-                            <td>{{ isset($data->userStatisticsData->minDroppendDiamandsInFeatureGame) ? random_int(0, 15) : 0 }}</td>
+                            <td>{{ isset($data->userStatisticsData->minDroppendDiamandsInFeatureGame) ? $data->userStatisticsData->minDroppendDiamandsInFeatureGame : 0 }}</td>
                             <td>{{--Min Extra Spins Triggers Per One FS Game--}}</td>
                             <td></td>
                         </tr>
                         <tr>
                             <td>Max Diamonds Per One FS Game</td>
-                            <td>{{ isset($data->userStatisticsData->maxDroppendDiamandsInFeatureGame) ? random_int(20, 27) : 0 }}</td>
+                            <td>{{ isset($data->userStatisticsData->maxDroppendDiamandsInFeatureGame) ? $data->userStatisticsData->maxDroppendDiamandsInFeatureGame : 0 }}</td>
                             <td>{{--Max Extra Spins Triggers Per One FS Game--}}</td>
                             <td></td>
                         </tr>
