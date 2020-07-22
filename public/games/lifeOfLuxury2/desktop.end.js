@@ -240,9 +240,9 @@
         game.load.audio('forcedStop', needUrlPath + '/sounds/forcedStop.mp3' + part2Url);
         game.load.audio('spinSound1f', needUrlPath + '/sounds/spinreels/1f.mp3' + part2Url);
         game.load.audio('spinSound2f', needUrlPath + '/sounds/spinreels/2f.mp3' + part2Url);
-        game.load.spritesheet('bri_anim', '' + path + '/img/bri_anim.png' + part2Url, 158, 149, 13);
-        game.load.spritesheet('car_anim', '' + path + '/img/car_anim.png' + part2Url, 158, 149, 5);
-        game.load.spritesheet('kater_anim', '' + path + '/img/kater_anim.png' + part2Url, 158, 149, 5);
+        game.load.spritesheet('bri_anim', '' + path + '/img/bri_anim.png' + part2Url, 160, 151, 13);
+        game.load.spritesheet('car_anim', '' + path + '/img/car_anim.png' + part2Url, 160, 151, 5);
+        game.load.spritesheet('kater_anim', '' + path + '/img/kater_anim.png' + part2Url, 160, 151, 4);
         game.load.spritesheet('plane_anim', '' + path + '/img/plane_anim.png' + part2Url, 158, 149, 7);
         game.load.spritesheet('bri_anim_1', '' + path + '/img/bri_anim_1_x5.png' + part2Url, 564, 373, 5); //удалить
         game.load.spritesheet('bri_anim_2', '' + path + '/img/bri_anim_2_x4.png' + part2Url, 564, 373, 4);

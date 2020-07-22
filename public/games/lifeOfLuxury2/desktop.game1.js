@@ -2033,7 +2033,7 @@ function game1() {
                         }
 
                         katerAnimArr[squareArr[wlWinValuesArray[lineflash] - 1][i - 1]].visible = true;
-                        katerAnimArr[squareArr[wlWinValuesArray[lineflash] - 1][i - 1]].animations.add('scatters_anim', [4, 3, 2, 1, 0], 5, false).play().onComplete.add(function () {
+                        katerAnimArr[squareArr[wlWinValuesArray[lineflash] - 1][i - 1]].animations.add('scatters_anim', [3, 2, 1, 0], 4, false).play().onComplete.add(function () {
                             for (var i = 1; i <= 15; ++i) {
                                 katerAnimArr[i].visible = false;
                             }
