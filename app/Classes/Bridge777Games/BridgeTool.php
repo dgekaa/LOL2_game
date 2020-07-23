@@ -98,20 +98,20 @@ class BridgeTool
     /**
      * Получение значения параметра featureGame
      *
-     * @param  string $screen
-     * @param  bool $isDromFeatureGame
+     * @param  int $moveNumberInFeatureGame
+     * @param  bool $isEndFeatureGame
      *
      * @return bool
      */
-    static public function getFeatureGameParametr(string $screen, bool $isDropFeatureGame): bool
+    static public function getFeatureGameParametr(int $moveNumberInFeatureGame, bool $isEndFeatureGame): bool
     {
         $featureGame = false;
 
-        if ($screen === 'featureGame') {
+        if($moveNumberInFeatureGame > 0) {
             $featureGame = true;
         }
 
-        if ($isDropFeatureGame) {
+        if($isEndFeatureGame) {
             $featureGame = true;
         }
 

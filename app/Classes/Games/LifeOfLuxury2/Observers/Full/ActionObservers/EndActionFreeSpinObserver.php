@@ -49,9 +49,9 @@ class EndActionFreeSpinObserver implements IObserver
                 $event->dataPool->requestData->linesInGame,
                 $event->dataPool->balanceData->totalPayoff,
                 $event->dataPool->logicData->table,
-                $event->dataPool->stateData->screen,
-                $event->dataPool->stateData->isDropFeatureGame,
-                $event->dataPool->requestData->platformId
+                $event->dataPool->requestData->platformId,
+                $event->dataPool->stateData->moveNumberInFeatureGame,
+                $event->dataPool->stateData->isEndFeatureGame
             );
 
             // запись баланса в БД

@@ -88,15 +88,16 @@ class BridgeService
     /**
      * Отрпвка данных с результатими хода в основной игре
      *
-     * @param  string $eventId           [description]
-     * @param  string $token             [description]
-     * @param  int    $userId            [description]
-     * @param  int    $gameId            [description]
-     * @param  int    $linesInGame       [description]
-     * @param  int    $totalPayoff       [description]
-     * @param  array  $table             [description]
-     * @param  string $screen            [description]
-     * @param  bool   $isDropFeatureGame [description]
+     * @param  string $eventId                 [description]
+     * @param  string $token                   [description]
+     * @param  int    $userId                  [description]
+     * @param  int    $gameId                  [description]
+     * @param  int    $linesInGame             [description]
+     * @param  int    $totalPayoff             [description]
+     * @param  array  $table                   [description]
+     * @param  int    $platformId              [description]
+     * @param  int    $moveNumberInFeatureGame [description]
+     * @param  bool   $isEndFeatureGame        [description]
      *
      * @return string json
      */
@@ -108,16 +109,16 @@ class BridgeService
         int $linesInGame,
         int $totalPayoff,
         array $table,
-        string $screen,
-        bool $isDropFeatureGame,
-        int $platformId
+        int $platformId,
+        int $moveNumberInFeatureGame,
+        bool $isEndFeatureGame
     ): string {
         $direction = BridgeTool::getDirectionParametr($totalPayoff);
         $eventType = BridgeTool::getEventTypeParametr($totalPayoff);
         $result = BridgeTool::getResultParametr($table);
         $featureGame = BridgeTool::getFeatureGameParametr(
-            $screen,
-            $isDropFeatureGame
+            $moveNumberInFeatureGame,
+            $isEndFeatureGame
         );
 
         // преобразование общего выигрыша из центов в доллары
