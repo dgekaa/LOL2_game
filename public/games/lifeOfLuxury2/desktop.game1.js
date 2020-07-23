@@ -445,15 +445,15 @@ function game1() {
             for (var i = 1; i <= 15; ++i) {
                 game1.copyCell[i] = game.add.sprite(cellPos[i - 1][0], cellPos[i - 1][1], 'cell0');
                 game1.copyCell[i].visible = false;
-                briAnimArr[i] = game.add.sprite(cellPos[i - 1][0], cellPos[i - 1][1], 'bri_anim');
+                briAnimArr[i] = game.add.sprite(cellPos[i - 1][0] - 1, cellPos[i - 1][1] - 1, 'bri_anim');
                 briAnimArr[i].visible = false;
                 coinAnimArr[i] = game.add.sprite(cellPos[i - 1][0], cellPos[i - 1][1], 'coin_anim');
                 coinAnimArr[i].visible = false;
-                carAnimArr[i] = game.add.sprite(cellPos[i - 1][0], cellPos[i - 1][1], 'car_anim');
+                carAnimArr[i] = game.add.sprite(cellPos[i - 1][0] - 1, cellPos[i - 1][1] - 1, 'car_anim');
                 carAnimArr[i].visible = false;
                 planeAnimArr[i] = game.add.sprite(cellPos[i - 1][0], cellPos[i - 1][1], 'plane_anim');
                 planeAnimArr[i].visible = false;
-                katerAnimArr[i] = game.add.sprite(cellPos[i - 1][0], cellPos[i - 1][1], 'kater_anim');
+                katerAnimArr[i] = game.add.sprite(cellPos[i - 1][0] - 1, cellPos[i - 1][1] - 1, 'kater_anim');
                 katerAnimArr[i].visible = false;
                 squareArrFreespin[i] = game.add.sprite(cellPos[i - 1][0] - 1, cellPos[i - 1][1] - 1, 'square_1');
                 squareArrFreespin[i].visible = false;
