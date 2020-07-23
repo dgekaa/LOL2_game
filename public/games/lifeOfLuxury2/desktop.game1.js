@@ -1405,7 +1405,7 @@ function game1() {
                     }
                     if (info[cell] === 0) {
                         briAnimArr[cell + 1].visible = true;
-                        briAnimArr[cell + 1].animations.add('coin_anim', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], 10, false).play().onComplete.add(function () {
+                        briAnimArr[cell + 1].animations.add('coin_anim', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], 15, false).play().onComplete.add(function () {
                             briAnimArr[cell + 1].visible = false;
                         });
                     }
