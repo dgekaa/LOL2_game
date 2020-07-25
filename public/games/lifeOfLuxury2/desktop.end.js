@@ -81,7 +81,7 @@
             }, this.game.sound, true);
         }
         game.load.image('game.background', '' + path + '/img/bg.png' + part2Url);
-        game.load.image('game.background2', '' + path + '/img/bg2.png' + part2Url);
+        game.load.image('game.background2', '' + path + '/img/bg2.jpg' + part2Url);
         game.load.image('game.background3', '' + path + '/img/bg3.png' + part2Url);
         game.load.image('background2_panels', '' + path + '/img/bg2_panels.png' + part2Url);
         game.load.image('game.background_overlay', '' + path + '/img/bg_overlay.png' + part2Url);
@@ -89,13 +89,13 @@
         game.load.image('bonus', '' + path + '/img/bonus.png' + part2Url);
         game.load.image('multiplier', '' + path + '/img/Multiplier.png' + part2Url);
         game.load.image('spins_remaining', '' + path + '/img/spins_remaining.png' + part2Url);
-        game.load.image('black_bg', path + '/img/black_bg.png' + part2Url);
-        game.load.image('black_bg2', path + '/img/black_bg2.png' + part2Url);
-        game.load.image('error_bg', path + '/img/error_bg.png' + part2Url);
-        game.load.image('session_bg', needUrlPath + '/img/session_bg.png' + part2Url);
-        game.load.image('establishing_bg', needUrlPath + '/img/establishing_bg.png' + part2Url);
-        game.load.image('btn_yes', path + '/img/btn_yes.png' + part2Url);
-        game.load.image('btn_no', path + '/img/btn_no.png' + part2Url);
+        game.load.image('black_bg', path + '/img/black_bg.jpg' + part2Url);
+        game.load.image('black_bg2', path + '/img/black_bg2.jpg' + part2Url);
+        game.load.image('error_bg', path + '/img/error_bg.jpg' + part2Url);
+        game.load.image('session_bg', needUrlPath + '/img/session_bg.jpg' + part2Url);
+        game.load.image('establishing_bg', needUrlPath + '/img/establishing_bg.jpg' + part2Url);
+        game.load.image('btn_yes', path + '/img/btn_yes.jpg' + part2Url);
+        game.load.image('btn_no', path + '/img/btn_no.jpg' + part2Url);
         // game.load.image('cell0', '' + path + '/img/0.png' + part2Url);
         // game.load.image('cell0_f', '' + path + '/img/0_f.png' + part2Url);
         // game.load.image('cell1', '' + path + '/img/1.png' + part2Url);
@@ -118,13 +118,13 @@
         // game.load.image('cell9_f', '' + path + '/img/9_f.png' + part2Url);
         // game.load.image('cell10', '' + path + '/img/10.png' + part2Url);
         // game.load.image('cell10_f', '' + path + '/img/10_f.png' + part2Url);
-        game.load.image('emptyCell', '' + path + '/img/100.png' + part2Url);
+        game.load.image('emptyCell', '' + path + '/img/100.jpg' + part2Url);
         for (let i = 0; i <= 10; ++i) {
-            game.load.image('cell' + i, needUrlPath + '/img/' + i + '.png' + part2Url);
-            game.load.image('cell' + i + '_f', needUrlPath + '/img/' + i + '_f.png' + part2Url);
+            game.load.image('cell' + i, needUrlPath + '/img/' + i + '.jpg' + part2Url);
+            game.load.image('cell' + i + '_f', needUrlPath + '/img/' + i + '_f.jpg' + part2Url);
         }
-        game.load.image('freespinStartBG', '' + path + '/img/freesponStartBG.png' + part2Url);
-        game.load.image('freesponStartBGAdditionalBonus', '' + path + '/img/freesponStartBGAdditionalBonus.png' + part2Url);
+        game.load.image('freespinStartBG', '' + path + '/img/freesponStartBG.jpg' + part2Url);
+        game.load.image('freesponStartBGAdditionalBonus', '' + path + '/img/freesponStartBGAdditionalBonus.jpg' + part2Url);
         game.load.image('freesponFinishBGText', '' + path + '/img/freesponFinishBGText.png' + part2Url);
         game.load.image('freesponStartBGText', '' + path + '/img/freesponStartBGText.png' + part2Url);
         game.load.image('top_bottom_label_1', '' + path + '/img/top_bottom_label_1.png' + part2Url);
@@ -141,8 +141,8 @@
         game.load.image('paytable', '' + path + '/img/btns/Pay Table.png' + part2Url);
         game.load.image('paytable_p', '' + path + '/img/btns/Pay Table_p.png' + part2Url);
 
-        game.load.image('bar', '' + path + '/img/bar.png' + part2Url);
-        game.load.image('bar2', '' + path + '/img/bar2.png' + part2Url);
+        game.load.image('bar', '' + path + '/img/bar.jpg' + part2Url);
+        game.load.image('bar2', '' + path + '/img/bar2.jpg' + part2Url);
         game.load.image('ticker', needUrlPath + '/img/ticker.png' + part2Url);
 
         game.load.image('stopButton', '' + path + '/img/btns/Stop Reels.png' + part2Url);
@@ -178,12 +178,12 @@
         game.load.image('help_page_2', '' + path + '/img/help_page_2.png' + part2Url);
         game.load.image('help_page_3', '' + path + '/img/help_page_3.png' + part2Url);
         game.load.image('help_page_4', '' + path + '/img/help_page_4.png' + part2Url);
-        game.load.image('paytable_page_1', '' + path + '/img/paytable_page_1.png' + part2Url);
-        game.load.image('paytable_page_2', '' + path + '/img/paytable_page_2.png' + part2Url);
-        game.load.image('paytable_page_3', '' + path + '/img/paytable_page_3.png' + part2Url);
-        game.load.image('paytable_page_4', '' + path + '/img/paytable_page_4.png' + part2Url);
-        game.load.image('paytable_page_5', '' + path + '/img/paytable_page_5.png' + part2Url);
-        game.load.image('paytable_page_6', '' + path + '/img/paytable_page_6.png' + part2Url);
+        game.load.image('paytable_page_1', '' + path + '/img/paytable_page_1.jpg' + part2Url);
+        game.load.image('paytable_page_2', '' + path + '/img/paytable_page_2.jpg' + part2Url);
+        game.load.image('paytable_page_3', '' + path + '/img/paytable_page_3.jpg' + part2Url);
+        game.load.image('paytable_page_4', '' + path + '/img/paytable_page_4.jpg' + part2Url);
+        game.load.image('paytable_page_5', '' + path + '/img/paytable_page_5.jpg' + part2Url);
+        game.load.image('paytable_page_6', '' + path + '/img/paytable_page_6.jpg' + part2Url);
 
         game.load.image('bg_bri', '' + path + '/img/bg_bri.png' + part2Url);
         game.load.image('little_bri', '' + path + '/img/little_bri.png' + part2Url);
@@ -231,7 +231,7 @@
         game.load.audio('briShow', needUrlPath + '/sounds/briShow.wav' + part2Url);
 
         for (let i = 1; i <= 20; ++i) {
-            game.load.audio('changeLine' + i, needUrlPath + '/sounds/changeLine/' + i + '.mp3' + part2Url);
+            game.load.audio('changeLine' + i, needUrlPath + '/soundFs/changeLine/' + i + '.mp3' + part2Url);
             game.load.audio('changeBet' + i, needUrlPath + '/sounds/changeBet/' + i + '.mp3' + part2Url);
         }
         for (let i = 1; i <= 9; ++i) {
@@ -240,10 +240,10 @@
         game.load.audio('forcedStop', needUrlPath + '/sounds/forcedStop.mp3' + part2Url);
         game.load.audio('spinSound1f', needUrlPath + '/sounds/spinreels/1f.mp3' + part2Url);
         game.load.audio('spinSound2f', needUrlPath + '/sounds/spinreels/2f.mp3' + part2Url);
-        game.load.spritesheet('bri_anim', '' + path + '/img/bri_anim.png' + part2Url, 160, 149, 12);
-        game.load.spritesheet('car_anim', '' + path + '/img/car_anim.png' + part2Url, 160, 149, 5);
-        game.load.spritesheet('kater_anim', '' + path + '/img/kater_anim.png' + part2Url, 160, 149, 4);
-        game.load.spritesheet('plane_anim', '' + path + '/img/plane_anim.png' + part2Url, 158, 149, 7);
+        game.load.spritesheet('bri_anim', '' + path + '/img/bri_anim.jpg' + part2Url, 160, 149, 12);
+        game.load.spritesheet('car_anim', '' + path + '/img/car_anim.jpg' + part2Url, 160, 149, 5);
+        game.load.spritesheet('kater_anim', '' + path + '/img/kater_anim.jpg' + part2Url, 160, 149, 4);
+        game.load.spritesheet('plane_anim', '' + path + '/img/plane_anim.jpg' + part2Url, 158, 149, 7);
         game.load.spritesheet('bri_anim_1', '' + path + '/img/bri_anim_1_x5.png' + part2Url, 564, 373, 5); //удалить
         game.load.spritesheet('bri_anim_2', '' + path + '/img/bri_anim_2_x4.png' + part2Url, 564, 373, 4);
         game.load.spritesheet('bri_anim_freespin', '' + path + '/img/bri_anim_freespin.png' + part2Url, 151, 145, 4);
