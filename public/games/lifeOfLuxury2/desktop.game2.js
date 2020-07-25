@@ -1666,122 +1666,98 @@ function game2() {
             } else {
                 sizeLine = 2;
             }
-            flickLine(sizeLine, wlWinValuesArray[lineflash]);
-        }
 
-        function flickLine(sizeLine, lineNumber) {
             if (stopWinAnim == true) {
                 return;
             }
-            showLine(lineNumber);
+
+            showLine(wlWinValuesArray[lineflash]);
             for (var i = 1; i <= sizeLine; ++i) {
-                squareArrImg[lineNumber - 1][i - 1].visible = true;
-                game2.copyCell[squareArr[lineNumber - 1][i - 1]].visible = true;
+                squareArrImg[wlWinValuesArray[lineflash] - 1][i - 1].visible = true;
+                game2.copyCell[squareArr[wlWinValuesArray[lineflash] - 1][i - 1]].visible = true;
             }
+
+            flickLine(sizeLine, wlWinValuesArray[lineflash]);
+        }
+
+        function changeBorderColor(lineNumber, tint) {
+            game2.lineArr[lineNumber].tint = tint;
+            for (var i = 1; i <= sizeLine; ++i) {
+                squareArrImg[lineNumber - 1][i - 1].tint = tint;
+            }
+        }
+
+        function lastIndication(wlWinValuesArray, lineNumber) {
             setTimeout(function () {
                 if (stopWinAnim == true) {
                     return;
                 }
-                winText.visible = false;
-                game2.lineArr[lineNumber].tint = 0x999999;
+                game2.lineArr[lineNumber].tint = 0xffffff;
                 for (var i = 1; i <= sizeLine; ++i) {
-                    squareArrImg[lineNumber - 1][i - 1].tint = 0x999999;
+                    squareArrImg[lineNumber - 1][i - 1].tint = 0xffffff;
                 }
-                setTimeout(function () {
+                winText.visible = true;
+
+                hideLines();
+                hideSquare();
+                for (var i = 1; i <= sizeLine; ++i) {
+                    game2.copyCell[squareArr[lineNumber - 1][i - 1]].visible = false;
+                }
+                if (lineflash === wlWinValuesArray.length - 1) {
+                    firstAroundAnim = false;
+                    lineflash = 0;
+                } else {
+                    lineflash = lineflash + 1;
+                }
+
+                if (wlWinValuesArray.length === 1) {
+                    if (lineflash === 0) {
+                        if (dataSpinRequest.stateData.isDropFeatureGame) {
+                            showWinFreeSpin(wcvFreeSpinWinValuesArray);
+                        } else {
+                            showWin(wlWinValuesArray, winCellInfo)
+                        }
+                    } else {
+                        showWin(wlWinValuesArray, winCellInfo)
+                    }
+                } else {
+                    setTimeout(() => {
+                        if (lineflash === 0) {
+                            if (dataSpinRequest.stateData.isDropFeatureGame) {
+                                showWinFreeSpin(wcvFreeSpinWinValuesArray);
+                            } else {
+                                showWin(wlWinValuesArray, winCellInfo)
+                            }
+                        } else {
+                            showWin(wlWinValuesArray, winCellInfo)
+                        }
+                    }, 140)
+                }
+            }, 275);
+        }
+
+        function flickLine(sizeLine, lineNumber) {
+            let isLightBorder = true;
+            let index = 0;
+
+            (async () => {
+                while (index < 8) {
                     if (stopWinAnim == true) {
                         return;
                     }
-                    game2.lineArr[lineNumber].tint = 0xffffff;
-                    for (var i = 1; i <= sizeLine; ++i) {
-                        squareArrImg[lineNumber - 1][i - 1].tint = 0xffffff;
-                    }
-                    winText.visible = true;
-                    setTimeout(function () {
-                        if (stopWinAnim == true) {
-                            return;
-                        }
-                        winText.visible = false;
-                        game2.lineArr[lineNumber].tint = 0x999999;
-                        for (var i = 1; i <= sizeLine; ++i) {
-                            squareArrImg[lineNumber - 1][i - 1].tint = 0x999999;
-                        }
-                        setTimeout(function () {
-                            if (stopWinAnim == true) {
-                                return;
-                            }
-                            game2.lineArr[lineNumber].tint = 0xffffff;
-                            for (var i = 1; i <= sizeLine; ++i) {
-                                squareArrImg[lineNumber - 1][i - 1].tint = 0xffffff;
-                            }
-                            winText.visible = true;
-                            setTimeout(function () {
-                                if (stopWinAnim == true) {
-                                    return;
-                                }
-                                winText.visible = false;
-                                game2.lineArr[lineNumber].tint = 0x999999;
-                                for (var i = 1; i <= sizeLine; ++i) {
-                                    squareArrImg[lineNumber - 1][i - 1].tint = 0x999999;
-                                }
-                                setTimeout(function () {
-                                    if (stopWinAnim == true) {
-                                        return;
-                                    }
-                                    game2.lineArr[lineNumber].tint = 0xffffff;
-                                    for (var i = 1; i <= sizeLine; ++i) {
-                                        squareArrImg[lineNumber - 1][i - 1].tint = 0xffffff;
-                                    }
-                                    winText.visible = true;
-                                    setTimeout(function () {
-                                        if (stopWinAnim == true) {
-                                            return;
-                                        }
-                                        winText.visible = false;
-                                        game2.lineArr[lineNumber].tint = 0x999999;
-                                        for (var i = 1; i <= sizeLine; ++i) {
-                                            squareArrImg[lineNumber - 1][i - 1].tint = 0x999999;
-                                        }
-                                        setTimeout(function () {
-                                            if (stopWinAnim == true) {
-                                                return;
-                                            }
-                                            game2.lineArr[lineNumber].tint = 0xffffff;
-                                            for (var i = 1; i <= sizeLine; ++i) {
-                                                squareArrImg[lineNumber - 1][i - 1].tint = 0xffffff;
-                                            }
-                                            winText.visible = true;
-                                            // setTimeout(function() {
-                                            if (stopWinAnim == true) {
-                                                return;
-                                            }
-                                            hideLines();
-                                            hideSquare();
-                                            for (var i = 1; i <= sizeLine; ++i) {
-                                                game2.copyCell[squareArr[lineNumber - 1][i - 1]].visible = false;
-                                            }
-                                            if (lineflash === wlWinValuesArray.length - 1) {
-                                                firstAroundAnim = false;
-                                                lineflash = 0;
-                                            } else {
-                                                lineflash = lineflash + 1;
-                                            }
-                                            if (lineflash === 0) {
-                                                if (dataSpinRequest.stateData.isDropFeatureGame) {
-                                                    showWinFreeSpin(wcvFreeSpinWinValuesArray);
-                                                } else {
-                                                    showWin(wlWinValuesArray, winCellInfo)
-                                                }
-                                            } else {
-                                                showWin(wlWinValuesArray, winCellInfo)
-                                            }
-                                        }, 275);
-                                    }, 550);
-                                }, 275);
-                            }, 550);
-                        }, 275);
-                    }, 550);
-                }, 275);
-            }, 550);
+
+                    winText.visible = isLightBorder;
+
+                    await delay(isLightBorder ? 550 : 275);
+
+                    index === 7 ?
+                        lastIndication(wlWinValuesArray, lineNumber) :
+                        changeBorderColor(lineNumber, isLightBorder ? 0x999999 : 0xffffff)
+                    isLightBorder = !isLightBorder;
+
+                    index++;
+                }
+            })()
         };
 
         function upLines() {

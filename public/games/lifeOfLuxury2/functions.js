@@ -40,6 +40,10 @@ function exitInfoPage() {
     });
 }
 
+function delay(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 function addBtnInfoPage() {
     return_to_game = game.add.sprite(23, 104 + 831, 'return_p');
     return_to_game.inputEnabled = true;
@@ -1167,7 +1171,7 @@ function requestState(data) {
     lines = data.logicData.linesInGame;
     bet = lines * betline;
     firstRequest = true;
-    balance = (data.balanceData.balance).toFixed() - data.balanceData.totalWinningsInFeatureGame;
+    balance = 1000;
     info = data.logicData.table;
     sessionUuid = data.sessionData.sessionUuid;
     const { sessionData: { mode } } = data;
