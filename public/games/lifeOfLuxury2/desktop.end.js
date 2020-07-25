@@ -231,7 +231,7 @@
         game.load.audio('briShow', needUrlPath + '/sounds/briShow.wav' + part2Url);
 
         for (let i = 1; i <= 20; ++i) {
-            game.load.audio('changeLine' + i, needUrlPath + '/soundFs/changeLine/' + i + '.mp3' + part2Url);
+            game.load.audio('changeLine' + i, needUrlPath + '/sounds/changeLine/' + i + '.mp3' + part2Url);
             game.load.audio('changeBet' + i, needUrlPath + '/sounds/changeBet/' + i + '.mp3' + part2Url);
         }
         for (let i = 1; i <= 9; ++i) {
