@@ -14,14 +14,14 @@ class StateCalculatorTool extends BaseStateCalculatorTool
      *
      * @param string $screen
      * @param array $table
-     * @param array $featureGameRoules [symbol, requiredAmount]
+     * @param array $featureGameRules [symbol, requiredAmount]
      *
      * @return bool
      */
     public function calculateIsDropFeatureGame(
         string $screen,
         array $table,
-        array $featureGameRoules
+        array $featureGameRules
     ): bool
     {
         $isDropFeatureGame = false;
@@ -30,13 +30,13 @@ class StateCalculatorTool extends BaseStateCalculatorTool
             // подсчет кол-ва выпавших символов
             $count = 0;
             foreach ($table as $key => $value) {
-                if ($value === $featureGameRoules[0] || $value === 0) {
+                if ($value === $featureGameRules[0] || $value === 0) {
                     $count += 1;
                 }
             }
 
             // проверка достаточно ли символов для выпадения featureGame
-            if ($count >= $featureGameRoules[1]) {
+            if ($count >= $featureGameRules[1]) {
                 $isDropFeatureGame = true;
             }
         }
