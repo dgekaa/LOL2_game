@@ -40,6 +40,10 @@ function exitInfoPage() {
     });
 }
 
+function delay(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 function addBtnInfoPage() {
     return_to_game = game.add.sprite(23, 104 + 831, 'return_p');
     return_to_game.inputEnabled = true;
