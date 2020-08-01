@@ -325,7 +325,7 @@ function game1() {
         }
 
         function animTopLabel(img) {
-            game.add.tween(topLabel).to({y: topLabel.position.y + 120}, 400, "Linear", true).onComplete.add(function () {
+            game.add.tween(topLabel).to({y: img === 'top_label_1' ? topLabel.position.y + 120 : topLabel.position.y + 103}, 400, "Linear", true).onComplete.add(function () {
                 changeImgTopLabel(img)
                 game.add.tween(topLabel).to({y: img === 'top_label_1' ? topLabel.position.y - 120 : topLabel.position.y - 103}, 400, "Linear", true).onComplete.add(function () {
                     changeImgTopLabel(img)
