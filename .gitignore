@@ -5,6 +5,7 @@
 /vendor/*
 !/vendor/avior/
 !/vendor/ixudra/
+composer.phar
 .env
 .phpunit.result.cache
 Homestead.json
