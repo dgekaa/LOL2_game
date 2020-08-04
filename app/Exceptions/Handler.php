@@ -2,6 +2,7 @@
 
 namespace App\Exceptions;
 
+use App\Models\Log;
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 
@@ -46,6 +47,27 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+        if(!method_exists($exception,'getRefId')) {
+            $log = new Log;
+            $log->type = 'error';
+            $log->data = $exception->__toString();
+            $log->save();
+
+            $refId = $log->id;
+        } else {
+            $refId = $exception->getRefId();
+        }
+
+        if ($request->ajax() || $request->wantsJson()) {
+            $response = [
+                'success' => false,
+                'message' => $exception->getMessage(),
+                'refId' => $refId
+            ];
+
+            return response()->json($response, $exception->getCode() ? $exception->getCode() : 500);
+        }
+
         return parent::render($request, $exception);
     }
 }

@@ -64,7 +64,7 @@ class BridgeController extends Controller
     public static function addCreadit(
         Request $request
     ): string {
-        $transactionId = (new \App\Models\LastEvent)->getTransactionId();
+        $transactionId = (int)(microtime(true) * 10000);
 
         $requestData = array(
             'token' => $request->input('token'),
