@@ -1444,6 +1444,7 @@ function game1() {
                         if (number == 4) {
                             // slotLayer3Group.add(topLabel);
                             // bg2_panels.loadTexture('background2_panels');
+                            // @@@@@@@@@@@@@@@@
                             checkWin();
                             for (var i = 1; i <= 15; ++i) {
                                 game1.cell[i].visible = true;
@@ -1535,7 +1536,7 @@ function game1() {
             } else if (wlWinValuesArray.length > 0) {
                 stopWinAnim = false;
                 firstAroundAnim = true;
-
+                // @@@@@@@@@@@@@
                 showWin(wlWinValuesArray, winCellInfo);
                 bottomText.setText(allWin + " Credits Won");
                 bottomText.fontSize = 35;
@@ -2630,9 +2631,9 @@ function game1() {
                         } else {
                             showWin(wlWinValuesArray, winCellInfo);
                         }
-                    }, 140);
+                    }, 0);
                 }
-            }, 275);
+            }, 0);
         }
 
         function upLines() {
