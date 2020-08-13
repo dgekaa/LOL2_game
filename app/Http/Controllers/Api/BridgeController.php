@@ -64,7 +64,7 @@ class BridgeController extends Controller
     public static function addCreadit(
         Request $request
     ): string {
-        $transactionId = (int)(microtime(true) * 10000);
+        $transactionId = (int)sprintf("%d%d", $request->input('userId'), (int)floor(microtime(true)));
 
         $requestData = array(
             'token' => $request->input('token'),
