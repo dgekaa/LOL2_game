@@ -199,6 +199,7 @@
                 needUrlPath + "/img/" + i + "_f.jpg" + part2Url
             );
         }
+
         game.load.image(
             "freespinStartBG",
             "" + path + "/img/freesponStartBG.jpg" + part2Url

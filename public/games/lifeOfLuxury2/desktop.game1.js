@@ -404,8 +404,8 @@ function game1() {
                             {
                                 y:
                                     img === "top_label_1"
-                                        ? topLabel.position.y - 120
-                                        : topLabel.position.y - 103
+                                        ? topLabel.position.y - 140
+                                        : topLabel.position.y - 83
                             },
                             400,
                             "Linear",

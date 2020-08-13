@@ -128,8 +128,26 @@ function game2() {
         for (var i = 1; i <= 15; ++i) {
             game.add.sprite(cellPos[i - 1][0], cellPos[i - 1][1], "emptyCell");
         }
-        info = [7, 1, 2, 3, 4, 5, 6, 7, 3, 9, 9, 1, 2, 3, 1];
-        info.sort(() => Math.random() - 0.5);
+
+        // info = [7, 1, 2, 3, 4, 5, 6, 7, 3, 9, 9, 1, 2, 3, 1];
+        // info.sort(() => Math.random() - 0.5);
+
+        function infoRandom() {
+            const infoArray = [
+                [1, 2, 3, 4, 5, 6, 7, 8, 9, 1, 2, 3, 4, 5, 6],
+                [2, 9, 1, 2, 3, 4, 5, 6, 1, 2, 3, 4, 5, 6, 7],
+                [3, 1, 4, 8, 9, 1, 5, 2, 3, 4, 5, 6, 7, 5, 1],
+                [9, 8, 7, 6, 5, 4, 3, 2, 1, 4, 5, 6, 7, 8, 9],
+                [1, 5, 9, 4, 7, 8, 2, 3, 6, 4, 5, 8, 9, 1, 2],
+                [1, 4, 7, 2, 5, 8, 3, 6, 9, 2, 5, 8, 3, 6, 9],
+                [9, 6, 3, 8, 5, 2, 7, 4, 1, 7, 8, 9, 4, 5, 6]
+            ];
+
+            info = infoArray[Math.floor(Math.random() * infoArray.length)];
+        }
+
+        infoRandom();
+
         bg = game.add.sprite(0, 0, "game.background2");
 
         slotLayer1Group = game.add.group();
@@ -151,7 +169,7 @@ function game2() {
             );
             slotLayer2Group.add(game2.cell[i]);
         }
-        console.log(info);
+        console.log(info, "___________________INFO");
         game2.bars[0] = game.add.tileSprite(77, 126 + 94, 158, 447, "bar2");
         game2.bars[0].tilePosition.y = randomNumber(0, 9) * 149;
         game2.bars[1] = game.add.tileSprite(255, 126 + 94, 158, 447, "bar2");
