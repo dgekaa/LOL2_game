@@ -596,15 +596,30 @@ function game1() {
         }
 
         function showLine(lineNumber) {
+            // game.add
+            //     .tween(game1.lineArr[lineNumber])
+            //     .to({ alpha: 1 }, 200, Phaser.Easing.LINEAR, true)
+            //     .onComplete.add(function() {
             game1.lineArr[lineNumber].visible = true;
+            // });
         }
 
         function showLineCircle(lineNumber) {
+            // game.add
+            //     .tween(game1.circleArr[lineNumber])
+            //     .to({ alpha: 1 }, 200, Phaser.Easing.LINEAR, true)
+            //     .onComplete.add(function() {
             game1.circleArr[lineNumber].visible = true;
+            // });
         }
 
         function showLineCircleText(lineNumber) {
+            // game.add
+            //     .tween(game1.textArr[lineNumber])
+            //     .to({ alpha: 1 }, 200, Phaser.Easing.LINEAR, true)
+            //     .onComplete.add(function() {
             game1.textArr[lineNumber].visible = true;
+            // });
         }
 
         function showSquare(lineNumber, squareNumber) {
@@ -613,31 +628,60 @@ function game1() {
 
         function hideLines() {
             game1.lineArr.forEach(function(line) {
+                // game.add
+                //     .tween(line)
+                //     .to({ alpha: 0 }, 200, Phaser.Easing.LINEAR, true)
+                //     .onComplete.add(function() {
                 line.visible = false;
                 line.tint = 0xffffff;
             });
+            // });
         }
 
         function hideLinesCircle() {
             game1.circleArr.forEach(function(line) {
+                // game.add
+                //     .tween(line)
+                //     .to({ alpha: 0 }, 200, Phaser.Easing.LINEAR, true)
+                //     .onComplete.add(function() {
                 line.visible = false;
             });
+            // });
         }
 
         function hideLinesCircleText() {
             game1.textArr.forEach(function(line) {
+                // game.add
+                //     .tween(line)
+                //     .to({ alpha: 0 }, 200, Phaser.Easing.LINEAR, true)
+                //     .onComplete.add(function() {
                 line.visible = false;
+                // });
             });
         }
 
         function hideSquare() {
             for (var i = 1; i <= 20; ++i) {
                 for (var j = 1; j <= 5; ++j) {
+                    // game.add
+                    //     .tween(squareArrImg[i - 1][j - 1])
+                    //     .to({ alpha: 0 }, 200, Phaser.Easing.LINEAR, true)
+                    //     .onComplete.add(function() {
+                    //         // squareArrImg[i - 1][j - 1].visible = false;
+                    //         // squareArrImg[i - 1][j - 1].tint = 0xffffff;
+                    //     });
                     squareArrImg[i - 1][j - 1].visible = false;
                     squareArrImg[i - 1][j - 1].tint = 0xffffff;
                 }
             }
             for (var i = 1; i <= 15; ++i) {
+                // game.add
+                //     .tween(squareArrFreespin[i])
+                //     .to({ alpha: 0 }, 200, Phaser.Easing.LINEAR, true)
+                //     .onComplete.add(function() {
+                //         // squareArrFreespin[i].visible = false;
+                //         // squareArrFreespin[i].tint = 0xffffff;
+                //     });
                 squareArrFreespin[i].visible = false;
                 squareArrFreespin[i].tint = 0xffffff;
             }
@@ -1730,6 +1774,8 @@ function game1() {
             }
         }
 
+        let reconnectCount = 0;
+
         function requestSpin(gamename, sessionUuid, betline, lines) {
             console.log(
                 getNeedUrlPath() +
@@ -1877,7 +1923,9 @@ function game1() {
                             sendMsg(gamename, sessionName, betline, lines);
                         } else {
                             var errorText = "//ошибка 30";
+                            console.log("переключение № " + reconnectCount);
                             console.log(errorText);
+
                             const responseText = xhr.responseText
                                 ? JSON.parse(xhr.responseText)
                                 : "";
@@ -1885,9 +1933,27 @@ function game1() {
                                 responseText && responseText.refId
                                     ? responseText.refId
                                     : "";
-                            refId && createRefID(refId);
-                            error_bg.visible = true;
-                            errorStatus = true;
+
+                            if (refId) {
+                                createRefID(refId);
+                                error_bg.visible = true;
+                                errorStatus = true;
+                            } else {
+                                if (reconnectCount < 10) {
+                                    reconnectCount++;
+                                    reconnectSpin(
+                                        gamename,
+                                        sessionUuid,
+                                        betline,
+                                        lines
+                                    );
+                                } else if (reconnectCount >= 10) {
+                                    createRefID("internet problem");
+                                    error_bg.visible = true;
+                                    errorStatus = true;
+                                    reconnectCount = 0;
+                                }
+                            }
                         }
                     }
                 });
@@ -2089,8 +2155,9 @@ function game1() {
                 error: function(xhr, ajaxOptions, thrownError) {
                     var errorText = "//ошибка переподкючения";
                     console.log(errorText);
-                    reconnectSpin(gamename, sessionUuid, betline, lines);
-                    // setTimeout("reconnectSpin()", 100);
+                    setTimeout(() => {
+                        requestSpin(gamename, sessionUuid, betline, lines);
+                    }, 3000);
                 }
             });
         }
@@ -2107,8 +2174,12 @@ function game1() {
                     squareArrFreespin[cell + 1].tint = 0xffffff;
                 });
                 if (afterFreespinStatus) {
-                    if (triggerShow % 2 === 0 && triggerShow) {
-                        isTriggerPay = !isTriggerPay;
+                    if (triggerShow) {
+                        if (triggerShow % 2 === 0) {
+                            isTriggerPay = true;
+                        } else {
+                            isTriggerPay = false;
+                        }
                     }
 
                     if (isTriggerPay) {
@@ -2117,6 +2188,26 @@ function game1() {
                         );
                     } else {
                         winText.setText("Bonus Pay \n" + bonusPay.toFixed());
+                    }
+
+                    winText.visible = true;
+
+                    triggerShow++;
+                } else {
+                    if (triggerShow) {
+                        if (triggerShow % 2 === 0) {
+                            isTriggerPay = true;
+                        } else {
+                            isTriggerPay = false;
+                        }
+                    }
+
+                    if (isTriggerPay) {
+                        winText.setText(
+                            "Trigger Pay \n" + triggerPay.toFixed()
+                        );
+                    } else {
+                        winText.setText("");
                     }
 
                     winText.visible = true;
@@ -2395,7 +2486,7 @@ function game1() {
                                     12
                                 ],
                                 12,
-                                false
+                                wlWinValuesArray.length === 1 ? true : false
                             )
                             .play()
                             .onComplete.add(function() {
@@ -2421,7 +2512,12 @@ function game1() {
                         carAnimArr[
                             squareArr[wlWinValuesArray[lineflash] - 1][i - 1]
                         ].animations
-                            .add("scatters_anim", [4, 3, 2, 1, 0], 5, false)
+                            .add(
+                                "scatters_anim",
+                                [4, 3, 2, 1, 0],
+                                5,
+                                wlWinValuesArray.length === 1 ? true : false
+                            )
                             .play()
                             .onComplete.add(function() {
                                 for (var i = 1; i <= 15; ++i) {
@@ -2452,7 +2548,7 @@ function game1() {
                                 "scatters_anim",
                                 [0, 1, 2, 3, 4, 5, 6],
                                 5,
-                                false
+                                wlWinValuesArray.length === 1 ? true : false
                             )
                             .play()
                             .onComplete.add(function() {
@@ -2477,7 +2573,12 @@ function game1() {
                         katerAnimArr[
                             squareArr[wlWinValuesArray[lineflash] - 1][i - 1]
                         ].animations
-                            .add("scatters_anim", [3, 2, 1, 0], 4, false)
+                            .add(
+                                "scatters_anim",
+                                [3, 2, 1, 0],
+                                4,
+                                wlWinValuesArray.length === 1 ? true : false
+                            )
                             .play()
                             .onComplete.add(function() {
                                 for (var i = 1; i <= 15; ++i) {
@@ -2493,6 +2594,7 @@ function game1() {
             if (stopWinAnim == true) {
                 return;
             }
+            // @@@@@@@@@@@@@@@@@@@@@@@@@@@
             showLine(wlWinValuesArray[lineflash]);
             for (var i = 1; i <= sizeLine; ++i) {
                 squareArrImg[wlWinValuesArray[lineflash] - 1][
@@ -2571,12 +2673,15 @@ function game1() {
 
                     await delay(isLightBorder ? 550 : 275);
 
-                    index === 7
-                        ? lastIndication(wlWinValuesArray, lineNumber)
-                        : changeBorderColor(
-                              lineNumber,
-                              isLightBorder ? 0x999999 : 0xffffff
-                          );
+                    if (index === 7) {
+                        lastIndication(wlWinValuesArray, lineNumber);
+                    } else {
+                        changeBorderColor(
+                            lineNumber,
+                            isLightBorder ? 0x999999 : 0xffffff
+                        );
+                    }
+
                     isLightBorder = !isLightBorder;
 
                     index++;
@@ -2585,25 +2690,44 @@ function game1() {
         }
 
         function lastIndication(wlWinValuesArray, lineNumber) {
-            setTimeout(function() {
-                if (stopWinAnim == true) {
-                    return;
+            if (stopWinAnim == true) {
+                return;
+            }
+            if (lineflash === wlWinValuesArray.length - 1) {
+                firstAroundAnim = false;
+                lineflash = 0;
+            } else {
+                lineflash = lineflash + 1;
+            }
+
+            if (wlWinValuesArray.length === 1) {
+                winText.visible = true;
+                if (afterFreespinStatus) {
+                    winText.visible = true;
                 }
-                if (lineflash === wlWinValuesArray.length - 1) {
-                    firstAroundAnim = false;
-                    lineflash = 0;
+                if (afterFreespinStatus) {
+                    hideLines();
+                    hideSquare();
+                    if (lineflash === 0) {
+                        showWinFreeSpin(wcvWinValuesArrayOld);
+                    } else {
+                        showWin(wlWinValuesArrayOld, winCellInfoOld);
+                    }
                 } else {
-                    lineflash = lineflash + 1;
+                    showWin(wlWinValuesArray, winCellInfo);
+                }
+            } else {
+                // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+                hideLines();
+                hideSquare();
+                for (var i = 1; i <= sizeLine; ++i) {
+                    game1.copyCell[
+                        squareArr[lineNumber - 1][i - 1]
+                    ].visible = false;
                 }
 
-                if (wlWinValuesArray.length === 1) {
-                    winText.visible = true;
+                setTimeout(() => {
                     if (afterFreespinStatus) {
-                        winText.visible = true;
-                    }
-                    if (afterFreespinStatus) {
-                        hideLines();
-                        hideSquare();
                         if (lineflash === 0) {
                             showWinFreeSpin(wcvWinValuesArrayOld);
                         } else {
@@ -2612,28 +2736,8 @@ function game1() {
                     } else {
                         showWin(wlWinValuesArray, winCellInfo);
                     }
-                } else {
-                    hideLines();
-                    hideSquare();
-                    for (var i = 1; i <= sizeLine; ++i) {
-                        game1.copyCell[
-                            squareArr[lineNumber - 1][i - 1]
-                        ].visible = false;
-                    }
-
-                    setTimeout(() => {
-                        if (afterFreespinStatus) {
-                            if (lineflash === 0) {
-                                showWinFreeSpin(wcvWinValuesArrayOld);
-                            } else {
-                                showWin(wlWinValuesArrayOld, winCellInfoOld);
-                            }
-                        } else {
-                            showWin(wlWinValuesArray, winCellInfo);
-                        }
-                    }, 0);
-                }
-            }, 0);
+                }, 0);
+            }
         }
 
         function upLines() {
@@ -3316,6 +3420,7 @@ function game1() {
                 coinAnimArr[i].visible = false;
                 planeAnimArr[i].visible = false;
                 katerAnimArr[i].visible = false;
+                carAnimArr[i].visible = false;
             }
             gameStatusText.visible = false;
             bottomText.visible = true;

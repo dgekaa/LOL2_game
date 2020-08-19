@@ -1524,10 +1524,10 @@ function game2() {
                                 console.log("additionalBonus");
                                 additionalBonus();
                             }
-                        }, 500);
-                    }, 200);
-                }, 500);
-            }, 200);
+                        }, 0);
+                    }, 0);
+                }, 0);
+            }, 0);
         }
 
         function additionalBonus() {
@@ -2484,9 +2484,9 @@ function game2() {
                         } else {
                             showWin(wlWinValuesArray, winCellInfo);
                         }
-                    }, 140);
+                    }, 0);
                 }
-            }, 275);
+            }, 0);
         }
 
         function flickLine(sizeLine, lineNumber) {
