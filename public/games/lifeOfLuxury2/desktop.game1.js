@@ -106,6 +106,8 @@ var allWin;
 var errorStatus = false;
 var curGame = 1;
 
+var evIdAfterFreeeSpeen = "";
+
 function game1() {
     var game1 = {
         cell: [],
@@ -1026,11 +1028,16 @@ function game1() {
         addScore();
         addinfoPage();
 
-        var eventId = game.add.text(1020, 0, "", {
-            font: "17px Arial",
-            fill: "#fff",
-            fontWeight: "bold"
-        });
+        var eventId = game.add.text(
+            1020,
+            0,
+            evIdAfterFreeeSpeen ? evIdAfterFreeeSpeen : "",
+            {
+                font: "17px Arial",
+                fill: "#fff",
+                fontWeight: "bold"
+            }
+        );
         eventId.anchor.setTo(1, 0);
         freespinStartBG = game.add.sprite(75, 125, "freespinStartBG");
         freespinStartBG.visible = false;
@@ -1105,6 +1112,7 @@ function game1() {
             allWin = dataArray.balanceData["payoffByLines"];
 
             if (dataArray.sessionData["eventId"]) {
+                evIdAfterFreeeSpeen = dataArray.sessionData["eventId"];
                 eventId.setText(`${dataArray.sessionData["eventId"]}`);
                 eventId.visible = true;
             }
@@ -1799,6 +1807,10 @@ function game1() {
                         }
 
                         if (IsJsonString(data)) {
+                            console.log(
+                                JSON.parse(data),
+                                " ++++++++++++++++++++++++++++++++"
+                            );
                             dataSpinRequest = JSON.parse(data);
                             //freespin
                             // if (activateFreeSpins)
