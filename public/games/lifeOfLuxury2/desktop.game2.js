@@ -677,8 +677,9 @@ function game2() {
                                 errorStatus = true;
                                 switch (dataSpinRequest.message) {
                                     case "FirstMoveFundsException":
-                                        dataSpinRequest.refId &&
-                                            createRefID(dataSpinRequest.refId);
+                                        dataSpinRequest.refId
+                                            ? createRefID(dataSpinRequest.refId)
+                                            : createRefID("Funds exception");
                                         error_bg.visible = true;
                                         break;
                                     case "BetPlacingAbortException":
@@ -696,13 +697,19 @@ function game2() {
                                         );
                                         break;
                                     case "low balance":
-                                        dataSpinRequest.refId &&
-                                            createRefID(dataSpinRequest.refId);
+                                        dataSpinRequest.refId
+                                            ? createRefID(dataSpinRequest.refId)
+                                            : createRefID(
+                                                  "low balance exception"
+                                              );
                                         error_bg.visible = true;
                                         break;
                                     case "UnauthenticatedException":
-                                        dataSpinRequest.refId &&
-                                            createRefID(dataSpinRequest.refId);
+                                        dataSpinRequest.refId
+                                            ? createRefID(dataSpinRequest.refId)
+                                            : createRefID(
+                                                  "Unauthenticated exception"
+                                              );
                                         error_bg.visible = true;
                                         break;
                                 }
@@ -768,8 +775,9 @@ function game2() {
                         if (dataSpinRequest.status === "false") {
                             switch (dataSpinRequest.message) {
                                 case "FirstMoveFundsException":
-                                    dataSpinRequest.refId &&
-                                        createRefID(dataSpinRequest.refId);
+                                    dataSpinRequest.refId
+                                        ? createRefID(dataSpinRequest.refId)
+                                        : createRefID("Funds exception");
                                     error_bg.visible = true;
                                     break;
                                 case "BetPlacingAbortException":
@@ -785,13 +793,17 @@ function game2() {
                                     );
                                     break;
                                 case "LowBalanceException":
-                                    dataSpinRequest.refId &&
-                                        createRefID(dataSpinRequest.refId);
+                                    dataSpinRequest.refId
+                                        ? createRefID(dataSpinRequest.refId)
+                                        : createRefID("LowBalance exception");
                                     error_bg.visible = true;
                                     break;
                                 case "UnauthenticatedException":
-                                    dataSpinRequest.refId &&
-                                        createRefID(dataSpinRequest.refId);
+                                    dataSpinRequest.refId
+                                        ? createRefID(dataSpinRequest.refId)
+                                        : createRefID(
+                                              "Unauthenticated exception"
+                                          );
                                     error_bg.visible = true;
                                     break;
                             }
@@ -816,7 +828,7 @@ function game2() {
                         responseText && responseText.refId
                             ? responseText.refId
                             : "";
-                    refId && createRefID(refId);
+                    refId ? createRefID(refId) : createRefID("Funds error");
                     console.log(errorText);
                     error_bg.visible = true;
                     errorStatus = true;
@@ -850,8 +862,9 @@ function game2() {
                         if (dataSpinRequest.status === "false") {
                             switch (dataSpinRequest.message) {
                                 case "FirstMoveFundsException":
-                                    dataSpinRequest.refId &&
-                                        createRefID(dataSpinRequest.refId);
+                                    dataSpinRequest.refId
+                                        ? createRefID(dataSpinRequest.refId)
+                                        : createRefID("Funds exception");
                                     error_bg.visible = true;
                                     break;
                                 case "BetPlacingAbortException":
@@ -867,13 +880,17 @@ function game2() {
                                     );
                                     break;
                                 case "LowBalanceException":
-                                    dataSpinRequest.refId &&
-                                        createRefID(dataSpinRequest.refId);
+                                    dataSpinRequest.refId
+                                        ? createRefID(dataSpinRequest.refId)
+                                        : createRefID("LowBalance exception");
                                     error_bg.visible = true;
                                     break;
                                 case "UnauthenticatedException":
-                                    dataSpinRequest.refId &&
-                                        createRefID(dataSpinRequest.refId);
+                                    dataSpinRequest.refId
+                                        ? createRefID(dataSpinRequest.refId)
+                                        : createRefID(
+                                              "Unauthenticated exception"
+                                          );
                                     error_bg.visible = true;
                                     break;
                             }
@@ -899,7 +916,9 @@ function game2() {
                         responseText && responseText.refId
                             ? responseText.refId
                             : "";
-                    refId && createRefID(refId);
+                    refId
+                        ? createRefID(refId)
+                        : createRefID("betPlacingAbort error");
                     error_bg.visible = true;
                     errorStatus = true;
                 }

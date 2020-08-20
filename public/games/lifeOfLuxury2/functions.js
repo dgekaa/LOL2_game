@@ -1249,7 +1249,7 @@ function exitGame(collect) {
                 : "";
             const refId =
                 responseText && responseText.refId ? responseText.refId : "";
-            refId && createRefID(refId);
+            refId ? createRefID(refId) : createRefID("exit error");
             error_bg.visible = true;
             errorStatus = true;
         }
