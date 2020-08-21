@@ -592,98 +592,60 @@ function game1() {
                         cellPos[squareArr[i - 1][j - 1] - 1][1] - 1,
                         "square_" + i
                     );
-                    squareArrImg[i - 1][j - 1].visible = false;
+                    game.add
+                        .tween(squareArrImg[i - 1][j - 1])
+                        .to({ alpha: 0 }, 100, Phaser.Easing.LINEAR, true)
+                        .onComplete.add(function() {});
                 }
             }
         }
 
         function showLine(lineNumber) {
-            // game.add
-            //     .tween(game1.lineArr[lineNumber])
-            //     .to({ alpha: 1 }, 200, Phaser.Easing.LINEAR, true)
-            //     .onComplete.add(function() {
-            game1.lineArr[lineNumber].visible = true;
-            // });
+            game.add
+                .tween(game1.lineArr[lineNumber])
+                .to({ alpha: 1 }, 100, Phaser.Easing.LINEAR, true)
+                .onComplete.add(function() {});
         }
 
         function showLineCircle(lineNumber) {
-            // game.add
-            //     .tween(game1.circleArr[lineNumber])
-            //     .to({ alpha: 1 }, 200, Phaser.Easing.LINEAR, true)
-            //     .onComplete.add(function() {
             game1.circleArr[lineNumber].visible = true;
-            // });
         }
 
         function showLineCircleText(lineNumber) {
-            // game.add
-            //     .tween(game1.textArr[lineNumber])
-            //     .to({ alpha: 1 }, 200, Phaser.Easing.LINEAR, true)
-            //     .onComplete.add(function() {
             game1.textArr[lineNumber].visible = true;
-            // });
-        }
-
-        function showSquare(lineNumber, squareNumber) {
-            squareArrImg[lineNumber - 1][squareNumber - 1].visible = true;
         }
 
         function hideLines() {
             game1.lineArr.forEach(function(line) {
-                // game.add
-                //     .tween(line)
-                //     .to({ alpha: 0 }, 200, Phaser.Easing.LINEAR, true)
-                //     .onComplete.add(function() {
-                line.visible = false;
-                line.tint = 0xffffff;
+                game.add
+                    .tween(line)
+                    .to({ alpha: 0 }, 100, Phaser.Easing.LINEAR, true)
+                    .onComplete.add(function() {});
             });
-            // });
         }
 
         function hideLinesCircle() {
             game1.circleArr.forEach(function(line) {
-                // game.add
-                //     .tween(line)
-                //     .to({ alpha: 0 }, 200, Phaser.Easing.LINEAR, true)
-                //     .onComplete.add(function() {
                 line.visible = false;
             });
-            // });
         }
 
         function hideLinesCircleText() {
             game1.textArr.forEach(function(line) {
-                // game.add
-                //     .tween(line)
-                //     .to({ alpha: 0 }, 200, Phaser.Easing.LINEAR, true)
-                //     .onComplete.add(function() {
                 line.visible = false;
-                // });
             });
         }
 
         function hideSquare() {
             for (var i = 1; i <= 20; ++i) {
                 for (var j = 1; j <= 5; ++j) {
-                    // game.add
-                    //     .tween(squareArrImg[i - 1][j - 1])
-                    //     .to({ alpha: 0 }, 200, Phaser.Easing.LINEAR, true)
-                    //     .onComplete.add(function() {
-                    //         // squareArrImg[i - 1][j - 1].visible = false;
-                    //         // squareArrImg[i - 1][j - 1].tint = 0xffffff;
-                    //     });
-                    squareArrImg[i - 1][j - 1].visible = false;
-                    squareArrImg[i - 1][j - 1].tint = 0xffffff;
+                    game.add
+                        .tween(squareArrImg[i - 1][j - 1])
+                        .to({ alpha: 0 }, 100, Phaser.Easing.LINEAR, true)
+                        .onComplete.add(function() {});
                 }
             }
             for (var i = 1; i <= 15; ++i) {
-                // game.add
-                //     .tween(squareArrFreespin[i])
-                //     .to({ alpha: 0 }, 200, Phaser.Easing.LINEAR, true)
-                //     .onComplete.add(function() {
-                //         // squareArrFreespin[i].visible = false;
-                //         // squareArrFreespin[i].tint = 0xffffff;
-                //     });
                 squareArrFreespin[i].visible = false;
                 squareArrFreespin[i].tint = 0xffffff;
             }
@@ -2626,9 +2588,11 @@ function game1() {
             // @@@@@@@@@@@@@@@@@@@@@@@@@@@
             showLine(wlWinValuesArray[lineflash]);
             for (var i = 1; i <= sizeLine; ++i) {
-                squareArrImg[wlWinValuesArray[lineflash] - 1][
-                    i - 1
-                ].visible = true;
+                game.add
+                    .tween(squareArrImg[wlWinValuesArray[lineflash] - 1][i - 1])
+                    .to({ alpha: 1 }, 100, Phaser.Easing.LINEAR, true)
+                    .onComplete.add(function() {});
+
                 game1.copyCell[
                     squareArr[wlWinValuesArray[lineflash] - 1][i - 1]
                 ].visible = true;
@@ -2746,14 +2710,15 @@ function game1() {
                     showWin(wlWinValuesArray, winCellInfo);
                 }
             } else {
-                // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
                 hideLines();
                 hideSquare();
-                for (var i = 1; i <= sizeLine; ++i) {
-                    game1.copyCell[
-                        squareArr[lineNumber - 1][i - 1]
-                    ].visible = false;
-                }
+                setTimeout(() => {
+                    for (var i = 1; i <= sizeLine; ++i) {
+                        game1.copyCell[
+                            squareArr[lineNumber - 1][i - 1]
+                        ].visible = false;
+                    }
+                }, 200);
 
                 setTimeout(() => {
                     if (afterFreespinStatus) {
@@ -2765,7 +2730,7 @@ function game1() {
                     } else {
                         showWin(wlWinValuesArray, winCellInfo);
                     }
-                }, 0);
+                }, 280);
             }
         }
 
@@ -3446,8 +3411,14 @@ function game1() {
             firstAnim = true;
             winText.visible = false;
             afterFreespinStatus = false;
+
+            setTimeout(() => {
+                for (var i = 1; i <= 15; ++i) {
+                    game1.copyCell[i].visible = false;
+                }
+            }, 100);
+
             for (var i = 1; i <= 15; ++i) {
-                game1.copyCell[i].visible = false;
                 squareArrFreespin[i].visible = false;
                 squareArrFreespin[i].tint = 0xffffff;
                 briAnimArr[i].visible = false;
