@@ -25,7 +25,7 @@ class EndActionSpinObserver implements IObserver
     {
         if ($event->name === 'endActionSpin') {
             // обновление eventId
-            $event->dataPool->sessionData->eventId = (int)sprintf("%d%d", $event->dataPool->requestData->userId, (int)(microtime(true) * 10000));
+            $event->dataPool->sessionData->eventId = (int)sprintf("%d%d", $event->dataPool->requestData->userId, (int)floor(microtime(true)));
 
             // отправка данных о снятии денег на 777games в основной игре
             $response = BridgeService::sendStartSpinMoveFunds(
