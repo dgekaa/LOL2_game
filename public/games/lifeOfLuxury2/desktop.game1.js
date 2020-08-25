@@ -1175,7 +1175,7 @@ function game1() {
                 });
         }
 
-        function middlespin(number, time, notEnd) {
+        function middlespin(number, time) {
             if (number == 0) {
                 timerSpin[number] = setTimeout(function() {
                     if (timeSpin) {
