@@ -1193,7 +1193,6 @@ function game1() {
                         } else {
                             finishSpinSound1.play();
                         }
-                        // @@@@@@@@@@@@@@@@@@@@@@@
                         endspin(number);
                     }
                 }, time);
@@ -1459,6 +1458,7 @@ function game1() {
                         if (number == 4) {
                             // slotLayer3Group.add(topLabel);
                             // bg2_panels.loadTexture('background2_panels');
+                            // @@@@@@@@@@@@@@@@
                             checkWin();
                             for (var i = 1; i <= 15; ++i) {
                                 game1.cell[i].visible = true;
@@ -1550,6 +1550,7 @@ function game1() {
             } else if (wlWinValuesArray.length > 0) {
                 stopWinAnim = false;
                 firstAroundAnim = true;
+                // @@@@@@@@@@@@@
                 showWin(wlWinValuesArray, winCellInfo);
                 bottomText.setText(allWin + " Credits Won");
                 bottomText.fontSize = 35;
@@ -1946,12 +1947,12 @@ function game1() {
                     autostart = false;
                     showButtons();
                 }
-                // @@@@@@@@@@@@@@@@@@@@@@@@2
-                middlespin(0, 700, true);
-                middlespin(1, 1050, true);
-                middlespin(2, 1400, true);
-                middlespin(3, 1750, true);
-                middlespin(4, 2100, true);
+
+                middlespin(0, 700);
+                middlespin(1, 1050);
+                middlespin(2, 1400);
+                middlespin(3, 1750);
+                middlespin(4, 2100);
             }
         }
 
@@ -2584,6 +2585,7 @@ function game1() {
             if (stopWinAnim == true) {
                 return;
             }
+            // @@@@@@@@@@@@@@@@@@@@@@@@@@@
             showLine(wlWinValuesArray[lineflash]);
             for (var i = 1; i <= sizeLine; ++i) {
                 game.add
