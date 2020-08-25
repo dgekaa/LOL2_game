@@ -1846,8 +1846,10 @@ function game1() {
 
                             if (dataSpinRequest.status !== "false") {
                                 isGetResponse = true;
+                                timeSpin = true;
                                 parseSpinAnswer(dataSpinRequest);
                             } else {
+                                timeSpin = false;
                                 errorStatus = true;
                                 switch (dataSpinRequest.message) {
                                     case "ActiveUserSessionException":
@@ -1890,6 +1892,7 @@ function game1() {
                                 }
                             }
                         } else {
+                            timeSpin = false;
                             console.log("json format error");
                             createRefID("api-v2 json format error");
                             error_bg.visible = true;
@@ -1898,6 +1901,7 @@ function game1() {
                         }
                     },
                     error: function(xhr, ajaxOptions, thrownError) {
+                        timeSpin = false;
                         if (!window.navigator.onLine) {
                             sendMsg(gamename, sessionName, betline, lines);
                         } else {
