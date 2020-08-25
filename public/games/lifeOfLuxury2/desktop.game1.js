@@ -1938,7 +1938,7 @@ function game1() {
                 });
             }
 
-            if (window.navigator.onLine) {
+            if (!window.navigator.onLine) {
                 sendMsg(gamename, sessionName, betline, lines);
             } else {
                 if (autostart) {
