@@ -674,93 +674,86 @@ function game2() {
         var errorStatus = false;
 
         function requestSpin(gamename, sessionName, betline, lines) {
-            if (window.navigator.onLine) {
-                $.ajax({
-                    type: "get",
-                    url:
-                        getNeedUrlPath() +
-                        `/api-v2/action?game_id=${gameId}&user_id=${userId}&mode=${demo}&action=free_spin&session_uuid=${sessionUuid}&token=${token}&linesInGame=${lines}&lineBet=${betline}&platform_id=${platformId}`,
-                    dataType: "html",
-                    success: function(data) {
-                        console.log(data);
-                        if (IsJsonString(data)) {
-                            dataSpinRequest = JSON.parse(data);
-                            if (dataSpinRequest.status !== "false") {
-                                parseSpinAnswer(dataSpinRequest);
-                            } else {
-                                errorStatus = true;
-                                switch (dataSpinRequest.message) {
-                                    case "FirstMoveFundsException":
-                                        dataSpinRequest.refId
-                                            ? createRefID(dataSpinRequest.refId)
-                                            : createRefID("Funds exception");
-                                        error_bg.visible = true;
-                                        break;
-                                    case "BetPlacingAbortException":
-                                        establishing_bg.visible = true;
-                                        setTimeout(
-                                            "BetPlacingAbortExceptionFunc(gamename, sessionName, betline, lines, dataSpinRequest.betPlacingAbortExceptionID)",
-                                            3000
-                                        );
-                                        break;
-                                    case "moveFundsException":
-                                        establishing_bg.visible = true;
-                                        setTimeout(
-                                            "moveFundsExceptionFunc(gamename, sessionName, betline, lines, dataSpinRequest.moveFundsExceptionID)",
-                                            3000
-                                        );
-                                        break;
-                                    case "low balance":
-                                        dataSpinRequest.refId
-                                            ? createRefID(dataSpinRequest.refId)
-                                            : createRefID(
-                                                  "low balance exception"
-                                              );
-                                        error_bg.visible = true;
-                                        break;
-                                    case "UnauthenticatedException":
-                                        dataSpinRequest.refId
-                                            ? createRefID(dataSpinRequest.refId)
-                                            : createRefID(
-                                                  "Unauthenticated exception"
-                                              );
-                                        error_bg.visible = true;
-                                        break;
-                                }
-                            }
+            // if (window.navigator.onLine) {
+            $.ajax({
+                type: "get",
+                url:
+                    getNeedUrlPath() +
+                    `/api-v2/action?game_id=${gameId}&user_id=${userId}&mode=${demo}&action=free_spin&session_uuid=${sessionUuid}&token=${token}&linesInGame=${lines}&lineBet=${betline}&platform_id=${platformId}`,
+                dataType: "html",
+                success: function(data) {
+                    console.log(data);
+                    if (IsJsonString(data)) {
+                        dataSpinRequest = JSON.parse(data);
+                        if (dataSpinRequest.status !== "false") {
+                            parseSpinAnswer(dataSpinRequest);
                         } else {
-                            console.log("json format error");
-                            createRefID("api-v2 json format error");
-                            error_bg.visible = true;
                             errorStatus = true;
-                        }
-                    },
-                    error: function(xhr, ajaxOptions, thrownError) {
-                        let timerId = setTimeout(function tick() {
-                            if (window.navigator.onLine) {
-                                requestSpin(
-                                    gamename,
-                                    sessionName,
-                                    betline,
-                                    lines
-                                );
-                                clearTimeout(timerId);
-                            } else {
-                                timerId = setTimeout(tick, 1000);
+                            switch (dataSpinRequest.message) {
+                                case "FirstMoveFundsException":
+                                    dataSpinRequest.refId
+                                        ? createRefID(dataSpinRequest.refId)
+                                        : createRefID("Funds exception");
+                                    error_bg.visible = true;
+                                    break;
+                                case "BetPlacingAbortException":
+                                    establishing_bg.visible = true;
+                                    setTimeout(
+                                        "BetPlacingAbortExceptionFunc(gamename, sessionName, betline, lines, dataSpinRequest.betPlacingAbortExceptionID)",
+                                        3000
+                                    );
+                                    break;
+                                case "moveFundsException":
+                                    establishing_bg.visible = true;
+                                    setTimeout(
+                                        "moveFundsExceptionFunc(gamename, sessionName, betline, lines, dataSpinRequest.moveFundsExceptionID)",
+                                        3000
+                                    );
+                                    break;
+                                case "low balance":
+                                    dataSpinRequest.refId
+                                        ? createRefID(dataSpinRequest.refId)
+                                        : createRefID("low balance exception");
+                                    error_bg.visible = true;
+                                    break;
+                                case "UnauthenticatedException":
+                                    dataSpinRequest.refId
+                                        ? createRefID(dataSpinRequest.refId)
+                                        : createRefID(
+                                              "Unauthenticated exception"
+                                          );
+                                    error_bg.visible = true;
+                                    break;
                             }
-                        }, 1000);
+                        }
+                    } else {
+                        console.log("json format error");
+                        createRefID("api-v2 json format error");
+                        error_bg.visible = true;
+                        errorStatus = true;
                     }
-                });
-            } else {
-                let timerId = setTimeout(function tick() {
-                    if (window.navigator.onLine) {
+                },
+                error: function(xhr, ajaxOptions, thrownError) {
+                    let timerId = setTimeout(function tick() {
+                        // if (window.navigator.onLine) {
                         requestSpin(gamename, sessionName, betline, lines);
                         clearTimeout(timerId);
-                    } else {
-                        timerId = setTimeout(tick, 1000);
-                    }
-                }, 1000);
-            }
+                        // } else {
+                        //     timerId = setTimeout(tick, 1000);
+                        // }
+                    }, 1000);
+                }
+            });
+            // } else {
+            //     let timerId = setTimeout(function tick() {
+            //         if (window.navigator.onLine) {
+            //             requestSpin(gamename, sessionName, betline, lines);
+            //             clearTimeout(timerId);
+            //         } else {
+            //             timerId = setTimeout(tick, 1000);
+            //         }
+            //     }, 1000);
+            // }
         }
 
         function moveFundsExceptionFunc(
@@ -770,7 +763,7 @@ function game2() {
             lines,
             moveFundsExceptionID
         ) {
-            if (!window.navigator.onLine) return;
+            // if (!window.navigator.onLine) return;
 
             $.ajax({
                 type: "get",
@@ -857,7 +850,7 @@ function game2() {
             lines,
             moveFundsExceptionID
         ) {
-            if (!window.navigator.onLine) return;
+            // if (!window.navigator.onLine) return;
 
             $.ajax({
                 type: "get",

@@ -1152,7 +1152,7 @@ urlPath2.forEach(function(item) {
 });
 
 function requestInit() {
-    if (!window.navigator.onLine) return;
+    // if (!window.navigator.onLine) return;
 
     var sessionID = location.href.substring(location.href.indexOf("/?") + 12);
     if (
@@ -1210,7 +1210,7 @@ function createRefID(number) {
 var collectValue;
 
 function exitGame(collect) {
-    if (!window.navigator.onLine) return;
+    // if (!window.navigator.onLine) return;
 
     console.log(collect);
     if (collect) {
@@ -1257,7 +1257,7 @@ function exitGame(collect) {
 }
 
 function resetSession() {
-    if (!window.navigator.onLine) return;
+    // if (!window.navigator.onLine) return;
 
     $.ajax({
         type: "get",

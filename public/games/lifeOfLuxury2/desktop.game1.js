@@ -657,7 +657,7 @@ function game1() {
         exit.events.onInputUp.add(function(click, pointer) {
             // if (pointer.button !== 0 && pointer.button !== undefined)
             //     return;
-            if (!window.navigator.onLine) return;
+            // if (!window.navigator.onLine) return;
 
             return_to_gameSong.play();
             exit.loadTexture("exit");
@@ -730,7 +730,7 @@ function game1() {
         selectLines.events.onInputUp.add(function(click, pointer) {
             // if (pointer.button !== 0 && pointer.button !== undefined)
             //     return;
-            if (!window.navigator.onLine) return;
+            // if (!window.navigator.onLine) return;
 
             selectLines.loadTexture("selectLines");
             if (balanceUpdateStatus) {
@@ -748,7 +748,7 @@ function game1() {
         betPerLine.events.onInputUp.add(function(click, pointer) {
             // if (pointer.button !== 0 && pointer.button !== undefined)
             //     return;
-            if (!window.navigator.onLine) return;
+            // if (!window.navigator.onLine) return;
 
             betPerLine.loadTexture("betPerLine");
             if (balanceUpdateStatus) {
@@ -765,7 +765,7 @@ function game1() {
         autoPlay.events.onInputUp.add(function(click, pointer) {
             // if (pointer.button !== 0 && pointer.button !== undefined)
             //     return;
-            if (!window.navigator.onLine) return;
+            // if (!window.navigator.onLine) return;
 
             if (autostart === false) {
                 if (balanceUpdateStatus) {
@@ -838,7 +838,7 @@ function game1() {
         startButton.events.onInputUp.add(function(click, pointer) {
             // if (pointer.button !== 0 && pointer.button !== undefined)
             //     return;
-            if (!window.navigator.onLine) return;
+            // if (!window.navigator.onLine) return;
 
             if (maxBetSpin.visible) spaceStatus = true;
 
@@ -944,7 +944,7 @@ function game1() {
             // maxBetSpin.loadTexture('maxBetSpin_p');
         });
         maxBetSpin.events.onInputUp.add(function(click, pointer) {
-            if (!window.navigator.onLine) return;
+            // if (!window.navigator.onLine) return;
 
             if (pointer.button !== 0 && pointer.button !== undefined) return;
             maxBetSpin.loadTexture("maxBetSpin");
@@ -1898,42 +1898,42 @@ function game1() {
                         }
                     },
                     error: function(xhr, ajaxOptions, thrownError) {
-                        if (!window.navigator.onLine) {
-                            sendMsg(gamename, sessionName, betline, lines);
-                        } else {
-                            var errorText = "//ошибка 30";
-                            console.log("переключение № " + reconnectCount);
-                            console.log(errorText);
+                        // if (!window.navigator.onLine) {
+                        //     sendMsg(gamename, sessionName, betline, lines);
+                        // } else {
+                        var errorText = "//ошибка 30";
+                        console.log("переключение № " + reconnectCount);
+                        console.log(errorText);
 
-                            const responseText = xhr.responseText
-                                ? JSON.parse(xhr.responseText)
+                        const responseText = xhr.responseText
+                            ? JSON.parse(xhr.responseText)
+                            : "";
+                        const refId =
+                            responseText && responseText.refId
+                                ? responseText.refId
                                 : "";
-                            const refId =
-                                responseText && responseText.refId
-                                    ? responseText.refId
-                                    : "";
 
-                            if (refId) {
-                                createRefID(refId);
+                        if (refId) {
+                            createRefID(refId);
+                            error_bg.visible = true;
+                            errorStatus = true;
+                        } else {
+                            if (reconnectCount < 10) {
+                                reconnectCount++;
+                                reconnectSpin(
+                                    gamename,
+                                    sessionUuid,
+                                    betline,
+                                    lines
+                                );
+                            } else if (reconnectCount >= 10) {
+                                createRefID("internet problem");
                                 error_bg.visible = true;
                                 errorStatus = true;
-                            } else {
-                                if (reconnectCount < 10) {
-                                    reconnectCount++;
-                                    reconnectSpin(
-                                        gamename,
-                                        sessionUuid,
-                                        betline,
-                                        lines
-                                    );
-                                } else if (reconnectCount >= 10) {
-                                    createRefID("internet problem");
-                                    error_bg.visible = true;
-                                    errorStatus = true;
-                                    reconnectCount = 0;
-                                }
+                                reconnectCount = 0;
                             }
                         }
+                        // }
                     }
                 });
             }
@@ -1963,7 +1963,7 @@ function game1() {
             lines,
             moveFundsExceptionID
         ) {
-            if (!window.navigator.onLine) return;
+            // if (!window.navigator.onLine) return;
 
             $.ajax({
                 type: "get",
@@ -2050,7 +2050,7 @@ function game1() {
             lines,
             moveFundsExceptionID
         ) {
-            if (!window.navigator.onLine) return;
+            // if (!window.navigator.onLine) return;
 
             $.ajax({
                 type: "get",
@@ -2133,7 +2133,7 @@ function game1() {
         }
 
         function reconnectSpin(gamename, sessionName, betline, lines) {
-            if (!window.navigator.onLine) return;
+            // if (!window.navigator.onLine) return;
 
             $.ajax({
                 type: "get",
@@ -3278,7 +3278,7 @@ function game1() {
         }
 
         function getBalance() {
-            if (!window.navigator.onLine) return;
+            // if (!window.navigator.onLine) return;
 
             if (!getBalanceWait) {
                 getBalanceWait = true;
@@ -3481,7 +3481,8 @@ function game1() {
             document.body
                 .querySelector("canvas")
                 .addEventListener("keyup", function(event) {
-                    if (event.keyCode === 32 && window.navigator.onLine) {
+                    if (event.keyCode === 32) {
+                        // if (event.keyCode === 32 && window.navigator.onLine) {
                         if (!errorStatus) {
                             if (curGame === 1) {
                                 if (startButton.visible) {
