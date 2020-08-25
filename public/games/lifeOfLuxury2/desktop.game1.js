@@ -1948,11 +1948,11 @@ function game1() {
                     showButtons();
                 }
 
-                // middlespin(0, 700);
-                // middlespin(1, 1050);
-                // middlespin(2, 1400);
-                // middlespin(3, 1750);
-                // middlespin(4, 2100);
+                middlespin(0, 700);
+                middlespin(1, 1050);
+                middlespin(2, 1400);
+                middlespin(3, 1750);
+                middlespin(4, 2100);
             }
         }
 
