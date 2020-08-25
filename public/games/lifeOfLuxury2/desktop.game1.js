@@ -1175,262 +1175,246 @@ function game1() {
                 });
         }
 
-        function middlespin(
-            number,
-            time,
-            notEnd,
-            gamename,
-            sessionUuid,
-            betline,
-            lines
-        ) {
-            if (!notEnd) {
-                reconnectSpin(gamename, sessionUuid, betline, lines);
-            } else {
-                if (number == 0) {
-                    timerSpin[number] = setTimeout(function() {
-                        if (timeSpin) {
-                            game1.spinStatus1 = false;
-                            game1.bars[0].visible = false;
-                            game1.cell[1 + 3 * 0].visible = true;
-                            game1.cell[2 + 3 * 0].visible = true;
-                            game1.cell[3 + 3 * 0].visible = true;
-                            game1.cell[1].loadTexture("cell" + info[0]);
-                            game1.cell[2].loadTexture("cell" + info[1]);
-                            game1.cell[3].loadTexture("cell" + info[2]);
-                            if (
-                                info[0] == 10 ||
-                                info[1] == 10 ||
-                                info[2] == 10
-                            ) {
-                                coinCount = coinCount + 1;
+        function middlespin(number, time, notEnd) {
+            if (number == 0) {
+                timerSpin[number] = setTimeout(function() {
+                    if (timeSpin) {
+                        game1.spinStatus1 = false;
+                        game1.bars[0].visible = false;
+                        game1.cell[1 + 3 * 0].visible = true;
+                        game1.cell[2 + 3 * 0].visible = true;
+                        game1.cell[3 + 3 * 0].visible = true;
+                        game1.cell[1].loadTexture("cell" + info[0]);
+                        game1.cell[2].loadTexture("cell" + info[1]);
+                        game1.cell[3].loadTexture("cell" + info[2]);
+                        if (info[0] == 10 || info[1] == 10 || info[2] == 10) {
+                            coinCount = coinCount + 1;
+                            coinSound1.play();
+                        } else {
+                            finishSpinSound1.play();
+                        }
+                        // @@@@@@@@@@@@@@@@@@@@@@@
+                        endspin(number);
+                    }
+                }, time);
+            }
+            if (number == 1) {
+                timerSpin[number] = setTimeout(function() {
+                    if (timeSpin) {
+                        game1.spinStatus2 = false;
+                        game1.bars[0].visible = false;
+                        game1.cell[1 + 3 * 0].visible = true;
+                        game1.cell[2 + 3 * 0].visible = true;
+                        game1.cell[3 + 3 * 0].visible = true;
+                        game1.bars[1].visible = false;
+                        game1.cell[1 + 3 * 1].visible = true;
+                        game1.cell[2 + 3 * 1].visible = true;
+                        game1.cell[3 + 3 * 1].visible = true;
+                        game1.cell[1].loadTexture("cell" + info[0]);
+                        game1.cell[2].loadTexture("cell" + info[1]);
+                        game1.cell[3].loadTexture("cell" + info[2]);
+                        game1.cell[4].loadTexture("cell" + info[3]);
+                        game1.cell[5].loadTexture("cell" + info[4]);
+                        game1.cell[6].loadTexture("cell" + info[5]);
+
+                        if (
+                            info[3] == 10 ||
+                            info[4] == 10 ||
+                            info[5] == 10 ||
+                            info[3] == 0 ||
+                            info[4] == 0 ||
+                            info[5] == 0
+                        ) {
+                            coinCount = coinCount + 1;
+                            if (coinCount === 1) {
                                 coinSound1.play();
                             } else {
-                                finishSpinSound1.play();
+                                coinSound2.play();
                             }
-                            // @@@@@@@@@@@@@@@@@@@@@@@
-                            endspin(number);
+                        } else {
+                            finishSpinSound2.play();
                         }
-                    }, time);
-                }
-                if (number == 1) {
-                    timerSpin[number] = setTimeout(function() {
-                        if (timeSpin) {
-                            game1.spinStatus2 = false;
-                            game1.bars[0].visible = false;
-                            game1.cell[1 + 3 * 0].visible = true;
-                            game1.cell[2 + 3 * 0].visible = true;
-                            game1.cell[3 + 3 * 0].visible = true;
-                            game1.bars[1].visible = false;
-                            game1.cell[1 + 3 * 1].visible = true;
-                            game1.cell[2 + 3 * 1].visible = true;
-                            game1.cell[3 + 3 * 1].visible = true;
-                            game1.cell[1].loadTexture("cell" + info[0]);
-                            game1.cell[2].loadTexture("cell" + info[1]);
-                            game1.cell[3].loadTexture("cell" + info[2]);
-                            game1.cell[4].loadTexture("cell" + info[3]);
-                            game1.cell[5].loadTexture("cell" + info[4]);
-                            game1.cell[6].loadTexture("cell" + info[5]);
+                        endspin(number);
+                    }
+                }, time);
+            }
+            if (number == 2) {
+                timerSpin[number] = setTimeout(function() {
+                    if (timeSpin) {
+                        game1.spinStatus3 = false;
+                        game1.bars[0].visible = false;
+                        game1.cell[1 + 3 * 0].visible = true;
+                        game1.cell[2 + 3 * 0].visible = true;
+                        game1.cell[3 + 3 * 0].visible = true;
+                        game1.bars[1].visible = false;
+                        game1.cell[1 + 3 * 1].visible = true;
+                        game1.cell[2 + 3 * 1].visible = true;
+                        game1.cell[3 + 3 * 1].visible = true;
+                        game1.bars[2].visible = false;
+                        game1.cell[1 + 3 * 2].visible = true;
+                        game1.cell[2 + 3 * 2].visible = true;
+                        game1.cell[3 + 3 * 2].visible = true;
 
-                            if (
-                                info[3] == 10 ||
-                                info[4] == 10 ||
-                                info[5] == 10 ||
-                                info[3] == 0 ||
-                                info[4] == 0 ||
-                                info[5] == 0
-                            ) {
-                                coinCount = coinCount + 1;
-                                if (coinCount === 1) {
-                                    coinSound1.play();
-                                } else {
-                                    coinSound2.play();
-                                }
+                        game1.cell[1].loadTexture("cell" + info[0]);
+                        game1.cell[2].loadTexture("cell" + info[1]);
+                        game1.cell[3].loadTexture("cell" + info[2]);
+                        game1.cell[4].loadTexture("cell" + info[3]);
+                        game1.cell[5].loadTexture("cell" + info[4]);
+                        game1.cell[6].loadTexture("cell" + info[5]);
+                        game1.cell[7].loadTexture("cell" + info[6]);
+                        game1.cell[8].loadTexture("cell" + info[7]);
+                        game1.cell[9].loadTexture("cell" + info[8]);
+                        if (
+                            info[6] == 10 ||
+                            info[7] == 10 ||
+                            info[8] == 10 ||
+                            info[6] == 0 ||
+                            info[7] == 0 ||
+                            info[8] == 0
+                        ) {
+                            coinCount = coinCount + 1;
+                            if (coinCount === 1) {
+                                coinSound1.play();
+                            } else if (coinCount === 2) {
+                                coinSound2.play();
                             } else {
-                                finishSpinSound2.play();
+                                coinSound3.play();
                             }
-                            endspin(number);
-                        }
-                    }, time);
-                }
-                if (number == 2) {
-                    timerSpin[number] = setTimeout(function() {
-                        if (timeSpin) {
-                            game1.spinStatus3 = false;
-                            game1.bars[0].visible = false;
-                            game1.cell[1 + 3 * 0].visible = true;
-                            game1.cell[2 + 3 * 0].visible = true;
-                            game1.cell[3 + 3 * 0].visible = true;
-                            game1.bars[1].visible = false;
-                            game1.cell[1 + 3 * 1].visible = true;
-                            game1.cell[2 + 3 * 1].visible = true;
-                            game1.cell[3 + 3 * 1].visible = true;
-                            game1.bars[2].visible = false;
-                            game1.cell[1 + 3 * 2].visible = true;
-                            game1.cell[2 + 3 * 2].visible = true;
-                            game1.cell[3 + 3 * 2].visible = true;
-
-                            game1.cell[1].loadTexture("cell" + info[0]);
-                            game1.cell[2].loadTexture("cell" + info[1]);
-                            game1.cell[3].loadTexture("cell" + info[2]);
-                            game1.cell[4].loadTexture("cell" + info[3]);
-                            game1.cell[5].loadTexture("cell" + info[4]);
-                            game1.cell[6].loadTexture("cell" + info[5]);
-                            game1.cell[7].loadTexture("cell" + info[6]);
-                            game1.cell[8].loadTexture("cell" + info[7]);
-                            game1.cell[9].loadTexture("cell" + info[8]);
-                            if (
-                                info[6] == 10 ||
-                                info[7] == 10 ||
-                                info[8] == 10 ||
-                                info[6] == 0 ||
-                                info[7] == 0 ||
-                                info[8] == 0
-                            ) {
-                                coinCount = coinCount + 1;
-                                if (coinCount === 1) {
-                                    coinSound1.play();
-                                } else if (coinCount === 2) {
-                                    coinSound2.play();
-                                } else {
-                                    coinSound3.play();
-                                }
-                            } else {
-                                finishSpinSound3.play();
-                            }
-                            console.log(finishSpinSound3);
+                        } else {
                             finishSpinSound3.play();
-                            endspin(number);
-                            // }
                         }
-                    }, time);
-                }
-                if (number == 3) {
-                    timerSpin[number] = setTimeout(function() {
-                        if (timeSpin) {
-                            game1.spinStatus4 = false;
-                            game1.bars[0].visible = false;
-                            game1.cell[1 + 3 * 0].visible = true;
-                            game1.cell[2 + 3 * 0].visible = true;
-                            game1.cell[3 + 3 * 0].visible = true;
-                            game1.bars[1].visible = false;
-                            game1.cell[1 + 3 * 1].visible = true;
-                            game1.cell[2 + 3 * 1].visible = true;
-                            game1.cell[3 + 3 * 1].visible = true;
-                            game1.bars[2].visible = false;
-                            game1.cell[1 + 3 * 2].visible = true;
-                            game1.cell[2 + 3 * 2].visible = true;
-                            game1.cell[3 + 3 * 2].visible = true;
+                        console.log(finishSpinSound3);
+                        finishSpinSound3.play();
+                        endspin(number);
+                        // }
+                    }
+                }, time);
+            }
+            if (number == 3) {
+                timerSpin[number] = setTimeout(function() {
+                    if (timeSpin) {
+                        game1.spinStatus4 = false;
+                        game1.bars[0].visible = false;
+                        game1.cell[1 + 3 * 0].visible = true;
+                        game1.cell[2 + 3 * 0].visible = true;
+                        game1.cell[3 + 3 * 0].visible = true;
+                        game1.bars[1].visible = false;
+                        game1.cell[1 + 3 * 1].visible = true;
+                        game1.cell[2 + 3 * 1].visible = true;
+                        game1.cell[3 + 3 * 1].visible = true;
+                        game1.bars[2].visible = false;
+                        game1.cell[1 + 3 * 2].visible = true;
+                        game1.cell[2 + 3 * 2].visible = true;
+                        game1.cell[3 + 3 * 2].visible = true;
 
-                            game1.bars[3].visible = false;
-                            game1.cell[1 + 3 * 3].visible = true;
-                            game1.cell[2 + 3 * 3].visible = true;
-                            game1.cell[3 + 3 * 3].visible = true;
+                        game1.bars[3].visible = false;
+                        game1.cell[1 + 3 * 3].visible = true;
+                        game1.cell[2 + 3 * 3].visible = true;
+                        game1.cell[3 + 3 * 3].visible = true;
 
-                            game1.cell[1].loadTexture("cell" + info[0]);
-                            game1.cell[2].loadTexture("cell" + info[1]);
-                            game1.cell[3].loadTexture("cell" + info[2]);
-                            game1.cell[4].loadTexture("cell" + info[3]);
-                            game1.cell[5].loadTexture("cell" + info[4]);
-                            game1.cell[6].loadTexture("cell" + info[5]);
-                            game1.cell[7].loadTexture("cell" + info[6]);
-                            game1.cell[8].loadTexture("cell" + info[7]);
-                            game1.cell[9].loadTexture("cell" + info[8]);
-                            game1.cell[10].loadTexture("cell" + info[9]);
-                            game1.cell[11].loadTexture("cell" + info[10]);
-                            game1.cell[12].loadTexture("cell" + info[11]);
-                            if (
-                                info[9] == 10 ||
-                                info[10] == 10 ||
-                                info[11] == 10 ||
-                                info[9] == 0 ||
-                                info[10] == 0 ||
-                                info[11] == 0
-                            ) {
-                                coinCount = coinCount + 1;
-                                if (coinCount === 1) {
-                                    coinSound1.play();
-                                } else if (coinCount === 2) {
-                                    coinSound2.play();
-                                } else if (coinCount === 3) {
-                                    coinSound3.play();
-                                } else {
-                                    coinSound4.play();
-                                }
+                        game1.cell[1].loadTexture("cell" + info[0]);
+                        game1.cell[2].loadTexture("cell" + info[1]);
+                        game1.cell[3].loadTexture("cell" + info[2]);
+                        game1.cell[4].loadTexture("cell" + info[3]);
+                        game1.cell[5].loadTexture("cell" + info[4]);
+                        game1.cell[6].loadTexture("cell" + info[5]);
+                        game1.cell[7].loadTexture("cell" + info[6]);
+                        game1.cell[8].loadTexture("cell" + info[7]);
+                        game1.cell[9].loadTexture("cell" + info[8]);
+                        game1.cell[10].loadTexture("cell" + info[9]);
+                        game1.cell[11].loadTexture("cell" + info[10]);
+                        game1.cell[12].loadTexture("cell" + info[11]);
+                        if (
+                            info[9] == 10 ||
+                            info[10] == 10 ||
+                            info[11] == 10 ||
+                            info[9] == 0 ||
+                            info[10] == 0 ||
+                            info[11] == 0
+                        ) {
+                            coinCount = coinCount + 1;
+                            if (coinCount === 1) {
+                                coinSound1.play();
+                            } else if (coinCount === 2) {
+                                coinSound2.play();
+                            } else if (coinCount === 3) {
+                                coinSound3.play();
                             } else {
-                                finishSpinSound4.play();
+                                coinSound4.play();
                             }
-                            endspin(number);
+                        } else {
+                            finishSpinSound4.play();
                         }
-                    }, time);
-                }
-                if (number == 4) {
-                    timerSpin[number] = setTimeout(function() {
-                        if (timeSpin) {
-                            game1.spinStatus5 = false;
-                            game1.bars[0].visible = false;
-                            game1.cell[1 + 3 * 0].visible = true;
-                            game1.cell[2 + 3 * 0].visible = true;
-                            game1.cell[3 + 3 * 0].visible = true;
-                            game1.bars[1].visible = false;
-                            game1.cell[1 + 3 * 1].visible = true;
-                            game1.cell[2 + 3 * 1].visible = true;
-                            game1.cell[3 + 3 * 1].visible = true;
-                            game1.bars[2].visible = false;
-                            game1.cell[1 + 3 * 2].visible = true;
-                            game1.cell[2 + 3 * 2].visible = true;
-                            game1.cell[3 + 3 * 2].visible = true;
+                        endspin(number);
+                    }
+                }, time);
+            }
+            if (number == 4) {
+                timerSpin[number] = setTimeout(function() {
+                    if (timeSpin) {
+                        game1.spinStatus5 = false;
+                        game1.bars[0].visible = false;
+                        game1.cell[1 + 3 * 0].visible = true;
+                        game1.cell[2 + 3 * 0].visible = true;
+                        game1.cell[3 + 3 * 0].visible = true;
+                        game1.bars[1].visible = false;
+                        game1.cell[1 + 3 * 1].visible = true;
+                        game1.cell[2 + 3 * 1].visible = true;
+                        game1.cell[3 + 3 * 1].visible = true;
+                        game1.bars[2].visible = false;
+                        game1.cell[1 + 3 * 2].visible = true;
+                        game1.cell[2 + 3 * 2].visible = true;
+                        game1.cell[3 + 3 * 2].visible = true;
 
-                            game1.bars[3].visible = false;
-                            game1.cell[1 + 3 * 3].visible = true;
-                            game1.cell[2 + 3 * 3].visible = true;
-                            game1.cell[3 + 3 * 3].visible = true;
+                        game1.bars[3].visible = false;
+                        game1.cell[1 + 3 * 3].visible = true;
+                        game1.cell[2 + 3 * 3].visible = true;
+                        game1.cell[3 + 3 * 3].visible = true;
 
-                            game1.bars[4].visible = false;
-                            game1.cell[1 + 3 * 4].visible = true;
-                            game1.cell[2 + 3 * 4].visible = true;
-                            game1.cell[3 + 3 * 4].visible = true;
+                        game1.bars[4].visible = false;
+                        game1.cell[1 + 3 * 4].visible = true;
+                        game1.cell[2 + 3 * 4].visible = true;
+                        game1.cell[3 + 3 * 4].visible = true;
 
-                            game1.cell[1].loadTexture("cell" + info[0]);
-                            game1.cell[2].loadTexture("cell" + info[1]);
-                            game1.cell[3].loadTexture("cell" + info[2]);
-                            game1.cell[4].loadTexture("cell" + info[3]);
-                            game1.cell[5].loadTexture("cell" + info[4]);
-                            game1.cell[6].loadTexture("cell" + info[5]);
-                            game1.cell[7].loadTexture("cell" + info[6]);
-                            game1.cell[8].loadTexture("cell" + info[7]);
-                            game1.cell[9].loadTexture("cell" + info[8]);
-                            game1.cell[10].loadTexture("cell" + info[9]);
-                            game1.cell[11].loadTexture("cell" + info[10]);
-                            game1.cell[12].loadTexture("cell" + info[11]);
-                            game1.cell[13].loadTexture("cell" + info[12]);
-                            game1.cell[14].loadTexture("cell" + info[13]);
-                            game1.cell[15].loadTexture("cell" + info[14]);
+                        game1.cell[1].loadTexture("cell" + info[0]);
+                        game1.cell[2].loadTexture("cell" + info[1]);
+                        game1.cell[3].loadTexture("cell" + info[2]);
+                        game1.cell[4].loadTexture("cell" + info[3]);
+                        game1.cell[5].loadTexture("cell" + info[4]);
+                        game1.cell[6].loadTexture("cell" + info[5]);
+                        game1.cell[7].loadTexture("cell" + info[6]);
+                        game1.cell[8].loadTexture("cell" + info[7]);
+                        game1.cell[9].loadTexture("cell" + info[8]);
+                        game1.cell[10].loadTexture("cell" + info[9]);
+                        game1.cell[11].loadTexture("cell" + info[10]);
+                        game1.cell[12].loadTexture("cell" + info[11]);
+                        game1.cell[13].loadTexture("cell" + info[12]);
+                        game1.cell[14].loadTexture("cell" + info[13]);
+                        game1.cell[15].loadTexture("cell" + info[14]);
 
-                            if (
-                                info[12] == 10 ||
-                                info[13] == 10 ||
-                                info[14] == 10
-                            ) {
-                                coinCount = coinCount + 1;
-                                if (coinCount === 1) {
-                                    coinSound1.play();
-                                } else if (coinCount === 2) {
-                                    coinSound2.play();
-                                } else if (coinCount === 3) {
-                                    coinSound3.play();
-                                } else if (coinCount === 4) {
-                                    coinSound4.play();
-                                } else {
-                                    coinSound5.play();
-                                }
+                        if (
+                            info[12] == 10 ||
+                            info[13] == 10 ||
+                            info[14] == 10
+                        ) {
+                            coinCount = coinCount + 1;
+                            if (coinCount === 1) {
+                                coinSound1.play();
+                            } else if (coinCount === 2) {
+                                coinSound2.play();
+                            } else if (coinCount === 3) {
+                                coinSound3.play();
+                            } else if (coinCount === 4) {
+                                coinSound4.play();
                             } else {
-                                finishSpinSound5.play();
+                                coinSound5.play();
                             }
-                            endspin(number);
+                        } else {
+                            finishSpinSound5.play();
                         }
-                    }, time);
-                }
+                        endspin(number);
+                    }
+                }, time);
             }
         }
 
@@ -1962,44 +1946,12 @@ function game1() {
                     autostart = false;
                     showButtons();
                 }
-                // @@@@@@@@@@@@@@@@@@@@@@@@
-                middlespin(0, 700, true, gamename, sessionUuid, betline, lines);
-                middlespin(
-                    1,
-                    1050,
-                    true,
-                    gamename,
-                    sessionUuid,
-                    betline,
-                    lines
-                );
-                middlespin(
-                    2,
-                    1400,
-                    true,
-                    gamename,
-                    sessionUuid,
-                    betline,
-                    lines
-                );
-                middlespin(
-                    3,
-                    1750,
-                    true,
-                    gamename,
-                    sessionUuid,
-                    betline,
-                    lines
-                );
-                middlespin(
-                    4,
-                    2100,
-                    true,
-                    gamename,
-                    sessionUuid,
-                    betline,
-                    lines
-                );
+                // @@@@@@@@@@@@@@@@@@@@@@@@2
+                middlespin(0, 700, true);
+                middlespin(1, 1050, true);
+                middlespin(2, 1400, true);
+                middlespin(3, 1750, true);
+                middlespin(4, 2100, true);
             }
         }
 
