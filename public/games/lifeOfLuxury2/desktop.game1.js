@@ -1938,22 +1938,22 @@ function game1() {
                 });
             }
 
-            if (window.navigator.onLine) {
-                sendMsg(gamename, sessionName, betline, lines);
-            } else {
-                if (autostart) {
-                    autoPlay.loadTexture("autoPlay");
-                    $("#spin").removeClass("auto");
-                    autostart = false;
-                    showButtons();
-                }
+            // if (window.navigator.onLine) {
+            sendMsg(gamename, sessionName, betline, lines);
+            // } else {
+            //     if (autostart) {
+            //         autoPlay.loadTexture("autoPlay");
+            //         $("#spin").removeClass("auto");
+            //         autostart = false;
+            //         showButtons();
+            //     }
 
-                middlespin(0, 700);
-                middlespin(1, 1050);
-                middlespin(2, 1400);
-                middlespin(3, 1750);
-                middlespin(4, 2100);
-            }
+            //     middlespin(0, 700);
+            //     middlespin(1, 1050);
+            //     middlespin(2, 1400);
+            //     middlespin(3, 1750);
+            //     middlespin(4, 2100);
+            // }
         }
 
         function moveFundsExceptionFunc(
