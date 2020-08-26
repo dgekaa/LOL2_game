@@ -672,6 +672,7 @@ function game2() {
         }
 
         var errorStatus = false;
+        let reconnectCount = 0;
 
         function requestSpin(gamename, sessionName, betline, lines) {
             // if (window.navigator.onLine) {
@@ -734,14 +735,47 @@ function game2() {
                     }
                 },
                 error: function(xhr, ajaxOptions, thrownError) {
-                    let timerId = setTimeout(function tick() {
-                        // if (window.navigator.onLine) {
-                        requestSpin(gamename, sessionName, betline, lines);
-                        clearTimeout(timerId);
-                        // } else {
-                        //     timerId = setTimeout(tick, 1000);
-                        // }
-                    }, 1000);
+                    const responseText = xhr.responseText
+                        ? JSON.parse(xhr.responseText)
+                        : "";
+                    const refId =
+                        responseText && responseText.refId
+                            ? responseText.refId
+                            : "";
+
+                    var errorText = "//ошибка 30";
+                    console.log("переключение № " + reconnectCount);
+                    console.log(errorText);
+
+                    if (refId) {
+                        createRefID(refId);
+                        error_bg.visible = true;
+                        errorStatus = true;
+                    } else {
+                        if (reconnectCount < 10) {
+                            reconnectCount++;
+                            reconnectSpin(
+                                gamename,
+                                sessionName,
+                                betline,
+                                lines
+                            );
+                        } else if (reconnectCount >= 10) {
+                            createRefID("internet problem");
+                            error_bg.visible = true;
+                            errorStatus = true;
+                            reconnectCount = 0;
+                        }
+                    }
+
+                    // let timerId = setTimeout(function tick() {
+                    //     // if (window.navigator.onLine) {
+                    //     requestSpin(gamename, sessionName, betline, lines);
+                    //     clearTimeout(timerId);
+                    //     // } else {
+                    //     //     timerId = setTimeout(tick, 1000);
+                    //     // }
+                    // }, 1000);
                 }
             });
             // } else {
@@ -944,8 +978,10 @@ function game2() {
                 error: function(xhr, ajaxOptions, thrownError) {
                     var errorText = "//ошибка переподкючения";
                     console.log(errorText);
-                    reconnectSpin(gamename, sessionName, betline, lines);
-                    // setTimeout("reconnectSpin()", 100);
+
+                    setTimeout(() => {
+                        requestSpin(gamename, sessionName, betline, lines);
+                    }, 3000);
                 }
             });
         }
