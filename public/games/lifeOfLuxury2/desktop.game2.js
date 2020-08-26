@@ -735,50 +735,50 @@ function game2() {
                     }
                 },
                 error: function(xhr, ajaxOptions, thrownError) {
-                    // if (freeSpinCount !== 10) {
-                    //     const responseText = xhr.responseText
-                    //         ? JSON.parse(xhr.responseText)
-                    //         : "";
-                    //     const refId =
-                    //         responseText && responseText.refId
-                    //             ? responseText.refId
-                    //             : "";
+                    if (freeSpinCount !== 10) {
+                        const responseText = xhr.responseText
+                            ? JSON.parse(xhr.responseText)
+                            : "";
+                        const refId =
+                            responseText && responseText.refId
+                                ? responseText.refId
+                                : "";
 
-                    //     var errorText = "//ошибка 30";
-                    //     console.log("переключение № " + reconnectCount);
-                    //     console.log(errorText);
+                        var errorText = "//ошибка 30";
+                        console.log("переключение № " + reconnectCount);
+                        console.log(errorText);
 
-                    //     if (refId) {
-                    //         createRefID(refId);
-                    //         error_bg.visible = true;
-                    //         errorStatus = true;
-                    //     } else {
-                    //         if (reconnectCount < 10) {
-                    //             reconnectCount++;
-                    //             reconnectSpin(
-                    //                 gamename,
-                    //                 sessionName,
-                    //                 betline,
-                    //                 lines
-                    //             );
-                    //         } else if (reconnectCount >= 10) {
-                    //             createRefID("internet problem");
-                    //             error_bg.visible = true;
-                    //             errorStatus = true;
-                    //             reconnectCount = 0;
-                    //         }
-                    //     }
-                    // } else {
-                    //     requestSpin(gamename, sessionName, betline, lines);
-                    // }
-                    let timerId = setTimeout(function tick() {
-                        if (window.navigator.onLine) {
-                            requestSpin(gamename, sessionName, betline, lines);
-                            clearTimeout(timerId);
+                        if (refId) {
+                            createRefID(refId);
+                            error_bg.visible = true;
+                            errorStatus = true;
                         } else {
-                            timerId = setTimeout(tick, 1000);
+                            if (reconnectCount < 10) {
+                                reconnectCount++;
+                                reconnectSpin(
+                                    gamename,
+                                    sessionName,
+                                    betline,
+                                    lines
+                                );
+                            } else if (reconnectCount >= 10) {
+                                createRefID("internet problem");
+                                error_bg.visible = true;
+                                errorStatus = true;
+                                reconnectCount = 0;
+                            }
                         }
-                    }, 1000);
+                    } else {
+                        requestSpin(gamename, sessionName, betline, lines);
+                    }
+                    // let timerId = setTimeout(function tick() {
+                    //     if (window.navigator.onLine) {
+                    //         requestSpin(gamename, sessionName, betline, lines);
+                    //         clearTimeout(timerId);
+                    //     } else {
+                    //         timerId = setTimeout(tick, 1000);
+                    //     }
+                    // }, 1000);
                 }
             });
             // } else {
