@@ -970,7 +970,6 @@ function game1() {
                 totalBet.setText(bet);
                 activateFreeSpins = true;
                 preStartSpin();
-                // requestSpin(gamename, sessionName, betline, lines);
             }
         });
         scorePosions = [
@@ -1160,7 +1159,11 @@ function game1() {
                     if (number == 4) {
                         game1.spinStatus5 = true;
                         timeSpin = true;
-                        requestSpin(gamename, sessionUuid, betline, lines);
+                        // 111111111111111111111
+                        demo === "demo"
+                            ? requestSpin(gamename, sessionUuid, betline, lines)
+                            : getBalance(gamename, sessionUuid, betline, lines);
+
                         changeTextCur = changeTextCur + 1;
                         if (changeTextCur === changeTextValue) {
                             if (topLabelValue === 2) {
@@ -1939,7 +1942,9 @@ function game1() {
             }
 
             // if (window.navigator.onLine) {
+            // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
             sendMsg(gamename, sessionName, betline, lines);
+
             // } else {
             //     if (autostart) {
             //         autoPlay.loadTexture("autoPlay");
@@ -3277,9 +3282,9 @@ function game1() {
             }
         }
 
-        function getBalance() {
+        function getBalance(gamename, sessionUuid, betline, lines) {
             // if (!window.navigator.onLine) return;
-
+            // requestSpin(gamename, sessionUuid, betline, lines);
             if (!getBalanceWait) {
                 getBalanceWait = true;
                 $.ajax({
@@ -3301,6 +3306,18 @@ function game1() {
                         console.log(data);
                         if (IsJsonString(data)) {
                             checkBalancedata = JSON.parse(data);
+
+                            // ############################################
+                            checkBalancedata["status"] == "true" &&
+                                +checkBalancedata["balance"].toFixed() >=
+                                    betline * lines &&
+                                requestSpin(
+                                    gamename,
+                                    sessionUuid,
+                                    betline,
+                                    lines
+                                );
+
                             setTimeout(function() {
                                 getBalanceWait = false;
                                 if (
