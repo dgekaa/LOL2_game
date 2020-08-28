@@ -1160,7 +1160,6 @@ function game1() {
                     if (number == 4) {
                         game1.spinStatus5 = true;
                         timeSpin = true;
-                        getBalance();
                         requestSpin(gamename, sessionUuid, betline, lines);
                         changeTextCur = changeTextCur + 1;
                         if (changeTextCur === changeTextValue) {
@@ -1770,11 +1769,11 @@ function game1() {
                         }
 
                         if (IsJsonString(data)) {
-                            console.log(
-                                JSON.parse(data),
-                                " ++++++++++++++++++++++++++++++++"
-                            );
                             dataSpinRequest = JSON.parse(data);
+                            console.log(
+                                dataSpinRequest,
+                                " dataSpinRequest++++++++++++++++++++++++++++++++"
+                            );
                             //freespin
                             // if (activateFreeSpins)
 
@@ -3299,7 +3298,7 @@ function game1() {
                         sessionUuid,
                     dataType: "html",
                     success: function(data) {
-                        console.log(data, "GET BALANCE______________________");
+                        console.log(data);
                         if (IsJsonString(data)) {
                             checkBalancedata = JSON.parse(data);
                             setTimeout(function() {
