@@ -3309,49 +3309,53 @@ function game1() {
 
                             // ############################################
                             checkBalancedata["status"] == "true" &&
-                                +checkBalancedata["balance"].toFixed() >=
-                                    betline * lines &&
-                                gamename &&
-                                sessionUuid &&
-                                betline &&
-                                lines &&
-                                requestSpin(
-                                    gamename,
-                                    sessionUuid,
-                                    betline,
-                                    lines
-                                );
-
-                            setTimeout(function() {
-                                getBalanceWait = false;
-                                if (
-                                    checkBalancedata["status"] == "true" &&
-                                    balance + allWin !==
-                                        +checkBalancedata["balance"].toFixed()
-                                ) {
-                                    balance = +checkBalancedata[
-                                        "balance"
-                                    ].toFixed();
-                                    changeBalance();
-                                } else if (
-                                    checkBalancedata["status"] !== "true"
-                                ) {
-                                    checkBalancedata.refId
-                                        ? createRefID(checkBalancedata.refId)
-                                        : createRefID(
-                                              "checkBalance status error"
-                                          );
-                                    error_bg.visible = true;
-                                    errorStatus = true;
-                                } else if (
-                                    balance + allWinOld >=
-                                    betline * lines
-                                ) {
-                                    checkBalance();
-                                } else {
-                                    getBalance();
-                                }
-                            }, 900);
+                            +checkBalancedata["balance"].toFixed() >=
+                                betline * lines &&
+                            gamename &&
+                            sessionUuid &&
+                            betline &&
+                            lines
+                                ? requestSpin(
+                                      gamename,
+                                      sessionUuid,
+                                      betline,
+                                      lines
+                                  )
+                                : setTimeout(function() {
+                                      getBalanceWait = false;
+                                      if (
+                                          checkBalancedata["status"] ==
+                                              "true" &&
+                                          balance + allWin !==
+                                              +checkBalancedata[
+                                                  "balance"
+                                              ].toFixed()
+                                      ) {
+                                          balance = +checkBalancedata[
+                                              "balance"
+                                          ].toFixed();
+                                          changeBalance();
+                                      } else if (
+                                          checkBalancedata["status"] !== "true"
+                                      ) {
+                                          checkBalancedata.refId
+                                              ? createRefID(
+                                                    checkBalancedata.refId
+                                                )
+                                              : createRefID(
+                                                    "checkBalance status error"
+                                                );
+                                          error_bg.visible = true;
+                                          errorStatus = true;
+                                      } else if (
+                                          balance + allWinOld >=
+                                          betline * lines
+                                      ) {
+                                          checkBalance();
+                                      } else {
+                                          getBalance();
+                                      }
+                                  }, 900);
                         } else {
                             console.log("json format error");
                             createRefID("get-user-balance json format error");
