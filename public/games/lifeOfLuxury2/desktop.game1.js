@@ -3283,7 +3283,9 @@ function game1() {
                             error_bg.visible = true;
                             errorStatus = true;
                         }
-                        sendMsg(gamename, sessionName, betline, lines);
+                        // @@@@@@@@@@@@@@@@@@@@@@@
+                        sendMsg &&
+                            sendMsg(gamename, sessionName, betline, lines);
                     },
                     error: function(xhr, ajaxOptions, thrownError) {
                         const responseText = xhr.responseText
