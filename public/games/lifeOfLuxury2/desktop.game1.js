@@ -3311,6 +3311,10 @@ function game1() {
                             checkBalancedata["status"] == "true" &&
                                 +checkBalancedata["balance"].toFixed() >=
                                     betline * lines &&
+                                gamename &&
+                                sessionUuid &&
+                                betline &&
+                                lines &&
                                 requestSpin(
                                     gamename,
                                     sessionUuid,
