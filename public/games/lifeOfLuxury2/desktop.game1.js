@@ -3298,7 +3298,7 @@ function game1() {
                         "&session_uuid=" +
                         sessionUuid,
                     dataType: "html",
-                    success: function() {
+                    success: function(data) {
                         console.log(data, "GET BALANCE______________________");
                         if (IsJsonString(data)) {
                             checkBalancedata = JSON.parse(data);
