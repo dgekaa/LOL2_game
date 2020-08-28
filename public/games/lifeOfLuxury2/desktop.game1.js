@@ -1763,81 +1763,139 @@ function game1() {
                     dataType: "html",
                     success: function(data) {
                         console.log(data);
-                        const demoOrFullSpean = () => {
-                            if (IsJsonString(data)) {
-                                console.log(
-                                    JSON.parse(data),
-                                    " ++++++++++++++++++++++++++++++++"
-                                );
-                                dataSpinRequest = JSON.parse(data);
+                        if (demo !== "demo") {
+                            getBalance();
+                            console.log("getBalance");
+                        }
 
-                                if (dataSpinRequest.status !== "false") {
-                                    isGetResponse = true;
-                                    parseSpinAnswer(dataSpinRequest);
-                                } else {
-                                    errorStatus = true;
-                                    switch (dataSpinRequest.message) {
-                                        case "ActiveUserSessionException":
-                                            session_bg.visible = true;
-                                            break;
-                                        case "FirstMoveFundsException":
-                                            dataSpinRequest.refId
-                                                ? createRefID(
-                                                      dataSpinRequest.refId
-                                                  )
-                                                : createRefID(
-                                                      "Funds exception"
-                                                  );
-                                            error_bg.visible = true;
-                                            break;
-                                        case "BetPlacingAbortException":
-                                            establishing_bg.visible = true;
-                                            setTimeout(
-                                                "BetPlacingAbortExceptionFunc(gamename, sessionName, betline, lines, dataSpinRequest.betPlacingAbortExceptionID)",
-                                                3000
-                                            );
-                                            break;
-                                        case "moveFundsException":
-                                            establishing_bg.visible = true;
-                                            setTimeout(
-                                                "moveFundsExceptionFunc(gamename, sessionName, betline, lines, dataSpinRequest.moveFundsExceptionID)",
-                                                3000
-                                            );
-                                            break;
-                                        case "low balance":
-                                            dataSpinRequest.refId
-                                                ? createRefID(
-                                                      dataSpinRequest.refId
-                                                  )
-                                                : createRefID("low balance");
-                                            error_bg.visible = true;
-                                            break;
-                                        case "UnauthenticatedException":
-                                            dataSpinRequest.refId
-                                                ? createRefID(
-                                                      dataSpinRequest.refId
-                                                  )
-                                                : createRefID(
-                                                      "Unauthenticated exception"
-                                                  );
-                                            error_bg.visible = true;
-                                            break;
-                                    }
-                                }
+                        if (IsJsonString(data)) {
+                            console.log(
+                                JSON.parse(data),
+                                " ++++++++++++++++++++++++++++++++"
+                            );
+                            dataSpinRequest = JSON.parse(data);
+                            //freespin
+                            // if (activateFreeSpins)
+
+                            // dataSpinRequest = {
+                            //     "stateData": {
+                            //         "screen": "featureGame",
+                            //         "isWin": true,
+                            //         "isWinOnMain": true,
+                            //         "isWinOnBonus": true,
+                            //         "isWinOnFeatureGame": false,
+                            //         "isDropFeatureGame": true,
+                            //         "isEndFeatureGame": false,
+                            //         "moveNumberInFeatureGame": 0,
+                            //         "prevScreen": "mainGame"
+                            //     },
+                            //     "balanceData": {
+                            //         "balance": 10080,
+                            //         "totalPayoff": 100,
+                            //         "payoffByLines": 20,
+                            //         "payoffByBonus": 80,
+                            //         "totalWinningsInFeatureGame": 0
+                            //     },
+                            //     "sessionData": {
+                            //         "eventId": null,
+                            //         "userId": 1,
+                            //         "gameId": 6,
+                            //         "mode": "demo",
+                            //         "sessionUuid": "0fd446e0-030c-11ea-9344-1fd7f7246bde"
+                            //     },
+                            //     "logicData": {
+                            //         "countSymbolsInGame": 11,
+                            //         "countOfMovesInFeatureGame": 12,
+                            //         "lineBet": 1,
+                            //         "linesInGame": 20,
+                            //         "table": [2, 10, 9, 1, 4, 9, 5, 6, 3, 9, 9, 1, 6, 4, 8],
+                            //         "winningLines": [{
+                            //             "lineNumber": 2,
+                            //             "symbol": 9,
+                            //             "winCellCount": 2
+                            //         }, {"lineNumber": 8, "symbol": 9, "winCellCount": 2}],
+                            //         "payoffsForBonus": [{"symbol": 10, "count": 3, "winning": 80}],
+                            //         "payoffsForLines": [{"lineNumber": 2, "winValue": 10}, {
+                            //             "lineNumber": 8,
+                            //             "winValue": 10
+                            //         }],
+                            //         "winningCells": {"2": 9, "5": 0},
+                            //         "multiplier": 2
+                            //     },
+                            //     "longData": {
+                            //         "stateData": {
+                            //             "screen": "featureGame",
+                            //             "isWin": true,
+                            //             "isWinOnMain": true,
+                            //             "isWinOnBonus": true,
+                            //             "isWinOnFeatureGame": false,
+                            //             "isDropFeatureGame": true,
+                            //             "isEndFeatureGame": false,
+                            //             "moveNumberInFeatureGame": 0,
+                            //             "prevScreen": "mainGame"
+                            //         },
+                            //         "balanceData": {
+                            //             "balance": 10080,
+                            //             "totalPayoff": 100,
+                            //             "payoffByLines": 20,
+                            //             "payoffByBonus": 80,
+                            //             "totalWinningsInFeatureGame": 0
+                            //         },
+                            //     }
+                            // }
+
+                            if (dataSpinRequest.status !== "false") {
+                                isGetResponse = true;
+                                parseSpinAnswer(dataSpinRequest);
                             } else {
-                                console.log("json format error");
-                                createRefID("api-v2 json format error");
-                                error_bg.visible = true;
                                 errorStatus = true;
-                                isGetResponse = false;
+                                switch (dataSpinRequest.message) {
+                                    case "ActiveUserSessionException":
+                                        session_bg.visible = true;
+                                        break;
+                                    case "FirstMoveFundsException":
+                                        dataSpinRequest.refId
+                                            ? createRefID(dataSpinRequest.refId)
+                                            : createRefID("Funds exception");
+                                        error_bg.visible = true;
+                                        break;
+                                    case "BetPlacingAbortException":
+                                        establishing_bg.visible = true;
+                                        setTimeout(
+                                            "BetPlacingAbortExceptionFunc(gamename, sessionName, betline, lines, dataSpinRequest.betPlacingAbortExceptionID)",
+                                            3000
+                                        );
+                                        break;
+                                    case "moveFundsException":
+                                        establishing_bg.visible = true;
+                                        setTimeout(
+                                            "moveFundsExceptionFunc(gamename, sessionName, betline, lines, dataSpinRequest.moveFundsExceptionID)",
+                                            3000
+                                        );
+                                        break;
+                                    case "low balance":
+                                        dataSpinRequest.refId
+                                            ? createRefID(dataSpinRequest.refId)
+                                            : createRefID("low balance");
+                                        error_bg.visible = true;
+                                        break;
+                                    case "UnauthenticatedException":
+                                        dataSpinRequest.refId
+                                            ? createRefID(dataSpinRequest.refId)
+                                            : createRefID(
+                                                  "Unauthenticated exception"
+                                              );
+                                        error_bg.visible = true;
+                                        break;
+                                }
                             }
-                        };
-                        // if (demo !== "demo") {
-                        //     getBalance();
-                        //     console.log("getBalance");
-                        // }
-
-                        demoOrFullSpean();
+                        } else {
+                            console.log("json format error");
+                            createRefID("api-v2 json format error");
+                            error_bg.visible = true;
+                            errorStatus = true;
+                            isGetResponse = false;
+                        }
                     },
                     error: function(xhr, ajaxOptions, thrownError) {
                         // if (!window.navigator.onLine) {
@@ -1881,11 +1939,7 @@ function game1() {
             }
 
             // if (window.navigator.onLine) {
-            if (demo !== "demo") {
-                getBalance(gamename, sessionName, betline, lines, sendMsg);
-            } else {
-                sendMsg(gamename, sessionName, betline, lines);
-            }
+            sendMsg(gamename, sessionName, betline, lines);
             // } else {
             //     if (autostart) {
             //         autoPlay.loadTexture("autoPlay");
@@ -3223,7 +3277,7 @@ function game1() {
             }
         }
 
-        function getBalance(gamename, sessionName, betline, lines, sendMsg) {
+        function getBalance() {
             // if (!window.navigator.onLine) return;
 
             if (!getBalanceWait) {
@@ -3283,9 +3337,6 @@ function game1() {
                             error_bg.visible = true;
                             errorStatus = true;
                         }
-                        // @@@@@@@@@@@@@@@@@@@@@@@
-                        sendMsg &&
-                            sendMsg(gamename, sessionName, betline, lines);
                     },
                     error: function(xhr, ajaxOptions, thrownError) {
                         const responseText = xhr.responseText
