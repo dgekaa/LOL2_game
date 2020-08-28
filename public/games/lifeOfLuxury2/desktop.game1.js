@@ -1159,10 +1159,13 @@ function game1() {
                     if (number == 4) {
                         game1.spinStatus5 = true;
                         timeSpin = true;
-                        // 111111111111111111111
-                        demo === "demo"
-                            ? requestSpin(gamename, sessionUuid, betline, lines)
-                            : getBalance(gamename, sessionUuid, betline, lines);
+                        // ##################################
+                        if (demo === "demo") {
+                            requestSpin(gamename, sessionUuid, betline, lines);
+                        } else {
+                            getBalance(gamename, sessionUuid, betline, lines);
+                            getBalanceWait = false;
+                        }
 
                         changeTextCur = changeTextCur + 1;
                         if (changeTextCur === changeTextValue) {
