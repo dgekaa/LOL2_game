@@ -1160,6 +1160,7 @@ function game1() {
                     if (number == 4) {
                         game1.spinStatus5 = true;
                         timeSpin = true;
+                        getBalance();
                         requestSpin(gamename, sessionUuid, betline, lines);
                         changeTextCur = changeTextCur + 1;
                         if (changeTextCur === changeTextValue) {
@@ -3221,7 +3222,7 @@ function game1() {
                     hideButtons([[maxBetSpin, "maxBetSpin"]]);
                 }
                 hideMobileBtn();
-                if (balance + allWinOld < betline * lines && demo !== "demo") {
+                if (demo !== "demo") {
                     checkBalance();
                     addcreditFlickStatus = true;
                     showButtons([[autoPlay, "autoPlay"]]);
@@ -3297,8 +3298,8 @@ function game1() {
                         "&session_uuid=" +
                         sessionUuid,
                     dataType: "html",
-                    success: function(data) {
-                        console.log(data);
+                    success: function() {
+                        console.log(data, "GET BALANCE______________________");
                         if (IsJsonString(data)) {
                             checkBalancedata = JSON.parse(data);
                             setTimeout(function() {
