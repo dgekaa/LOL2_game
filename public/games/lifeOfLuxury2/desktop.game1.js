@@ -970,6 +970,7 @@ function game1() {
                 totalBet.setText(bet);
                 activateFreeSpins = true;
                 preStartSpin();
+                // requestSpin(gamename, sessionName, betline, lines);
             }
         });
         scorePosions = [
@@ -1159,13 +1160,7 @@ function game1() {
                     if (number == 4) {
                         game1.spinStatus5 = true;
                         timeSpin = true;
-                        // ##################################
-                        if (demo === "demo") {
-                            requestSpin(gamename, sessionUuid, betline, lines);
-                        } else {
-                            getBalance(gamename, sessionUuid, betline, lines);
-                        }
-
+                        requestSpin(gamename, sessionUuid, betline, lines);
                         changeTextCur = changeTextCur + 1;
                         if (changeTextCur === changeTextValue) {
                             if (topLabelValue === 2) {
@@ -1774,11 +1769,11 @@ function game1() {
                         }
 
                         if (IsJsonString(data)) {
-                            dataSpinRequest = JSON.parse(data);
                             console.log(
-                                dataSpinRequest,
-                                " dataSpinRequest++++++++++++++++++++++++++++++++"
+                                JSON.parse(data),
+                                " ++++++++++++++++++++++++++++++++"
                             );
+                            dataSpinRequest = JSON.parse(data);
                             //freespin
                             // if (activateFreeSpins)
 
@@ -1944,9 +1939,7 @@ function game1() {
             }
 
             // if (window.navigator.onLine) {
-            // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
             sendMsg(gamename, sessionName, betline, lines);
-
             // } else {
             //     if (autostart) {
             //         autoPlay.loadTexture("autoPlay");
@@ -3284,9 +3277,9 @@ function game1() {
             }
         }
 
-        function getBalance(gamename, sessionUuid, betline, lines) {
+        function getBalance() {
             // if (!window.navigator.onLine) return;
-            // requestSpin(gamename, sessionUuid, betline, lines);
+
             if (!getBalanceWait) {
                 getBalanceWait = true;
                 $.ajax({
@@ -3304,64 +3297,41 @@ function game1() {
                         "&session_uuid=" +
                         sessionUuid,
                     dataType: "html",
-                    success: function(data) {
+                    success: function() {
+                        let data = '{"status":"true","balance":0}';
                         console.log(data);
                         if (IsJsonString(data)) {
                             checkBalancedata = JSON.parse(data);
-
-                            // ############################################
-                            if (
-                                checkBalancedata["status"] == "true" &&
-                                +checkBalancedata["balance"].toFixed() >=
-                                    betline * lines &&
-                                gamename &&
-                                sessionUuid &&
-                                betline &&
-                                lines
-                            ) {
-                                requestSpin(
-                                    gamename,
-                                    sessionUuid,
-                                    betline,
-                                    lines
-                                );
+                            setTimeout(function() {
                                 getBalanceWait = false;
-                            } else {
-                                setTimeout(function() {
-                                    getBalanceWait = false;
-                                    if (
-                                        checkBalancedata["status"] == "true" &&
-                                        balance + allWin !==
-                                            +checkBalancedata[
-                                                "balance"
-                                            ].toFixed()
-                                    ) {
-                                        balance = +checkBalancedata[
-                                            "balance"
-                                        ].toFixed();
-                                        changeBalance();
-                                    } else if (
-                                        checkBalancedata["status"] !== "true"
-                                    ) {
-                                        checkBalancedata.refId
-                                            ? createRefID(
-                                                  checkBalancedata.refId
-                                              )
-                                            : createRefID(
-                                                  "checkBalance status error"
-                                              );
-                                        error_bg.visible = true;
-                                        errorStatus = true;
-                                    } else if (
-                                        balance + allWinOld >=
-                                        betline * lines
-                                    ) {
-                                        checkBalance();
-                                    } else {
-                                        getBalance();
-                                    }
-                                }, 900);
-                            }
+                                if (
+                                    checkBalancedata["status"] == "true" &&
+                                    balance + allWin !==
+                                        +checkBalancedata["balance"].toFixed()
+                                ) {
+                                    balance = +checkBalancedata[
+                                        "balance"
+                                    ].toFixed();
+                                    changeBalance();
+                                } else if (
+                                    checkBalancedata["status"] !== "true"
+                                ) {
+                                    checkBalancedata.refId
+                                        ? createRefID(checkBalancedata.refId)
+                                        : createRefID(
+                                              "checkBalance status error"
+                                          );
+                                    error_bg.visible = true;
+                                    errorStatus = true;
+                                } else if (
+                                    balance + allWinOld >=
+                                    betline * lines
+                                ) {
+                                    checkBalance();
+                                } else {
+                                    getBalance();
+                                }
+                            }, 900);
                         } else {
                             console.log("json format error");
                             createRefID("get-user-balance json format error");
