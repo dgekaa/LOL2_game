@@ -1487,7 +1487,7 @@ function game2() {
                 }
             }
         }
-
+        // ###########################
         function showWinFreeSpin(wcvFreeSpinWinValuesArray) {
             console.log(wcvFreeSpinWinValuesArray);
             wcvFreeSpinWinValuesArray.forEach(function(cell, i) {
@@ -1594,7 +1594,7 @@ function game2() {
                 }, 0);
             }, 0);
         }
-
+        // ###########################3
         function additionalBonus() {
             freesponStartBGAdditionalBonus.visible = true;
             freesponStartBGAdditionalBonus.alpha = 0;
@@ -2572,7 +2572,7 @@ function game2() {
                     winText.visible = isLightBorder;
 
                     await delay(isLightBorder ? 550 : 275);
-
+                    // ##############################
                     index === 7
                         ? lastIndication(wlWinValuesArray, lineNumber)
                         : changeBorderColor(

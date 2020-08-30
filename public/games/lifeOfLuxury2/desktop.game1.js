@@ -594,7 +594,7 @@ function game1() {
                     );
                     game.add
                         .tween(squareArrImg[i - 1][j - 1])
-                        .to({ alpha: 0 }, 100, Phaser.Easing.LINEAR, true)
+                        .to({ alpha: 0 }, 60, Phaser.Easing.LINEAR, true)
                         .onComplete.add(function() {});
                 }
             }
@@ -603,7 +603,7 @@ function game1() {
         function showLine(lineNumber) {
             game.add
                 .tween(game1.lineArr[lineNumber])
-                .to({ alpha: 1 }, 100, Phaser.Easing.LINEAR, true)
+                .to({ alpha: 1 }, 60, Phaser.Easing.LINEAR, true)
                 .onComplete.add(function() {});
         }
 
@@ -619,7 +619,7 @@ function game1() {
             game1.lineArr.forEach(function(line) {
                 game.add
                     .tween(line)
-                    .to({ alpha: 0 }, 100, Phaser.Easing.LINEAR, true)
+                    .to({ alpha: 0 }, 60, Phaser.Easing.LINEAR, true)
                     .onComplete.add(function() {});
             });
         }
@@ -641,7 +641,7 @@ function game1() {
                 for (var j = 1; j <= 5; ++j) {
                     game.add
                         .tween(squareArrImg[i - 1][j - 1])
-                        .to({ alpha: 0 }, 100, Phaser.Easing.LINEAR, true)
+                        .to({ alpha: 0 }, 60, Phaser.Easing.LINEAR, true)
                         .onComplete.add(function() {});
                 }
             }
@@ -1078,6 +1078,7 @@ function game1() {
                 eventId.setText(`${dataArray.sessionData["eventId"]}`);
                 eventId.visible = true;
             }
+            // #######################################
 
             if (dataSpinRequest.stateData.isWinOnBonus) {
                 allWin = dataArray.balanceData["totalPayoff"];
@@ -1116,7 +1117,7 @@ function game1() {
                 .tween(game1.cell[1 + number * 3])
                 .to(
                     { y: game1.cell[1 + number * 3].position.y - 30 },
-                    200,
+                    60,
                     Phaser.Easing.LINEAR,
                     true
                 )
@@ -1127,7 +1128,7 @@ function game1() {
                 .tween(game1.cell[2 + number * 3])
                 .to(
                     { y: game1.cell[2 + number * 3].position.y - 30 },
-                    200,
+                    60,
                     Phaser.Easing.LINEAR,
                     true
                 )
@@ -1138,7 +1139,7 @@ function game1() {
                 .tween(game1.cell[3 + number * 3])
                 .to(
                     { y: game1.cell[3 + number * 3].position.y - 30 },
-                    200,
+                    60,
                     Phaser.Easing.LINEAR,
                     true
                 )
@@ -1432,7 +1433,7 @@ function game1() {
                     .tween(game1.cell[1 + number * 3])
                     .to(
                         { y: game1.cell[1 + number * 3].position.y - 30 },
-                        200,
+                        60,
                         Phaser.Easing.LINEAR,
                         true
                     )
@@ -1441,7 +1442,7 @@ function game1() {
                     .tween(game1.cell[2 + number * 3])
                     .to(
                         { y: game1.cell[2 + number * 3].position.y - 30 },
-                        200,
+                        60,
                         Phaser.Easing.LINEAR,
                         true
                     )
@@ -1450,7 +1451,7 @@ function game1() {
                     .tween(game1.cell[3 + number * 3])
                     .to(
                         { y: game1.cell[3 + number * 3].position.y - 30 },
-                        200,
+                        60,
                         Phaser.Easing.LINEAR,
                         true
                     )
@@ -1755,6 +1756,11 @@ function game1() {
             // dataSpinRequest = {"stateData":{"screen":"featureGame","isWin":true,"isWinOnMain":true,"isWinOnBonus":true,"isWinOnFeatureGame":false,"isDropFeatureGame":true,"isEndFeatureGame":false,"moveNumberInFeatureGame":0,"prevScreen":"mainGame"},"balanceData":{"balance":10100,"totalPayoff":200,"payoffByLines":0,"payoffByBonus":200,"totalWinningsInFeatureGame":0},"sessionData":{"eventId":null,"userId":1,"gameId":6,"mode":"demo","sessionUuid":"0fd446e0-030c-11ea-9344-1fd7f7246bde"},"logicData":{"countSymbolsInGame":11,"countOfMovesInFeatureGame":12,"lineBet":5,"linesInGame":20,"table":[3,8,10,3,6,2,6,7,8,10,5,7,5,6,10],"winningLines":[],"payoffsForBonus":[{"symbol":10,"count":3,"winning":200}],"payoffsForLines":[],"winningCells":[],"multiplier":2},"longData":{"stateData":{"screen":"featureGame","isWin":true,"isWinOnMain":true,"isWinOnBonus":true,"isWinOnFeatureGame":false,"isDropFeatureGame":true,"isEndFeatureGame":false,"moveNumberInFeatureGame":0,"prevScreen":"mainGame"},"balanceData":{"balance":10100,"totalPayoff":200,"payoffByLines":0,"payoffByBonus":200,"totalWinningsInFeatureGame":0},"logicData":{"countSymbolsInGame":11,"countOfMovesInFeatureGame":12,"lineBet":5,"linesInGame":20,"table":[3,8,10,3,6,2,6,7,8,10,5,7,5,6,10],"winningLines":[],"payoffsForBonus":[{"symbol":10,"count":3,"winning":200}],"payoffsForLines":[],"winningCells":[],"multiplier":2}}}
             // parseSpinAnswer(dataSpinRequest);
             function sendMsg() {
+                if (demo !== "demo") {
+                    getBalance();
+                    console.log("getBalance");
+                }
+
                 $.ajax({
                     type: "get",
                     url:
@@ -1763,16 +1769,8 @@ function game1() {
                     dataType: "html",
                     success: function(data) {
                         console.log(data);
-                        if (demo !== "demo") {
-                            getBalance();
-                            console.log("getBalance");
-                        }
 
                         if (IsJsonString(data)) {
-                            console.log(
-                                JSON.parse(data),
-                                " ++++++++++++++++++++++++++++++++"
-                            );
                             dataSpinRequest = JSON.parse(data);
                             //freespin
                             // if (activateFreeSpins)
@@ -2590,7 +2588,7 @@ function game1() {
             for (var i = 1; i <= sizeLine; ++i) {
                 game.add
                     .tween(squareArrImg[wlWinValuesArray[lineflash] - 1][i - 1])
-                    .to({ alpha: 1 }, 100, Phaser.Easing.LINEAR, true)
+                    .to({ alpha: 1 }, 60, Phaser.Easing.LINEAR, true)
                     .onComplete.add(function() {});
 
                 game1.copyCell[
@@ -2718,7 +2716,7 @@ function game1() {
                             squareArr[lineNumber - 1][i - 1]
                         ].visible = false;
                     }
-                }, 200);
+                }, 60);
 
                 setTimeout(() => {
                     if (afterFreespinStatus) {
