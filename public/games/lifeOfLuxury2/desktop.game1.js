@@ -1761,180 +1761,189 @@ function game1() {
                     getBalance();
                     console.log("getBalance");
                 }
+                setTimeout(() => {
+                    $.ajax({
+                        type: "get",
+                        url:
+                            getNeedUrlPath() +
+                            `/api-v2/action?game_id=${gameId}&user_id=${userId}&mode=${demo}&action=spin&session_uuid=${sessionUuid}&token=${token}&linesInGame=${lines}&lineBet=${betline}&platform_id=${platformId}`,
+                        dataType: "html",
+                        success: function(data) {
+                            console.log(data);
 
-                $.ajax({
-                    type: "get",
-                    url:
-                        getNeedUrlPath() +
-                        `/api-v2/action?game_id=${gameId}&user_id=${userId}&mode=${demo}&action=spin&session_uuid=${sessionUuid}&token=${token}&linesInGame=${lines}&lineBet=${betline}&platform_id=${platformId}`,
-                    dataType: "html",
-                    success: function(data) {
-                        console.log(data);
+                            if (IsJsonString(data)) {
+                                dataSpinRequest = JSON.parse(data);
+                                //freespin
+                                // if (activateFreeSpins)
 
-                        if (IsJsonString(data)) {
-                            dataSpinRequest = JSON.parse(data);
-                            //freespin
-                            // if (activateFreeSpins)
+                                // dataSpinRequest = {
+                                //     "stateData": {
+                                //         "screen": "featureGame",
+                                //         "isWin": true,
+                                //         "isWinOnMain": true,
+                                //         "isWinOnBonus": true,
+                                //         "isWinOnFeatureGame": false,
+                                //         "isDropFeatureGame": true,
+                                //         "isEndFeatureGame": false,
+                                //         "moveNumberInFeatureGame": 0,
+                                //         "prevScreen": "mainGame"
+                                //     },
+                                //     "balanceData": {
+                                //         "balance": 10080,
+                                //         "totalPayoff": 100,
+                                //         "payoffByLines": 20,
+                                //         "payoffByBonus": 80,
+                                //         "totalWinningsInFeatureGame": 0
+                                //     },
+                                //     "sessionData": {
+                                //         "eventId": null,
+                                //         "userId": 1,
+                                //         "gameId": 6,
+                                //         "mode": "demo",
+                                //         "sessionUuid": "0fd446e0-030c-11ea-9344-1fd7f7246bde"
+                                //     },
+                                //     "logicData": {
+                                //         "countSymbolsInGame": 11,
+                                //         "countOfMovesInFeatureGame": 12,
+                                //         "lineBet": 1,
+                                //         "linesInGame": 20,
+                                //         "table": [2, 10, 9, 1, 4, 9, 5, 6, 3, 9, 9, 1, 6, 4, 8],
+                                //         "winningLines": [{
+                                //             "lineNumber": 2,
+                                //             "symbol": 9,
+                                //             "winCellCount": 2
+                                //         }, {"lineNumber": 8, "symbol": 9, "winCellCount": 2}],
+                                //         "payoffsForBonus": [{"symbol": 10, "count": 3, "winning": 80}],
+                                //         "payoffsForLines": [{"lineNumber": 2, "winValue": 10}, {
+                                //             "lineNumber": 8,
+                                //             "winValue": 10
+                                //         }],
+                                //         "winningCells": {"2": 9, "5": 0},
+                                //         "multiplier": 2
+                                //     },
+                                //     "longData": {
+                                //         "stateData": {
+                                //             "screen": "featureGame",
+                                //             "isWin": true,
+                                //             "isWinOnMain": true,
+                                //             "isWinOnBonus": true,
+                                //             "isWinOnFeatureGame": false,
+                                //             "isDropFeatureGame": true,
+                                //             "isEndFeatureGame": false,
+                                //             "moveNumberInFeatureGame": 0,
+                                //             "prevScreen": "mainGame"
+                                //         },
+                                //         "balanceData": {
+                                //             "balance": 10080,
+                                //             "totalPayoff": 100,
+                                //             "payoffByLines": 20,
+                                //             "payoffByBonus": 80,
+                                //             "totalWinningsInFeatureGame": 0
+                                //         },
+                                //     }
+                                // }
 
-                            // dataSpinRequest = {
-                            //     "stateData": {
-                            //         "screen": "featureGame",
-                            //         "isWin": true,
-                            //         "isWinOnMain": true,
-                            //         "isWinOnBonus": true,
-                            //         "isWinOnFeatureGame": false,
-                            //         "isDropFeatureGame": true,
-                            //         "isEndFeatureGame": false,
-                            //         "moveNumberInFeatureGame": 0,
-                            //         "prevScreen": "mainGame"
-                            //     },
-                            //     "balanceData": {
-                            //         "balance": 10080,
-                            //         "totalPayoff": 100,
-                            //         "payoffByLines": 20,
-                            //         "payoffByBonus": 80,
-                            //         "totalWinningsInFeatureGame": 0
-                            //     },
-                            //     "sessionData": {
-                            //         "eventId": null,
-                            //         "userId": 1,
-                            //         "gameId": 6,
-                            //         "mode": "demo",
-                            //         "sessionUuid": "0fd446e0-030c-11ea-9344-1fd7f7246bde"
-                            //     },
-                            //     "logicData": {
-                            //         "countSymbolsInGame": 11,
-                            //         "countOfMovesInFeatureGame": 12,
-                            //         "lineBet": 1,
-                            //         "linesInGame": 20,
-                            //         "table": [2, 10, 9, 1, 4, 9, 5, 6, 3, 9, 9, 1, 6, 4, 8],
-                            //         "winningLines": [{
-                            //             "lineNumber": 2,
-                            //             "symbol": 9,
-                            //             "winCellCount": 2
-                            //         }, {"lineNumber": 8, "symbol": 9, "winCellCount": 2}],
-                            //         "payoffsForBonus": [{"symbol": 10, "count": 3, "winning": 80}],
-                            //         "payoffsForLines": [{"lineNumber": 2, "winValue": 10}, {
-                            //             "lineNumber": 8,
-                            //             "winValue": 10
-                            //         }],
-                            //         "winningCells": {"2": 9, "5": 0},
-                            //         "multiplier": 2
-                            //     },
-                            //     "longData": {
-                            //         "stateData": {
-                            //             "screen": "featureGame",
-                            //             "isWin": true,
-                            //             "isWinOnMain": true,
-                            //             "isWinOnBonus": true,
-                            //             "isWinOnFeatureGame": false,
-                            //             "isDropFeatureGame": true,
-                            //             "isEndFeatureGame": false,
-                            //             "moveNumberInFeatureGame": 0,
-                            //             "prevScreen": "mainGame"
-                            //         },
-                            //         "balanceData": {
-                            //             "balance": 10080,
-                            //             "totalPayoff": 100,
-                            //             "payoffByLines": 20,
-                            //             "payoffByBonus": 80,
-                            //             "totalWinningsInFeatureGame": 0
-                            //         },
-                            //     }
-                            // }
-
-                            if (dataSpinRequest.status !== "false") {
-                                isGetResponse = true;
-                                parseSpinAnswer(dataSpinRequest);
-                            } else {
-                                errorStatus = true;
-                                switch (dataSpinRequest.message) {
-                                    case "ActiveUserSessionException":
-                                        session_bg.visible = true;
-                                        break;
-                                    case "FirstMoveFundsException":
-                                        dataSpinRequest.refId
-                                            ? createRefID(dataSpinRequest.refId)
-                                            : createRefID("Funds exception");
-                                        error_bg.visible = true;
-                                        break;
-                                    case "BetPlacingAbortException":
-                                        establishing_bg.visible = true;
-                                        setTimeout(
-                                            "BetPlacingAbortExceptionFunc(gamename, sessionName, betline, lines, dataSpinRequest.betPlacingAbortExceptionID)",
-                                            3000
-                                        );
-                                        break;
-                                    case "moveFundsException":
-                                        establishing_bg.visible = true;
-                                        setTimeout(
-                                            "moveFundsExceptionFunc(gamename, sessionName, betline, lines, dataSpinRequest.moveFundsExceptionID)",
-                                            3000
-                                        );
-                                        break;
-                                    case "low balance":
-                                        dataSpinRequest.refId
-                                            ? createRefID(dataSpinRequest.refId)
-                                            : createRefID("low balance");
-                                        error_bg.visible = true;
-                                        break;
-                                    case "UnauthenticatedException":
-                                        dataSpinRequest.refId
-                                            ? createRefID(dataSpinRequest.refId)
-                                            : createRefID(
-                                                  "Unauthenticated exception"
-                                              );
-                                        error_bg.visible = true;
-                                        break;
+                                if (dataSpinRequest.status !== "false") {
+                                    isGetResponse = true;
+                                    parseSpinAnswer(dataSpinRequest);
+                                } else {
+                                    errorStatus = true;
+                                    switch (dataSpinRequest.message) {
+                                        case "ActiveUserSessionException":
+                                            session_bg.visible = true;
+                                            break;
+                                        case "FirstMoveFundsException":
+                                            dataSpinRequest.refId
+                                                ? createRefID(
+                                                      dataSpinRequest.refId
+                                                  )
+                                                : createRefID(
+                                                      "Funds exception"
+                                                  );
+                                            error_bg.visible = true;
+                                            break;
+                                        case "BetPlacingAbortException":
+                                            establishing_bg.visible = true;
+                                            setTimeout(
+                                                "BetPlacingAbortExceptionFunc(gamename, sessionName, betline, lines, dataSpinRequest.betPlacingAbortExceptionID)",
+                                                3000
+                                            );
+                                            break;
+                                        case "moveFundsException":
+                                            establishing_bg.visible = true;
+                                            setTimeout(
+                                                "moveFundsExceptionFunc(gamename, sessionName, betline, lines, dataSpinRequest.moveFundsExceptionID)",
+                                                3000
+                                            );
+                                            break;
+                                        case "low balance":
+                                            dataSpinRequest.refId
+                                                ? createRefID(
+                                                      dataSpinRequest.refId
+                                                  )
+                                                : createRefID("low balance");
+                                            error_bg.visible = true;
+                                            break;
+                                        case "UnauthenticatedException":
+                                            dataSpinRequest.refId
+                                                ? createRefID(
+                                                      dataSpinRequest.refId
+                                                  )
+                                                : createRefID(
+                                                      "Unauthenticated exception"
+                                                  );
+                                            error_bg.visible = true;
+                                            break;
+                                    }
                                 }
-                            }
-                        } else {
-                            console.log("json format error");
-                            createRefID("api-v2 json format error");
-                            error_bg.visible = true;
-                            errorStatus = true;
-                            isGetResponse = false;
-                        }
-                    },
-                    error: function(xhr, ajaxOptions, thrownError) {
-                        // if (!window.navigator.onLine) {
-                        //     sendMsg(gamename, sessionName, betline, lines);
-                        // } else {
-                        var errorText = "//ошибка 30";
-                        console.log("переключение № " + reconnectCount);
-                        console.log(errorText);
-
-                        const responseText = xhr.responseText
-                            ? JSON.parse(xhr.responseText)
-                            : "";
-                        const refId =
-                            responseText && responseText.refId
-                                ? responseText.refId
-                                : "";
-
-                        if (refId) {
-                            createRefID(refId);
-                            error_bg.visible = true;
-                            errorStatus = true;
-                        } else {
-                            if (reconnectCount < 10) {
-                                reconnectCount++;
-                                reconnectSpin(
-                                    gamename,
-                                    sessionUuid,
-                                    betline,
-                                    lines
-                                );
-                            } else if (reconnectCount >= 10) {
-                                createRefID("internet problem");
+                            } else {
+                                console.log("json format error");
+                                createRefID("api-v2 json format error");
                                 error_bg.visible = true;
                                 errorStatus = true;
-                                reconnectCount = 0;
+                                isGetResponse = false;
                             }
+                        },
+                        error: function(xhr, ajaxOptions, thrownError) {
+                            // if (!window.navigator.onLine) {
+                            //     sendMsg(gamename, sessionName, betline, lines);
+                            // } else {
+                            var errorText = "//ошибка 30";
+                            console.log("переключение № " + reconnectCount);
+                            console.log(errorText);
+
+                            const responseText = xhr.responseText
+                                ? JSON.parse(xhr.responseText)
+                                : "";
+                            const refId =
+                                responseText && responseText.refId
+                                    ? responseText.refId
+                                    : "";
+
+                            if (refId) {
+                                createRefID(refId);
+                                error_bg.visible = true;
+                                errorStatus = true;
+                            } else {
+                                if (reconnectCount < 10) {
+                                    reconnectCount++;
+                                    reconnectSpin(
+                                        gamename,
+                                        sessionUuid,
+                                        betline,
+                                        lines
+                                    );
+                                } else if (reconnectCount >= 10) {
+                                    createRefID("internet problem");
+                                    error_bg.visible = true;
+                                    errorStatus = true;
+                                    reconnectCount = 0;
+                                }
+                            }
+                            // }
                         }
-                        // }
-                    }
-                });
+                    });
+                }, 60);
             }
 
             // if (window.navigator.onLine) {
