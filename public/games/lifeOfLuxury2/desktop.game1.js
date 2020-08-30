@@ -1757,6 +1757,7 @@ function game1() {
             // parseSpinAnswer(dataSpinRequest);
             function sendMsg() {
                 if (demo !== "demo") {
+                    getBalanceWait = false;
                     getBalance();
                     console.log("getBalance");
                 }
