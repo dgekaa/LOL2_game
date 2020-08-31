@@ -2,6 +2,7 @@
 
 namespace App\Classes\Bridge777Games;
 
+use Illuminate\Support\Facades\Log;
 use Ixudra\Curl\Facades\Curl;
 
 class BridgeApi
@@ -62,6 +63,28 @@ class BridgeApi
 
         $responseMoveFunds = Curl::to($requestURL)->post();
 
+        self::writeApiLog("moveFunds {$params['eventType']}", ['request' => $requestURL, 'response' => $responseMoveFunds]);
+
+        if ($params['eventType'] === 'BetPlacing') {
+            if ($responseMoveFunds === false) {
+                throw new \Exception(['type' => 'bridgeApi->moveFunds', 'requestURL' => $requestURL, 'responseMoveFunds' => $responseMoveFunds]);
+            }
+            if (!isset(json_decode($responseMoveFunds)->status)) {
+                throw new \Exception(['type' => 'bridgeApi->moveFunds', 'requestURL' => $requestURL, 'responseMoveFunds' => $responseMoveFunds]);
+            }
+            if (json_decode($responseMoveFunds)->status === false) {
+                throw new \Exception(['type' => 'bridgeApi->moveFunds', 'requestURL' => $requestURL, 'responseMoveFunds' => $responseMoveFunds]);
+            }
+        }
+
         return $responseMoveFunds;
+    }
+
+    /**
+     * @param string $message
+     * @param array $context
+     */
+    private static function writeApiLog(string $message, array $context) {
+        Log::channel('api')->info($message, $context);
     }
 }
