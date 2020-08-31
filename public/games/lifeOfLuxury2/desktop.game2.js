@@ -1511,6 +1511,7 @@ function game2() {
                     flickWin(wcvFreeSpinWinValuesArray);
                 }, 1000);
             } else {
+                // #########################
                 flickWin(wcvFreeSpinWinValuesArray);
             }
         }
@@ -1589,10 +1590,10 @@ function game2() {
                                 console.log("additionalBonus");
                                 additionalBonus();
                             }
-                        }, 0);
-                    }, 0);
-                }, 0);
-            }, 0);
+                        }, 1000);
+                    }, 750);
+                }, 500);
+            }, 250);
         }
         // ###########################3
         function additionalBonus() {
