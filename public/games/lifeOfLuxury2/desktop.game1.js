@@ -592,19 +592,23 @@ function game1() {
                         cellPos[squareArr[i - 1][j - 1] - 1][1] - 1,
                         "square_" + i
                     );
-                    game.add
-                        .tween(squareArrImg[i - 1][j - 1])
-                        .to({ alpha: 0 }, 60, Phaser.Easing.LINEAR, true)
-                        .onComplete.add(function() {});
+                    // game.add
+                    //     .tween(squareArrImg[i - 1][j - 1])
+                    //     .to({ alpha: 0 }, 100, Phaser.Easing.LINEAR, true)
+                    //     .onComplete.add(function() {});
+
+                    squareArrImg[i - 1][j - 1].visible = false;
                 }
             }
         }
 
         function showLine(lineNumber) {
-            game.add
-                .tween(game1.lineArr[lineNumber])
-                .to({ alpha: 1 }, 60, Phaser.Easing.LINEAR, true)
-                .onComplete.add(function() {});
+            // XXXXXXXXXXXXXXXXXXXXX
+            // game.add
+            //     .tween(game1.lineArr[lineNumber])
+            //     .to({ alpha: 1 }, 100, Phaser.Easing.LINEAR, true)
+            //     .onComplete.add(function() {});
+            game1.lineArr[lineNumber].visible = true;
         }
 
         function showLineCircle(lineNumber) {
@@ -617,10 +621,13 @@ function game1() {
 
         function hideLines() {
             game1.lineArr.forEach(function(line) {
-                game.add
-                    .tween(line)
-                    .to({ alpha: 0 }, 60, Phaser.Easing.LINEAR, true)
-                    .onComplete.add(function() {});
+                // XXXXXXXXXXXXXXXXx
+                // game.add
+                //     .tween(line)
+                //     .to({ alpha: 0 }, 100, Phaser.Easing.LINEAR, true)
+                //     .onComplete.add(function() {});
+                line.visible = false;
+                line.tint = 0xffffff;
             });
         }
 
@@ -639,10 +646,13 @@ function game1() {
         function hideSquare() {
             for (var i = 1; i <= 20; ++i) {
                 for (var j = 1; j <= 5; ++j) {
-                    game.add
-                        .tween(squareArrImg[i - 1][j - 1])
-                        .to({ alpha: 0 }, 60, Phaser.Easing.LINEAR, true)
-                        .onComplete.add(function() {});
+                    // game.add
+                    //     .tween(squareArrImg[i - 1][j - 1])
+                    //     .to({ alpha: 0 }, 100, Phaser.Easing.LINEAR, true)
+                    //     .onComplete.add(function() {});
+
+                    squareArrImg[i - 1][j - 1].visible = false;
+                    squareArrImg[i - 1][j - 1].tint = 0xffffff;
                 }
             }
             for (var i = 1; i <= 15; ++i) {
@@ -1761,189 +1771,179 @@ function game1() {
                     getBalance();
                     console.log("getBalance");
                 }
-                setTimeout(() => {
-                    $.ajax({
-                        type: "get",
-                        url:
-                            getNeedUrlPath() +
-                            `/api-v2/action?game_id=${gameId}&user_id=${userId}&mode=${demo}&action=spin&session_uuid=${sessionUuid}&token=${token}&linesInGame=${lines}&lineBet=${betline}&platform_id=${platformId}`,
-                        dataType: "html",
-                        success: function(data) {
-                            console.log(data);
+                $.ajax({
+                    type: "get",
+                    url:
+                        getNeedUrlPath() +
+                        `/api-v2/action?game_id=${gameId}&user_id=${userId}&mode=${demo}&action=spin&session_uuid=${sessionUuid}&token=${token}&linesInGame=${lines}&lineBet=${betline}&platform_id=${platformId}`,
+                    dataType: "html",
+                    success: function(data) {
+                        console.log(data);
 
-                            if (IsJsonString(data)) {
-                                dataSpinRequest = JSON.parse(data);
-                                //freespin
-                                // if (activateFreeSpins)
+                        if (IsJsonString(data)) {
+                            dataSpinRequest = JSON.parse(data);
+                            //freespin
+                            // if (activateFreeSpins)
 
-                                // dataSpinRequest = {
-                                //     "stateData": {
-                                //         "screen": "featureGame",
-                                //         "isWin": true,
-                                //         "isWinOnMain": true,
-                                //         "isWinOnBonus": true,
-                                //         "isWinOnFeatureGame": false,
-                                //         "isDropFeatureGame": true,
-                                //         "isEndFeatureGame": false,
-                                //         "moveNumberInFeatureGame": 0,
-                                //         "prevScreen": "mainGame"
-                                //     },
-                                //     "balanceData": {
-                                //         "balance": 10080,
-                                //         "totalPayoff": 100,
-                                //         "payoffByLines": 20,
-                                //         "payoffByBonus": 80,
-                                //         "totalWinningsInFeatureGame": 0
-                                //     },
-                                //     "sessionData": {
-                                //         "eventId": null,
-                                //         "userId": 1,
-                                //         "gameId": 6,
-                                //         "mode": "demo",
-                                //         "sessionUuid": "0fd446e0-030c-11ea-9344-1fd7f7246bde"
-                                //     },
-                                //     "logicData": {
-                                //         "countSymbolsInGame": 11,
-                                //         "countOfMovesInFeatureGame": 12,
-                                //         "lineBet": 1,
-                                //         "linesInGame": 20,
-                                //         "table": [2, 10, 9, 1, 4, 9, 5, 6, 3, 9, 9, 1, 6, 4, 8],
-                                //         "winningLines": [{
-                                //             "lineNumber": 2,
-                                //             "symbol": 9,
-                                //             "winCellCount": 2
-                                //         }, {"lineNumber": 8, "symbol": 9, "winCellCount": 2}],
-                                //         "payoffsForBonus": [{"symbol": 10, "count": 3, "winning": 80}],
-                                //         "payoffsForLines": [{"lineNumber": 2, "winValue": 10}, {
-                                //             "lineNumber": 8,
-                                //             "winValue": 10
-                                //         }],
-                                //         "winningCells": {"2": 9, "5": 0},
-                                //         "multiplier": 2
-                                //     },
-                                //     "longData": {
-                                //         "stateData": {
-                                //             "screen": "featureGame",
-                                //             "isWin": true,
-                                //             "isWinOnMain": true,
-                                //             "isWinOnBonus": true,
-                                //             "isWinOnFeatureGame": false,
-                                //             "isDropFeatureGame": true,
-                                //             "isEndFeatureGame": false,
-                                //             "moveNumberInFeatureGame": 0,
-                                //             "prevScreen": "mainGame"
-                                //         },
-                                //         "balanceData": {
-                                //             "balance": 10080,
-                                //             "totalPayoff": 100,
-                                //             "payoffByLines": 20,
-                                //             "payoffByBonus": 80,
-                                //             "totalWinningsInFeatureGame": 0
-                                //         },
-                                //     }
-                                // }
-
-                                if (dataSpinRequest.status !== "false") {
-                                    isGetResponse = true;
-                                    parseSpinAnswer(dataSpinRequest);
-                                } else {
-                                    errorStatus = true;
-                                    switch (dataSpinRequest.message) {
-                                        case "ActiveUserSessionException":
-                                            session_bg.visible = true;
-                                            break;
-                                        case "FirstMoveFundsException":
-                                            dataSpinRequest.refId
-                                                ? createRefID(
-                                                      dataSpinRequest.refId
-                                                  )
-                                                : createRefID(
-                                                      "Funds exception"
-                                                  );
-                                            error_bg.visible = true;
-                                            break;
-                                        case "BetPlacingAbortException":
-                                            establishing_bg.visible = true;
-                                            setTimeout(
-                                                "BetPlacingAbortExceptionFunc(gamename, sessionName, betline, lines, dataSpinRequest.betPlacingAbortExceptionID)",
-                                                3000
-                                            );
-                                            break;
-                                        case "moveFundsException":
-                                            establishing_bg.visible = true;
-                                            setTimeout(
-                                                "moveFundsExceptionFunc(gamename, sessionName, betline, lines, dataSpinRequest.moveFundsExceptionID)",
-                                                3000
-                                            );
-                                            break;
-                                        case "low balance":
-                                            dataSpinRequest.refId
-                                                ? createRefID(
-                                                      dataSpinRequest.refId
-                                                  )
-                                                : createRefID("low balance");
-                                            error_bg.visible = true;
-                                            break;
-                                        case "UnauthenticatedException":
-                                            dataSpinRequest.refId
-                                                ? createRefID(
-                                                      dataSpinRequest.refId
-                                                  )
-                                                : createRefID(
-                                                      "Unauthenticated exception"
-                                                  );
-                                            error_bg.visible = true;
-                                            break;
-                                    }
-                                }
-                            } else {
-                                console.log("json format error");
-                                createRefID("api-v2 json format error");
-                                error_bg.visible = true;
-                                errorStatus = true;
-                                isGetResponse = false;
-                            }
-                        },
-                        error: function(xhr, ajaxOptions, thrownError) {
-                            // if (!window.navigator.onLine) {
-                            //     sendMsg(gamename, sessionName, betline, lines);
-                            // } else {
-                            var errorText = "//ошибка 30";
-                            console.log("переключение № " + reconnectCount);
-                            console.log(errorText);
-
-                            const responseText = xhr.responseText
-                                ? JSON.parse(xhr.responseText)
-                                : "";
-                            const refId =
-                                responseText && responseText.refId
-                                    ? responseText.refId
-                                    : "";
-
-                            if (refId) {
-                                createRefID(refId);
-                                error_bg.visible = true;
-                                errorStatus = true;
-                            } else {
-                                if (reconnectCount < 10) {
-                                    reconnectCount++;
-                                    reconnectSpin(
-                                        gamename,
-                                        sessionUuid,
-                                        betline,
-                                        lines
-                                    );
-                                } else if (reconnectCount >= 10) {
-                                    createRefID("internet problem");
-                                    error_bg.visible = true;
-                                    errorStatus = true;
-                                    reconnectCount = 0;
-                                }
-                            }
+                            // dataSpinRequest = {
+                            //     "stateData": {
+                            //         "screen": "featureGame",
+                            //         "isWin": true,
+                            //         "isWinOnMain": true,
+                            //         "isWinOnBonus": true,
+                            //         "isWinOnFeatureGame": false,
+                            //         "isDropFeatureGame": true,
+                            //         "isEndFeatureGame": false,
+                            //         "moveNumberInFeatureGame": 0,
+                            //         "prevScreen": "mainGame"
+                            //     },
+                            //     "balanceData": {
+                            //         "balance": 10080,
+                            //         "totalPayoff": 100,
+                            //         "payoffByLines": 20,
+                            //         "payoffByBonus": 80,
+                            //         "totalWinningsInFeatureGame": 0
+                            //     },
+                            //     "sessionData": {
+                            //         "eventId": null,
+                            //         "userId": 1,
+                            //         "gameId": 6,
+                            //         "mode": "demo",
+                            //         "sessionUuid": "0fd446e0-030c-11ea-9344-1fd7f7246bde"
+                            //     },
+                            //     "logicData": {
+                            //         "countSymbolsInGame": 11,
+                            //         "countOfMovesInFeatureGame": 12,
+                            //         "lineBet": 1,
+                            //         "linesInGame": 20,
+                            //         "table": [2, 10, 9, 1, 4, 9, 5, 6, 3, 9, 9, 1, 6, 4, 8],
+                            //         "winningLines": [{
+                            //             "lineNumber": 2,
+                            //             "symbol": 9,
+                            //             "winCellCount": 2
+                            //         }, {"lineNumber": 8, "symbol": 9, "winCellCount": 2}],
+                            //         "payoffsForBonus": [{"symbol": 10, "count": 3, "winning": 80}],
+                            //         "payoffsForLines": [{"lineNumber": 2, "winValue": 10}, {
+                            //             "lineNumber": 8,
+                            //             "winValue": 10
+                            //         }],
+                            //         "winningCells": {"2": 9, "5": 0},
+                            //         "multiplier": 2
+                            //     },
+                            //     "longData": {
+                            //         "stateData": {
+                            //             "screen": "featureGame",
+                            //             "isWin": true,
+                            //             "isWinOnMain": true,
+                            //             "isWinOnBonus": true,
+                            //             "isWinOnFeatureGame": false,
+                            //             "isDropFeatureGame": true,
+                            //             "isEndFeatureGame": false,
+                            //             "moveNumberInFeatureGame": 0,
+                            //             "prevScreen": "mainGame"
+                            //         },
+                            //         "balanceData": {
+                            //             "balance": 10080,
+                            //             "totalPayoff": 100,
+                            //             "payoffByLines": 20,
+                            //             "payoffByBonus": 80,
+                            //             "totalWinningsInFeatureGame": 0
+                            //         },
+                            //     }
                             // }
+
+                            if (dataSpinRequest.status !== "false") {
+                                isGetResponse = true;
+                                parseSpinAnswer(dataSpinRequest);
+                            } else {
+                                errorStatus = true;
+                                switch (dataSpinRequest.message) {
+                                    case "ActiveUserSessionException":
+                                        session_bg.visible = true;
+                                        break;
+                                    case "FirstMoveFundsException":
+                                        dataSpinRequest.refId
+                                            ? createRefID(dataSpinRequest.refId)
+                                            : createRefID("Funds exception");
+                                        error_bg.visible = true;
+                                        break;
+                                    case "BetPlacingAbortException":
+                                        establishing_bg.visible = true;
+                                        setTimeout(
+                                            "BetPlacingAbortExceptionFunc(gamename, sessionName, betline, lines, dataSpinRequest.betPlacingAbortExceptionID)",
+                                            3000
+                                        );
+                                        break;
+                                    case "moveFundsException":
+                                        establishing_bg.visible = true;
+                                        setTimeout(
+                                            "moveFundsExceptionFunc(gamename, sessionName, betline, lines, dataSpinRequest.moveFundsExceptionID)",
+                                            3000
+                                        );
+                                        break;
+                                    case "low balance":
+                                        dataSpinRequest.refId
+                                            ? createRefID(dataSpinRequest.refId)
+                                            : createRefID("low balance");
+                                        error_bg.visible = true;
+                                        break;
+                                    case "UnauthenticatedException":
+                                        dataSpinRequest.refId
+                                            ? createRefID(dataSpinRequest.refId)
+                                            : createRefID(
+                                                  "Unauthenticated exception"
+                                              );
+                                        error_bg.visible = true;
+                                        break;
+                                }
+                            }
+                        } else {
+                            console.log("json format error");
+                            createRefID("api-v2 json format error");
+                            error_bg.visible = true;
+                            errorStatus = true;
+                            isGetResponse = false;
                         }
-                    });
-                }, 60);
+                    },
+                    error: function(xhr, ajaxOptions, thrownError) {
+                        // if (!window.navigator.onLine) {
+                        //     sendMsg(gamename, sessionName, betline, lines);
+                        // } else {
+                        var errorText = "//ошибка 30";
+                        console.log("переключение № " + reconnectCount);
+                        console.log(errorText);
+
+                        const responseText = xhr.responseText
+                            ? JSON.parse(xhr.responseText)
+                            : "";
+                        const refId =
+                            responseText && responseText.refId
+                                ? responseText.refId
+                                : "";
+
+                        if (refId) {
+                            createRefID(refId);
+                            error_bg.visible = true;
+                            errorStatus = true;
+                        } else {
+                            if (reconnectCount < 10) {
+                                reconnectCount++;
+                                reconnectSpin(
+                                    gamename,
+                                    sessionUuid,
+                                    betline,
+                                    lines
+                                );
+                            } else if (reconnectCount >= 10) {
+                                createRefID("internet problem");
+                                error_bg.visible = true;
+                                errorStatus = true;
+                                reconnectCount = 0;
+                            }
+                        }
+                        // }
+                    }
+                });
             }
 
             // if (window.navigator.onLine) {
@@ -2593,13 +2593,17 @@ function game1() {
             if (stopWinAnim == true) {
                 return;
             }
-            // @@@@@@@@@@@@@@@@@@@@@@@@@@@
+
             showLine(wlWinValuesArray[lineflash]);
             for (var i = 1; i <= sizeLine; ++i) {
-                game.add
-                    .tween(squareArrImg[wlWinValuesArray[lineflash] - 1][i - 1])
-                    .to({ alpha: 1 }, 60, Phaser.Easing.LINEAR, true)
-                    .onComplete.add(function() {});
+                // game.add
+                //     .tween(squareArrImg[wlWinValuesArray[lineflash] - 1][i - 1])
+                //     .to({ alpha: 1 }, 100, Phaser.Easing.LINEAR, true)
+                //     .onComplete.add(function() {});
+
+                squareArrImg[wlWinValuesArray[lineflash] - 1][
+                    i - 1
+                ].visible = true;
 
                 game1.copyCell[
                     squareArr[wlWinValuesArray[lineflash] - 1][i - 1]
@@ -2672,9 +2676,13 @@ function game1() {
                         winText.visible = isLightBorder;
                     }
 
-                    await delay(isLightBorder ? 550 : 275);
+                    await delay(isLightBorder ? 600 : 300);
 
                     if (index === 7) {
+                        changeBorderColor(
+                            lineNumber,
+                            isLightBorder ? 0x999999 : 0xffffff
+                        );
                         lastIndication(wlWinValuesArray, lineNumber);
                     } else {
                         changeBorderColor(
@@ -2720,13 +2728,13 @@ function game1() {
             } else {
                 hideLines();
                 hideSquare();
-                setTimeout(() => {
-                    for (var i = 1; i <= sizeLine; ++i) {
-                        game1.copyCell[
-                            squareArr[lineNumber - 1][i - 1]
-                        ].visible = false;
-                    }
-                }, 60);
+                // setTimeout(() => {
+                for (var i = 1; i <= sizeLine; ++i) {
+                    game1.copyCell[
+                        squareArr[lineNumber - 1][i - 1]
+                    ].visible = false;
+                }
+                // }, 100);
 
                 setTimeout(() => {
                     if (afterFreespinStatus) {
@@ -2738,7 +2746,7 @@ function game1() {
                     } else {
                         showWin(wlWinValuesArray, winCellInfo);
                     }
-                }, 280);
+                }, 0);
             }
         }
 
@@ -3420,11 +3428,9 @@ function game1() {
             winText.visible = false;
             afterFreespinStatus = false;
 
-            setTimeout(() => {
-                for (var i = 1; i <= 15; ++i) {
-                    game1.copyCell[i].visible = false;
-                }
-            }, 100);
+            for (var i = 1; i <= 15; ++i) {
+                game1.copyCell[i].visible = false;
+            }
 
             for (var i = 1; i <= 15; ++i) {
                 squareArrFreespin[i].visible = false;

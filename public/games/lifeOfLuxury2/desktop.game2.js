@@ -445,22 +445,26 @@ function game2() {
                 for (var j = 1; j <= 5; ++j) {
                     squareArrImg[i - 1][j - 1] = game.add.sprite(
                         cellPos[squareArr[i - 1][j - 1] - 1][0] - 1,
-                        cellPos[squareArr[i - 1][j - 1] - 1][1] + 94,
+                        cellPos[squareArr[i - 1][j - 1] - 1][1] + 93,
                         "square_" + i
                     );
-                    game.add
-                        .tween(squareArrImg[i - 1][j - 1])
-                        .to({ alpha: 0 }, 100, Phaser.Easing.LINEAR, true)
-                        .onComplete.add(function() {});
+                    // game.add
+                    //     .tween(squareArrImg[i - 1][j - 1])
+                    //     .to({ alpha: 0 }, 100, Phaser.Easing.LINEAR, true)
+                    //     .onComplete.add(function() {});
+
+                    squareArrImg[i - 1][j - 1].visible = false;
                 }
             }
         }
 
         function showLine(lineNumber) {
-            game.add
-                .tween(game2.lineArr[lineNumber])
-                .to({ alpha: 1 }, 100, Phaser.Easing.LINEAR, true)
-                .onComplete.add(function() {});
+            // game.add
+            //     .tween(game2.lineArr[lineNumber])
+            //     .to({ alpha: 1 }, 100, Phaser.Easing.LINEAR, true)
+            //     .onComplete.add(function() {});
+
+            game2.lineArr[lineNumber].visible = true;
         }
 
         function showLineCircle(lineNumber) {
@@ -471,16 +475,15 @@ function game2() {
             game2.textArr[lineNumber].visible = true;
         }
 
-        function showSquare(lineNumber, squareNumber) {
-            squareArrImg[lineNumber - 1][squareNumber - 1].visible = true;
-        }
-
         function hideLines() {
             game2.lineArr.forEach(function(line) {
-                game.add
-                    .tween(line)
-                    .to({ alpha: 0 }, 100, Phaser.Easing.LINEAR, true)
-                    .onComplete.add(function() {});
+                // game.add
+                //     .tween(line)
+                //     .to({ alpha: 0 }, 100, Phaser.Easing.LINEAR, true)
+                //     .onComplete.add(function() {});
+
+                line.visible = false;
+                line.tint = 0xffffff;
             });
         }
 
@@ -499,10 +502,13 @@ function game2() {
         function hideSquare() {
             for (var i = 1; i <= 20; ++i) {
                 for (var j = 1; j <= 5; ++j) {
-                    game.add
-                        .tween(squareArrImg[i - 1][j - 1])
-                        .to({ alpha: 0 }, 100, Phaser.Easing.LINEAR, true)
-                        .onComplete.add(function() {});
+                    // game.add
+                    //     .tween(squareArrImg[i - 1][j - 1])
+                    //     .to({ alpha: 0 }, 100, Phaser.Easing.LINEAR, true)
+                    //     .onComplete.add(function() {});
+
+                    squareArrImg[i - 1][j - 1].visible = false;
+                    squareArrImg[i - 1][j - 1].tint = 0xffffff;
                 }
             }
             for (var i = 1; i <= 15; ++i) {
@@ -634,11 +640,11 @@ function game2() {
             winText.visible = false;
             topBottomLabel.visible = false;
             mulFreespinOld = mulFreespin;
-            setTimeout(() => {
-                for (var i = 1; i <= 15; ++i) {
-                    game2.copyCell[i].visible = false;
-                }
-            }, 100);
+            // setTimeout(() => {
+            for (var i = 1; i <= 15; ++i) {
+                game2.copyCell[i].visible = false;
+            }
+            // }, 100);
 
             // gameStatusText.visible = false;
             bottomText.visible = true;
@@ -2486,10 +2492,13 @@ function game2() {
 
             showLine(wlWinValuesArray[lineflash]);
             for (var i = 1; i <= sizeLine; ++i) {
-                game.add
-                    .tween(squareArrImg[wlWinValuesArray[lineflash] - 1][i - 1])
-                    .to({ alpha: 1 }, 100, Phaser.Easing.LINEAR, true)
-                    .onComplete.add(function() {});
+                // game.add
+                //     .tween(squareArrImg[wlWinValuesArray[lineflash] - 1][i - 1])
+                //     .to({ alpha: 1 }, 100, Phaser.Easing.LINEAR, true)
+                //     .onComplete.add(function() {});
+                squareArrImg[wlWinValuesArray[lineflash] - 1][
+                    i - 1
+                ].visible = true;
 
                 game2.copyCell[
                     squareArr[wlWinValuesArray[lineflash] - 1][i - 1]
@@ -2539,13 +2548,13 @@ function game2() {
             } else {
                 hideLines();
                 hideSquare();
-                setTimeout(() => {
-                    for (var i = 1; i <= sizeLine; ++i) {
-                        game2.copyCell[
-                            squareArr[lineNumber - 1][i - 1]
-                        ].visible = false;
-                    }
-                }, 200);
+                // setTimeout(() => {
+                for (var i = 1; i <= sizeLine; ++i) {
+                    game2.copyCell[
+                        squareArr[lineNumber - 1][i - 1]
+                    ].visible = false;
+                }
+                // }, 200);
                 setTimeout(() => {
                     if (lineflash === 0) {
                         if (dataSpinRequest.stateData.isDropFeatureGame) {
@@ -2556,7 +2565,7 @@ function game2() {
                     } else {
                         showWin(wlWinValuesArray, winCellInfo);
                     }
-                }, 280);
+                }, 0);
             }
         }
 
@@ -2565,16 +2574,15 @@ function game2() {
             let index = 0;
 
             (async () => {
-                while (index < 8) {
+                while (index < 4) {
                     if (stopWinAnim == true) {
                         return;
                     }
 
                     winText.visible = isLightBorder;
 
-                    await delay(isLightBorder ? 550 : 275);
-                    // ##############################
-                    index === 7
+                    await delay(isLightBorder ? 600 : 300);
+                    index === 3
                         ? lastIndication(wlWinValuesArray, lineNumber)
                         : changeBorderColor(
                               lineNumber,
