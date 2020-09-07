@@ -26,11 +26,14 @@ class BridgeApi
             $responseGetBalance = Curl::to("https://play777games.com/getBalance?token={$token}&userId={$userId}&gameId={$gameId}&platformId={$platformId}")
                ->post();
         } elseif ($platformId === 2 || $platformId === '2') {
-            $responseGetBalance = Curl::to("https://play.devbet.live/getBalance?token={$token}&userId={$userId}&gameId={$gameId}&platformId={$platformId}")
+            $responseGetBalance = Curl::to("https://dev.play777games.com/getBalance?token={$token}&userId={$userId}&gameId={$gameId}&platformId={$platformId}")
                ->post();
         } elseif ($platformId === 3 || $platformId === '3') {
             $responseGetBalance = Curl::to("https://donateandplay.com/getBalance?token={$token}&userId={$userId}&gameId={$gameId}&platformId={$platformId}")
                ->post();
+        } elseif ($platformId === 4 || $platformId === '4') {
+            $responseGetBalance = Curl::to("https://old.play777games.com/getBalance?token={$token}&userId={$userId}&gameId={$gameId}&platformId={$platformId}")
+                ->post();
         }
 
         // получение баланса в долларах
@@ -54,10 +57,13 @@ class BridgeApi
     {
         $requestURL = "https://play777games.com/moveFunds?";
         if ($params['platformId'] === 2 || $params['platformId'] === '2') {
-            $requestURL = "https://play.devbet.live/moveFunds?";
+            $requestURL = "https://dev.play777games.com/moveFunds?";
         }
-        if ($params['platformId'] === 3 || $params['platformId'] === 3) {
+        if ($params['platformId'] === 3 || $params['platformId'] === '3') {
             $requestURL = "https://donateandplay.com/moveFunds?";
+        }
+        if ($params['platformId'] === 4 || $params['platformId'] === '4') {
+            $requestURL = "https://old.play777games.com/moveFunds?";
         }
         $requestURL .= http_build_query($params);
 

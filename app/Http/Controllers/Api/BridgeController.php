@@ -98,10 +98,13 @@ class BridgeController extends Controller
 
         $url = 'https://play777games.com/';
         if ($platformId === 2 || $platformId === '2') {
-            $url = 'https://play.devbet.live/';
+            $url = 'https://dev.play777games.com/';
         }
         if ($platformId === 3 || $platformId === '3') {
             $url = 'https://donateandplay.com/';
+        }
+        if ($platformId === 4 || $platformId === '4') {
+            $url = 'https://old.play777games.com/';
         }
 
         $responseGetBalance = Curl::to("{$url}getBalance?token={$token}&userId={$userId}&gameId={$gameId}&platformId={$platformId}")
@@ -140,10 +143,13 @@ class BridgeController extends Controller
         }
 
         if ($platformId === 2 || $platformId === '2') {
-            $url = 'https://play.devbet.live/';
+            $url = 'https://dev.play777games.com/';
         }
         if ($platformId === 3 || $platformId === '3') {
             $url = 'https://donateandplay.com/';
+        }
+        if ($platformId === 4 || $platformId === '4') {
+            $url = 'https://old.play777games.com/';
         }
 
         $platformId = 1;
