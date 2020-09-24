@@ -1596,9 +1596,9 @@ function game2() {
                                 console.log("additionalBonus");
                                 additionalBonus();
                             }
-                        }, 350);
+                        }, 400);
                     }, 200);
-                }, 350);
+                }, 400);
             }, 200);
         }
         // ###########################3
