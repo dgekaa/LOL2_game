@@ -63,7 +63,7 @@ class BridgeService
         // преобразование ставки из центов в доллары
         $bet /= 100;
 
-        $transactionId = (int)sprintf("%d%d", $userId, (int)(microtime(true)*10000));
+        $transactionId = intval(sprintf("%d%d", $userId, intval(substr(strval(microtime(true)*10000), 3))));
 
         $params = [
             'eventId' => $eventId,
@@ -124,7 +124,7 @@ class BridgeService
         // преобразование общего выигрыша из центов в доллары
         $totalPayoff /= 100;
 
-        $transactionId = (int)sprintf("%d%d", $userId, (int)(microtime(true)*10000));
+        $transactionId = intval(sprintf("%d%d", $userId, intval(substr(strval(microtime(true)*10000), 3))));
 
         $params = [
             'eventId' => $eventId,
