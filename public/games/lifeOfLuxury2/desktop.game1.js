@@ -3295,6 +3295,7 @@ function game1() {
 
         function getBalance() {
             // if (!window.navigator.onLine) return;
+            console.log("_________HELLO SASHA________");
 
             if (!getBalanceWait) {
                 getBalanceWait = true;
