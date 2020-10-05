@@ -2247,6 +2247,8 @@ function game1() {
                 } else {
                     flickWin(wcvWinValuesArray);
                 }
+                // @@@@@@@@@@@@@@@@@
+                winText.visible = false;
             }
 
             let isLightBorder = true;
