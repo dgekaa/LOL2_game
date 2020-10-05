@@ -1499,7 +1499,7 @@ function game2() {
             wcvFreeSpinWinValuesArray.forEach(function(cell, i) {
                 squareArrFreespin[cell + 1].visible = true;
                 wcvFreeSpinWinValuesArray.forEach(function(cell, i) {
-                    squareArrFreespin[cell + 1].tint = 0xffffff;
+                    squareArrFreespin[cell + 1].tint = 0x999999;
                 });
             });
             if (afterDropFeatureGame) {
