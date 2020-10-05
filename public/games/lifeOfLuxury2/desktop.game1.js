@@ -2183,7 +2183,7 @@ function game1() {
 
                     if (isTriggerPay) {
                         winText.setText(
-                            "Trigger Pay \n" + triggerPay.toFixed()
+                            "Trigger Pay LLL \n" + triggerPay.toFixed()
                         );
                     } else {
                         winText.setText("Bonus Pay \n" + bonusPay.toFixed());
@@ -2203,7 +2203,7 @@ function game1() {
 
                     if (isTriggerPay) {
                         winText.setText(
-                            "Trigger Pay \n" + triggerPay.toFixed()
+                            "Trigger Pay PPP \n" + triggerPay.toFixed()
                         );
                     } else {
                         winText.setText("");
@@ -2833,7 +2833,7 @@ function game1() {
                 fill: "#01e033"
             });
             paid.anchor.setTo(1, 0.5);
-            winText = game.add.text(149, 608, "Trigger Pay \n40", {
+            winText = game.add.text(149, 608, "Trigger Pay UUU \n40", {
                 font: '22px "Arial"',
                 fill: "#ffffff",
                 fontWeight: 600,
