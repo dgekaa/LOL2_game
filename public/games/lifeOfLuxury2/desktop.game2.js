@@ -1523,6 +1523,9 @@ function game2() {
             wcvFreeSpinWinValuesArray.forEach(function(cell, i) {
                 squareArrFreespin[cell + 1].tint = 0xffffff;
             });
+            if (afterDropFeatureGame) {
+                winText.visible = true;
+            }
             setTimeout(function() {
                 if (stopWinAnim == true) {
                     wcvFreeSpinWinValuesArray.forEach(function(cell, i) {
@@ -1534,7 +1537,7 @@ function game2() {
                     squareArrFreespin[cell + 1].tint = 0x999999;
                 });
                 if (afterDropFeatureGame) {
-                    winText.visible = true;
+                    winText.visible = false;
                 }
                 setTimeout(function() {
                     if (stopWinAnim == true) {
@@ -1544,7 +1547,7 @@ function game2() {
                         squareArrFreespin[cell + 1].tint = 0xffffff;
                     });
                     if (afterDropFeatureGame) {
-                        winText.visible = false;
+                        winText.visible = true;
                     }
                     setTimeout(function() {
                         if (stopWinAnim == true) {
@@ -1560,14 +1563,14 @@ function game2() {
                             squareArrFreespin[cell + 1].tint = 0x999999;
                         });
                         if (afterDropFeatureGame) {
-                            winText.visible = true;
+                            winText.visible = false;
                         }
                         setTimeout(function() {
                             if (stopWinAnim == true) {
                                 return;
                             }
                             if (afterDropFeatureGame) {
-                                winText.visible = false;
+                                winText.visible = true;
                                 if (winWithoutCoin > 0) {
                                     wcvFreeSpinWinValuesArray.forEach(function(
                                         cell,
@@ -1603,6 +1606,8 @@ function game2() {
         function additionalBonus() {
             freesponStartBGAdditionalBonus.visible = true;
             freesponStartBGAdditionalBonus.alpha = 0;
+
+            winText.visible = false;
 
             const currentPos = mulFreespin - (briArr.length - 1);
 
