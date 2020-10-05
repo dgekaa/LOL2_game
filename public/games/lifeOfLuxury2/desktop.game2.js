@@ -1500,16 +1500,15 @@ function game2() {
                 squareArrFreespin[cell + 1].visible = true;
             });
             if (afterDropFeatureGame) {
-                // @@@@@@@@@@@@@@@@@@
                 // winText.visible = true;
-                winText.setText(
-                    "Trigger Pay \n" +
-                        payoffByBonus / mulFreespinOld +
-                        " x " +
-                        mulFreespinOld +
-                        " = " +
-                        payoffByBonus
-                );
+                // winText.setText(
+                //     "Trigger Pay \n" +
+                //         payoffByBonus / mulFreespinOld +
+                //         " x " +
+                //         mulFreespinOld +
+                //         " = " +
+                //         payoffByBonus
+                // );
             }
             if (!afterDropFeatureGame) {
                 bottomText.visible = true;
@@ -1601,7 +1600,7 @@ function game2() {
                 }, 400);
             }, 200);
         }
-        // ###########################3
+
         function additionalBonus() {
             freesponStartBGAdditionalBonus.visible = true;
             freesponStartBGAdditionalBonus.alpha = 0;
@@ -1623,8 +1622,15 @@ function game2() {
                             .tween(freesponStartBGAdditionalBonus)
                             .to({ alpha: 0 }, 1000, "Linear", true)
                             .onComplete.add(function() {
-                                // @@@@@@@@@@@@@@@@@@@@@@@
                                 winText.visible = true;
+                                winText.setText(
+                                    "Trigger Pay \n" +
+                                        payoffByBonus / mulFreespinOld +
+                                        " x " +
+                                        mulFreespinOld +
+                                        " = " +
+                                        payoffByBonus
+                                );
                                 freesponStartBGAdditionalBonus.visible = false;
                                 afterDropFeatureGame = true;
                                 showWinFreeSpin(wcvFreeSpinWinValuesArray);
