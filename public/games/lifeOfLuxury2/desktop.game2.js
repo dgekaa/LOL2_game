@@ -1497,7 +1497,7 @@ function game2() {
             if (afterDropFeatureGame) {
                 winText.visible = true;
                 winText.setText(
-                    "Trigger Pay \n" +
+                    "Trigger Pay !!! \n" +
                         payoffByBonus / mulFreespinOld +
                         " x " +
                         mulFreespinOld +
