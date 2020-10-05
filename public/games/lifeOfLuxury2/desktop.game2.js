@@ -1594,10 +1594,10 @@ function game2() {
                                 console.log("additionalBonus");
                                 additionalBonus();
                             }
-                        }, 600);
-                    }, 300);
-                }, 600);
-            }, 300);
+                        }, 300);
+                    }, 600);
+                }, 300);
+            }, 600);
         }
 
         function additionalBonus() {
