@@ -1493,14 +1493,14 @@ function game2() {
                 }
             }
         }
-        // ###########################
+
         function showWinFreeSpin(wcvFreeSpinWinValuesArray) {
             console.log(wcvFreeSpinWinValuesArray);
             wcvFreeSpinWinValuesArray.forEach(function(cell, i) {
                 squareArrFreespin[cell + 1].visible = true;
             });
             if (afterDropFeatureGame) {
-                winText.visible = true;
+                // winText.visible = true;
                 winText.setText(
                     "Trigger Pay \n" +
                         payoffByBonus / mulFreespinOld +
@@ -1517,7 +1517,6 @@ function game2() {
                     flickWin(wcvFreeSpinWinValuesArray);
                 }, 1000);
             } else {
-                // #########################
                 flickWin(wcvFreeSpinWinValuesArray);
             }
         }
@@ -1619,6 +1618,7 @@ function game2() {
                     allFreeSpinCount = allFreeSpinCount + 12;
                     spinsLeft.setText(freeSpinCount);
                     setTimeout(function() {
+                        winText.visible = true;
                         game.add
                             .tween(freesponStartBGAdditionalBonus)
                             .to({ alpha: 0 }, 1000, "Linear", true)
