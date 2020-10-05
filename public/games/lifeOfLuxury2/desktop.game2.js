@@ -1597,9 +1597,9 @@ function game2() {
                                 additionalBonus();
                             }
                         }, 600);
-                    }, 200);
+                    }, 300);
                 }, 600);
-            }, 200);
+            }, 300);
         }
 
         function additionalBonus() {
