@@ -1572,6 +1572,7 @@ function game2() {
                                 return;
                             }
                             if (afterDropFeatureGame) {
+                                winText.visible = false;
                                 if (winWithoutCoin > 0) {
                                     wcvFreeSpinWinValuesArray.forEach(function(
                                         cell,
