@@ -1546,7 +1546,7 @@ function game2() {
                         return;
                     }
                     wcvFreeSpinWinValuesArray.forEach(function(cell, i) {
-                        squareArrFreespin[cell + 1].tint = 0x999999;
+                        squareArrFreespin[cell + 1].tint = 0xffffff;
                     });
                     if (afterDropFeatureGame) {
                         winText.visible = false;
