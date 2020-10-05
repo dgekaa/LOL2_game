@@ -2655,7 +2655,7 @@ function game2() {
                 fill: "#01e033"
             });
             paid.anchor.setTo(1, 0.5);
-            winText = game.add.text(149, 608 + 94, "Trigger Pay \n40", {
+            winText = game.add.text(149, 608 + 94, "Trigger Pay ??? \n40", {
                 font: '22px "Arial"',
                 fill: "#ffffff",
                 fontWeight: 600,
