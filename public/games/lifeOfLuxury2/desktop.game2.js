@@ -1498,6 +1498,9 @@ function game2() {
             console.log(wcvFreeSpinWinValuesArray);
             wcvFreeSpinWinValuesArray.forEach(function(cell, i) {
                 squareArrFreespin[cell + 1].visible = true;
+                wcvFreeSpinWinValuesArray.forEach(function(cell, i) {
+                    squareArrFreespin[cell + 1].tint = 0x999999;
+                });
             });
             if (afterDropFeatureGame) {
                 winText.visible = true;
