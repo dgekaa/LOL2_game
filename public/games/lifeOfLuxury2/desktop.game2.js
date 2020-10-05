@@ -502,11 +502,6 @@ function game2() {
         function hideSquare() {
             for (var i = 1; i <= 20; ++i) {
                 for (var j = 1; j <= 5; ++j) {
-                    // game.add
-                    //     .tween(squareArrImg[i - 1][j - 1])
-                    //     .to({ alpha: 0 }, 100, Phaser.Easing.LINEAR, true)
-                    //     .onComplete.add(function() {});
-
                     squareArrImg[i - 1][j - 1].visible = false;
                     squareArrImg[i - 1][j - 1].tint = 0xffffff;
                 }
@@ -1526,17 +1521,17 @@ function game2() {
                 return;
             }
             wcvFreeSpinWinValuesArray.forEach(function(cell, i) {
-                squareArrFreespin[cell + 1].tint = 0x999999;
+                squareArrFreespin[cell + 1].tint = 0xffffff;
             });
             setTimeout(function() {
                 if (stopWinAnim == true) {
                     wcvFreeSpinWinValuesArray.forEach(function(cell, i) {
-                        squareArrFreespin[cell + 1].tint = 0xffffff;
+                        squareArrFreespin[cell + 1].tint = 0x999999;
                     });
                     return;
                 }
                 wcvFreeSpinWinValuesArray.forEach(function(cell, i) {
-                    squareArrFreespin[cell + 1].tint = 0xffffff;
+                    squareArrFreespin[cell + 1].tint = 0x999999;
                 });
                 if (afterDropFeatureGame) {
                     winText.visible = true;
@@ -1546,7 +1541,7 @@ function game2() {
                         return;
                     }
                     wcvFreeSpinWinValuesArray.forEach(function(cell, i) {
-                        squareArrFreespin[cell + 1].tint = 0x999999;
+                        squareArrFreespin[cell + 1].tint = 0xffffff;
                     });
                     if (afterDropFeatureGame) {
                         winText.visible = false;
@@ -1557,12 +1552,12 @@ function game2() {
                                 cell,
                                 i
                             ) {
-                                squareArrFreespin[cell + 1].tint = 0xffffff;
+                                squareArrFreespin[cell + 1].tint = 0x999999;
                             });
                             return;
                         }
                         wcvFreeSpinWinValuesArray.forEach(function(cell, i) {
-                            squareArrFreespin[cell + 1].tint = 0xffffff;
+                            squareArrFreespin[cell + 1].tint = 0x999999;
                         });
                         if (afterDropFeatureGame) {
                             winText.visible = true;
@@ -1580,7 +1575,7 @@ function game2() {
                                     ) {
                                         squareArrFreespin[
                                             cell + 1
-                                        ].tint = 0x999999;
+                                        ].tint = 0xffffff;
                                         squareArrFreespin[
                                             cell + 1
                                         ].visible = false;
