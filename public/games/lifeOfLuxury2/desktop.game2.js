@@ -1500,6 +1500,7 @@ function game2() {
                 squareArrFreespin[cell + 1].visible = true;
             });
             if (afterDropFeatureGame) {
+                // @@@@@@@@@@@@@@@@@@
                 // winText.visible = true;
                 winText.setText(
                     "Trigger Pay \n" +
@@ -1618,11 +1619,12 @@ function game2() {
                     allFreeSpinCount = allFreeSpinCount + 12;
                     spinsLeft.setText(freeSpinCount);
                     setTimeout(function() {
-                        winText.visible = true;
                         game.add
                             .tween(freesponStartBGAdditionalBonus)
                             .to({ alpha: 0 }, 1000, "Linear", true)
                             .onComplete.add(function() {
+                                // @@@@@@@@@@@@@@@@@@@@@@@
+                                winText.visible = true;
                                 freesponStartBGAdditionalBonus.visible = false;
                                 afterDropFeatureGame = true;
                                 showWinFreeSpin(wcvFreeSpinWinValuesArray);
