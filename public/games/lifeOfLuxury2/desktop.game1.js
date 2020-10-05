@@ -1649,7 +1649,7 @@ function game1() {
             wcvWinValuesArray.forEach(function(cell, i) {
                 squareArrFreespin[cell + 1].visible = true;
                 // @@@@@@@@@@@@@@@@@@@@@@@@@@@
-                squareArrFreespin[i].tint = 0xffffff;
+                squareArrFreespin[cell + 1].tint = 0xffffff;
                 if (!afterFreespinStatus) {
                     if (info[cell] === 10) {
                         coinAnimArr[cell + 1].visible = true;
