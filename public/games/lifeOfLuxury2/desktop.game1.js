@@ -1469,7 +1469,6 @@ function game1() {
                         if (number == 4) {
                             // slotLayer3Group.add(topLabel);
                             // bg2_panels.loadTexture('background2_panels');
-                            // @@@@@@@@@@@@@@@@
                             checkWin();
                             for (var i = 1; i <= 15; ++i) {
                                 game1.cell[i].visible = true;
@@ -1561,7 +1560,6 @@ function game1() {
             } else if (wlWinValuesArray.length > 0) {
                 stopWinAnim = false;
                 firstAroundAnim = true;
-                // @@@@@@@@@@@@@
                 showWin(wlWinValuesArray, winCellInfo);
                 bottomText.setText(allWin + " Credits Won");
                 bottomText.fontSize = 35;
@@ -1650,6 +1648,8 @@ function game1() {
             console.log(wcvWinValuesArray);
             wcvWinValuesArray.forEach(function(cell, i) {
                 squareArrFreespin[cell + 1].visible = true;
+                // @@@@@@@@@@@@@@@@@@@@@@@@@@@
+                squareArrFreespin[i].tint = 0xffffff;
                 if (!afterFreespinStatus) {
                     if (info[cell] === 10) {
                         coinAnimArr[cell + 1].visible = true;
