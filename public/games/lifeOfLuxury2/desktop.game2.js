@@ -1,4 +1,10 @@
 function game2() {
+    winText = game.add.text(149, 608 + 94, "++++", {
+        font: '22px "Arial"',
+        fill: "#ffffff",
+        fontWeight: 600,
+        align: "center"
+    });
     var game2 = {
         cell: [],
         copyCell: [],
@@ -38,13 +44,6 @@ function game2() {
     game2.preload = function() {};
 
     game2.create = function() {
-        winText = game.add.text(149, 608 + 94, "____", {
-            font: '22px "Arial"',
-            fill: "#ffffff",
-            fontWeight: 600,
-            align: "center"
-        });
-
         if (
             game.sound.usingWebAudio &&
             game.sound.context.state === "suspended"
@@ -1504,7 +1503,7 @@ function game2() {
             if (afterDropFeatureGame) {
                 winText.visible = true;
                 winText.setText(
-                    "Trigger Pay !!! \n" +
+                    "Trigger Pay \n" +
                         payoffByBonus / mulFreespinOld +
                         " x " +
                         mulFreespinOld +
@@ -2662,12 +2661,13 @@ function game2() {
                 fill: "#01e033"
             });
             paid.anchor.setTo(1, 0.5);
-            winText = game.add.text(149, 608 + 94, "Trigger Pay ??? \n40", {
+            winText = game.add.text(149, 608 + 94, "Trigger Pay \n40", {
                 font: '22px "Arial"',
                 fill: "#ffffff",
                 fontWeight: 600,
                 align: "center"
             });
+
             winText.lineSpacing = -10;
             winText.anchor.setTo(0.5, 0.5);
             winText.visible = false;
