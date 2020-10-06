@@ -1742,6 +1742,8 @@ function game1() {
                             $("#spin").removeClass("auto");
                             createdStarsStatus = true;
                             createdStarsMiniStatus = true;
+                            // @@@@@@@@@@@@@@@@@@
+                            winText.setText("");
                             game.state.start("game2");
                         });
                     game.add
@@ -2247,8 +2249,6 @@ function game1() {
                 } else {
                     flickWin(wcvWinValuesArray);
                 }
-                // @@@@@@@@@@@@@@@@@
-                winText.visible = false;
             }
 
             let isLightBorder = true;
