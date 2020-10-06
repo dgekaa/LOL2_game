@@ -2210,7 +2210,7 @@ function game1() {
                     }
 
                     winText.visible = true;
-                    winText.setText("xxxxx");
+
                     triggerShow++;
                 }
             }

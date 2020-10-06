@@ -38,6 +38,7 @@ function game2() {
     game2.preload = function() {};
 
     game2.create = function() {
+        winText.setText("*****");
         if (
             game.sound.usingWebAudio &&
             game.sound.context.state === "suspended"
