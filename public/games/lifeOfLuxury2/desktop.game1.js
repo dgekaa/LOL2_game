@@ -2258,11 +2258,10 @@ function game1() {
 
                     if (index === 7 && winWithoutCoin > 0) {
                         lastIndication();
+                        winText.setText("sssssккккк");
                     } else {
                         isLightBorder ? lightBorder() : darkBorder();
                     }
-
-                    winText.setText("sssssssss");
 
                     index++;
                     isLightBorder = !isLightBorder;
