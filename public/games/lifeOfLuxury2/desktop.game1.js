@@ -1713,6 +1713,7 @@ function game1() {
                 bottomText.fontSize = 35;
                 setTimeout(function() {
                     flickWin(wcvWinValuesArray);
+                    winText.setText("###");
                 }, 1000);
             } else {
                 flickWin(wcvWinValuesArray);
@@ -1742,9 +1743,6 @@ function game1() {
                             $("#spin").removeClass("auto");
                             createdStarsStatus = true;
                             createdStarsMiniStatus = true;
-                            // @@@@@@@@@@@@@@@@@@
-                            game.world.remove(winText);
-                            console.log("   game.world.remove(winText);");
                             game.state.start("game2");
                         });
                     game.add
