@@ -41,7 +41,14 @@ function game2() {
         ]
     };
 
-    game2.preload = function() {};
+    game2.preload = function() {
+        winText = game.add.text(149, 608 + 94, "====", {
+            font: '22px "Arial"',
+            fill: "#ffffff",
+            fontWeight: 600,
+            align: "center"
+        });
+    };
 
     game2.create = function() {
         if (
