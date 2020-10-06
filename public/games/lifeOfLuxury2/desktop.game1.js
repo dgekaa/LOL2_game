@@ -2210,7 +2210,7 @@ function game1() {
                     }
 
                     winText.visible = true;
-
+                    winText.setText("xxxxx");
                     triggerShow++;
                 }
             }
@@ -2258,7 +2258,6 @@ function game1() {
 
                     if (index === 7 && winWithoutCoin > 0) {
                         lastIndication();
-                        winText.setText("sssssккккк");
                     } else {
                         isLightBorder ? lightBorder() : darkBorder();
                     }
