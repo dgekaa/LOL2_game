@@ -38,7 +38,13 @@ function game2() {
     game2.preload = function() {};
 
     game2.create = function() {
-        winText.setText("*****");
+        winText = game.add.text(149, 608 + 94, "____", {
+            font: '22px "Arial"',
+            fill: "#ffffff",
+            fontWeight: 600,
+            align: "center"
+        });
+
         if (
             game.sound.usingWebAudio &&
             game.sound.context.state === "suspended"
