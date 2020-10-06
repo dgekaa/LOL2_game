@@ -1,10 +1,4 @@
 function game2() {
-    winText = game.add.text(149, 608 + 94, "++++", {
-        font: '22px "Arial"',
-        fill: "#ffffff",
-        fontWeight: 600,
-        align: "center"
-    });
     var game2 = {
         cell: [],
         copyCell: [],
@@ -41,14 +35,7 @@ function game2() {
         ]
     };
 
-    game2.preload = function() {
-        winText = game.add.text(149, 608 + 94, "====", {
-            font: '22px "Arial"',
-            fill: "#ffffff",
-            fontWeight: 600,
-            align: "center"
-        });
-    };
+    game2.preload = function() {};
 
     game2.create = function() {
         if (
@@ -1522,14 +1509,14 @@ function game2() {
                 bottomText.visible = true;
                 bottomText.setText("BONUS RETRIGGERED");
                 setTimeout(function() {
-                    flickWin(wcvFreeSpinWinValuesArray);
+                    flickWinFreeSpeen(wcvFreeSpinWinValuesArray);
                 }, 1000);
             } else {
-                flickWin(wcvFreeSpinWinValuesArray);
+                flickWinFreeSpeen(wcvFreeSpinWinValuesArray);
             }
         }
 
-        function flickWin(wcvFreeSpinWinValuesArray) {
+        function flickWinFreeSpeen(wcvFreeSpinWinValuesArray) {
             if (stopWinAnim == true) {
                 return;
             }
@@ -1598,7 +1585,9 @@ function game2() {
                                     });
                                     showWin(wlWinValuesArray, winCellInfo);
                                 } else {
-                                    flickWin(wcvFreeSpinWinValuesArray);
+                                    flickWinFreeSpeen(
+                                        wcvFreeSpinWinValuesArray
+                                    );
                                 }
                             } else {
                                 wcvFreeSpinWinValuesArray.forEach(function(
