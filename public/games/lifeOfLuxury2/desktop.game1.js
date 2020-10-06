@@ -1713,7 +1713,6 @@ function game1() {
                 bottomText.fontSize = 35;
                 setTimeout(function() {
                     flickWin(wcvWinValuesArray);
-                    winText.setText("###");
                 }, 1000);
             } else {
                 flickWin(wcvWinValuesArray);
@@ -2204,7 +2203,7 @@ function game1() {
 
                     if (isTriggerPay) {
                         winText.setText(
-                            "Trigger Pay PPP \n" + triggerPay.toFixed()
+                            "Trigger Pay PPPPP \n" + triggerPay.toFixed()
                         );
                     } else {
                         winText.setText("");
@@ -2262,6 +2261,8 @@ function game1() {
                     } else {
                         isLightBorder ? lightBorder() : darkBorder();
                     }
+
+                    winText.setText("sssssssss");
 
                     index++;
                     isLightBorder = !isLightBorder;
