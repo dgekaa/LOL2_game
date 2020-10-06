@@ -2255,6 +2255,9 @@ function game1() {
 
             async function QWE() {
                 while (winWithoutCoin > 0 ? index < 8 : true) {
+                    if (stopWinAnim == true) {
+                        return;
+                    }
                     await delay(isLightBorder ? 275 : 550);
 
                     if (index === 7 && winWithoutCoin > 0) {
