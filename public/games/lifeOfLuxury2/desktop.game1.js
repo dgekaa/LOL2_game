@@ -1743,7 +1743,8 @@ function game1() {
                             createdStarsStatus = true;
                             createdStarsMiniStatus = true;
                             // @@@@@@@@@@@@@@@@@@
-                            winText.setText("МММ");
+                            game.world.remove(winText);
+                            console.log("   game.world.remove(winText);");
                             game.state.start("game2");
                         });
                     game.add
