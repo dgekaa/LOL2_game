@@ -2253,7 +2253,7 @@ function game1() {
             let isLightBorder = true;
             let index = 0;
 
-            (async () => {
+            async function QWE() {
                 while (winWithoutCoin > 0 ? index < 8 : true) {
                     await delay(isLightBorder ? 275 : 550);
 
@@ -2266,7 +2266,8 @@ function game1() {
                     index++;
                     isLightBorder = !isLightBorder;
                 }
-            })();
+            }
+            QWE();
         }
 
         var sizeLine = 0;
