@@ -1647,9 +1647,9 @@ function game1() {
         function showWinFreeSpin(wcvWinValuesArray) {
             console.log(wcvWinValuesArray);
             wcvWinValuesArray.forEach(function(cell, i) {
-                squareArrFreespin[cell + 1].visible = true;
-                // @@@@@@@@@@@@@@@@@@@@@@@@@@@
                 squareArrFreespin[cell + 1].tint = 0xffffff;
+                squareArrFreespin[cell + 1].visible = true;
+
                 if (!afterFreespinStatus) {
                     if (info[cell] === 10) {
                         coinAnimArr[cell + 1].visible = true;
@@ -2202,7 +2202,6 @@ function game1() {
                     }
 
                     if (isTriggerPay) {
-                        // @@@@@@@@@@@@@@@@@@@@
                         winText.setText(
                             "Trigger Pay \n" + triggerPay.toFixed()
                         );
@@ -2253,7 +2252,7 @@ function game1() {
             let isLightBorder = true;
             let index = 0;
 
-            async function QWE() {
+            async function startIndication() {
                 while (winWithoutCoin > 0 ? index < 8 : true) {
                     if (stopWinAnim == true) {
                         return;
@@ -2270,7 +2269,7 @@ function game1() {
                     isLightBorder = !isLightBorder;
                 }
             }
-            QWE();
+            startIndication();
         }
 
         var sizeLine = 0;
