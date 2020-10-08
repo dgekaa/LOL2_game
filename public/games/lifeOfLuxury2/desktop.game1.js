@@ -2201,13 +2201,13 @@ function game1() {
                         }
                     }
 
-                    if (isTriggerPay) {
-                        winText.setText(
-                            "Trigger Pay \n" + triggerPay.toFixed()
-                        );
-                    } else {
-                        winText.setText("");
-                    }
+                    // if (isTriggerPay) {
+                    //     winText.setText(
+                    //         "Trigger Pay \n" + triggerPay.toFixed()
+                    //     );
+                    // } else {
+                    winText.setText("");
+                    // }
 
                     winText.visible = true;
 
