@@ -683,7 +683,7 @@
         );
         game.load.atlasJSONHash(
             "coin_anim",
-            needUrlPath + "/img/coin.png",
+            needUrlPath + "/img/coin.jpg",
             needUrlPath + "/img/coin.json" + part2Url
         );
     };
