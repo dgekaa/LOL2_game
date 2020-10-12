@@ -1098,9 +1098,6 @@ function getNeedUrlPath() {
     }
 }
 
-// ajax-запросы
-
-//init-запрос
 var sessionName;
 var urlPath;
 var demo;
