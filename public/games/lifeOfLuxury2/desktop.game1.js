@@ -1103,7 +1103,6 @@ function game1() {
                     dataArray.balanceData["totalPayoff"];
             }
             if (realSpinStatus) {
-                // ______________________________-
                 credit.setText(balance);
                 realSpinStatus = false;
             }
@@ -2756,6 +2755,16 @@ function game1() {
         }
 
         function upLines() {
+            for (var i = 1; i <= 15; ++i) {
+                squareArrFreespin[i].visible = false;
+                squareArrFreespin[i].tint = 0xffffff;
+                briAnimArr[i].visible = false;
+                coinAnimArr[i].visible = false;
+                planeAnimArr[i].visible = false;
+                katerAnimArr[i].visible = false;
+                carAnimArr[i].visible = false;
+            }
+
             stopWinAnim = true;
             bottomText.visible = false;
             for (var i = 1; i <= 15; ++i) {
@@ -3372,7 +3381,6 @@ function game1() {
         }
 
         function changeBalance() {
-            // ___________________________________
             credit.setText(balance);
             checkScore();
 
