@@ -2475,9 +2475,6 @@ function game1() {
                                 wlWinValuesArray.length === 1 ? true : false
                             )
                             .play()
-                            .onLoop.add(function(e) {
-                                console.log(e, "_LOOP__");
-                            })
                             .onComplete.add(function() {
                                 for (var i = 1; i <= 15; ++i) {
                                     briAnimArr[i].visible = false;
@@ -2508,9 +2505,6 @@ function game1() {
                                 wlWinValuesArray.length === 1 ? true : false
                             )
                             .play()
-                            .onLoop.add(function(e) {
-                                console.log(e, "_LOOP__");
-                            })
                             .onComplete.add(function() {
                                 for (var i = 1; i <= 15; ++i) {
                                     carAnimArr[i].visible = false;
@@ -2543,9 +2537,6 @@ function game1() {
                                 wlWinValuesArray.length === 1 ? true : false
                             )
                             .play()
-                            .onLoop.add(function(e) {
-                                console.log(e, "_LOOP__");
-                            })
                             .onComplete.add(function() {
                                 for (var i = 1; i <= 15; ++i) {
                                     planeAnimArr[i].visible = false;
@@ -2575,9 +2566,6 @@ function game1() {
                                 wlWinValuesArray.length === 1 ? true : false
                             )
                             .play()
-                            .onLoop.add(function(e) {
-                                console.log(e, "_LOOP__");
-                            })
                             .onComplete.add(function() {
                                 for (var i = 1; i <= 15; ++i) {
                                     katerAnimArr[i].visible = false;
