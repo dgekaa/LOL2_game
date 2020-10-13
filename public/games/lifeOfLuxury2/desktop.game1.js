@@ -2475,10 +2475,9 @@ function game1() {
                                 wlWinValuesArray.length === 1 ? true : false
                             )
                             .play()
-                            .onLoop(function(e) {
+                            .onLoop.add(function(e) {
                                 console.log(e, "_LOOP__");
                             })
-
                             .onComplete.add(function() {
                                 for (var i = 1; i <= 15; ++i) {
                                     briAnimArr[i].visible = false;
@@ -2509,7 +2508,7 @@ function game1() {
                                 wlWinValuesArray.length === 1 ? true : false
                             )
                             .play()
-                            .onLoop(function(e) {
+                            .onLoop.add(function(e) {
                                 console.log(e, "_LOOP__");
                             })
                             .onComplete.add(function() {
@@ -2544,7 +2543,7 @@ function game1() {
                                 wlWinValuesArray.length === 1 ? true : false
                             )
                             .play()
-                            .onLoop(function(e) {
+                            .onLoop.add(function(e) {
                                 console.log(e, "_LOOP__");
                             })
                             .onComplete.add(function() {
@@ -2576,7 +2575,7 @@ function game1() {
                                 wlWinValuesArray.length === 1 ? true : false
                             )
                             .play()
-                            .onLoop(function(e) {
+                            .onLoop.add(function(e) {
                                 console.log(e, "_LOOP__");
                             })
                             .onComplete.add(function() {
