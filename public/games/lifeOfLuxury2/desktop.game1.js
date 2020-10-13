@@ -603,11 +603,6 @@ function game1() {
         }
 
         function showLine(lineNumber) {
-            // XXXXXXXXXXXXXXXXXXXXX
-            // game.add
-            //     .tween(game1.lineArr[lineNumber])
-            //     .to({ alpha: 1 }, 100, Phaser.Easing.LINEAR, true)
-            //     .onComplete.add(function() {});
             game1.lineArr[lineNumber].visible = true;
         }
 
@@ -621,11 +616,6 @@ function game1() {
 
         function hideLines() {
             game1.lineArr.forEach(function(line) {
-                // XXXXXXXXXXXXXXXXx
-                // game.add
-                //     .tween(line)
-                //     .to({ alpha: 0 }, 100, Phaser.Easing.LINEAR, true)
-                //     .onComplete.add(function() {});
                 line.visible = false;
                 line.tint = 0xffffff;
             });
@@ -646,11 +636,6 @@ function game1() {
         function hideSquare() {
             for (var i = 1; i <= 20; ++i) {
                 for (var j = 1; j <= 5; ++j) {
-                    // game.add
-                    //     .tween(squareArrImg[i - 1][j - 1])
-                    //     .to({ alpha: 0 }, 100, Phaser.Easing.LINEAR, true)
-                    //     .onComplete.add(function() {});
-
                     squareArrImg[i - 1][j - 1].visible = false;
                     squareArrImg[i - 1][j - 1].tint = 0xffffff;
                 }
@@ -1467,8 +1452,6 @@ function game1() {
                     )
                     .onComplete.add(function() {
                         if (number == 4) {
-                            // slotLayer3Group.add(topLabel);
-                            // bg2_panels.loadTexture('background2_panels');
                             checkWin();
                             for (var i = 1; i <= 15; ++i) {
                                 game1.cell[i].visible = true;
@@ -2492,6 +2475,10 @@ function game1() {
                                 wlWinValuesArray.length === 1 ? true : false
                             )
                             .play()
+                            .onLoop(function(e) {
+                                console.log(e, "_LOOP__");
+                            })
+
                             .onComplete.add(function() {
                                 for (var i = 1; i <= 15; ++i) {
                                     briAnimArr[i].visible = false;
@@ -2522,6 +2509,9 @@ function game1() {
                                 wlWinValuesArray.length === 1 ? true : false
                             )
                             .play()
+                            .onLoop(function(e) {
+                                console.log(e, "_LOOP__");
+                            })
                             .onComplete.add(function() {
                                 for (var i = 1; i <= 15; ++i) {
                                     carAnimArr[i].visible = false;
@@ -2554,6 +2544,9 @@ function game1() {
                                 wlWinValuesArray.length === 1 ? true : false
                             )
                             .play()
+                            .onLoop(function(e) {
+                                console.log(e, "_LOOP__");
+                            })
                             .onComplete.add(function() {
                                 for (var i = 1; i <= 15; ++i) {
                                     planeAnimArr[i].visible = false;
@@ -2583,6 +2576,9 @@ function game1() {
                                 wlWinValuesArray.length === 1 ? true : false
                             )
                             .play()
+                            .onLoop(function(e) {
+                                console.log(e, "_LOOP__");
+                            })
                             .onComplete.add(function() {
                                 for (var i = 1; i <= 15; ++i) {
                                     katerAnimArr[i].visible = false;
@@ -2600,11 +2596,6 @@ function game1() {
 
             showLine(wlWinValuesArray[lineflash]);
             for (var i = 1; i <= sizeLine; ++i) {
-                // game.add
-                //     .tween(squareArrImg[wlWinValuesArray[lineflash] - 1][i - 1])
-                //     .to({ alpha: 1 }, 100, Phaser.Easing.LINEAR, true)
-                //     .onComplete.add(function() {});
-
                 squareArrImg[wlWinValuesArray[lineflash] - 1][
                     i - 1
                 ].visible = true;
