@@ -1,4 +1,4 @@
-const loadResurce = () => {
+const loadResource = () => {
     var needUrlPath = "";
     if (
         location.href.indexOf("/games/") !== -1 &&
