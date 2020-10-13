@@ -1148,7 +1148,7 @@ urlPath2.forEach(function(item) {
     // console.log(nickname)
 });
 
-function requestInit() {
+function requestInit(startGameFirst) {
     // if (!window.navigator.onLine) return;
 
     var sessionID = location.href.substring(location.href.indexOf("/?") + 12);
@@ -1178,7 +1178,7 @@ function requestInit() {
                 data = JSON.parse(data);
                 if (data) {
                     var sessionName = data;
-                    requestState(data);
+                    requestState(data, startGameFirst);
                 } else {
                     $(".preloader").addClass("error");
                     errorStatus = true;
@@ -1281,7 +1281,12 @@ var featureGameStatus = false;
 var freeSpinCountInit, mulFreespinInit, allWinOldInit, allFreeSpinCountInit;
 var wlValuesFS;
 
-function requestState(data) {
+function requestState(data, startGameFirst) {
+    if (startGameFirst) {
+        game.state.start("preload");
+        return;
+    }
+
     game1();
     game2();
     if (preloaderStatus) {
