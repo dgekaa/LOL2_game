@@ -2524,41 +2524,25 @@ function game1() {
                             firstAroundAnim && planeSong.play();
                         }
 
-                        const planeAnimFunc = () => {
-                            planeAnimArr[
-                                squareArr[wlWinValuesArray[lineflash] - 1][
-                                    i - 1
-                                ]
-                            ].visible = true;
+                        planeAnimArr[
+                            squareArr[wlWinValuesArray[lineflash] - 1][i - 1]
+                        ].visible = true;
 
-                            planeAnimArr[
-                                squareArr[wlWinValuesArray[lineflash] - 1][
-                                    i - 1
-                                ]
-                            ].animations
-                                .add(
-                                    "scatters_anim",
-                                    [0, 1, 2, 3, 4, 5, 6],
-                                    5,
-                                    false
-                                )
-                                .play()
-                                .onComplete.add(function() {
-                                    if (wlWinValuesArray.length === 1) {
-                                        setTimeout(() => {
-                                            for (var i = 1; i <= 15; ++i) {
-                                                planeAnimArr[i].visible = true;
-                                            }
-                                        }, 2000);
-                                    } else {
-                                        for (var i = 1; i <= 15; ++i) {
-                                            planeAnimArr[i].visible = false;
-                                        }
-                                    }
-                                });
-                        };
-
-                        planeAnimFunc();
+                        planeAnimArr[
+                            squareArr[wlWinValuesArray[lineflash] - 1][i - 1]
+                        ].animations
+                            .add(
+                                "scatters_anim",
+                                [0, 1, 2, 3, 4, 5, 6],
+                                5,
+                                wlWinValuesArray.length === 1 ? true : false
+                            )
+                            .play()
+                            .onComplete.add(function() {
+                                for (var i = 1; i <= 15; ++i) {
+                                    planeAnimArr[i].visible = false;
+                                }
+                            });
                     }
                     if (
                         info[
