@@ -2524,7 +2524,7 @@ function game1() {
                             firstAroundAnim && planeSong.play();
                         }
 
-                        const qwe = () => {
+                        const planeAnimFunc = () => {
                             planeAnimArr[
                                 squareArr[wlWinValuesArray[lineflash] - 1][
                                     i - 1
@@ -2558,7 +2558,7 @@ function game1() {
                                 });
                         };
 
-                        qwe();
+                        planeAnimFunc();
                     }
                     if (
                         info[
