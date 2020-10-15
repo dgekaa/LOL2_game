@@ -1543,7 +1543,8 @@ function game1() {
             } else if (wlWinValuesArray.length > 0) {
                 stopWinAnim = false;
                 firstAroundAnim = true;
-                showWin(wlWinValuesArray, winCellInfo);
+                // +++++++++++++++++++++
+                showWin(wlWinValuesArray);
                 bottomText.setText(allWin + " Credits Won");
                 bottomText.fontSize = 35;
             } else {
@@ -2220,10 +2221,7 @@ function game1() {
                             squareArrFreespin[cell + 1].visible = false;
                         });
 
-                        setTimeout(
-                            () => showWin(wlWinValuesArrayOld, winCellInfoOld),
-                            140
-                        );
+                        setTimeout(() => showWin(wlWinValuesArrayOld), 140);
                     } else {
                         flickWin(wcvWinValuesArray);
                     }
@@ -2258,14 +2256,14 @@ function game1() {
         var sizeLine = 0;
         var otherSound = false;
 
-        function showWin(wlWinValuesArray) {
+        function showWin(wlWinValuesArray, oneLineAnimation) {
             otherSound = false;
             multiStatus = false;
             if (stopWinAnim == true) {
                 return;
             }
-            winText.visible = true;
-            if (afterFreespinStatus) {
+            if (!oneLineAnimation) winText.visible = true;
+            if (afterFreespinStatus && !oneLineAnimation) {
                 winText.visible = true;
             }
 
@@ -2314,7 +2312,7 @@ function game1() {
                         ] === 9)
                 ) {
                     if (firstAroundAnim) {
-                        if (!afterFreespinStatus) {
+                        if (!afterFreespinStatus && !oneLineAnimation) {
                             katerSong.play();
                         }
                         otherSound = true;
@@ -2330,17 +2328,13 @@ function game1() {
                         ] === 1)
                 ) {
                     if (firstAroundAnim) {
-                        if (!afterFreespinStatus) {
+                        if (!afterFreespinStatus && !oneLineAnimation) {
                             planeSong.play();
                         }
                         otherSound = true;
                     }
                 }
-                console.log(
-                    wlWinValuesArray[lineflash] - 1,
-                    squareArr[wlWinValuesArray[lineflash] - 1][0],
-                    "car"
-                );
+
                 if (
                     (info[squareArr[wlWinValuesArray[lineflash] - 1][0] - 1] ===
                         4) &
@@ -2351,7 +2345,7 @@ function game1() {
                         ] === 4)
                 ) {
                     if (firstAroundAnim) {
-                        if (!afterFreespinStatus) {
+                        if (!afterFreespinStatus && !oneLineAnimation) {
                             carSong.play();
                         }
                         otherSound = true;
@@ -2472,12 +2466,18 @@ function game1() {
                                     12
                                 ],
                                 12,
-                                wlWinValuesArray.length === 1 ? true : false
+                                false
                             )
                             .play()
                             .onComplete.add(function() {
-                                for (var i = 1; i <= 15; ++i) {
-                                    briAnimArr[i].visible = false;
+                                if (wlWinValuesArray.length === 1) {
+                                    setTimeout(() => {
+                                        showWin(wlWinValuesArray, true);
+                                    }, 2475);
+                                } else {
+                                    for (var i = 1; i <= 15; ++i) {
+                                        briAnimArr[i].visible = false;
+                                    }
                                 }
                             });
                     }
@@ -2498,16 +2498,17 @@ function game1() {
                         carAnimArr[
                             squareArr[wlWinValuesArray[lineflash] - 1][i - 1]
                         ].animations
-                            .add(
-                                "scatters_anim",
-                                [4, 3, 2, 1, 0],
-                                5,
-                                wlWinValuesArray.length === 1 ? true : false
-                            )
+                            .add("scatters_anim", [4, 3, 2, 1, 0], 5, false)
                             .play()
                             .onComplete.add(function() {
-                                for (var i = 1; i <= 15; ++i) {
-                                    carAnimArr[i].visible = false;
+                                if (wlWinValuesArray.length === 1) {
+                                    setTimeout(() => {
+                                        showWin(wlWinValuesArray, true);
+                                    }, 2475);
+                                } else {
+                                    for (var i = 1; i <= 15; ++i) {
+                                        carAnimArr[i].visible = false;
+                                    }
                                 }
                             });
                     }
@@ -2520,7 +2521,7 @@ function game1() {
                                 1
                         ] === 1
                     ) {
-                        if (sizeLine === 2) {
+                        if (sizeLine === 2 && !oneLineAnimation) {
                             firstAroundAnim && planeSong.play();
                         }
 
@@ -2535,12 +2536,19 @@ function game1() {
                                 "scatters_anim",
                                 [0, 1, 2, 3, 4, 5, 6],
                                 5,
-                                wlWinValuesArray.length === 1 ? true : false
+                                false
+                                // !!!!!!!!!!!!!!!!!!!!!!!!!!!!
                             )
                             .play()
                             .onComplete.add(function() {
-                                for (var i = 1; i <= 15; ++i) {
-                                    planeAnimArr[i].visible = false;
+                                if (wlWinValuesArray.length === 1) {
+                                    setTimeout(() => {
+                                        showWin(wlWinValuesArray, true);
+                                    }, 2475);
+                                } else {
+                                    for (var i = 1; i <= 15; ++i) {
+                                        planeAnimArr[i].visible = false;
+                                    }
                                 }
                             });
                     }
@@ -2550,13 +2558,14 @@ function game1() {
                                 1
                         ] === 9
                     ) {
-                        if (sizeLine === 2) {
+                        if (sizeLine === 2 && !oneLineAnimation) {
                             firstAroundAnim && katerSong.play();
                         }
 
                         katerAnimArr[
                             squareArr[wlWinValuesArray[lineflash] - 1][i - 1]
                         ].visible = true;
+
                         katerAnimArr[
                             squareArr[wlWinValuesArray[lineflash] - 1][i - 1]
                         ].animations
@@ -2564,19 +2573,24 @@ function game1() {
                                 "scatters_anim",
                                 [3, 2, 1, 0],
                                 4,
-                                wlWinValuesArray.length === 1 ? true : false
+                                false
+                                // !!!!!!!!!!!!!!!!!!!!!!!!!!!1
                             )
                             .play()
                             .onComplete.add(function() {
-                                for (var i = 1; i <= 15; ++i) {
-                                    katerAnimArr[i].visible = false;
+                                if (wlWinValuesArray.length === 1) {
+                                    setTimeout(() => {
+                                        showWin(wlWinValuesArray, true);
+                                    }, 2475);
+                                } else {
+                                    for (var i = 1; i <= 15; ++i) {
+                                        katerAnimArr[i].visible = false;
+                                    }
                                 }
                             });
                     }
                 }
             }
-
-            console.log(wlWinValuesArray);
 
             if (stopWinAnim == true) {
                 return;
@@ -2594,11 +2608,12 @@ function game1() {
             }
 
             if (wlWinValuesArray.length === 1 && !afterFreespinStatus) {
-                oneLineIndication(
-                    sizeLine,
-                    wlWinValuesArray[lineflash],
-                    wlWinValuesArray
-                );
+                !oneLineAnimation &&
+                    oneLineIndication(
+                        sizeLine,
+                        wlWinValuesArray[lineflash],
+                        wlWinValuesArray
+                    );
             } else {
                 multipleLinesOfIndication(
                     sizeLine,
@@ -2618,26 +2633,32 @@ function game1() {
         function oneLineIndication(sizeLine, lineNumber) {
             let isLightBorder = true;
 
-            (async () => {
-                while (true) {
-                    if (stopWinAnim == true) {
-                        return;
-                    }
+            // (async () => {
+            // while (true) {
 
+            if (stopWinAnim == true) {
+                return;
+            }
+
+            setInterval(
+                () => {
                     winText.visible = isLightBorder;
                     if (afterFreespinStatus) {
                         winText.visible = isLightBorder;
                     }
 
-                    await delay(isLightBorder ? 550 : 275);
+                    // await delay(isLightBorder ? 550 : 275);
 
                     changeBorderColor(
                         lineNumber,
                         isLightBorder ? 0x999999 : 0xffffff
                     );
                     isLightBorder = !isLightBorder;
-                }
-            })();
+                },
+                isLightBorder ? 550 : 275
+            );
+            // }
+            // })();
         }
 
         function multipleLinesOfIndication(
@@ -2703,10 +2724,10 @@ function game1() {
                     if (lineflash === 0) {
                         showWinFreeSpin(wcvWinValuesArrayOld);
                     } else {
-                        showWin(wlWinValuesArrayOld, winCellInfoOld);
+                        showWin(wlWinValuesArrayOld);
                     }
                 } else {
-                    showWin(wlWinValuesArray, winCellInfo);
+                    showWin(wlWinValuesArray);
                 }
             } else {
                 hideLines();
@@ -2724,10 +2745,10 @@ function game1() {
                         if (lineflash === 0) {
                             showWinFreeSpin(wcvWinValuesArrayOld);
                         } else {
-                            showWin(wlWinValuesArrayOld, winCellInfoOld);
+                            showWin(wlWinValuesArrayOld);
                         }
                     } else {
-                        showWin(wlWinValuesArray, winCellInfo);
+                        showWin(wlWinValuesArray);
                     }
                 }, 0);
             }
