@@ -1743,6 +1743,7 @@ function game1() {
 
         function requestSpin(gamename, sessionUuid, betline, lines) {
             imageAnim && clearInterval(imageAnim);
+            stopWinAnim = true;
             function sendMsg() {
                 if (demo !== "demo") {
                     getBalanceWait = false;
