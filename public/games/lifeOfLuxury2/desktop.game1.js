@@ -2466,7 +2466,7 @@ function game1() {
                                 if (wlWinValuesArray.length === 1) {
                                     setTimeout(() => {
                                         showWin(wlWinValuesArray, true);
-                                    }, 3200);
+                                    }, 3000);
                                 } else {
                                     for (var i = 1; i <= 15; ++i) {
                                         briAnimArr[i].visible = false;
@@ -2497,7 +2497,7 @@ function game1() {
                                 if (wlWinValuesArray.length === 1) {
                                     setTimeout(() => {
                                         showWin(wlWinValuesArray, true);
-                                    }, 3200);
+                                    }, 3000);
                                 } else {
                                     for (var i = 1; i <= 15; ++i) {
                                         carAnimArr[i].visible = false;
@@ -2536,7 +2536,7 @@ function game1() {
                                 if (wlWinValuesArray.length === 1) {
                                     setTimeout(() => {
                                         showWin(wlWinValuesArray, true);
-                                    }, 3200);
+                                    }, 3000);
                                 } else {
                                     for (var i = 1; i <= 15; ++i) {
                                         planeAnimArr[i].visible = false;
@@ -2567,7 +2567,7 @@ function game1() {
                                 if (wlWinValuesArray.length === 1) {
                                     setTimeout(() => {
                                         showWin(wlWinValuesArray, true);
-                                    }, 3200);
+                                    }, 3000);
                                 } else {
                                     for (var i = 1; i <= 15; ++i) {
                                         katerAnimArr[i].visible = false;
