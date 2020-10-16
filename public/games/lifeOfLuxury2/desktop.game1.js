@@ -2619,32 +2619,24 @@ function game1() {
         function oneLineIndication(sizeLine, lineNumber) {
             let isLightBorder = true;
 
-            // (async () => {
-            // while (true) {
-
             if (stopWinAnim == true) {
                 return;
             }
-
-            setInterval(
+            let imageAnim;
+            imageAnim && clearInterval(imageAnim);
+            imageAnim = setInterval(
                 () => {
                     winText.visible = isLightBorder;
-                    if (afterFreespinStatus) {
-                        winText.visible = isLightBorder;
-                    }
-
-                    // await delay(isLightBorder ? 550 : 275);
 
                     changeBorderColor(
                         lineNumber,
                         isLightBorder ? 0x999999 : 0xffffff
                     );
+
                     isLightBorder = !isLightBorder;
                 },
                 isLightBorder ? 550 : 275
             );
-            // }
-            // })();
         }
 
         function multipleLinesOfIndication(
@@ -2662,9 +2654,6 @@ function game1() {
                     }
 
                     winText.visible = isLightBorder;
-                    if (afterFreespinStatus) {
-                        winText.visible = isLightBorder;
-                    }
 
                     await delay(isLightBorder ? 600 : 300);
 
