@@ -1742,6 +1742,7 @@ function game1() {
         let reconnectCount = 0;
 
         function requestSpin(gamename, sessionUuid, betline, lines) {
+            imageAnim && clearInterval(imageAnim);
             function sendMsg() {
                 if (demo !== "demo") {
                     getBalanceWait = false;
@@ -2616,14 +2617,15 @@ function game1() {
             }
         }
 
+        let imageAnim;
+
         function oneLineIndication(sizeLine, lineNumber) {
             let isLightBorder = true;
 
             if (stopWinAnim == true) {
                 return;
             }
-            let imageAnim;
-            imageAnim && clearInterval(imageAnim);
+
             imageAnim = setInterval(
                 () => {
                     winText.visible = isLightBorder;
