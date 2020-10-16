@@ -641,7 +641,6 @@ function game2() {
             }
             // }, 100);
 
-            // gameStatusText.visible = false;
             bottomText.visible = true;
             bottomText.font = "ArialMT-CondensedBold";
             bottomText.fontSize = "26px";
@@ -2700,7 +2699,6 @@ function game2() {
                 fontWeight: 800
             });
             bottomText.anchor.setTo(0.5, 0.5);
-            // bottomText.visible = false;
             spinsLeft = game.add.text(193 - 238, 38, freeSpinCount, {
                 font: '45px "ArialMT-CondensedBold"',
                 fill: "#ffffff"
