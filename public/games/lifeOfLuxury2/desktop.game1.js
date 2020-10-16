@@ -2466,7 +2466,7 @@ function game1() {
                                 if (wlWinValuesArray.length === 1) {
                                     setTimeout(() => {
                                         showWin(wlWinValuesArray, true);
-                                    }, 3600);
+                                    }, 3500);
                                 } else {
                                     for (var i = 1; i <= 15; ++i) {
                                         briAnimArr[i].visible = false;
@@ -2497,7 +2497,7 @@ function game1() {
                                 if (wlWinValuesArray.length === 1) {
                                     setTimeout(() => {
                                         showWin(wlWinValuesArray, true);
-                                    }, 3600);
+                                    }, 3500);
                                 } else {
                                     for (var i = 1; i <= 15; ++i) {
                                         carAnimArr[i].visible = false;
@@ -2530,14 +2530,13 @@ function game1() {
                                 [0, 1, 2, 3, 4, 5, 6],
                                 5,
                                 false
-                                // !!!!!!!!!!!!!!!!!!!!!!!!!!!!
                             )
                             .play()
                             .onComplete.add(function() {
                                 if (wlWinValuesArray.length === 1) {
                                     setTimeout(() => {
                                         showWin(wlWinValuesArray, true);
-                                    }, 3600);
+                                    }, 3500);
                                 } else {
                                     for (var i = 1; i <= 15; ++i) {
                                         planeAnimArr[i].visible = false;
@@ -2562,19 +2561,13 @@ function game1() {
                         katerAnimArr[
                             squareArr[wlWinValuesArray[lineflash] - 1][i - 1]
                         ].animations
-                            .add(
-                                "scatters_anim",
-                                [3, 2, 1, 0],
-                                4,
-                                false
-                                // !!!!!!!!!!!!!!!!!!!!!!!!!!!1
-                            )
+                            .add("scatters_anim", [3, 2, 1, 0], 4, false)
                             .play()
                             .onComplete.add(function() {
                                 if (wlWinValuesArray.length === 1) {
                                     setTimeout(() => {
                                         showWin(wlWinValuesArray, true);
-                                    }, 3600);
+                                    }, 3500);
                                 } else {
                                     for (var i = 1; i <= 15; ++i) {
                                         katerAnimArr[i].visible = false;
@@ -3301,9 +3294,6 @@ function game1() {
         }
 
         function getBalance() {
-            // if (!window.navigator.onLine) return;
-            console.log("_________HELLO SASHA________");
-
             if (!getBalanceWait) {
                 getBalanceWait = true;
                 $.ajax({
