@@ -2900,7 +2900,8 @@ function game2() {
                     updateFinishSound.play();
                     allWinOld = allWinOld + allwinUpd;
                     bonusText.setText(allWinOld);
-                    bottomText.visible = false;
+                    // !!!!!!!!!!!!!!!!!!!!!!!!
+                    // bottomText.visible = false;
                     setTimeout(function() {
                         if (freeSpinCount > 0) {
                             if (briStatus) {
@@ -3008,6 +3009,9 @@ function game2() {
                 squareArrFreespin[i].tint = 0xffffff;
             }
             winText.visible = false;
+            // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            bottomText.visible = false;
+
             freesponFinishBGText.visible = true;
 
             briLeft = game.add.sprite(123, 475, "bri_anim_freespin");
