@@ -3685,28 +3685,28 @@ function game1() {
             });
             hideMobileBtn();
             if (isMobile) {
-                black_bg2 = game.add.sprite(0, 0, "black_bg2");
-                black_bg2.inputEnabled = true;
-                btn_yes = game.add.sprite(238, 476, "btn_yes");
-                btn_yes.inputEnabled = true;
-                btn_yes.input.useHandCursor = true;
-                btn_yes.events.onInputUp.add(function(click, pointer) {
-                    game.sound.mute = false;
-                    black_bg2.visible = false;
-                    btn_yes.visible = false;
-                    btn_no.visible = false;
-                    checkScore();
-                });
-                btn_no = game.add.sprite(544, 475, "btn_no");
-                btn_no.inputEnabled = true;
-                btn_no.input.useHandCursor = true;
-                btn_no.events.onInputUp.add(function(click, pointer) {
-                    game.sound.mute = true;
-                    black_bg2.visible = false;
-                    btn_yes.visible = false;
-                    btn_no.visible = false;
-                    checkScore();
-                });
+                // black_bg2 = game.add.sprite(0, 0, "black_bg2");
+                // black_bg2.inputEnabled = true;
+                // btn_yes = game.add.sprite(238, 476, "btn_yes");
+                // btn_yes.inputEnabled = true;
+                // btn_yes.input.useHandCursor = true;
+                // btn_yes.events.onInputUp.add(function(click, pointer) {
+                game.sound.mute = false;
+                // black_bg2.visible = false;
+                // btn_yes.visible = false;
+                // btn_no.visible = false;
+                checkScore();
+                // });
+                // btn_no = game.add.sprite(544, 475, "btn_no");
+                // btn_no.inputEnabled = true;
+                // btn_no.input.useHandCursor = true;
+                // btn_no.events.onInputUp.add(function(click, pointer) {
+                //     game.sound.mute = true;
+                //     black_bg2.visible = false;
+                //     btn_yes.visible = false;
+                //     btn_no.visible = false;
+                //     checkScore();
+                // });
             } else {
                 checkScore();
             }
