@@ -941,7 +941,7 @@ function game1() {
         maxBetSpin.events.onInputUp.add(function(click, pointer) {
             // if (!window.navigator.onLine) return;
 
-            if (pointer.button !== 0 && pointer.button !== undefined) return;
+            // if (pointer.button !== 0 && pointer.button !== undefined) return;
             maxBetSpin.loadTexture("maxBetSpin");
             if (balanceUpdateStatus) {
                 stopUpdateBalance();
