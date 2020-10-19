@@ -2900,8 +2900,6 @@ function game2() {
                     updateFinishSound.play();
                     allWinOld = allWinOld + allwinUpd;
                     bonusText.setText(allWinOld);
-                    // !!!!!!!!!!!!!!!!!!!!!!!!
-                    // bottomText.visible = false;
                     setTimeout(function() {
                         if (freeSpinCount > 0) {
                             if (briStatus) {
@@ -3009,7 +3007,6 @@ function game2() {
                 squareArrFreespin[i].tint = 0xffffff;
             }
             winText.visible = false;
-            // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
             bottomText.visible = false;
 
             freesponFinishBGText.visible = true;
@@ -3107,6 +3104,13 @@ function game2() {
         }
 
         $("canvas").mouseup(function(e) {
+            if (curGame === 2) {
+                if (balanceUpdateStatus2) {
+                    balanceUpdateStatus2 = false;
+                }
+            }
+        });
+        $("canvas").touchend(function(e) {
             if (curGame === 2) {
                 if (balanceUpdateStatus2) {
                     balanceUpdateStatus2 = false;
