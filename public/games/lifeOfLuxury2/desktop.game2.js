@@ -3110,7 +3110,7 @@ function game2() {
                 }
             }
         });
-        $("canvas").touchend(function(e) {
+        $("canvas").on("touchend", function(e) {
             if (curGame === 2) {
                 if (balanceUpdateStatus2) {
                     balanceUpdateStatus2 = false;
