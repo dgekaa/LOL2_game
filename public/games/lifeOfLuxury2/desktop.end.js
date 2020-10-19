@@ -620,6 +620,9 @@ function checkErrorFiles() {
     errorAudio = {};
     errorSpritesheet = {};
     function onFileError(name, data) {
+        if (name == "bri_anim") {
+            console.log(data);
+        }
         if (data.type === "image") {
             errorImage[name] = data.url;
         } else if (data.type === "audio") {
