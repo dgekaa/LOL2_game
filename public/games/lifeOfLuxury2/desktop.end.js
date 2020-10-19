@@ -650,12 +650,10 @@ function checkErrorFiles() {
         game.stage.disableVisibilityChange = true;
 
         if (
-            !Object.keys(errorImage).length ||
-            !Object.keys(errorAudio).length ||
-            !Object.keys(errorSpritesheet).length
+            Object.keys(errorImage).length ||
+            Object.keys(errorAudio).length ||
+            Object.keys(errorSpritesheet).length
         ) {
-            loadResource();
-        } else {
             if (Object.keys(errorImage).length) {
                 for (let key in errorImage) {
                     game.load.image(key, errorImage[key]);
@@ -678,6 +676,8 @@ function checkErrorFiles() {
             //     needUrlPath + "/img/spritesheet.png",
             //     needUrlPath + "/img/sprites.json" + part2Url
             // );
+        } else {
+            loadResource();
         }
 
         checkErrorFiles();
