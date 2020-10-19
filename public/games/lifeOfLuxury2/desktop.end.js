@@ -656,11 +656,12 @@ function checkErrorFiles() {
         ) {
             loadResource();
         } else {
-            loadResource();
-            // game.load.image(
-            //     "game.background_overlay2",
-            //     "" + path + "/img/bg_overlay2.png" + part2Url
-            // );
+            if (Object.keys(errorImage).length) {
+                for (let key in errorImage) {
+                    game.load.image(key, errorImage[key]);
+                }
+            }
+
             // game.load.audio(
             //     "spinSound2f",
             //     needUrlPath + "/sounds/spinreels/2f.mp3" + part2Url
