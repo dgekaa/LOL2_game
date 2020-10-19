@@ -1,3 +1,7 @@
+let errorImage = {},
+    errorAudio = {},
+    errorSpritesheet = {};
+
 const loadResource = () => {
     var needUrlPath = "";
     if (
@@ -611,10 +615,6 @@ const loadResource = () => {
     );
 };
 
-let errorImage = {},
-    errorAudio = {},
-    errorSpritesheet = {};
-
 function checkErrorFiles() {
     errorImage = {};
     errorAudio = {};
@@ -626,6 +626,9 @@ function checkErrorFiles() {
             errorAudio[name] = data.url;
         } else if (data.type === "spritesheet") {
             errorSpritesheet[name] = data.url;
+        } else {
+            console.log(name);
+            console.log(data.url);
         }
     }
     game.load.onFileError.add(onFileError, this);
@@ -643,7 +646,36 @@ function checkErrorFiles() {
         game.scale.pageAlignHorizontally = true;
         game.stage.disableVisibilityChange = true;
 
-        loadResource();
+        if (
+            !Object.keys(errorImage).length ||
+            !Object.keys(errorAudio).length ||
+            !Object.keys(errorSpritesheet).length
+        ) {
+            loadResource();
+        } else {
+            loadResource();
+            // game.load.image(
+            //     "game.background_overlay2",
+            //     "" + path + "/img/bg_overlay2.png" + part2Url
+            // );
+            // game.load.audio(
+            //     "spinSound2f",
+            //     needUrlPath + "/sounds/spinreels/2f.mp3" + part2Url
+            // );
+            // game.load.spritesheet(
+            //     "bri_big_anim_start",
+            //     needUrlPath + "/img/bri_big_anim_start.png" + part2Url,
+            //     392,
+            //     372,
+            //     4
+            // );
+            // game.load.atlasJSONHash(
+            //     "coin_big_anim",
+            //     needUrlPath + "/img/spritesheet.png",
+            //     needUrlPath + "/img/sprites.json" + part2Url
+            // );
+        }
+
         checkErrorFiles();
     };
 

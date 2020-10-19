@@ -1543,7 +1543,6 @@ function game1() {
             } else if (wlWinValuesArray.length > 0) {
                 stopWinAnim = false;
                 firstAroundAnim = true;
-                // +++++++++++++++++++++
                 showWin(wlWinValuesArray);
                 bottomText.setText(allWin + " Credits Won");
                 bottomText.fontSize = 35;
