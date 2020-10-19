@@ -642,7 +642,6 @@ function checkErrorFiles() {
 
     preload.preload = function() {
         game.scale.fullScreenScaleMode = Phaser.ScaleManager.EXACT_FIT; //EXACT_FIT  SHOW_ALL
-
         game.scale.scaleMode = Phaser.ScaleManager.EXACT_FIT;
         game.scale.pageAlignVertically = true;
         game.scale.scaleMode = 2;
@@ -660,10 +659,12 @@ function checkErrorFiles() {
                 }
             }
 
-            // game.load.audio(
-            //     "spinSound2f",
-            //     needUrlPath + "/sounds/spinreels/2f.mp3" + part2Url
-            // );
+            if (Object.keys(errorAudio).length) {
+                for (let key in errorAudio) {
+                    game.load.audio(key, errorImage[key]);
+                }
+            }
+
             // game.load.spritesheet(
             //     "bri_big_anim_start",
             //     needUrlPath + "/img/bri_big_anim_start.png" + part2Url,
