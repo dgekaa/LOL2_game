@@ -1,6 +1,7 @@
 let errorImage = {},
     errorAudio = {},
-    errorSpritesheet = {};
+    errorSpritesheet = {},
+    errorTextureatlas = {};
 
 const loadResource = () => {
     var needUrlPath = "";
@@ -619,6 +620,7 @@ function checkErrorFiles() {
     errorImage = {};
     errorAudio = {};
     errorSpritesheet = {};
+    errorTextureatlas = {};
     function onFileError(name, data) {
         console.log(name, "-----", data.type);
         console.log(name, "-----", data);
@@ -629,6 +631,8 @@ function checkErrorFiles() {
             errorAudio[name] = data.url;
         } else if (data.type === "spritesheet") {
             errorSpritesheet[name] = data.url;
+        } else if (data.type === "textureatlas") {
+            errorTextureatlas[name] = data.url;
         } else {
             console.log(name);
             console.log(data.url);
@@ -649,33 +653,37 @@ function checkErrorFiles() {
         game.stage.disableVisibilityChange = true;
 
         if (
+            Object.keys(errorSpritesheet).length ||
             Object.keys(errorImage).length ||
             Object.keys(errorAudio).length ||
-            Object.keys(errorSpritesheet).length
+            Object.keys(errorTextureatlas).length
         ) {
-            loadResource(errorImage, errorAudio, errorSpritesheet);
-            // if (Object.keys(errorImage).length) {
-            //     for (let key in errorImage) {
-            //         game.load.image(key, errorImage[key]);
-            //     }
-            // }
-            // if (Object.keys(errorAudio).length) {
-            //     for (let key in errorAudio) {
-            //         game.load.audio(key, errorImage[key]);
-            //     }
-            // }
-            // game.load.spritesheet(
-            //     "bri_big_anim_start",
-            //     needUrlPath + "/img/bri_big_anim_start.png" + part2Url,
-            //     392,
-            //     372,
-            //     4
-            // );
-            // game.load.atlasJSONHash(
-            //     "coin_big_anim",
-            //     needUrlPath + "/img/spritesheet.png",
-            //     needUrlPath + "/img/sprites.json" + part2Url
-            // );
+            if (Object.keys(errorImage).length) {
+                for (let key in errorImage) {
+                    game.load.image(key, errorImage[key]);
+                }
+            }
+            if (Object.keys(errorAudio).length) {
+                for (let key in errorAudio) {
+                    game.load.audio(key, errorAudio[key]);
+                }
+            }
+            if (Object.keys(errorSpritesheet).length) {
+                for (let key in errorSpritesheet) {
+                    game.load.spritesheet(
+                        key,
+                        errorSpritesheet[key],
+                        392,
+                        372,
+                        4
+                    );
+                }
+            }
+            if (Object.keys(errorTextureatlas).length) {
+                for (let key in errorTextureatlas) {
+                    game.load.atlasJSONHash(key, errorTextureatlas[key]);
+                }
+            }
         } else {
             loadResource();
         }
@@ -687,7 +695,8 @@ function checkErrorFiles() {
         if (
             Object.keys(errorImage).length ||
             Object.keys(errorAudio).length ||
-            Object.keys(errorSpritesheet).length
+            Object.keys(errorSpritesheet).length ||
+            Object.keys(errorTextureatlas).length
         ) {
             game.state.start("preload");
         } else {
