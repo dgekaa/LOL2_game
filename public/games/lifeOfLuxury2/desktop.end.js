@@ -620,9 +620,9 @@ function checkErrorFiles() {
     errorAudio = {};
     errorSpritesheet = {};
     function onFileError(name, data) {
-        if (name == "bri_anim") {
-            console.log(data);
-        }
+        console.log(name, "-----", data.type);
+        console.log(name, "-----", data);
+
         if (data.type === "image") {
             errorImage[name] = data.url;
         } else if (data.type === "audio") {
@@ -653,18 +653,17 @@ function checkErrorFiles() {
             Object.keys(errorAudio).length ||
             Object.keys(errorSpritesheet).length
         ) {
-            if (Object.keys(errorImage).length) {
-                for (let key in errorImage) {
-                    game.load.image(key, errorImage[key]);
-                }
-            }
-
-            if (Object.keys(errorAudio).length) {
-                for (let key in errorAudio) {
-                    game.load.audio(key, errorImage[key]);
-                }
-            }
-
+            loadResource(errorImage, errorAudio, errorSpritesheet);
+            // if (Object.keys(errorImage).length) {
+            //     for (let key in errorImage) {
+            //         game.load.image(key, errorImage[key]);
+            //     }
+            // }
+            // if (Object.keys(errorAudio).length) {
+            //     for (let key in errorAudio) {
+            //         game.load.audio(key, errorImage[key]);
+            //     }
+            // }
             // game.load.spritesheet(
             //     "bri_big_anim_start",
             //     needUrlPath + "/img/bri_big_anim_start.png" + part2Url,
