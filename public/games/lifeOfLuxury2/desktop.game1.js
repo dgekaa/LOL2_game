@@ -1530,7 +1530,7 @@ function game1() {
                 stopWinAnim = false;
                 wcvWinValuesArray = [];
                 bottomText.setText(
-                    bonusPay + linePay + triggerPay + " Credits 1 Won"
+                    bonusPay + linePay + triggerPay + " Credits Won"
                 );
                 // bottomText.fontSize = 35;
                 bottomText.fontSize = 150;
@@ -1550,7 +1550,7 @@ function game1() {
                 stopWinAnim = false;
                 firstAroundAnim = true;
                 showWin(wlWinValuesArray);
-                bottomText.setText(allWin + " Credits 2 Won");
+                bottomText.setText(allWin + " Credits Won");
                 // bottomText.fontSize = 35;
                 bottomText.fontSize = 150;
                 console.log(bottomText, " BBB");
@@ -2856,7 +2856,7 @@ function game1() {
             collect_text.anchor.setTo(0.5, 0.5);
             collect_text.visible = false;
             // bottomText = game.add.text(512, 610, "BONUS!", {
-            bottomText = game.add.text(512, 610, "BONUS!", {
+            bottomText = game.add.text(800, 610, "BONUS!", {
                 font: '150px "Arial"',
                 // font: '35px "Arial"',
                 fill: "#fffd6f",
