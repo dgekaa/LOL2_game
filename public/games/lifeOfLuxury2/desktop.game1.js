@@ -1023,6 +1023,8 @@ function game1() {
             bottomText.setText(allWin + " Credits Won");
             // bottomText.fontSize = 35;
             bottomText.fontSize = 150;
+            console.log(bottomText, " BBB");
+
             paid.setText(allWinOld);
             info = infoOldOnlyForThisWindow;
             for (var i = 1; i <= 15; ++i) {
@@ -1530,7 +1532,10 @@ function game1() {
                 bottomText.setText(
                     bonusPay + linePay + triggerPay + " Credits Won"
                 );
-                bottomText.fontSize = 35;
+                // bottomText.fontSize = 35;
+                bottomText.fontSize = 150;
+                console.log(bottomText, " BBB");
+
                 for (key in info) {
                     if (info[key] === 10 || info[key] === 0) {
                         wcvWinValuesArray.push(+key);
@@ -1546,7 +1551,9 @@ function game1() {
                 firstAroundAnim = true;
                 showWin(wlWinValuesArray);
                 bottomText.setText(allWin + " Credits Won");
-                bottomText.fontSize = 35;
+                // bottomText.fontSize = 35;
+                bottomText.fontSize = 150;
+                console.log(bottomText, " BBB");
             } else {
                 spinStatus = false;
                 gameStatusTextFlick();
