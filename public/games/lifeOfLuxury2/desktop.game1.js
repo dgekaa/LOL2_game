@@ -2866,7 +2866,7 @@ function game1() {
             });
             // 1024,
             // 800,
-            // bottomText.anchor.setTo(0.5, 0.5);
+            bottomText.anchor.setTo(1, 0.5);
             bottomText.visible = false;
         }
 
