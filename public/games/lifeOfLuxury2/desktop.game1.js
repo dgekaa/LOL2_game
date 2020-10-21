@@ -2862,7 +2862,7 @@ function game1() {
             });
             // 1024,
             // 800,
-            bottomText.anchor.setTo(0.5, 1);
+            bottomText.anchor.setTo(1, 1);
             bottomText.visible = false;
         }
 
