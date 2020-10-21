@@ -2691,14 +2691,17 @@ function game2() {
             );
             collect_text.anchor.setTo(0.5, 0.5);
             collect_text.visible = false;
-            bottomText = game.add.text(512, 610, "BONUS!", {
+            // bottomText = game.add.text(512, 610, "BONUS!", {
+            bottomText = game.add.text(0, 0, "BONUS!", {
                 font: '35px "Arial"',
                 fill: "#fffd6f",
                 stroke: "#000000",
                 strokeThickness: 5,
-                fontWeight: 800
+                fontWeight: 800,
+                boundsAlignH: "center"
             });
-            bottomText.anchor.setTo(0.5, 0.5);
+            bottomText.setTextBounds(0, 584, 1024, 100);
+            // bottomText.anchor.setTo(0.5, 0.5);
             spinsLeft = game.add.text(194 - 238, 38, freeSpinCount, {
                 font: '45px "ArialMT-CondensedBold"',
                 fill: "#ffffff"
