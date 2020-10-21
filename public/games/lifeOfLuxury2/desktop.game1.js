@@ -1021,8 +1021,7 @@ function game1() {
             allWin = allWinOld + winOldTrigerFreeSpin;
             bottomText.visible = true;
             bottomText.setText(allWin + " Credits Won");
-            // bottomText.fontSize = 35;
-            bottomText.fontSize = 150;
+            bottomText.fontSize = 35;
             console.log(bottomText, " BBB");
 
             paid.setText(allWinOld);
@@ -1532,8 +1531,7 @@ function game1() {
                 bottomText.setText(
                     bonusPay + linePay + triggerPay + " Credits Won"
                 );
-                // bottomText.fontSize = 35;
-                bottomText.fontSize = 150;
+                bottomText.fontSize = 35;
                 console.log(bottomText, " BBB");
 
                 for (key in info) {
@@ -1551,8 +1549,7 @@ function game1() {
                 firstAroundAnim = true;
                 showWin(wlWinValuesArray);
                 bottomText.setText(allWin + " Credits Won");
-                // bottomText.fontSize = 35;
-                bottomText.fontSize = 150;
+                bottomText.fontSize = 35;
                 console.log(bottomText, " BBB");
             } else {
                 spinStatus = false;
@@ -2857,8 +2854,7 @@ function game1() {
             collect_text.visible = false;
             // bottomText = game.add.text(512, 610, "BONUS!", {
             bottomText = game.add.text(1024, 610, "BONUS!", {
-                font: '150px "Arial"',
-                // font: '35px "Arial"',
+                font: '35px "Arial"',
                 fill: "#fffd6f",
                 stroke: "#000000",
                 strokeThickness: 5,
@@ -3440,8 +3436,7 @@ function game1() {
             gameStatusText.visible = false;
             bottomText.visible = true;
             bottomText.setText("Good Luck!");
-            // bottomText.fontSize = 35;
-            bottomText.fontSize = 150;
+            bottomText.fontSize = 35;
             console.log(bottomText, "_______________bottomText");
             paid.setText("0");
             startButton.loadTexture("stopButton");
