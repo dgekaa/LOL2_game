@@ -2858,7 +2858,7 @@ function game1() {
                 fontWeight: 800,
                 boundsAlignH: "center"
             });
-            bottomText.setTextBounds(0, 612, 1024, 100);
+            bottomText.setTextBounds(0, 590, 1024, 100);
             // bottomText.anchor.setTo(1, 1);
             bottomText.visible = false;
         }
