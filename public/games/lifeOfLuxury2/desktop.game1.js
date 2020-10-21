@@ -3244,7 +3244,7 @@ function game1() {
                     }
                 }
             } else {
-                if (spinStatus) {
+                if (!spinStatus) {
                     showButtons([[startButton, "startButton"]]);
                     showButtons([[autoPlay, "autoPlay"]]);
                     showButtons([[maxBetSpin, "maxBetSpin"]]);
