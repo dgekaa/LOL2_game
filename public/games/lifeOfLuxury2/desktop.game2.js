@@ -2636,12 +2636,12 @@ function game2() {
                 fill: "#01e033"
             });
             credit.anchor.setTo(1, 0.5);
-            linesText = game.add.text(535, 664, lines, {
+            linesText = game.add.text(536, 664, lines, {
                 font: '47px "Digital-7 Mono"',
                 fill: "#01e033"
             });
             linesText.anchor.setTo(1, 0.5);
-            lineBetText = game.add.text(665, 664, betline, {
+            lineBetText = game.add.text(666, 664, betline, {
                 font: '47px "Digital-7 Mono"',
                 fill: "#01e033"
             });
@@ -2651,12 +2651,12 @@ function game2() {
                 fill: "#01e033"
             });
             totalBet.anchor.setTo(1, 0.5);
-            paid = game.add.text(991, 664, "0", {
+            paid = game.add.text(992, 664, "0", {
                 font: '47px "Digital-7 Mono"',
                 fill: "#01e033"
             });
             paid.anchor.setTo(1, 0.5);
-            winText = game.add.text(149, 608 + 94, "Trigger Pay \n40", {
+            winText = game.add.text(150, 608 + 94, "Trigger Pay \n40", {
                 font: '22px "Arial"',
                 fill: "#ffffff",
                 fontWeight: 600,
@@ -2672,7 +2672,7 @@ function game2() {
             });
             bonusWinText.anchor.setTo(0.5, 0.5);
             bonusWinText.visible = false;
-            gameStatusText = game.add.text(893, 597 + 94, "Play 400 Credits", {
+            gameStatusText = game.add.text(894, 598 + 94, "Play 400 Credits", {
                 font: '22px "Arial"',
                 fill: "#ffffff",
                 fontWeight: 600
@@ -2682,7 +2682,7 @@ function game2() {
 
             collect_text = game.add.text(
                 510,
-                341 + 94,
+                342 + 94,
                 "HAND PAY 25585 CREDITS",
                 {
                     font: '35px "PF Agora Slab Pro"',
@@ -2691,7 +2691,7 @@ function game2() {
             );
             collect_text.anchor.setTo(0.5, 0.5);
             collect_text.visible = false;
-            bottomText = game.add.text(512, 609, "BONUS!", {
+            bottomText = game.add.text(512, 610, "BONUS!", {
                 font: '35px "Arial"',
                 fill: "#fffd6f",
                 stroke: "#000000",
@@ -2699,7 +2699,7 @@ function game2() {
                 fontWeight: 800
             });
             bottomText.anchor.setTo(0.5, 0.5);
-            spinsLeft = game.add.text(193 - 238, 38, freeSpinCount, {
+            spinsLeft = game.add.text(194 - 238, 38, freeSpinCount, {
                 font: '45px "ArialMT-CondensedBold"',
                 fill: "#ffffff"
             });
@@ -2709,12 +2709,12 @@ function game2() {
                 fill: "#ffffff"
             });
             bonusText.anchor.setTo(1, 0.5);
-            multiplierText = game.add.text(859, 172 - 204, mulFreespin, {
+            multiplierText = game.add.text(860, 172 - 204, mulFreespin, {
                 font: '45px "ArialMT-CondensedBold"',
                 fill: "#ffffff"
             });
             multiplierText.anchor.setTo(1, 0.5);
-            multiBriText = game.add.text(191, 170, "10", {
+            multiBriText = game.add.text(192, 170, "10", {
                 font: '30px "PragmaticaBoldCyrillic"',
                 fill: "#ffffff",
                 stroke: "#000000",
@@ -3020,7 +3020,7 @@ function game2() {
                 .tween(freespinStartBG)
                 .to({ alpha: 1 }, 1000, "Linear", true)
                 .onComplete.add(function() {
-                    winTextCenter = game.add.text(513, 535, "0", {
+                    winTextCenter = game.add.text(514, 535, "0", {
                         font: '99px "AmazoneBT-Regular"',
                         fill: "#ff4921",
                         stroke: "#000000",

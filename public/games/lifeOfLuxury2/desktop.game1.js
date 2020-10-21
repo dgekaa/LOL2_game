@@ -2812,12 +2812,12 @@ function game1() {
                 fill: "#01e033"
             });
             credit.anchor.setTo(1, 0.5);
-            linesText = game.add.text(535, 664, lines, {
+            linesText = game.add.text(536, 664, lines, {
                 font: '47px "Digital-7 Mono"',
                 fill: "#01e033"
             });
             linesText.anchor.setTo(1, 0.5);
-            lineBetText = game.add.text(665, 664, betline, {
+            lineBetText = game.add.text(664, 664, betline, {
                 font: '47px "Digital-7 Mono"',
                 fill: "#01e033"
             });
@@ -2827,12 +2827,12 @@ function game1() {
                 fill: "#01e033"
             });
             totalBet.anchor.setTo(1, 0.5);
-            paid = game.add.text(991, 664, "0", {
+            paid = game.add.text(990, 664, "0", {
                 font: '47px "Digital-7 Mono"',
                 fill: "#01e033"
             });
             paid.anchor.setTo(1, 0.5);
-            winText = game.add.text(149, 608, "Trigger Pay \n40", {
+            winText = game.add.text(150, 608, "Trigger Pay \n40", {
                 font: '22px "Arial"',
                 fill: "#ffffff",
                 fontWeight: 600,
@@ -2841,7 +2841,7 @@ function game1() {
             winText.lineSpacing = -10;
             winText.anchor.setTo(0.5, 0.5);
             winText.visible = false;
-            gameStatusText = game.add.text(893, 597, "Play 400 Credits", {
+            gameStatusText = game.add.text(894, 598, "Play 400 Credits", {
                 font: '22px "Arial"',
                 fill: "#ffffff",
                 fontWeight: 600
@@ -2849,7 +2849,7 @@ function game1() {
             gameStatusText.anchor.setTo(0.5, 0.5);
             gameStatusText.visible = false;
 
-            collect_text = game.add.text(510, 341, "HAND PAY 25585 CREDITS", {
+            collect_text = game.add.text(510, 342, "HAND PAY 25585 CREDITS", {
                 font: '35px "PF Agora Slab Pro"',
                 fill: "#fffc15"
             });
