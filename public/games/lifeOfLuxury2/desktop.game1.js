@@ -2854,7 +2854,7 @@ function game1() {
             collect_text.visible = false;
             // bottomText = game.add.text(512, 610, "BONUS!", {
 
-            bottomText = game.add.text(420, 583, "BONUS!", {
+            bottomText = game.add.text(0, 0, "BONUS!", {
                 font: '35px "Arial"',
                 fill: "#fffd6f",
                 stroke: "#000000",
