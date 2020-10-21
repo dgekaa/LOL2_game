@@ -3244,13 +3244,15 @@ function game1() {
                     }
                 }
             } else {
-                showButtons([[startButton, "startButton"]]);
-                showButtons([[autoPlay, "autoPlay"]]);
-                showButtons([[maxBetSpin, "maxBetSpin"]]);
-                if (!autostart) {
-                    autoPlay.loadTexture("autoPlay");
+                if (spinStatus) {
+                    showButtons([[startButton, "startButton"]]);
+                    showButtons([[autoPlay, "autoPlay"]]);
+                    showButtons([[maxBetSpin, "maxBetSpin"]]);
+                    if (!autostart) {
+                        autoPlay.loadTexture("autoPlay");
+                    }
+                    showMobileBtn();
                 }
-                showMobileBtn();
             }
         }
 
