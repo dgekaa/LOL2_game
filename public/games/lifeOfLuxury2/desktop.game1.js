@@ -2851,7 +2851,7 @@ function game1() {
             collect_text.visible = false;
             // bottomText = game.add.text(512, 610, "BONUS!", {
             bottomText = game.add.text(0, 0, "BONUS!", {
-                font: '100px "Arial"',
+                font: '35px "Arial"',
                 fill: "#fffd6f",
                 stroke: "#000000",
                 strokeThickness: 5,
@@ -3433,7 +3433,7 @@ function game1() {
             gameStatusText.visible = false;
             bottomText.visible = true;
             bottomText.setText("Good Luck!");
-            bottomText.fontSize = 35;
+            bottomText.fontSize = 100;
             console.log(bottomText, "_______________bottomText");
             paid.setText("0");
             startButton.loadTexture("stopButton");
