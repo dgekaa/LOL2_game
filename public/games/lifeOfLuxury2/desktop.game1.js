@@ -2859,10 +2859,11 @@ function game1() {
                 stroke: "#000000",
                 strokeThickness: 5,
                 fontWeight: 800,
-                align: "right"
+                align: "center"
             });
-            // 1024,
-            // 800,
+
+            bottomText.setTextBounds(100, 100, 300, 300);
+
             bottomText.anchor.setTo(0, 0);
             bottomText.visible = false;
         }
