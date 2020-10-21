@@ -1021,7 +1021,8 @@ function game1() {
             allWin = allWinOld + winOldTrigerFreeSpin;
             bottomText.visible = true;
             bottomText.setText(allWin + " Credits Won");
-            bottomText.fontSize = 35;
+            bottomText.fontSize = 100;
+            // bottomText.fontSize = 35;
             console.log(bottomText, " BBB");
 
             paid.setText(allWinOld);
@@ -1531,7 +1532,8 @@ function game1() {
                 bottomText.setText(
                     bonusPay + linePay + triggerPay + " Credits Won"
                 );
-                bottomText.fontSize = 35;
+                bottomText.fontSize = 100;
+                // bottomText.fontSize = 35;
                 console.log(bottomText, " BBB");
 
                 for (key in info) {
@@ -1549,7 +1551,8 @@ function game1() {
                 firstAroundAnim = true;
                 showWin(wlWinValuesArray);
                 bottomText.setText(allWin + " Credits Won");
-                bottomText.fontSize = 35;
+                bottomText.fontSize = 100;
+                // bottomText.fontSize = 35;
                 console.log(bottomText, " BBB");
             } else {
                 spinStatus = false;
@@ -2855,7 +2858,8 @@ function game1() {
             // bottomText = game.add.text(512, 610, "BONUS!", {
 
             bottomText = game.add.text(0, 0, "BONUS!", {
-                font: '35px "Arial"',
+                // font: '35px "Arial"',
+                font: '150px "Arial"',
                 fill: "#fffd6f",
                 stroke: "#000000",
                 strokeThickness: 5,
@@ -3439,7 +3443,8 @@ function game1() {
             gameStatusText.visible = false;
             bottomText.visible = true;
             bottomText.setText("Good Luck!");
-            bottomText.fontSize = 35;
+            // bottomText.fontSize = 35;
+            bottomText.fontSize = 100;
             console.log(bottomText, "_______________bottomText");
             paid.setText("0");
             startButton.loadTexture("stopButton");
