@@ -2853,12 +2853,13 @@ function game1() {
             collect_text.anchor.setTo(0.5, 0.5);
             collect_text.visible = false;
             // bottomText = game.add.text(512, 610, "BONUS!", {
-            bottomText = game.add.text(420, 582, "BONUS!", {
+            bottomText = game.add.text(420, 583, "BONUS!", {
                 font: '35px "Arial"',
                 fill: "#fffd6f",
                 stroke: "#000000",
                 strokeThickness: 5,
-                fontWeight: 800
+                fontWeight: 800,
+                align: "center"
             });
             // 1024,
             // 800,
