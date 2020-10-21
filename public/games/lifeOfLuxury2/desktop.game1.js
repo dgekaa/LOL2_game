@@ -146,12 +146,11 @@ function game1() {
     game1.create = function() {
         Phaser.Text.prototype.defuzz = function() {
             var _this = this;
-            setImmediate(function() {
-                var dx = _.round(_this.worldPosition.x) - _this.worldPosition.x;
-                var dy = _.round(_this.worldPosition.y) - _this.worldPosition.y;
-                _this.x += dx;
-                _this.y += dy;
-            });
+
+            var dx = Math.round(_this.worldPosition.x) - _this.worldPosition.x;
+            var dy = Math.round(_this.worldPosition.y) - _this.worldPosition.y;
+            _this.x += dx;
+            _this.y += dy;
         };
 
         if (
