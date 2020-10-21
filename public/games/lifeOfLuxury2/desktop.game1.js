@@ -2852,7 +2852,7 @@ function game1() {
             });
             collect_text.anchor.setTo(0.5, 0.5);
             collect_text.visible = false;
-            bottomText = game.add.text(512, 609, "BONUS!", {
+            bottomText = game.add.text(512, 610, "BONUS!", {
                 font: '150px "Arial"',
                 // font: '35px "Arial"',
                 fill: "#fffd6f",
