@@ -643,7 +643,8 @@ function game2() {
 
             bottomText.visible = true;
             bottomText.font = "ArialMT-CondensedBold";
-            bottomText.fontSize = "26px";
+            // bottomText.fontSize = "26px";
+            bottomText.fontSize = "35px";
             bottomText.fill = "#ffffff";
             bottomText.stroke = "#000000";
             bottomText.strokeThickness = 5;
@@ -656,7 +657,6 @@ function game2() {
                     mulFreespin +
                     "X"
             );
-            bottomText.setTextBounds(0, 589, 1024, 60);
 
             bg2_panels.loadTexture("game.background3");
             slotLayer2Group.add(topLabel);
@@ -1462,8 +1462,6 @@ function game2() {
                 updateBalance();
                 showWin(wlWinValuesArray, winCellInfo);
                 bottomText.setText(allWin + " Credits Won");
-                bottomText.setTextBounds(0, 589, 1024, 60);
-                bottomText.fontSize = 35;
             } else {
                 lose_freespinsSound.play();
                 if (freeSpinCount > 0) {
@@ -1511,7 +1509,6 @@ function game2() {
             if (!afterDropFeatureGame) {
                 bottomText.visible = true;
                 bottomText.setText("BONUS RETRIGGERED");
-                bottomText.setTextBounds(0, 587, 1024, 60);
 
                 setTimeout(function() {
                     flickWinFreeSpeen(wcvFreeSpinWinValuesArray);
@@ -2408,8 +2405,6 @@ function game2() {
             winText.visible = true;
             if (!dataSpinRequest.stateData.isDropFeatureGame) {
                 bottomText.setText(allWin + " Credits Won");
-                bottomText.setTextBounds(0, 589, 1024, 60);
-                bottomText.fontSize = 35;
             }
             winText.setText(
                 "Line Pay \n" +
