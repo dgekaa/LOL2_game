@@ -1021,7 +1021,8 @@ function game1() {
             allWin = allWinOld + winOldTrigerFreeSpin;
             bottomText.visible = true;
             bottomText.setText(allWin + " Credits Won");
-            bottomText.fontSize = 35;
+            bottomText.fontSize = 70;
+            // bottomText.fontSize = 35;
             paid.setText(allWinOld);
             info = infoOldOnlyForThisWindow;
             for (var i = 1; i <= 15; ++i) {
@@ -1529,7 +1530,8 @@ function game1() {
                 bottomText.setText(
                     bonusPay + linePay + triggerPay + " Credits Won"
                 );
-                bottomText.fontSize = 35;
+                // bottomText.fontSize = 35;
+                bottomText.fontSize = 70;
                 for (key in info) {
                     if (info[key] === 10 || info[key] === 0) {
                         wcvWinValuesArray.push(+key);
@@ -1545,7 +1547,8 @@ function game1() {
                 firstAroundAnim = true;
                 showWin(wlWinValuesArray);
                 bottomText.setText(allWin + " Credits Won");
-                bottomText.fontSize = 35;
+                // bottomText.fontSize = 35;
+                bottomText.fontSize = 70;
             } else {
                 spinStatus = false;
                 gameStatusTextFlick();
@@ -1575,7 +1578,8 @@ function game1() {
                         bottomText.setText(
                             "To play please add credit to game."
                         );
-                        bottomText.fontSize = 25;
+                        bottomText.fontSize = 70;
+                        // bottomText.fontSize = 25;
                         autoPlay.loadTexture("addCredit");
                         addCreditFlick();
                     }
@@ -1693,7 +1697,8 @@ function game1() {
                 // winText.setText('Trigger Pay \n' + +winOldTrigerFreeSpin.toFixed());
                 bottomText.visible = true;
                 bottomText.setText("BONUS!");
-                bottomText.fontSize = 35;
+                bottomText.fontSize = 70;
+                // bottomText.fontSize = 35;
                 setTimeout(function() {
                     flickWin(wcvWinValuesArray);
                 }, 1000);
@@ -3238,7 +3243,8 @@ function game1() {
                         bottomText.setText(
                             "To play please add credit to game."
                         );
-                        bottomText.fontSize = 25;
+                        bottomText.fontSize = 70;
+                        // bottomText.fontSize = 25;
                         autoPlay.loadTexture("addCredit");
                         addCreditFlick();
                     }
@@ -3428,7 +3434,8 @@ function game1() {
             gameStatusText.visible = false;
             bottomText.visible = true;
             bottomText.setText("Good Luck!");
-            bottomText.fontSize = 35;
+            // bottomText.fontSize = 35;
+            bottomText.fontSize = 70;
             paid.setText("0");
             startButton.loadTexture("stopButton");
             hideLines();
