@@ -3433,7 +3433,7 @@ function game1() {
             gameStatusText.visible = false;
             bottomText.visible = true;
             bottomText.setText("Good Luck!");
-            bottomText.fontSize = 100;
+            bottomText.fontSize = 35;
             console.log(bottomText, "_______________bottomText");
             paid.setText("0");
             startButton.loadTexture("stopButton");
