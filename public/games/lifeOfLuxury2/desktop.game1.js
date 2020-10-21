@@ -2859,7 +2859,7 @@ function game1() {
                 stroke: "#000000",
                 strokeThickness: 5,
                 fontWeight: 800,
-                align: "center"
+                align: "left"
             });
             // 1024,
             // 800,
