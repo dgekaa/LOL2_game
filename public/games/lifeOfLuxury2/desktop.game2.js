@@ -2699,7 +2699,7 @@ function game2() {
                 strokeThickness: 5,
                 fontWeight: 800,
                 boundsAlignH: "center",
-                boundsAlignV: "center"
+                boundsAlignV: "top"
             });
             bottomText.setTextBounds(0, 588, 1024, 60);
             // bottomText.anchor.setTo(0.5, 0.5);
