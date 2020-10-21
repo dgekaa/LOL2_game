@@ -2863,9 +2863,9 @@ function game1() {
                 boundsAlignH: "center"
             });
 
-            bottomText.setTextBounds(200, 100, 500, 300);
+            bottomText.setTextBounds(0, 200, 1024, 100);
 
-            bottomText.anchor.setTo(1, 1);
+            // bottomText.anchor.setTo(1, 1);
             bottomText.visible = false;
         }
 
