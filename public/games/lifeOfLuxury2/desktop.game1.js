@@ -2854,7 +2854,7 @@ function game1() {
                 font: '35px "Arial"',
                 fill: "#fffd6f",
                 stroke: "#000000",
-                strokeThickness: 5,
+                strokeThickness: 4,
                 fontWeight: 800,
                 boundsAlignH: "center"
             });
