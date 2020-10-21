@@ -2857,7 +2857,7 @@ function game1() {
                 strokeThickness: 20,
                 fontWeight: 800
             });
-            // bottomText.anchor.setTo(0.5, 0.5);
+            bottomText.anchor.setTo(0.5, 0.5);
             bottomText.visible = false;
         }
 
@@ -3433,6 +3433,7 @@ function game1() {
             bottomText.setText("Good Luck!");
             // bottomText.fontSize = 35;
             bottomText.fontSize = 150;
+            console.log(bottomText, "_______________bottomText");
             paid.setText("0");
             startButton.loadTexture("stopButton");
             hideLines();
