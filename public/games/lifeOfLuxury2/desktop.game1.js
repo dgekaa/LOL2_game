@@ -2853,6 +2853,8 @@ function game1() {
             collect_text.anchor.setTo(0.5, 0.5);
             collect_text.visible = false;
             // bottomText = game.add.text(512, 610, "BONUS!", {
+            bottomText.setTextBounds(100, 100, 300, 300);
+
             bottomText = game.add.text(420, 583, "BONUS!", {
                 font: '35px "Arial"',
                 fill: "#fffd6f",
@@ -2861,8 +2863,6 @@ function game1() {
                 fontWeight: 800,
                 align: "center"
             });
-
-            bottomText.setTextBounds(100, 100, 300, 300);
 
             bottomText.anchor.setTo(0, 0);
             bottomText.visible = false;
