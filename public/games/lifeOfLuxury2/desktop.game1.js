@@ -2857,7 +2857,8 @@ function game1() {
                 // font: '35px "Arial"',
                 fill: "#fffd6f",
                 stroke: "#000000",
-                strokeThickness: 5,
+                // strokeThickness: 5,
+                strokeThickness: 20,
                 fontWeight: 800
             });
             bottomText.anchor.setTo(0.5, 0.5);
