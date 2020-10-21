@@ -2701,7 +2701,7 @@ function game2() {
                 boundsAlignH: "center",
                 boundsAlignV: "top"
             });
-            bottomText.setTextBounds(0, 588, 1024, 60);
+            bottomText.setTextBounds(0, 587, 1024, 60);
             // bottomText.anchor.setTo(0.5, 0.5);
             spinsLeft = game.add.text(194 - 238, 38, freeSpinCount, {
                 font: '45px "ArialMT-CondensedBold"',
