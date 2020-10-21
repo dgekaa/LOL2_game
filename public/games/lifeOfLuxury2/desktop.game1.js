@@ -2865,7 +2865,7 @@ function game1() {
 
             bottomText.setTextBounds(200, 100, 500, 300);
 
-            bottomText.anchor.setTo(0, 0);
+            bottomText.anchor.setTo(1, 1);
             bottomText.visible = false;
         }
 
