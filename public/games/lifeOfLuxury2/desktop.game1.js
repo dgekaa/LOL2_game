@@ -2851,14 +2851,14 @@ function game1() {
             collect_text.visible = false;
             // bottomText = game.add.text(512, 610, "BONUS!", {
             bottomText = game.add.text(0, 0, "BONUS!", {
-                font: '35px "Arial"',
+                font: '100px "Arial"',
                 fill: "#fffd6f",
                 stroke: "#000000",
                 strokeThickness: 5,
                 fontWeight: 800,
                 boundsAlignH: "center"
             });
-            bottomText.setTextBounds(0, 586, 1024, 100);
+            bottomText.setTextBounds(0, 584, 1024, 100);
             // bottomText.anchor.setTo(1, 1);
             bottomText.visible = false;
         }
