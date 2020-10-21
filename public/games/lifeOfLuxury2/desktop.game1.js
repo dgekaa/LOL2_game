@@ -1021,7 +1021,8 @@ function game1() {
             allWin = allWinOld + winOldTrigerFreeSpin;
             bottomText.visible = true;
             bottomText.setText(allWin + " Credits Won");
-            bottomText.fontSize = 35;
+            // bottomText.fontSize = 35;
+            bottomText.fontSize = 150;
             paid.setText(allWinOld);
             info = infoOldOnlyForThisWindow;
             for (var i = 1; i <= 15; ++i) {
@@ -2851,9 +2852,9 @@ function game1() {
                 font: '150px "Arial"',
                 // font: '35px "Arial"',
                 fill: "#fffd6f",
-                // stroke: "#000000",
+                stroke: "#000000",
                 // strokeThickness: 5,
-                // strokeThickness: 20,
+                strokeThickness: 20,
                 fontWeight: 800
             });
             // bottomText.anchor.setTo(0.5, 0.5);
@@ -3430,7 +3431,8 @@ function game1() {
             gameStatusText.visible = false;
             bottomText.visible = true;
             bottomText.setText("Good Luck!");
-            bottomText.fontSize = 35;
+            // bottomText.fontSize = 35;
+            bottomText.fontSize = 150;
             paid.setText("0");
             startButton.loadTexture("stopButton");
             hideLines();
