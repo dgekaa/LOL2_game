@@ -144,6 +144,16 @@ function game1() {
     };
 
     game1.create = function() {
+        Phaser.Text.prototype.defuzz = function() {
+            var _this = this;
+            setImmediate(function() {
+                var dx = _.round(_this.worldPosition.x) - _this.worldPosition.x;
+                var dy = _.round(_this.worldPosition.y) - _this.worldPosition.y;
+                _this.x += dx;
+                _this.y += dy;
+            });
+        };
+
         if (
             game.sound.usingWebAudio &&
             game.sound.context.state === "suspended"
@@ -1021,6 +1031,7 @@ function game1() {
             allWin = allWinOld + winOldTrigerFreeSpin;
             bottomText.visible = true;
             bottomText.setText(allWin + " Credits Won");
+            bottomText.defuzz();
             bottomText.fontSize = 70;
             // bottomText.fontSize = 35;
             paid.setText(allWinOld);
@@ -1530,6 +1541,7 @@ function game1() {
                 bottomText.setText(
                     bonusPay + linePay + triggerPay + " Credits Won"
                 );
+                bottomText.defuzz();
                 // bottomText.fontSize = 35;
                 bottomText.fontSize = 70;
                 for (key in info) {
@@ -1547,6 +1559,7 @@ function game1() {
                 firstAroundAnim = true;
                 showWin(wlWinValuesArray);
                 bottomText.setText(allWin + " Credits Won");
+                bottomText.defuzz();
                 // bottomText.fontSize = 35;
                 bottomText.fontSize = 70;
             } else {
@@ -1578,6 +1591,7 @@ function game1() {
                         bottomText.setText(
                             "To play please add credit to game."
                         );
+                        bottomText.defuzz();
                         bottomText.fontSize = 70;
                         // bottomText.fontSize = 25;
                         autoPlay.loadTexture("addCredit");
@@ -1697,6 +1711,7 @@ function game1() {
                 // winText.setText('Trigger Pay \n' + +winOldTrigerFreeSpin.toFixed());
                 bottomText.visible = true;
                 bottomText.setText("BONUS!");
+                bottomText.defuzz();
                 bottomText.fontSize = 70;
                 // bottomText.fontSize = 35;
                 setTimeout(function() {
@@ -2772,6 +2787,7 @@ function game1() {
 
             if (balance + allWinOld < betline * lines) {
                 bottomText.setText("To play please add credit to game.");
+                bottomText.defuzz();
                 bottomText.visible = true;
             }
         }
@@ -2799,6 +2815,7 @@ function game1() {
 
             if (balance + allWinOld < betline * lines) {
                 bottomText.setText("To play please add credit to game.");
+                bottomText.defuzz();
                 bottomText.visible = true;
             }
         }
@@ -3245,6 +3262,7 @@ function game1() {
                         bottomText.setText(
                             "To play please add credit to game."
                         );
+                        bottomText.defuzz();
                         bottomText.fontSize = 70;
                         // bottomText.fontSize = 25;
                         autoPlay.loadTexture("addCredit");
@@ -3436,6 +3454,7 @@ function game1() {
             gameStatusText.visible = false;
             bottomText.visible = true;
             bottomText.setText("Good Luck!");
+            bottomText.defuzz();
             // bottomText.fontSize = 35;
             bottomText.fontSize = 70;
             paid.setText("0");
