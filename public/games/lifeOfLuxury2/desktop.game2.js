@@ -1463,6 +1463,7 @@ function game2() {
                 showWin(wlWinValuesArray, winCellInfo);
                 bottomText.setText(allWin + " Credits Won");
                 bottomText.setTextBounds(0, 589, 1024, 60);
+                bottomText.fontSize = 35;
             } else {
                 lose_freespinsSound.play();
                 if (freeSpinCount > 0) {
@@ -2408,6 +2409,7 @@ function game2() {
             if (!dataSpinRequest.stateData.isDropFeatureGame) {
                 bottomText.setText(allWin + " Credits Won");
                 bottomText.setTextBounds(0, 589, 1024, 60);
+                bottomText.fontSize = 35;
             }
             winText.setText(
                 "Line Pay \n" +
@@ -2706,7 +2708,7 @@ function game2() {
                 fontWeight: 800,
                 boundsAlignH: "center"
             });
-            bottomText.setTextBounds(0, 585, 1024, 60);
+            bottomText.setTextBounds(0, 585, 1024, 100);
             // bottomText.anchor.setTo(0.5, 0.5);
             spinsLeft = game.add.text(194 - 238, 38, freeSpinCount, {
                 font: '45px "ArialMT-CondensedBold"',
