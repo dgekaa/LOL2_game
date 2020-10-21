@@ -643,8 +643,7 @@ function game2() {
 
             bottomText.visible = true;
             bottomText.font = "ArialMT-CondensedBold";
-            // bottomText.fontSize = "26px";
-            bottomText.fontSize = "35px";
+            bottomText.fontSize = "30px";
             bottomText.fill = "#ffffff";
             bottomText.stroke = "#000000";
             bottomText.strokeThickness = 5;
@@ -657,6 +656,7 @@ function game2() {
                     mulFreespin +
                     "X"
             );
+            bottomText.setTextBounds(0, 587, 1024, 100);
 
             bg2_panels.loadTexture("game.background3");
             slotLayer2Group.add(topLabel);
