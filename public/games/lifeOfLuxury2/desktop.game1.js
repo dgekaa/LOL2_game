@@ -1582,7 +1582,7 @@ function game1() {
                         addCreditFlick();
                     }
                 } else {
-                    if (autostart == false) {
+                    if (autostart == false && !spinStatus) {
                         showButtons([[startButton, "startButton"]]);
                         showButtons([[autoPlay, "autoPlay"]]);
                         showButtons([[maxBetSpin, "maxBetSpin"]]);
@@ -1886,9 +1886,6 @@ function game1() {
                         }
                     },
                     error: function(xhr, ajaxOptions, thrownError) {
-                        // if (!window.navigator.onLine) {
-                        //     sendMsg(gamename, sessionName, betline, lines);
-                        // } else {
                         var errorText = "//ошибка 30";
                         console.log("переключение № " + reconnectCount);
                         console.log(errorText);
@@ -1921,27 +1918,11 @@ function game1() {
                                 reconnectCount = 0;
                             }
                         }
-                        // }
                     }
                 });
             }
 
-            // if (window.navigator.onLine) {
             sendMsg(gamename, sessionName, betline, lines);
-            // } else {
-            //     if (autostart) {
-            //         autoPlay.loadTexture("autoPlay");
-            //         $("#spin").removeClass("auto");
-            //         autostart = false;
-            //         showButtons();
-            //     }
-
-            //     middlespin(0, 700);
-            //     middlespin(1, 1050);
-            //     middlespin(2, 1400);
-            //     middlespin(3, 1750);
-            //     middlespin(4, 2100);
-            // }
         }
 
         function moveFundsExceptionFunc(
@@ -1951,8 +1932,6 @@ function game1() {
             lines,
             moveFundsExceptionID
         ) {
-            // if (!window.navigator.onLine) return;
-
             $.ajax({
                 type: "get",
                 url:
@@ -2038,8 +2017,6 @@ function game1() {
             lines,
             moveFundsExceptionID
         ) {
-            // if (!window.navigator.onLine) return;
-
             $.ajax({
                 type: "get",
                 url:
@@ -2925,7 +2902,7 @@ function game1() {
                     autoPlay.loadTexture("addCredit");
                 }
             } else {
-                if (autostart == false) {
+                if (autostart == false && !spinStatus) {
                     showButtons([[startButton, "startButton"]]);
                     showButtons([[autoPlay, "autoPlay"]]);
                     showButtons([[maxBetSpin, "maxBetSpin"]]);
@@ -2965,7 +2942,7 @@ function game1() {
                     autoPlay.loadTexture("addCredit");
                 }
             } else {
-                if (autostart == false) {
+                if (autostart == false && !spinStatus) {
                     showButtons([[startButton, "startButton"]]);
                     showButtons([[autoPlay, "autoPlay"]]);
                     showButtons([[maxBetSpin, "maxBetSpin"]]);
@@ -3004,7 +2981,7 @@ function game1() {
                     autoPlay.loadTexture("addCredit");
                 }
             } else {
-                if (autostart == false) {
+                if (autostart == false && !spinStatus) {
                     showButtons([[startButton, "startButton"]]);
                     showButtons([[autoPlay, "autoPlay"]]);
                     showButtons([[maxBetSpin, "maxBetSpin"]]);
@@ -3096,7 +3073,7 @@ function game1() {
                             autoPlay.loadTexture("addCredit");
                         }
                     } else {
-                        if (autostart == false) {
+                        if (autostart == false && !spinStatus) {
                             showButtons([[startButton, "startButton"]]);
                             showButtons([[autoPlay, "autoPlay"]]);
                             showButtons([[maxBetSpin, "maxBetSpin"]]);

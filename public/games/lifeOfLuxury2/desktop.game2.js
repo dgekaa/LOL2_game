@@ -2705,8 +2705,7 @@ function game2() {
                 stroke: "#000000",
                 strokeThickness: 5,
                 fontWeight: 800,
-                boundsAlignH: "center",
-                letterSpacing: "2px"
+                boundsAlignH: "center"
             });
             bottomText.setTextBounds(0, 585, 1024, 100);
             // bottomText.anchor.setTo(0.5, 0.5);
