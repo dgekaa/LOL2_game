@@ -1582,10 +1582,12 @@ function game1() {
                         addCreditFlick();
                     }
                 } else {
-                    if (autostart == false && !spinStatus) {
+                    if (autostart == false) {
                         showButtons([[startButton, "startButton"]]);
-                        showButtons([[autoPlay, "autoPlay"]]);
-                        showButtons([[maxBetSpin, "maxBetSpin"]]);
+                        if (!spinStatus) {
+                            showButtons([[autoPlay, "autoPlay"]]);
+                            showButtons([[maxBetSpin, "maxBetSpin"]]);
+                        }
                         showMobileBtn();
                     }
                 }
@@ -2902,10 +2904,12 @@ function game1() {
                     autoPlay.loadTexture("addCredit");
                 }
             } else {
-                if (autostart == false && !spinStatus) {
+                if (autostart == false) {
                     showButtons([[startButton, "startButton"]]);
-                    showButtons([[autoPlay, "autoPlay"]]);
-                    showButtons([[maxBetSpin, "maxBetSpin"]]);
+                    if (!spinStatus) {
+                        showButtons([[autoPlay, "autoPlay"]]);
+                        showButtons([[maxBetSpin, "maxBetSpin"]]);
+                    }
                     showMobileBtn();
                 }
             }
@@ -2942,10 +2946,12 @@ function game1() {
                     autoPlay.loadTexture("addCredit");
                 }
             } else {
-                if (autostart == false && !spinStatus) {
+                if (autostart == false) {
                     showButtons([[startButton, "startButton"]]);
-                    showButtons([[autoPlay, "autoPlay"]]);
-                    showButtons([[maxBetSpin, "maxBetSpin"]]);
+                    if (!spinStatus) {
+                        showButtons([[autoPlay, "autoPlay"]]);
+                        showButtons([[maxBetSpin, "maxBetSpin"]]);
+                    }
                     showMobileBtn();
                 }
             }
@@ -2981,10 +2987,12 @@ function game1() {
                     autoPlay.loadTexture("addCredit");
                 }
             } else {
-                if (autostart == false && !spinStatus) {
+                if (autostart == false) {
                     showButtons([[startButton, "startButton"]]);
-                    showButtons([[autoPlay, "autoPlay"]]);
-                    showButtons([[maxBetSpin, "maxBetSpin"]]);
+                    if (!spinStatus) {
+                        showButtons([[autoPlay, "autoPlay"]]);
+                        showButtons([[maxBetSpin, "maxBetSpin"]]);
+                    }
                     showMobileBtn();
                 }
             }
@@ -3073,10 +3081,12 @@ function game1() {
                             autoPlay.loadTexture("addCredit");
                         }
                     } else {
-                        if (autostart == false && !spinStatus) {
+                        if (autostart == false) {
                             showButtons([[startButton, "startButton"]]);
-                            showButtons([[autoPlay, "autoPlay"]]);
-                            showButtons([[maxBetSpin, "maxBetSpin"]]);
+                            if (!spinStatus) {
+                                showButtons([[autoPlay, "autoPlay"]]);
+                                showButtons([[maxBetSpin, "maxBetSpin"]]);
+                            }
                             showMobileBtn();
                         }
                     }
