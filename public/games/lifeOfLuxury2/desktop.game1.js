@@ -1540,6 +1540,7 @@ function game1() {
                     showButtons();
                 }
                 if (balance + allWin < betline * lines) {
+                    bottomText.visible = false;
                     autostart = false;
                     $("#spin").removeClass("auto");
                     showButtons();
