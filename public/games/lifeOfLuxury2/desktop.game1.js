@@ -1726,7 +1726,6 @@ function game1() {
         let reconnectCount = 0;
 
         function requestSpin(gamename, sessionUuid, betline, lines) {
-            imageAnim && clearInterval(imageAnim);
             stopWinAnim = true;
             function sendMsg() {
                 if (demo !== "demo") {
@@ -1734,6 +1733,7 @@ function game1() {
                     getBalance();
                     console.log("getBalance");
                 }
+                imageAnim && clearInterval(imageAnim);
                 winText.visible = false;
                 $.ajax({
                     type: "get",
