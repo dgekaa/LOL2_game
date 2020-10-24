@@ -1534,13 +1534,13 @@ function game1() {
                 bottomText.fontSize = 35;
             } else {
                 spinStatus = false;
+                bottomText.visible = false;
                 gameStatusTextFlick();
                 changeNumberSpin();
                 if (autostart == false) {
                     showButtons();
                 }
                 if (balance + allWin < betline * lines) {
-                    bottomText.visible = false;
                     autostart = false;
                     $("#spin").removeClass("auto");
                     showButtons();
