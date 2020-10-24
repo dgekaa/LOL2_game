@@ -924,12 +924,9 @@ function game1() {
         maxBetSpin.inputEnabled = true;
         maxBetSpin.input.useHandCursor = true;
         maxBetSpin.events.onInputDown.add(function() {
-            // maxBetSpin.loadTexture('maxBetSpin_p');
+            // maxBetSpin.loadTexture("maxBetSpin_p");
         });
         maxBetSpin.events.onInputUp.add(function(click, pointer) {
-            // if (!window.navigator.onLine) return;
-
-            // if (pointer.button !== 0 && pointer.button !== undefined) return;
             maxBetSpin.loadTexture("maxBetSpin");
             if (balanceUpdateStatus) {
                 stopUpdateBalance();
@@ -953,7 +950,6 @@ function game1() {
                 totalBet.setText(bet);
                 activateFreeSpins = true;
                 preStartSpin();
-                // requestSpin(gamename, sessionName, betline, lines);
             }
         });
         scorePosions = [
@@ -1676,13 +1672,10 @@ function game1() {
                     }
                 }
             });
-            // winText.visible = false;
             if (afterFreespinStatus) {
                 winText.visible = true;
             }
             if (!afterFreespinStatus) {
-                // winText.visible = true;
-                // winText.setText('Trigger Pay \n' + +winOldTrigerFreeSpin.toFixed());
                 bottomText.visible = true;
                 bottomText.setText("BONUS!");
                 bottomText.fontSize = 35;
@@ -1741,6 +1734,7 @@ function game1() {
                     getBalance();
                     console.log("getBalance");
                 }
+                winText.visible = false;
                 $.ajax({
                     type: "get",
                     url:
@@ -1752,75 +1746,6 @@ function game1() {
 
                         if (IsJsonString(data)) {
                             dataSpinRequest = JSON.parse(data);
-                            //freespin
-                            // if (activateFreeSpins)
-
-                            // dataSpinRequest = {
-                            //     "stateData": {
-                            //         "screen": "featureGame",
-                            //         "isWin": true,
-                            //         "isWinOnMain": true,
-                            //         "isWinOnBonus": true,
-                            //         "isWinOnFeatureGame": false,
-                            //         "isDropFeatureGame": true,
-                            //         "isEndFeatureGame": false,
-                            //         "moveNumberInFeatureGame": 0,
-                            //         "prevScreen": "mainGame"
-                            //     },
-                            //     "balanceData": {
-                            //         "balance": 10080,
-                            //         "totalPayoff": 100,
-                            //         "payoffByLines": 20,
-                            //         "payoffByBonus": 80,
-                            //         "totalWinningsInFeatureGame": 0
-                            //     },
-                            //     "sessionData": {
-                            //         "eventId": null,
-                            //         "userId": 1,
-                            //         "gameId": 6,
-                            //         "mode": "demo",
-                            //         "sessionUuid": "0fd446e0-030c-11ea-9344-1fd7f7246bde"
-                            //     },
-                            //     "logicData": {
-                            //         "countSymbolsInGame": 11,
-                            //         "countOfMovesInFeatureGame": 12,
-                            //         "lineBet": 1,
-                            //         "linesInGame": 20,
-                            //         "table": [2, 10, 9, 1, 4, 9, 5, 6, 3, 9, 9, 1, 6, 4, 8],
-                            //         "winningLines": [{
-                            //             "lineNumber": 2,
-                            //             "symbol": 9,
-                            //             "winCellCount": 2
-                            //         }, {"lineNumber": 8, "symbol": 9, "winCellCount": 2}],
-                            //         "payoffsForBonus": [{"symbol": 10, "count": 3, "winning": 80}],
-                            //         "payoffsForLines": [{"lineNumber": 2, "winValue": 10}, {
-                            //             "lineNumber": 8,
-                            //             "winValue": 10
-                            //         }],
-                            //         "winningCells": {"2": 9, "5": 0},
-                            //         "multiplier": 2
-                            //     },
-                            //     "longData": {
-                            //         "stateData": {
-                            //             "screen": "featureGame",
-                            //             "isWin": true,
-                            //             "isWinOnMain": true,
-                            //             "isWinOnBonus": true,
-                            //             "isWinOnFeatureGame": false,
-                            //             "isDropFeatureGame": true,
-                            //             "isEndFeatureGame": false,
-                            //             "moveNumberInFeatureGame": 0,
-                            //             "prevScreen": "mainGame"
-                            //         },
-                            //         "balanceData": {
-                            //             "balance": 10080,
-                            //             "totalPayoff": 100,
-                            //             "payoffByLines": 20,
-                            //             "payoffByBonus": 80,
-                            //             "totalWinningsInFeatureGame": 0
-                            //         },
-                            //     }
-                            // }
 
                             if (dataSpinRequest.status !== "false") {
                                 isGetResponse = true;
@@ -2148,13 +2073,7 @@ function game1() {
                         }
                     }
 
-                    // if (isTriggerPay) {
-                    //     winText.setText(
-                    //         "Trigger Pay \n" + triggerPay.toFixed()
-                    //     );
-                    // } else {
                     winText.setText("");
-                    // }
 
                     winText.visible = true;
 
@@ -3429,8 +3348,7 @@ function game1() {
                 showMobileBtn();
             }
             hideSquare();
-            // bg2_panels.loadTexture('game.background');
-            // slotLayer2Group.add(topLabel);
+
             setTimeout(function() {
                 startspin(0);
                 setTimeout(function() {
