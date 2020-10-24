@@ -650,26 +650,11 @@ function game1() {
         exit.inputEnabled = true;
         exit.input.useHandCursor = true;
         exit.events.onInputUp.add(function(click, pointer) {
-            // if (pointer.button !== 0 && pointer.button !== undefined)
-            //     return;
-            // if (!window.navigator.onLine) return;
-
             return_to_gameSong.play();
             exit.loadTexture("exit");
             if (balanceUpdateStatus) {
                 stopUpdateBalance();
             } else {
-                // coinAnim();
-                // giveBalance();
-                // var allBalance = balance + allWinOld;
-                // blue_field.visible = true;
-                // collect_text.setText('HAND PAY ' +allBalance+' CREDITS')
-                // flickcollect_text();
-                // credit.setText(0);
-                // paid.setText(allBalance);
-                // setTimeout(function() {
-                //  location.href = '/';
-                // }, 4000);
                 bottomText.visible = false;
                 hideLines();
                 if (demo !== "demo") {
@@ -687,13 +672,15 @@ function game1() {
         paytable.inputEnabled = true;
         paytable.input.useHandCursor = true;
         paytable.events.onInputUp.add(function(click, pointer) {
-            // if (pointer.button !== 0 && pointer.button !== undefined)
-            //     return;
             paytable.loadTexture("paytable");
             if (balanceUpdateStatus) {
                 stopUpdateBalance();
             } else {
                 openInfoPage("paytable");
+                if (isMobile) {
+                    document.querySelector(".btn_1").style.display = "none";
+                }
+
                 bottomText.visible = false;
                 hideLines();
                 hideButtons();
@@ -703,12 +690,13 @@ function game1() {
         help.inputEnabled = true;
         help.input.useHandCursor = true;
         help.events.onInputUp.add(function(click, pointer) {
-            // if (pointer.button !== 0 && pointer.button !== undefined)
-            //     return;
             help.loadTexture("help");
             if (balanceUpdateStatus) {
                 stopUpdateBalance();
             } else {
+                if (isMobile) {
+                    document.querySelector(".btn_1").style.display = "none";
+                }
                 openInfoPage("help");
                 bottomText.visible = false;
                 hideLines();
@@ -3679,28 +3667,8 @@ function game1() {
             });
             hideMobileBtn();
             if (isMobile) {
-                // black_bg2 = game.add.sprite(0, 0, "black_bg2");
-                // black_bg2.inputEnabled = true;
-                // btn_yes = game.add.sprite(238, 476, "btn_yes");
-                // btn_yes.inputEnabled = true;
-                // btn_yes.input.useHandCursor = true;
-                // btn_yes.events.onInputUp.add(function(click, pointer) {
                 game.sound.mute = false;
-                // black_bg2.visible = false;
-                // btn_yes.visible = false;
-                // btn_no.visible = false;
                 checkScore();
-                // });
-                // btn_no = game.add.sprite(544, 475, "btn_no");
-                // btn_no.inputEnabled = true;
-                // btn_no.input.useHandCursor = true;
-                // btn_no.events.onInputUp.add(function(click, pointer) {
-                //     game.sound.mute = true;
-                //     black_bg2.visible = false;
-                //     btn_yes.visible = false;
-                //     btn_no.visible = false;
-                //     checkScore();
-                // });
             } else {
                 checkScore();
             }

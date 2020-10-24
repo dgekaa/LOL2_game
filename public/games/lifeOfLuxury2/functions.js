@@ -46,6 +46,9 @@ function exitInfoPage() {
         .to({ y: 0 + 831 }, 600, Phaser.Easing.LINEAR, true)
         .onComplete.add(function() {
             showButtons();
+            if (isMobile) {
+                document.querySelector(".btn_1").style.display = "block";
+            }
         });
 }
 
@@ -58,7 +61,6 @@ function addBtnInfoPage() {
     return_to_game.inputEnabled = true;
     return_to_game.input.useHandCursor = true;
     return_to_game.events.onInputUp.add(function(click, pointer) {
-        // if (pointer.button !== 0 && pointer.button !== undefined) return;
         helpSound.play();
         exitInfoPage();
     });
@@ -66,7 +68,6 @@ function addBtnInfoPage() {
     nextBtnInfoPage.inputEnabled = true;
     nextBtnInfoPage.input.useHandCursor = true;
     nextBtnInfoPage.events.onInputUp.add(function(click, pointer) {
-        // if (pointer.button !== 0 && pointer.button !== undefined) return;
         helpSound.play();
         nextInfoPage();
     });
