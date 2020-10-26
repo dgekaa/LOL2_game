@@ -2717,7 +2717,8 @@ function game1() {
             });
             paid.anchor.setTo(1, 0.5);
             winText = game.add.text(150, 608, "Trigger Pay \n40", {
-                font: '22px "Arial"',
+                font: '99px "Arial"',
+                // font: '22px "Arial"',
                 fill: "#ffffff",
                 fontWeight: 600,
                 align: "center"
