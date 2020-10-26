@@ -690,11 +690,11 @@ function game2() {
                         dataSpinRequest = JSON.parse(data);
                         if (dataSpinRequest.status !== "false") {
                             let eventId = game.add.text(
-                                980,
-                                700,
+                                990,
+                                685,
                                 dataSpinRequest.sessionData["eventId"] || "",
                                 {
-                                    font: "26px Arial",
+                                    font: "24px Arial",
                                     fill: "#fff",
                                     fontWeight: "bold"
                                 }
