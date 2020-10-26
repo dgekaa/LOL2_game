@@ -689,9 +689,17 @@ function game2() {
                     if (IsJsonString(data)) {
                         dataSpinRequest = JSON.parse(data);
                         if (dataSpinRequest.status !== "false") {
-                            eventId.setText(
-                                `${dataSpinRequest.sessionData["eventId"]}`
+                            let eventId = game.add.text(
+                                1020,
+                                0,
+                                dataSpinRequest.sessionData["eventId"] || "",
+                                {
+                                    font: "17px Arial",
+                                    fill: "#fff",
+                                    fontWeight: "bold"
+                                }
                             );
+                            eventId.anchor.setTo(1, 0);
                             eventId.visible = true;
                             parseSpinAnswer(dataSpinRequest);
                         } else {
