@@ -689,6 +689,10 @@ function game2() {
                     if (IsJsonString(data)) {
                         dataSpinRequest = JSON.parse(data);
                         if (dataSpinRequest.status !== "false") {
+                            eventId.setText(
+                                `${dataSpinRequest.sessionData["eventId"]}`
+                            );
+                            eventId.visible = true;
                             parseSpinAnswer(dataSpinRequest);
                         } else {
                             errorStatus = true;
