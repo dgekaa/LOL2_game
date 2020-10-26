@@ -987,7 +987,7 @@ function game1() {
         addScore();
         addinfoPage();
 
-        var eventId = game.add.text(
+        eventId = game.add.text(
             1020,
             0,
             evIdAfterFreeeSpeen ? evIdAfterFreeeSpeen : "",
