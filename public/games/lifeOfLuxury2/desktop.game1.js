@@ -3272,8 +3272,10 @@ function game1() {
             checkScore();
 
             if (balance + allWinOld >= betline * lines) {
-                bottomText.setText("");
-                bottomText.visible = true;
+                if (!spinStatus) {
+                    bottomText.setText("");
+                    bottomText.visible = true;
+                }
             }
 
             if (balance + allWin > 0) {
