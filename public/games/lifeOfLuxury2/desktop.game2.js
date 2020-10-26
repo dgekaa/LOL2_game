@@ -696,7 +696,7 @@ function game2() {
                                 {
                                     font: "22px Arial",
                                     fill: "#fff",
-                                    fontWeight: "bold"
+                                    fontWeight: 600
                                 }
                             );
                             eventId.anchor.setTo(1, 0);
@@ -3030,6 +3030,7 @@ function game2() {
             }
             winText.visible = false;
             bottomText.visible = false;
+            eventId.visible = false;
 
             freesponFinishBGText.visible = true;
 
