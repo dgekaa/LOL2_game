@@ -693,6 +693,7 @@ function game1() {
                 stopUpdateBalance();
             } else {
                 openInfoPage("paytable");
+                eventId.visible = false;
                 if (isMobile) {
                     document.querySelector(".btn_1").style.display = "none";
                 }
@@ -710,6 +711,7 @@ function game1() {
             if (balanceUpdateStatus) {
                 stopUpdateBalance();
             } else {
+                eventId.visible = false;
                 if (isMobile) {
                     document.querySelector(".btn_1").style.display = "none";
                 }
@@ -1065,8 +1067,6 @@ function game1() {
                 dataArray.balanceData["balance"] -
                 dataArray.balanceData["totalPayoff"];
 
-            // linesR = dataArray['linesInGame'];
-            // betlineR = dataArray['betLine'];
             allWin = dataArray.balanceData["payoffByLines"];
 
             if (dataArray.sessionData["eventId"]) {
@@ -1074,7 +1074,6 @@ function game1() {
                 eventId.setText(`${dataArray.sessionData["eventId"]}`);
                 eventId.visible = true;
             }
-            // #######################################
 
             if (dataSpinRequest.stateData.isWinOnBonus) {
                 allWin = dataArray.balanceData["totalPayoff"];
@@ -1759,8 +1758,6 @@ function game1() {
                         `/api-v2/action?game_id=${gameId}&user_id=${userId}&mode=${demo}&action=spin&session_uuid=${sessionUuid}&token=${token}&linesInGame=${lines}&lineBet=${betline}&platform_id=${platformId}`,
                     dataType: "html",
                     success: function(data) {
-                        console.log(data);
-
                         if (IsJsonString(data)) {
                             dataSpinRequest = JSON.parse(data);
 
@@ -2030,8 +2027,6 @@ function game1() {
         }
 
         function reconnectSpin(gamename, sessionName, betline, lines) {
-            // if (!window.navigator.onLine) return;
-
             $.ajax({
                 type: "get",
                 url: getNeedUrlPath() + "/reconnect",

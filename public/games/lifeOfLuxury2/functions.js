@@ -46,6 +46,7 @@ function exitInfoPage() {
         .to({ y: 0 + 831 }, 600, Phaser.Easing.LINEAR, true)
         .onComplete.add(function() {
             showButtons();
+            eventId.visible = true;
             if (isMobile) {
                 document.querySelector(".btn_1").style.display = "block";
             }
