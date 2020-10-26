@@ -153,8 +153,8 @@ function game1() {
         let style_width = +getComputedStyle(canvas)
             .getPropertyValue("width")
             .slice(0, -2);
-        canvas.setAttribute("height", style_height * dpi);
-        canvas.setAttribute("width", style_width * dpi);
+        canvas.setAttribute("height", style_height * 0.2);
+        canvas.setAttribute("width", style_width * 0.2);
     }
 
     fix_dpi();
