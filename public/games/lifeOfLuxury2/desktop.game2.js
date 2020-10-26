@@ -1488,17 +1488,9 @@ function game2() {
                     }
                 } else {
                     setTimeout(function() {
-                        // blackBg.visible = true;
                         setTimeout(function() {
                             finishFreespins();
                         }, 2000);
-                        // game.add.tween(blackBg).to({ alpha: 1 }, 1000, "Linear", true).onComplete.add(function() {
-                        //   setTimeout(function() {
-                        //     stopWinAnim = true;
-                        //     afterFreespinStatus = true;
-                        //     game.state.start('game1');
-                        //   }, 1000);
-                        // })
                     }, 2500);
                 }
             }
@@ -2932,15 +2924,6 @@ function game2() {
                             }
                         } else {
                             finishFreespins();
-                            // blackBg.visible = true;
-
-                            // game.add.tween(blackBg).to({ alpha: 1 }, 1000, "Linear", true).onComplete.add(function() {
-                            //   setTimeout(function() {
-                            //     stopWinAnim = true;
-                            //     afterFreespinStatus = true;
-                            //     game.state.start('game1');
-                            //   }, 1000);
-                            // })
                         }
                     }, 2000);
                 }

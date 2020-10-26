@@ -3268,7 +3268,7 @@ function game1() {
         }
 
         function changeBalance() {
-            credit.setText(balance);
+            !spinStatus && credit.setText(balance);
             checkScore();
 
             if (balance + allWinOld >= betline * lines) {
