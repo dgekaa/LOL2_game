@@ -143,6 +143,22 @@ function game1() {
         ]
     };
 
+    let dpi = window.devicePixelRatio;
+    let canvas = document.body.querySelector("canvas");
+
+    function fix_dpi() {
+        let style_height = +getComputedStyle(canvas)
+            .getPropertyValue("height")
+            .slice(0, -2);
+        let style_width = +getComputedStyle(canvas)
+            .getPropertyValue("width")
+            .slice(0, -2);
+        canvas.setAttribute("height", style_height * dpi);
+        canvas.setAttribute("width", style_width * dpi);
+    }
+
+    fix_dpi();
+
     game1.create = function() {
         if (
             game.sound.usingWebAudio &&
