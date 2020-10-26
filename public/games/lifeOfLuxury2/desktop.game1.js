@@ -143,21 +143,21 @@ function game1() {
         ]
     };
 
-    let dpi = window.devicePixelRatio;
-    let canvas = document.body.querySelector("canvas");
+    // let dpi = window.devicePixelRatio;
+    // let canvas = document.body.querySelector("canvas");
 
-    function fix_dpi() {
-        let style_height = +getComputedStyle(canvas)
-            .getPropertyValue("height")
-            .slice(0, -2);
-        let style_width = +getComputedStyle(canvas)
-            .getPropertyValue("width")
-            .slice(0, -2);
-        canvas.setAttribute("height", style_height * 0.2);
-        canvas.setAttribute("width", style_width * 0.2);
-    }
+    // function fix_dpi() {
+    //     let style_height = +getComputedStyle(canvas)
+    //         .getPropertyValue("height")
+    //         .slice(0, -2);
+    //     let style_width = +getComputedStyle(canvas)
+    //         .getPropertyValue("width")
+    //         .slice(0, -2);
+    //     canvas.setAttribute("height", style_height * 0.2);
+    //     canvas.setAttribute("width", style_width * 0.2);
+    // }
 
-    fix_dpi();
+    // fix_dpi();
 
     game1.create = function() {
         if (
