@@ -2814,8 +2814,6 @@ function game1() {
                 autoPlay.loadTexture("autoPlay");
                 if (balance + allWin < betline * lines && demo !== "demo") {
                     checkBalance();
-                    // !!!!!!!!!!!!!!!!!!!!1
-
                     showButtons([[autoPlay, "autoPlay"]]);
                     autoPlay.loadTexture("addCredit");
                     addcreditFlickStatus = true;
