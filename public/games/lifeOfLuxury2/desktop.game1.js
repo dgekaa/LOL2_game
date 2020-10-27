@@ -2998,13 +2998,11 @@ function game1() {
                             demo !== "demo"
                         ) {
                             checkBalance();
-                            // !!!!!!!!!!!!!!!!!!!!!!!!!!!!1!
-                            if (!balanceUpdateStatus) {
-                                showButtons([[autoPlay, "autoPlay"]]);
-                                autoPlay.loadTexture("addCredit");
-                                addcreditFlickStatus = true;
-                                addCreditFlick();
-                            }
+
+                            showButtons([[autoPlay, "autoPlay"]]);
+                            autoPlay.loadTexture("addCredit");
+                            addcreditFlickStatus = true;
+                            addCreditFlick();
                         }
                     } else {
                         if (autostart == false) {
