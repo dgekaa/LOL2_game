@@ -2812,7 +2812,7 @@ function game1() {
                 }
                 hideMobileBtn();
                 autoPlay.loadTexture("autoPlay");
-                if (balance + allWin < betline * lines && demo !== "demo") {
+                if (demo !== "demo") {
                     checkBalance();
                     showButtons([[autoPlay, "autoPlay"]]);
                     autoPlay.loadTexture("addCredit");
@@ -2902,12 +2902,12 @@ function game1() {
                 if (balance + allWin < betline * lines && demo !== "demo") {
                     // !!!!!!!!!!!!!!!!!!!!!!!!!!!!1!
                     checkBalance();
-                    if (!balanceUpdateStatus) {
-                        showButtons([[autoPlay, "autoPlay"]]);
-                        autoPlay.loadTexture("addCredit");
-                        addcreditFlickStatus = true;
-                        addCreditFlick();
-                    }
+                    // if (!balanceUpdateStatus) {
+                    //     showButtons([[autoPlay, "autoPlay"]]);
+                    //     autoPlay.loadTexture("addCredit");
+                    //     addcreditFlickStatus = true;
+                    //     addCreditFlick();
+                    // }
                 }
             } else {
                 if (autostart == false) {
