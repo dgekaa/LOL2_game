@@ -2902,7 +2902,7 @@ function game1() {
                 // if (balance + allWin < betline * lines && demo !== "demo") {
                 //     // !!!!!!!!!!!!!!!!!!!!!!!!!!!!1!
                 //     checkBalance();
-                //     showButtons([[autoPlay, "autoPlay"]]);
+                showButtons([[autoPlay, "autoPlay"]]);
                 //     autoPlay.loadTexture("addCredit");
                 //     addcreditFlickStatus = true;
                 //     addCreditFlick();
