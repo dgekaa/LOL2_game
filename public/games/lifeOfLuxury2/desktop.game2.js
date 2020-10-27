@@ -97,6 +97,7 @@ function game2() {
         var mulFreespinOld = 2;
         var freeSpinCount = 12;
         var allFreeSpinCount = 12;
+        let eventId;
         allWinOld = 0;
         if (featureGameStatus) {
             allWinOld = allWinOldInit;
@@ -689,7 +690,7 @@ function game2() {
                     if (IsJsonString(data)) {
                         dataSpinRequest = JSON.parse(data);
                         if (dataSpinRequest.status !== "false") {
-                            let eventId = game.add.text(
+                            eventId = game.add.text(
                                 975,
                                 687,
                                 dataSpinRequest.sessionData["eventId"] || "",
