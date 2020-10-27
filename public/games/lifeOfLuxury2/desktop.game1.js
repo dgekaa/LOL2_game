@@ -1483,7 +1483,6 @@ function game1() {
             flickBtn = true;
             if (addcreditFlickStatus) {
                 autoPlay.loadTexture("addCredit");
-                //autoPlay.loadTexture('addCredit_p');
                 setTimeout(function() {
                     if (addcreditFlickStatus) {
                         autoPlay.loadTexture("addCredit_p");
@@ -2821,6 +2820,8 @@ function game1() {
                     checkBalance();
                     showButtons([[autoPlay, "autoPlay"]]);
                     autoPlay.loadTexture("addCredit");
+                    // %%%%%%%%%%%%%%%%%%%%%
+                    addCreditFlick();
                 }
             } else {
                 if (autostart == false) {
@@ -2863,6 +2864,8 @@ function game1() {
                     checkBalance();
                     showButtons([[autoPlay, "autoPlay"]]);
                     autoPlay.loadTexture("addCredit");
+                    // %%%%%%%%%%%%%%%%
+                    addCreditFlick();
                 }
             } else {
                 if (autostart == false) {
@@ -2904,6 +2907,8 @@ function game1() {
                     checkBalance();
                     showButtons([[autoPlay, "autoPlay"]]);
                     autoPlay.loadTexture("addCredit");
+                    // %%%%%%%%%%%%%%%5
+                    addCreditFlick();
                 }
             } else {
                 if (autostart == false) {
@@ -2998,6 +3003,8 @@ function game1() {
                             checkBalance();
                             showButtons([[autoPlay, "autoPlay"]]);
                             autoPlay.loadTexture("addCredit");
+                            // %%%%%%%%%%%%%%%
+                            addCreditFlick();
                         }
                     } else {
                         if (autostart == false) {
