@@ -1019,6 +1019,7 @@ function game1() {
             allWin = allWinOld + winOldTrigerFreeSpin;
             bottomText.visible = true;
             bottomText.setText(allWin + " Credits Won");
+            bottomText.y = 0;
             bottomText.fontSize = 35;
 
             paid.setText(allWinOld);
@@ -1524,6 +1525,7 @@ function game1() {
                 bottomText.setText(
                     bonusPay + linePay + triggerPay + " Credits Won"
                 );
+                bottomText.y = 0;
                 bottomText.fontSize = 35;
 
                 for (key in info) {
@@ -1541,6 +1543,7 @@ function game1() {
                 firstAroundAnim = true;
                 showWin(wlWinValuesArray);
                 bottomText.setText(allWin + " Credits Won");
+                bottomText.y = 0;
                 bottomText.fontSize = 35;
             } else {
                 spinStatus = false;
@@ -1566,12 +1569,12 @@ function game1() {
                     if (balance + allWin < betline * lines && demo !== "demo") {
                         checkBalance();
                         showButtons([[autoPlay, "autoPlay"]]);
-                        //autoPlay.loadTexture('addCredit');
                         addcreditFlickStatus = true;
                         bottomText.visible = true;
                         bottomText.setText(
                             "To play please add credit to game."
                         );
+                        bottomText.y = 15;
                         bottomText.fontSize = 25;
                         autoPlay.loadTexture("addCredit");
                         addCreditFlick();
@@ -1689,6 +1692,7 @@ function game1() {
             if (!afterFreespinStatus) {
                 bottomText.visible = true;
                 bottomText.setText("BONUS!");
+                bottomText.y = 0;
                 bottomText.fontSize = 35;
                 setTimeout(function() {
                     flickWin(wcvWinValuesArray);
@@ -2662,6 +2666,7 @@ function game1() {
 
             if (balance + allWinOld < betline * lines) {
                 bottomText.setText("To play please add credit to game.");
+                bottomText.y = 0;
                 bottomText.visible = true;
             }
         }
@@ -2689,6 +2694,7 @@ function game1() {
 
             if (balance + allWinOld < betline * lines) {
                 bottomText.setText("To play please add credit to game.");
+                bottomText.y = 0;
                 bottomText.visible = true;
             }
         }
@@ -3156,6 +3162,7 @@ function game1() {
                         bottomText.setText(
                             "To play please add credit to game."
                         );
+                        bottomText.y = 15;
                         bottomText.fontSize = 25;
                         autoPlay.loadTexture("addCredit");
                         addCreditFlick();
@@ -3348,6 +3355,7 @@ function game1() {
             gameStatusText.visible = false;
             bottomText.visible = true;
             bottomText.setText("Good Luck!");
+            bottomText.y = 0;
             bottomText.fontSize = 35;
             console.log(bottomText, "_______________bottomText");
             paid.setText("0");
