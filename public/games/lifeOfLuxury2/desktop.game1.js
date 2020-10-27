@@ -2821,6 +2821,7 @@ function game1() {
                     showButtons([[autoPlay, "autoPlay"]]);
                     autoPlay.loadTexture("addCredit");
                     // %%%%%%%%%%%%%%%%%%%%%
+                    addcreditFlickStatus = true;
                     addCreditFlick();
                 }
             } else {
@@ -2865,6 +2866,7 @@ function game1() {
                     showButtons([[autoPlay, "autoPlay"]]);
                     autoPlay.loadTexture("addCredit");
                     // %%%%%%%%%%%%%%%%
+                    addcreditFlickStatus = true;
                     addCreditFlick();
                 }
             } else {
@@ -2908,6 +2910,7 @@ function game1() {
                     showButtons([[autoPlay, "autoPlay"]]);
                     autoPlay.loadTexture("addCredit");
                     // %%%%%%%%%%%%%%%5
+                    addcreditFlickStatus = true;
                     addCreditFlick();
                 }
             } else {
@@ -3004,6 +3007,7 @@ function game1() {
                             showButtons([[autoPlay, "autoPlay"]]);
                             autoPlay.loadTexture("addCredit");
                             // %%%%%%%%%%%%%%%
+                            addcreditFlickStatus = true;
                             addCreditFlick();
                         }
                     } else {
