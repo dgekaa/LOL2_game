@@ -3000,10 +3000,13 @@ function game1() {
                             demo !== "demo"
                         ) {
                             checkBalance();
-                            showButtons([[autoPlay, "autoPlay"]]);
-                            autoPlay.loadTexture("addCredit");
-                            addcreditFlickStatus = true;
-                            addCreditFlick();
+                            // !!!!!!!!!!!!!!!!!!!!!!!!!!!!1!
+                            if (!balanceUpdateStatus) {
+                                showButtons([[autoPlay, "autoPlay"]]);
+                                autoPlay.loadTexture("addCredit");
+                                addcreditFlickStatus = true;
+                                addCreditFlick();
+                            }
                         }
                     } else {
                         if (autostart == false) {
