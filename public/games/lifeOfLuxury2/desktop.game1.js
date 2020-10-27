@@ -1574,7 +1574,7 @@ function game1() {
                         bottomText.setText(
                             "To play please add credit to game."
                         );
-                        bottomText.y = 6;
+                        bottomText.y = 8;
                         bottomText.fontSize = 25;
                         autoPlay.loadTexture("addCredit");
                         addCreditFlick();
@@ -2666,7 +2666,8 @@ function game1() {
 
             if (balance + allWinOld < betline * lines) {
                 bottomText.setText("To play please add credit to game.");
-                bottomText.y = 0;
+                bottomText.y = 8;
+                bottomText.fontSize = 25;
                 bottomText.visible = true;
             }
         }
@@ -2694,7 +2695,8 @@ function game1() {
 
             if (balance + allWinOld < betline * lines) {
                 bottomText.setText("To play please add credit to game.");
-                bottomText.y = 0;
+                bottomText.y = 8;
+                bottomText.fontSize = 25;
                 bottomText.visible = true;
             }
         }
@@ -3162,7 +3164,7 @@ function game1() {
                         bottomText.setText(
                             "To play please add credit to game."
                         );
-                        bottomText.y = 6;
+                        bottomText.y = 8;
                         bottomText.fontSize = 25;
                         autoPlay.loadTexture("addCredit");
                         addCreditFlick();
