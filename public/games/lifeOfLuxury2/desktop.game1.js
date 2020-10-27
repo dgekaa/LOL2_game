@@ -1574,7 +1574,7 @@ function game1() {
                         bottomText.setText(
                             "To play please add credit to game."
                         );
-                        bottomText.y = 3;
+                        bottomText.y = 6;
                         bottomText.fontSize = 25;
                         autoPlay.loadTexture("addCredit");
                         addCreditFlick();
@@ -3162,7 +3162,7 @@ function game1() {
                         bottomText.setText(
                             "To play please add credit to game."
                         );
-                        bottomText.y = 3;
+                        bottomText.y = 6;
                         bottomText.fontSize = 25;
                         autoPlay.loadTexture("addCredit");
                         addCreditFlick();
