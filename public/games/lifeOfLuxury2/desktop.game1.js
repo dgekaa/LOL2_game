@@ -764,10 +764,6 @@ function game1() {
         autoPlay.input.useHandCursor = true;
         autoPlay.events.onInputDown.add(function() {});
         autoPlay.events.onInputUp.add(function(click, pointer) {
-            // if (pointer.button !== 0 && pointer.button !== undefined)
-            //     return;
-            // if (!window.navigator.onLine) return;
-
             if (autostart === false) {
                 if (balanceUpdateStatus) {
                     stopUpdateBalance();
@@ -2818,10 +2814,13 @@ function game1() {
                 autoPlay.loadTexture("autoPlay");
                 if (balance + allWin < betline * lines && demo !== "demo") {
                     checkBalance();
-                    showButtons([[autoPlay, "autoPlay"]]);
-                    autoPlay.loadTexture("addCredit");
-                    addcreditFlickStatus = true;
-                    addCreditFlick();
+                    // !!!!!!!!!!!!!!!!!!!!1
+                    if (!balanceUpdateStatus) {
+                        showButtons([[autoPlay, "autoPlay"]]);
+                        autoPlay.loadTexture("addCredit");
+                        addcreditFlickStatus = true;
+                        addCreditFlick();
+                    }
                 }
             } else {
                 if (autostart == false) {
@@ -2904,6 +2903,7 @@ function game1() {
                 hideMobileBtn();
                 autoPlay.loadTexture("autoPlay");
                 if (balance + allWin < betline * lines && demo !== "demo") {
+                    // !!!!!!!!!!!!!!!!!!!!!!!!!!!!1!
                     checkBalance();
                     showButtons([[autoPlay, "autoPlay"]]);
                     autoPlay.loadTexture("addCredit");
