@@ -2899,14 +2899,14 @@ function game1() {
                 }
                 hideMobileBtn();
                 autoPlay.loadTexture("autoPlay");
-                if (balance + allWin < betline * lines && demo !== "demo") {
-                    // !!!!!!!!!!!!!!!!!!!!!!!!!!!!1!
-                    checkBalance();
-                    showButtons([[autoPlay, "autoPlay"]]);
-                    autoPlay.loadTexture("addCredit");
-                    addcreditFlickStatus = true;
-                    addCreditFlick();
-                }
+                // if (balance + allWin < betline * lines && demo !== "demo") {
+                //     // !!!!!!!!!!!!!!!!!!!!!!!!!!!!1!
+                //     checkBalance();
+                //     showButtons([[autoPlay, "autoPlay"]]);
+                //     autoPlay.loadTexture("addCredit");
+                //     addcreditFlickStatus = true;
+                //     addCreditFlick();
+                // }
             } else {
                 if (autostart == false) {
                     showButtons([[startButton, "startButton"]]);
