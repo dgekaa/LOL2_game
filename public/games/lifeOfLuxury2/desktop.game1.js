@@ -2820,7 +2820,6 @@ function game1() {
                     checkBalance();
                     showButtons([[autoPlay, "autoPlay"]]);
                     autoPlay.loadTexture("addCredit");
-                    // %%%%%%%%%%%%%%%%%%%%%
                     addcreditFlickStatus = true;
                     addCreditFlick();
                 }
@@ -2865,7 +2864,6 @@ function game1() {
                     checkBalance();
                     showButtons([[autoPlay, "autoPlay"]]);
                     autoPlay.loadTexture("addCredit");
-                    // %%%%%%%%%%%%%%%%
                     addcreditFlickStatus = true;
                     addCreditFlick();
                 }
@@ -2909,7 +2907,6 @@ function game1() {
                     checkBalance();
                     showButtons([[autoPlay, "autoPlay"]]);
                     autoPlay.loadTexture("addCredit");
-                    // %%%%%%%%%%%%%%%5
                     addcreditFlickStatus = true;
                     addCreditFlick();
                 }
@@ -3006,7 +3003,6 @@ function game1() {
                             checkBalance();
                             showButtons([[autoPlay, "autoPlay"]]);
                             autoPlay.loadTexture("addCredit");
-                            // %%%%%%%%%%%%%%%
                             addcreditFlickStatus = true;
                             addCreditFlick();
                         }
@@ -3141,6 +3137,7 @@ function game1() {
         function checkScore() {
             addcreditFlickStatus = false;
             if (balance + allWinOld < betline * lines) {
+                // %%%%%%%%%%%%%%%%%%%
                 hideButtons([[startButton, "startButton"]]);
                 if (!flickBtn) {
                     autoPlay.loadTexture("autoPlay");
@@ -3154,7 +3151,8 @@ function game1() {
                     checkBalance();
                     addcreditFlickStatus = true;
                     showButtons([[autoPlay, "autoPlay"]]);
-                    if (!flickBtn) {
+
+                    if (!flickBtn && !spinStatus) {
                         addcreditFlickStatus = true;
                         bottomText.visible = true;
                         bottomText.setText(
