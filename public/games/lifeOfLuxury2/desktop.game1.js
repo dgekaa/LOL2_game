@@ -8,7 +8,7 @@ var game = new Phaser.Game(
     false,
     false
 );
-game.resolution = devicePixelRatio || 1;
+game.resolution = 1;
 console.log(game, "---===");
 var game1;
 var triggerShow = 0;
