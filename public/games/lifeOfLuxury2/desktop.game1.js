@@ -9,7 +9,7 @@ var game = new Phaser.Game(
     false
 );
 game.resolution = 1;
-console.log(game, "---===");
+
 var game1;
 var triggerShow = 0;
 var isTriggerPay = true;
@@ -3132,7 +3132,7 @@ function game1() {
             if (balance + allWinOld < betline * lines) {
                 // %%%%%%%%%%%%%%%%%%%
                 hideButtons([[startButton, "startButton"]]);
-                if (!flickBtn) {
+                if (!flickBtn && !spinStatus) {
                     autoPlay.loadTexture("autoPlay");
                     hideButtons([[autoPlay, "autoPlay"]]);
                 }
