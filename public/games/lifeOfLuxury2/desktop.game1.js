@@ -1556,6 +1556,8 @@ function game1() {
                         );
                         bottomText.y = 7;
                         bottomText.fontSize = 25;
+                        // !!!!!!!!!!!!!!!!!!!!!!!!!
+                        addcreditFlickStatus = true;
                         autoPlay.loadTexture("addCredit");
                         addCreditFlick();
                     }

@@ -76,7 +76,6 @@ function addBtnInfoPage() {
     prevBtnInfoPage.inputEnabled = true;
     prevBtnInfoPage.input.useHandCursor = true;
     prevBtnInfoPage.events.onInputUp.add(function(click, pointer) {
-        // if (pointer.button !== 0 && pointer.button !== undefined) return;
         helpSound.play();
         prevInfoPage();
     });
