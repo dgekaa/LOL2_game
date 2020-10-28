@@ -2530,7 +2530,6 @@ function showButtons(buttonsArray) {
             hideButtons([[autoPlay, "autoPlay"]]);
             autoPlay.loadTexture("addCredit");
             addcreditFlickStatus = true;
-            addCreditFlick();
         }
     }
 
