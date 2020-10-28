@@ -2522,6 +2522,15 @@ function showButtons(buttonsArray) {
     if (buttonsArray === undefined) {
         buttonsArray = [];
     }
+
+    let win = allWin || 0;
+    if (balance && betline && lines) {
+        if (balance + win < betline * lines) {
+            hideButtons([[startButton, "startButton"]]);
+            hideButtons([[autoPlay, "autoPlay"]]);
+        }
+    }
+
     if (buttonsArray.length == 0) {
         paytable.inputEnabled = true;
         paytable.input.useHandCursor = true;

@@ -59,6 +59,7 @@ var isEnd = {
     "3": false,
     "4": false
 };
+
 var squareArr = [
     [2, 5, 8, 11, 14],
     [1, 4, 7, 10, 13],
@@ -814,15 +815,8 @@ function game1() {
         startButton = game.add.sprite(650, 706, "startButton");
         startButton.inputEnabled = true;
         startButton.input.useHandCursor = true;
-        startButton.events.onInputDown.add(function() {
-            // startButton.loadTexture('startButton_p');
-            // btnSound.play();
-        });
+        startButton.events.onInputDown.add(function() {});
         startButton.events.onInputUp.add(function(click, pointer) {
-            // if (pointer.button !== 0 && pointer.button !== undefined)
-            //     return;
-            // if (!window.navigator.onLine) return;
-
             if (maxBetSpin.visible) spaceStatus = true;
 
             if (isSpinStart) allowSpin = false;
@@ -1552,7 +1546,7 @@ function game1() {
                     addcreditFlickStatus = false;
                     autoPlay.loadTexture("autoPlay");
                     console.log(balance + allWin);
-                    if (balance + allWin < betline * lines && demo !== "demo") {
+                    if (demo !== "demo") {
                         checkBalance();
                         showButtons([[autoPlay, "autoPlay"]]);
                         addcreditFlickStatus = true;
@@ -2894,14 +2888,8 @@ function game1() {
                 }
                 hideMobileBtn();
                 autoPlay.loadTexture("autoPlay");
-                // if (balance + allWin < betline * lines && demo !== "demo") {
-                //     // !!!!!!!!!!!!!!!!!!!!!!!!!!!!1!
-                //     checkBalance();
+
                 showButtons([[autoPlay, "autoPlay"]]);
-                //     autoPlay.loadTexture("addCredit");
-                //     addcreditFlickStatus = true;
-                //     addCreditFlick();
-                // }
             } else {
                 if (autostart == false) {
                     showButtons([[startButton, "startButton"]]);
@@ -2988,12 +2976,8 @@ function game1() {
                         }
                         hideMobileBtn();
                         autoPlay.loadTexture("autoPlay");
-                        if (
-                            balance + allWin < betline * lines &&
-                            demo !== "demo"
-                        ) {
+                        if (demo !== "demo") {
                             checkBalance();
-
                             showButtons([[autoPlay, "autoPlay"]]);
                             autoPlay.loadTexture("addCredit");
                             addcreditFlickStatus = true;
