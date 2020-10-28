@@ -2528,6 +2528,9 @@ function showButtons(buttonsArray) {
         if (balance + win < betline * lines) {
             hideButtons([[startButton, "startButton"]]);
             hideButtons([[autoPlay, "autoPlay"]]);
+            autoPlay.loadTexture("addCredit");
+            addcreditFlickStatus = true;
+            addCreditFlick();
         }
     }
 

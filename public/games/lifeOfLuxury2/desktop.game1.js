@@ -3114,7 +3114,6 @@ function game1() {
         function checkScore() {
             addcreditFlickStatus = false;
             if (balance + allWinOld < betline * lines) {
-                // %%%%%%%%%%%%%%%%%%%
                 hideButtons([[startButton, "startButton"]]);
                 if (!flickBtn && !spinStatus) {
                     autoPlay.loadTexture("autoPlay");
