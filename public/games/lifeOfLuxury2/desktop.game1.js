@@ -3143,7 +3143,7 @@ function game1() {
                 if (demo !== "demo") {
                     checkBalance();
                     addcreditFlickStatus = true;
-                    showButtons([[autoPlay, "autoPlay"]]);
+                    !spinStatus && showButtons([[autoPlay, "autoPlay"]]);
 
                     if (!flickBtn && !spinStatus) {
                         addcreditFlickStatus = true;
