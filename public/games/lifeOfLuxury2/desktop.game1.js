@@ -8,7 +8,10 @@ var game = new Phaser.Game(
     false,
     false
 );
-game.resolution = 1;
+
+if (devicePixelRatio && devicePixelRatio > 1.9) {
+    game.resolution = devicePixelRatio;
+}
 
 var game1;
 var triggerShow = 0;
@@ -1507,7 +1510,6 @@ function game1() {
                 );
                 bottomText.y = 0;
                 bottomText.fontSize = 35;
-
                 for (key in info) {
                     if (info[key] === 10 || info[key] === 0) {
                         wcvWinValuesArray.push(+key);
@@ -1556,7 +1558,7 @@ function game1() {
                         );
                         bottomText.y = 7;
                         bottomText.fontSize = 25;
-                        // !!!!!!!!!!!!!!!!!!!!!!!!!
+
                         addcreditFlickStatus = true;
                         autoPlay.loadTexture("addCredit");
                         addCreditFlick();
@@ -3331,7 +3333,6 @@ function game1() {
             bottomText.setText("Good Luck!");
             bottomText.y = 0;
             bottomText.fontSize = 35;
-            console.log(bottomText, "_______________bottomText");
             paid.setText("0");
             startButton.loadTexture("stopButton");
             hideLines();
