@@ -3610,7 +3610,7 @@ function game1() {
         game1.ticker.tilePosition.x += 0.5;
         // document.body.querySelector('canvas').focus();
 
-        window.onfocus = function() {
+        window.document.onfocus = function() {
             !spinStatus && console.log("___ GET BALANCE ___");
         };
     };
