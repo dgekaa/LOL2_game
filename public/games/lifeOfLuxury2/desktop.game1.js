@@ -114,6 +114,10 @@ var curGame = 1;
 
 var evIdAfterFreeeSpeen = "";
 
+window.onfocus = function() {
+    !spinStatus && console.log("___ GET BALANCE ___");
+};
+
 function game1() {
     var game1 = {
         cell: [],
