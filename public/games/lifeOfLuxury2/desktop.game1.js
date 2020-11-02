@@ -150,10 +150,6 @@ function game1() {
     };
 
     game1.create = function() {
-        window.onfocus = function() {
-            !spinStatus && console.log("___ GET BALANCE ___");
-        };
-
         if (
             game.sound.usingWebAudio &&
             game.sound.context.state === "suspended"
@@ -3613,6 +3609,10 @@ function game1() {
         }
         game1.ticker.tilePosition.x += 0.5;
         // document.body.querySelector('canvas').focus();
+
+        window.onfocus = function() {
+            !spinStatus && console.log("___ GET BALANCE ___");
+        };
     };
 
     game.state.add("game1", game1);
