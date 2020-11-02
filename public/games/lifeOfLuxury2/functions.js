@@ -7,7 +7,7 @@ var winBonusValue = 0;
 var winWithoutCoin = 0;
 let flickBtnInfoStatus = false;
 
-window.document.onfocus = function() {
+window.onfocus = function() {
     !spinStatus && console.log("___ GET BALANCE ___");
 };
 
