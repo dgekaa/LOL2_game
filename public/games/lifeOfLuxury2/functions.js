@@ -6,6 +6,11 @@ var paytableStatus = false;
 var winBonusValue = 0;
 var winWithoutCoin = 0;
 let flickBtnInfoStatus = false;
+
+window.document.onfocus = function() {
+    !spinStatus && console.log("___ GET BALANCE ___");
+};
+
 //функция для рандома
 function randomNumber(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
