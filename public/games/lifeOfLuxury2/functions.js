@@ -1295,7 +1295,7 @@ function requestState(data, startGameFirst) {
     bet = lines * betline;
     firstRequest = true;
     BALANCE =
-        data.balanceData.BALANCE.toFixed() -
+        data.balanceData.balance.toFixed() -
         data.balanceData.totalWinningsInFeatureGame;
     info = data.logicData.table;
     sessionUuid = data.sessionData.sessionUuid;
