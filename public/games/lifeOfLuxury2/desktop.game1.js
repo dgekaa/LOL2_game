@@ -150,6 +150,10 @@ function game1() {
     };
 
     game1.create = function() {
+        window.onfocus = function() {
+            !spinStatus && console.log("___ GET BALANCE ___");
+        };
+
         if (
             game.sound.usingWebAudio &&
             game.sound.context.state === "suspended"
