@@ -664,7 +664,7 @@ function game1() {
                 bottomText.visible = false;
                 hideLines();
                 if (demo !== "demo") {
-                    if (balance + allWin !== 0) {
+                    if (BALANCE + allWin !== 0) {
                         $(".popup_exit,.overlay").show();
                     } else {
                         exitGame(false);
@@ -733,14 +733,8 @@ function game1() {
         betPerLine = game.add.sprite(531, 706, "betPerLine");
         betPerLine.inputEnabled = true;
         betPerLine.input.useHandCursor = true;
-        betPerLine.events.onInputDown.add(function() {
-            // betPerLine.loadTexture('betPerLine_p');
-        });
+        betPerLine.events.onInputDown.add(function() {});
         betPerLine.events.onInputUp.add(function(click, pointer) {
-            // if (pointer.button !== 0 && pointer.button !== undefined)
-            //     return;
-            // if (!window.navigator.onLine) return;
-
             betPerLine.loadTexture("betPerLine");
             if (balanceUpdateStatus) {
                 stopUpdateBalance();
@@ -760,7 +754,7 @@ function game1() {
                     autoPlay.loadTexture("autoPlay");
                 } else {
                     if (
-                        balance + allWinOld < betline * lines &&
+                        BALANCE + allWinOld < betline * lines &&
                         demo !== "demo"
                     ) {
                         console.log("press add credits");
@@ -928,7 +922,7 @@ function game1() {
             if (balanceUpdateStatus) {
                 stopUpdateBalance();
             } else {
-                if (balance + allWinOld > 399) {
+                if (BALANCE + allWinOld > 399) {
                     lines = 20;
                     betline = 20;
                 } else {
@@ -959,9 +953,9 @@ function game1() {
             [187, 648, 17],
             [828, 648, 17]
         ];
-        balance = +balance;
+        BALANCE = +BALANCE;
         if (afterFreespinStatus) {
-            balance = balanceOld;
+            BALANCE = balanceOld;
         }
         addScore();
         addinfoPage();
@@ -1043,7 +1037,7 @@ function game1() {
             balanceR =
                 dataArray.balanceData["balance"] -
                 dataArray.balanceData["totalPayoff"];
-            balance =
+            BALANCE =
                 dataArray.balanceData["balance"] -
                 dataArray.balanceData["totalPayoff"];
 
@@ -1068,7 +1062,7 @@ function game1() {
                     dataArray.balanceData["totalPayoff"];
             }
             if (realSpinStatus) {
-                credit.setText(balance);
+                credit.setText(BALANCE);
                 realSpinStatus = false;
             }
 
@@ -1535,19 +1529,19 @@ function game1() {
                 if (autostart == false) {
                     showButtons();
                 }
-                if (balance + allWin < betline * lines) {
+                if (BALANCE + allWin < betline * lines) {
                     autostart = false;
                     $("#spin").removeClass("auto");
                     showButtons();
                     hideButtons([[startButton, "startButton"]]);
                     hideButtons([[autoPlay, "autoPlay"]]);
-                    if (balance + allWin < 1) {
+                    if (BALANCE + allWin < 1) {
                         hideButtons([[maxBetSpin, "maxBetSpin"]]);
                     }
                     hideMobileBtn();
                     addcreditFlickStatus = false;
                     autoPlay.loadTexture("autoPlay");
-                    console.log(balance + allWin);
+                    console.log(BALANCE + allWin);
                     if (demo !== "demo") {
                         checkBalance();
                         showButtons([[autoPlay, "autoPlay"]]);
@@ -2648,7 +2642,7 @@ function game1() {
             linesText.setText(lines);
             totalBet.setText(bet);
 
-            if (balance + allWinOld < betline * lines) {
+            if (BALANCE + allWinOld < betline * lines) {
                 bottomText.setText("To play please add credit to game.");
                 bottomText.y = 7;
                 bottomText.fontSize = 25;
@@ -2677,7 +2671,7 @@ function game1() {
             lineBetText.setText(betline);
             totalBet.setText(bet);
 
-            if (balance + allWinOld < betline * lines) {
+            if (BALANCE + allWinOld < betline * lines) {
                 bottomText.setText("To play please add credit to game.");
                 bottomText.y = 7;
                 bottomText.fontSize = 25;
@@ -2686,7 +2680,7 @@ function game1() {
         }
 
         function addScore() {
-            credit = game.add.text(214, 664, balance, {
+            credit = game.add.text(214, 664, BALANCE, {
                 font: '47px "Digital-7 Mono"',
                 fill: "#01e033"
             });
@@ -2794,13 +2788,13 @@ function game1() {
 
         function stopUpdateBalance() {
             balanceUpdateStatus = false;
-            if (balance + allWin < betline * lines) {
+            if (BALANCE + allWin < betline * lines) {
                 autostart = false;
                 $("#spin").removeClass("auto");
                 showButtons();
                 hideButtons([[startButton, "startButton"]]);
                 hideButtons([[autoPlay, "autoPlay"]]);
-                if (balance + allWin < 1) {
+                if (BALANCE + allWin < 1) {
                     hideButtons([[maxBetSpin, "maxBetSpin"]]);
                 }
                 hideMobileBtn();
@@ -2833,23 +2827,23 @@ function game1() {
             changeNumberSpin();
             allWinOld = allWinOld + +allwinUpd;
             paid.setText(+allwinUpd);
-            credit.setText(balance + +allwinUpd);
+            credit.setText(BALANCE + +allwinUpd);
         }
 
         stopUB = function stopUpdateBalance2() {
             balanceUpdateStatus = false;
-            if (balance + allWin < betline * lines) {
+            if (BALANCE + allWin < betline * lines) {
                 autostart = false;
                 $("#spin").removeClass("auto");
                 showButtons();
                 hideButtons([[startButton, "startButton"]]);
                 hideButtons([[autoPlay, "autoPlay"]]);
-                if (balance + allWin < 1) {
+                if (BALANCE + allWin < 1) {
                     hideButtons([[maxBetSpin, "maxBetSpin"]]);
                 }
                 hideMobileBtn();
                 autoPlay.loadTexture("autoPlay");
-                if (balance + allWin < betline * lines && demo !== "demo") {
+                if (BALANCE + allWin < betline * lines && demo !== "demo") {
                     checkBalance();
                     showButtons([[autoPlay, "autoPlay"]]);
                     autoPlay.loadTexture("addCredit");
@@ -2872,7 +2866,7 @@ function game1() {
             changeNumberSpin();
             allWinOld = allWinOld + +allwinUpd;
             paid.setText(+allwinUpd);
-            credit.setText(balance + +allwinUpd);
+            credit.setText(BALANCE + +allwinUpd);
         };
 
         function updateBalance() {
@@ -2881,13 +2875,13 @@ function game1() {
             if (autostart == false) {
                 showButtons();
             }
-            if (balance + allWin < betline * lines) {
+            if (BALANCE + allWin < betline * lines) {
                 autostart = false;
                 $("#spin").removeClass("auto");
                 showButtons();
                 hideButtons([[startButton, "startButton"]]);
                 hideButtons([[autoPlay, "autoPlay"]]);
-                if (balance + allWin < 1) {
+                if (BALANCE + allWin < 1) {
                     hideButtons([[maxBetSpin, "maxBetSpin"]]);
                 }
                 hideMobileBtn();
@@ -2961,7 +2955,7 @@ function game1() {
                         return;
                     } else {
                         paid.setText(x);
-                        credit.setText(balance + x);
+                        credit.setText(BALANCE + x);
                         setTimeout(arguments.callee, interval);
                     }
                 } else {
@@ -2969,13 +2963,13 @@ function game1() {
                     if (autostart == false) {
                         showButtons();
                     }
-                    if (balance + allWin < betline * lines) {
+                    if (BALANCE + allWin < betline * lines) {
                         autostart = false;
                         $("#spin").removeClass("auto");
                         showButtons();
                         hideButtons([[startButton, "startButton"]]);
                         hideButtons([[autoPlay, "autoPlay"]]);
-                        if (balance + allWin < 1) {
+                        if (BALANCE + allWin < 1) {
                             hideButtons([[maxBetSpin, "maxBetSpin"]]);
                         }
                         hideMobileBtn();
@@ -3001,7 +2995,7 @@ function game1() {
                     changeNumberSpin();
                     allWinOld = allWinOld + +allwinUpd;
                     paid.setText(+allwinUpd);
-                    credit.setText(balance + +allwinUpd);
+                    credit.setText(BALANCE + +allwinUpd);
                     winSound.stop();
                     updateFinishSound.play();
                     if (autostart == true) {
@@ -3081,7 +3075,7 @@ function game1() {
         function giveBalance() {
             var x = 0;
             var interval;
-            allBalance = balance + allWinOld;
+            allBalance = BALANCE + allWinOld;
             (function() {
                 if (x < allBalance) {
                     interval = 1000 / 10;
@@ -3117,13 +3111,13 @@ function game1() {
 
         function checkScore() {
             addcreditFlickStatus = false;
-            if (balance + allWinOld < betline * lines) {
+            if (BALANCE + allWinOld < betline * lines) {
                 hideButtons([[startButton, "startButton"]]);
                 if (!flickBtn && !spinStatus) {
                     autoPlay.loadTexture("autoPlay");
                     hideButtons([[autoPlay, "autoPlay"]]);
                 }
-                if (balance + allWinOld < 1) {
+                if (BALANCE + allWinOld < 1) {
                     hideButtons([[maxBetSpin, "maxBetSpin"]]);
                 }
                 hideMobileBtn();
@@ -3163,8 +3157,8 @@ function game1() {
         function checkBalance() {
             if (!getBalanceWait && demo !== "demo") {
                 if (
-                    balance + allWinOld < betline * lines &&
-                    balance + allWin < betline * lines &&
+                    BALANCE + allWinOld < betline * lines &&
+                    BALANCE + allWin < betline * lines &&
                     curGame === 1
                 ) {
                     getBalance();
@@ -3176,7 +3170,7 @@ function game1() {
                             !balanceUpdateStatus &&
                             !spinStatus
                         ) {
-                            if (balance + allWin > 0) {
+                            if (BALANCE + allWin > 0) {
                                 getBalance();
                             }
                         } else {
@@ -3213,10 +3207,10 @@ function game1() {
                             getBalanceWait = false;
                             if (
                                 checkBalancedata["status"] == "true" &&
-                                balance + allWin !==
+                                BALANCE + allWin !==
                                     +checkBalancedata["balance"].toFixed()
                             ) {
-                                balance = +checkBalancedata[
+                                BALANCE = +checkBalancedata[
                                     "balance"
                                 ].toFixed();
                                 changeBalance();
@@ -3226,7 +3220,7 @@ function game1() {
                                     : createRefID("checkBalance status error");
                                 error_bg.visible = true;
                                 errorStatus = true;
-                            } else if (balance + allWinOld >= betline * lines) {
+                            } else if (BALANCE + allWinOld >= betline * lines) {
                                 checkBalance();
                             } else {
                                 getBalance();
@@ -3258,23 +3252,23 @@ function game1() {
         }
 
         function changeBalance() {
-            !spinStatus && credit.setText(balance);
+            !spinStatus && credit.setText(BALANCE);
             checkScore();
 
-            if (balance + allWinOld >= betline * lines) {
+            if (BALANCE + allWinOld >= betline * lines) {
                 if (!spinStatus) {
                     bottomText.setText("");
                     bottomText.visible = true;
                 }
             }
 
-            if (balance + allWin > 0) {
+            if (BALANCE + allWin > 0) {
                 checkBalance();
             }
         }
 
         function pickMaxSpin() {
-            var currentBalance = balance + allWinOld;
+            var currentBalance = BALANCE + allWinOld;
             var curNumb = 1;
             var curLine = 1;
             var curBet = 1;
@@ -3392,7 +3386,7 @@ function game1() {
                                         if (paytableStatus === false) {
                                             if (autostart === false) {
                                                 if (
-                                                    balance + allWinOld >=
+                                                    BALANCE + allWinOld >=
                                                     betline * lines
                                                 ) {
                                                     if (balanceUpdateStatus) {

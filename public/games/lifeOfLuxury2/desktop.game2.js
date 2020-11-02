@@ -523,7 +523,7 @@ function game2() {
             [187, 648, 17],
             [828, 648, 17]
         ];
-        balance = +balance;
+        BALANCE = +BALANCE;
         addScore();
         if (featureGameStatus) {
             briMulti[1].visible = false;
@@ -1015,8 +1015,6 @@ function game2() {
             winCellInfo = dataArray.logicData["winningCells"];
             wlValues = dataArray.logicData["payoffsForLines"];
 
-            // balance = dataArray.balanceData['balance'] - dataArray.balanceData['totalPayoff'];
-
             allWin = dataArray.balanceData["payoffByLines"];
             payoffByBonus = dataArray.balanceData["payoffByBonus"];
 
@@ -1038,7 +1036,6 @@ function game2() {
                     dataArray.longData.balanceData["totalPayoff"];
                 infoOld = dataArray.longData.logicData.table;
                 wlValuesOld = dataArray.longData.logicData["payoffsForLines"];
-                // balanceOld = dataArray.longData.balanceData['balance'] - dataArray.longData.balanceData['totalPayoff'];
                 wcvWinValuesArrayOld = [];
                 wlWinValuesArrayOld = [];
                 winWithoutCoinOld = 0;
@@ -2643,7 +2640,7 @@ function game2() {
         console.log(mulFreespin);
 
         function addScore() {
-            credit = game.add.text(214, 664, balance, {
+            credit = game.add.text(214, 664, BALANCE, {
                 font: '47px "Digital-7 Mono"',
                 fill: "#01e033"
             });
@@ -2950,7 +2947,7 @@ function game2() {
                         x += 2;
                     }
                     bonusText.setText(allWinOld - x);
-                    credit.setText(balance + x);
+                    credit.setText(BALANCE + x);
                     paid.setText(x);
                     winTextCenter.setText(x);
                     if (balanceUpdateStatus2 === false) {
@@ -2962,9 +2959,9 @@ function game2() {
                     balanceSongAudio.stop();
                     updateFinishSound.play();
                     bonusText.setText(0);
-                    credit.setText(balance + allWinOld);
-                    balanceOld = balance;
-                    balance = balance + allWinOld;
+                    credit.setText(BALANCE + allWinOld);
+                    balanceOld = BALANCE;
+                    BALANCE = BALANCE + allWinOld;
                     paid.setText(allWinOld);
                     winTextCenter.setText(allWinOld);
                     bottomText.visible = false;

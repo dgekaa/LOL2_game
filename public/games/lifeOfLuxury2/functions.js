@@ -414,7 +414,7 @@ function addButtonsGame1(game, pageCount) {
                 }
             } else {
                 autostart = true;
-                takePrize(game, scorePosions, balanceOld, balance);
+                takePrize(game, scorePosions, balanceOld, BALANCE);
             }
         } else {
             //если автостарт работает, то просто включем либо выключаем его как опцию без совершения каких либо других действий
@@ -473,19 +473,15 @@ function addButtonsGame1(game, pageCount) {
                     hideLines();
                     requestSpin(gamename, betline, lines, bet, sid);
                 } else {
-                    takePrize(game, scorePosions, balanceOld, balance);
+                    takePrize(game, scorePosions, balanceOld, BALANCE);
                 }
             } else {
-                //быстрое получение приза
-
                 checkUpdateBalance = false;
 
-                //сопутствующие действия
                 showButtons();
                 takeWin.stop();
                 changeTableTitle("play1To");
 
-                //останавливаем счетчики
                 clearInterval(textCounter);
                 clearInterval(totalWinRCounter);
                 clearInterval(timer);
@@ -495,7 +491,7 @@ function addButtonsGame1(game, pageCount) {
                 balanceScore = game.add.text(
                     scorePosions[2][0],
                     scorePosions[2][1],
-                    parseInt(balance),
+                    parseInt(BALANCE),
                     {
                         font: scorePosions[2][2] + 'px "TeX Gyre Schola Bold"',
                         fill: "#fff567",
@@ -801,7 +797,7 @@ function showSpinResult(checkWin, checkRopeGame, wlValues) {
                 clearInterval(timer);
 
                 if (autostart == true) {
-                    takePrize(game, scorePosions, balanceOld, balance);
+                    takePrize(game, scorePosions, balanceOld, BALANCE);
                 } else {
                     checkAutoStart = false;
                 }
@@ -833,12 +829,12 @@ function showSpinResult(checkWin, checkRopeGame, wlValues) {
         }, 500);
     } else {
         if (autostart == true) {
-            updateBalance(game, scorePosions, balanceOld, balance);
+            updateBalance(game, scorePosions, balanceOld, BALANCE);
             hideLines();
             requestSpin(gamename, betline, lines, bet, sid);
         } else {
             changeTableTitle("play1To");
-            updateBalance(game, scorePosions, balanceOld, balance);
+            updateBalance(game, scorePosions, balanceOld, BALANCE);
             if (isMobile) {
                 showButtons([[startButton], [home], [gear], [dollar], [bet1]]);
             } else {
@@ -1020,14 +1016,14 @@ function checkSpinResult(totalWinR) {
     }
 }
 
-function takePrize(game, scorePosions, balanceOld, balance) {
+function takePrize(game, scorePosions, balanceOld, BALANCE) {
     changeTableTitle("take");
     hideButtons();
 
     hideNumbersAmin();
     hideLines();
 
-    updateBalance(game, scorePosions, balanceOld, balance);
+    updateBalance(game, scorePosions, balanceOld, BALANCE);
     updateTotalWinR(game, scorePosions, totalWinR);
 }
 
@@ -1298,8 +1294,8 @@ function requestState(data, startGameFirst) {
     lines = data.logicData.linesInGame;
     bet = lines * betline;
     firstRequest = true;
-    balance =
-        data.balanceData.balance.toFixed() -
+    BALANCE =
+        data.balanceData.BALANCE.toFixed() -
         data.balanceData.totalWinningsInFeatureGame;
     info = data.logicData.table;
     sessionUuid = data.sessionData.sessionUuid;
@@ -1310,7 +1306,7 @@ function requestState(data, startGameFirst) {
     }
     if (data.stateData.screen === "featureGame") {
         featureGameStatus = true;
-        balance =
+        BALANCE =
             data.longData.balanceData["balance"] -
             data.longData.balanceData["totalPayoff"];
     }
@@ -1337,7 +1333,7 @@ var checkGame = 0; // индикатор текущего экрана (теку
 // для игры с картами betline содержит номер попытки
 var scorePosions;
 
-function addScore(game, scorePosions, bet, lines, balance, betline) {
+function addScore(game, scorePosions, bet, lines, BALANCE, betline) {
     betScore = game.add.text(scorePosions[0][0], scorePosions[0][1], bet, {
         font: scorePosions[0][2] + 'px "TeX Gyre Schola Bold"',
         fill: "#fff567",
@@ -1355,7 +1351,7 @@ function addScore(game, scorePosions, bet, lines, balance, betline) {
     balanceScore = game.add.text(
         scorePosions[2][0],
         scorePosions[2][1],
-        balance,
+        BALANCE,
         {
             font: scorePosions[2][2] + 'px "TeX Gyre Schola Bold"',
             fill: "#fff567",
@@ -1589,7 +1585,7 @@ function parseDoubleAnswer(dataDoubleRequest) {
                 totalWin = dwin; // изменяем для последующего использования dwin из ответа для вывода dwin
             }
             if (item.indexOf("balance=") + 1) {
-                balance = item.replace("balance=", "").replace(".00", "");
+                BALANCE = item.replace("balance=", "").replace(".00", "");
             }
             if (item.indexOf("dcard2=") + 1) {
                 dcard2 = item.replace("dcard2=", "");
@@ -2021,7 +2017,7 @@ function updateBalanceGame3(game, scorePosions, balanceR) {
         );
     }, interval);
 
-    balance = parseInt(parseInt(balanceR) + parseInt(ropeValuesResult));
+    BALANCE = parseInt(parseInt(balanceR) + parseInt(ropeValuesResult));
 
     setTimeout(function() {
         takeWin.stop();
@@ -2079,7 +2075,7 @@ function updateBalanceGame4(game, scorePosions, balanceR) {
         );
     }, interval);
 
-    balance = parseInt(parseInt(balanceR) + parseInt(ropeValuesResult));
+    BALANCE = parseInt(parseInt(balanceR) + parseInt(ropeValuesResult));
 
     setTimeout(function() {
         takeWin.stop();
@@ -2116,7 +2112,7 @@ function addButtonsGame1Mobile(game) {
                 hideLines();
                 requestSpin(gamename, betline, lines, bet, sid);
             } else {
-                takePrize(game, scorePosions, balanceOld, balance);
+                takePrize(game, scorePosions, balanceOld, BALANCE);
             }
         } else {
             //быстрое получение приза
@@ -2139,7 +2135,7 @@ function addButtonsGame1Mobile(game) {
             balanceScore = game.add.text(
                 scorePosions[2][0],
                 scorePosions[2][1],
-                parseInt(balance),
+                parseInt(BALANCE),
                 {
                     font: scorePosions[2][2] + 'px "Press Start 2P"',
                     fill: "#fcfe6e",
@@ -2429,7 +2425,7 @@ function coinGoLeftToRight(elem) {
 function giveBalance() {
     var x = 0;
     var interval;
-    allBalance = balance + allWinOld;
+    allBalance = BALANCE + allWinOld;
     (function() {
         if (x < allBalance) {
             interval = 1000 / 10;
@@ -2523,8 +2519,8 @@ function showButtons(buttonsArray) {
     }
 
     let win = allWin || 0;
-    if (balance && betline && lines) {
-        if (balance + win < betline * lines) {
+    if (BALANCE && betline && lines) {
+        if (BALANCE + win < betline * lines) {
             hideButtons([[startButton, "startButton"]]);
             hideButtons([[autoPlay, "autoPlay"]]);
             autoPlay.loadTexture("addCredit");

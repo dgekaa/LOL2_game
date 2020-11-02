@@ -1,12 +1,12 @@
 //переменные получаемые из api
-var gamename = 'lifeOfLuxury2'; //название игры
+var gamename = "lifeOfLuxury2"; //название игры
 var result;
 var state;
 var sid;
 var user;
 var min;
 var id;
-var balance = 1000;
+var BALANCE = 1000;
 var extralife = 45;
 var jackpots;
 var betline = 20;
