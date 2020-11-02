@@ -114,10 +114,6 @@ var curGame = 1;
 
 var evIdAfterFreeeSpeen = "";
 
-window.onfocus = function() {
-    !spinStatus && console.log("___ GET BALANCE ___");
-};
-
 function game1() {
     var game1 = {
         cell: [],
@@ -154,6 +150,9 @@ function game1() {
     };
 
     game1.create = function() {
+        window.onfocus = function() {
+            !spinStatus && console.log("___ GET BALANCE ___");
+        };
         if (
             game.sound.usingWebAudio &&
             game.sound.context.state === "suspended"
