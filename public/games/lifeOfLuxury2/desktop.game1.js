@@ -815,9 +815,7 @@ function game1() {
         startButton.events.onInputDown.add(function() {});
         startButton.events.onInputUp.add(function(click, pointer) {
             if (maxBetSpin.visible) spaceStatus = true;
-
             if (isSpinStart) allowSpin = false;
-
             if (spaceStatus && allowSpin) {
                 if (balanceUpdateStatus) {
                     startButton.loadTexture("startButton");
@@ -1014,14 +1012,7 @@ function game1() {
         } else {
             gameStatusTextFlick();
         }
-        // if (dataArray.status === 'false') {
-        //   errorStatus = true;
-        //   if (dataArray.message === 'SessionNotExist') {
-        //     session_bg.visible = true;
-        //   } else {
-        //     error_bg.visible = true;
-        //   }
-        // }
+
         var coinCount = 0;
 
         function parseSpinAnswer(dataSpinRequest) {
@@ -1724,7 +1715,6 @@ function game1() {
                 if (demo !== "demo") {
                     getBalanceWait = false;
                     getBalance();
-                    console.log("getBalance");
                 }
                 imageAnim && clearInterval(imageAnim);
                 winText.visible = false;
@@ -3163,20 +3153,20 @@ function game1() {
                 ) {
                     getBalance();
                 } else {
-                    setTimeout(function() {
-                        if (
-                            !autostart &&
-                            curGame === 1 &&
-                            !balanceUpdateStatus &&
-                            !spinStatus
-                        ) {
-                            if (BALANCE + allWin > 0) {
-                                getBalance();
-                            }
-                        } else {
-                            checkBalance();
+                    // setTimeout(function() {
+                    if (
+                        !autostart &&
+                        curGame === 1 &&
+                        !balanceUpdateStatus &&
+                        !spinStatus
+                    ) {
+                        if (BALANCE + allWin > 0) {
+                            getBalance();
                         }
-                    }, 30000);
+                    } else {
+                        // checkBalance();
+                    }
+                    // }, 30000);
                 }
             }
         }
@@ -3203,7 +3193,6 @@ function game1() {
                         console.log(data);
                         if (IsJsonString(data)) {
                             checkBalancedata = JSON.parse(data);
-                            // setTimeout(function() {
                             getBalanceWait = false;
                             if (
                                 checkBalancedata["status"] == "true" &&
@@ -3225,7 +3214,6 @@ function game1() {
                             } else {
                                 getBalance();
                             }
-                            // }, 900);
                         } else {
                             console.log("json format error");
                             createRefID("get-user-balance json format error");

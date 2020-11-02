@@ -398,9 +398,6 @@ function addButtonsGame1(game, pageCount) {
         }
     });
     automaricstart.events.onInputDown.add(function() {
-        //проверка есть ли выигрышь который нужно забрать и проверка включен ли авто-режим
-        //главная проверка на то можно ли включить/выключить автостарт
-
         if (checkAutoStart == false) {
             checkAutoStart = true; // теперь автостарт нельзя отключить
 
@@ -417,7 +414,6 @@ function addButtonsGame1(game, pageCount) {
                 takePrize(game, scorePosions, balanceOld, BALANCE);
             }
         } else {
-            //если автостарт работает, то просто включем либо выключаем его как опцию без совершения каких либо других действий
             if (autostart == false) {
                 autostart = true;
             } else {
