@@ -1278,6 +1278,7 @@ var wlValuesFS;
 function requestState(data, startGameFirst) {
     if (startGameFirst) {
         game.state.start("preload");
+        firstRequest = true;
         return;
     }
 

@@ -139,28 +139,7 @@ const loadResource = () => {
     );
     game.load.image("btn_yes", path + "/img/btn_yes.jpg" + part2Url);
     game.load.image("btn_no", path + "/img/btn_no.jpg" + part2Url);
-    // game.load.image('cell0', '' + path + '/img/0.png' + part2Url);
-    // game.load.image('cell0_f', '' + path + '/img/0_f.png' + part2Url);
-    // game.load.image('cell1', '' + path + '/img/1.png' + part2Url);
-    // game.load.image('cell1_f', '' + path + '/img/1_f.png' + part2Url);
-    // game.load.image('cell2', '' + path + '/img/2.png' + part2Url);
-    // game.load.image('cell2_f', '' + path + '/img/2_f.png' + part2Url);
-    // game.load.image('cell3', '' + path + '/img/3.png' + part2Url);
-    // game.load.image('cell3_f', '' + path + '/img/3_f.png' + part2Url);
-    // game.load.image('cell4', '' + path + '/img/4.png' + part2Url);
-    // game.load.image('cell4_f', '' + path + '/img/4_f.png' + part2Url);
-    // game.load.image('cell5', '' + path + '/img/5.png' + part2Url);
-    // game.load.image('cell5_f', '' + path + '/img/5_f.png' + part2Url);
-    // game.load.image('cell6', '' + path + '/img/6.png' + part2Url);
-    // game.load.image('cell6_f', '' + path + '/img/6_f.png' + part2Url);
-    // game.load.image('cell7', '' + path + '/img/7.png' + part2Url);
-    // game.load.image('cell7_f', '' + path + '/img/7_f.png' + part2Url);
-    // game.load.image('cell8', '' + path + '/img/8.png' + part2Url);
-    // game.load.image('cell8_f', '' + path + '/img/8_f.png' + part2Url);
-    // game.load.image('cell9', '' + path + '/img/9.png' + part2Url);
-    // game.load.image('cell9_f', '' + path + '/img/9_f.png' + part2Url);
-    // game.load.image('cell10', '' + path + '/img/10.png' + part2Url);
-    // game.load.image('cell10_f', '' + path + '/img/10_f.png' + part2Url);
+
     game.load.image("emptyCell", "" + path + "/img/100.jpg" + part2Url);
     for (let i = 0; i <= 10; ++i) {
         game.load.image(
@@ -622,9 +601,6 @@ function checkErrorFiles() {
     errorSpritesheet = {};
     errorTextureatlas = {};
     function onFileError(name, data) {
-        console.log(name, "-----", data.type);
-        console.log(name, "-----", data);
-
         if (data.type === "image") {
             errorImage[name] = data.url;
         } else if (data.type === "audio") {
