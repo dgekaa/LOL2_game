@@ -2975,6 +2975,7 @@ function game2() {
         }
 
         function closeFreespins() {
+            eventId.visible = false;
             setTimeout(function() {
                 winTextCenter.visible = false;
                 createdStarsStatus = false;
