@@ -994,7 +994,7 @@ function game1() {
             allWin = allWinOld + winOldTrigerFreeSpin;
             bottomText.visible = true;
             bottomText.setText(allWin + " Credits Won");
-            bottomText.y = 0;
+            // bottomText.y = 0;
             bottomText.fontSize = 35;
 
             paid.setText(allWinOld);
@@ -1493,7 +1493,7 @@ function game1() {
                 bottomText.setText(
                     bonusPay + linePay + triggerPay + " Credits Won"
                 );
-                bottomText.y = 0;
+                // bottomText.y = 0;
                 bottomText.fontSize = 35;
                 for (key in info) {
                     if (info[key] === 10 || info[key] === 0) {
@@ -1510,7 +1510,7 @@ function game1() {
                 firstAroundAnim = true;
                 showWin(wlWinValuesArray);
                 bottomText.setText(allWin + " Credits Won");
-                bottomText.y = 0;
+                // bottomText.y = 0;
                 bottomText.fontSize = 35;
             } else {
                 spinStatus = false;
@@ -1541,7 +1541,7 @@ function game1() {
                         bottomText.setText(
                             "To play please add credit to game."
                         );
-                        bottomText.y = 7;
+                        // bottomText.y = 7;
                         bottomText.fontSize = 25;
 
                         addcreditFlickStatus = true;
@@ -1661,7 +1661,7 @@ function game1() {
             if (!afterFreespinStatus) {
                 bottomText.visible = true;
                 bottomText.setText("BONUS!");
-                bottomText.y = 0;
+                // bottomText.y = 0;
                 bottomText.fontSize = 35;
                 setTimeout(function() {
                     flickWin(wcvWinValuesArray);
@@ -2634,7 +2634,7 @@ function game1() {
 
             if (BALANCE + allWinOld < betline * lines) {
                 bottomText.setText("To play please add credit to game.");
-                bottomText.y = 7;
+                // bottomText.y = 7;
                 bottomText.fontSize = 25;
                 bottomText.visible = true;
             }
@@ -2663,7 +2663,7 @@ function game1() {
 
             if (BALANCE + allWinOld < betline * lines) {
                 bottomText.setText("To play please add credit to game.");
-                bottomText.y = 7;
+                // bottomText.y = 7;
                 bottomText.fontSize = 25;
                 bottomText.visible = true;
             }
@@ -2719,17 +2719,17 @@ function game1() {
             collect_text.anchor.setTo(0.5, 0.5);
             collect_text.visible = false;
 
-            // bottomText = game.add.text(512, 610, "BONUS!", {
-            bottomText = game.add.text(0, 0, "BONUS!", {
+            bottomText = game.add.text(512, 610, "BONUS!", {
+                // bottomText = game.add.text(0, 0, "BONUS!", {
                 font: '35px "Arial"',
                 fill: "#fffd6f",
                 stroke: "#000000",
                 strokeThickness: 4,
-                fontWeight: 600,
-                boundsAlignH: "center"
+                fontWeight: 600
+                // boundsAlignH: "center"
             });
-            bottomText.setTextBounds(0, 584, 1024, 100);
-            // bottomText.anchor.setTo(1, 1);
+            // bottomText.setTextBounds(0, 584, 1024, 100);
+            bottomText.anchor.setTo(0.5, 0.5);
             bottomText.visible = false;
         }
 
@@ -3129,7 +3129,7 @@ function game1() {
                         bottomText.setText(
                             "To play please add credit to game."
                         );
-                        bottomText.y = 7;
+                        // bottomText.y = 7;
                         bottomText.fontSize = 25;
                         autoPlay.loadTexture("addCredit");
                         addCreditFlick();
@@ -3320,7 +3320,7 @@ function game1() {
             gameStatusText.visible = false;
             bottomText.visible = true;
             bottomText.setText("Good Luck!");
-            bottomText.y = 0;
+            // bottomText.y = 0;
             bottomText.fontSize = 35;
             paid.setText("0");
             startButton.loadTexture("stopButton");
