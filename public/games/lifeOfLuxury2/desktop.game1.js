@@ -2870,7 +2870,12 @@ function game1() {
                 $("#spin").removeClass("auto");
                 showButtons();
                 hideButtons([[startButton, "startButton"]]);
-                hideButtons([[autoPlay, "autoPlay"]]);
+                // hideButtons([[autoPlay, "autoPlay"]]);
+                // !!!!!!!!!!!!!!!!!!!!!!!!!!!
+                showButtons([[autoPlay, "autoPlay"]]);
+                autoPlay.loadTexture("addCredit");
+                addcreditFlickStatus = true;
+                addCreditFlick();
                 if (BALANCE + allWin < 1) {
                     hideButtons([[maxBetSpin, "maxBetSpin"]]);
                 }
