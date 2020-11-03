@@ -695,9 +695,9 @@ function game2() {
                                 687,
                                 dataSpinRequest.sessionData["eventId"] || "",
                                 {
-                                    font: "22px Arial",
+                                    font: "17px Arial",
                                     fill: "#fff",
-                                    fontWeight: 600
+                                    fontWeight: "bold"
                                 }
                             );
                             eventId.anchor.setTo(1, 0);
