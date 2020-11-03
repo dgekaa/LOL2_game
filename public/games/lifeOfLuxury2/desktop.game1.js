@@ -3163,7 +3163,7 @@ function game1() {
                         !spinStatus
                     ) {
                         if (BALANCE + allWin > 0) {
-                            getBalance();
+                            // getBalance();
                         }
                     } else {
                         // checkBalance();
