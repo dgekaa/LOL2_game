@@ -657,7 +657,7 @@ function game2() {
                     mulFreespin +
                     "X"
             );
-            bottomText.setTextBounds(0, 586, 1024, 100);
+            // bottomText.setTextBounds(0, 586, 1024, 100);
 
             bg2_panels.loadTexture("game.background3");
             slotLayer2Group.add(topLabel);
@@ -1473,7 +1473,7 @@ function game2() {
                 showWin(wlWinValuesArray, winCellInfo);
                 bottomText.setText(allWin + " Credits Won");
                 bottomText.fontSize = "35px";
-                bottomText.setTextBounds(0, 585, 1024, 100);
+                // bottomText.setTextBounds(0, 585, 1024, 100);
             } else {
                 lose_freespinsSound.play();
                 if (freeSpinCount > 0) {
@@ -2410,7 +2410,7 @@ function game2() {
             if (!dataSpinRequest.stateData.isDropFeatureGame) {
                 bottomText.setText(allWin + " Credits Won");
                 bottomText.fontSize = "35px";
-                bottomText.setTextBounds(0, 585, 1024, 100);
+                // bottomText.setTextBounds(0, 585, 1024, 100);
             }
             winText.setText(
                 "Line Pay \n" +
@@ -2700,17 +2700,19 @@ function game2() {
             );
             collect_text.anchor.setTo(0.5, 0.5);
             collect_text.visible = false;
-            // bottomText = game.add.text(512, 610, "BONUS!", {
-            bottomText = game.add.text(0, 0, "BONUS!", {
+
+            bottomText = game.add.text(512, 610, "BONUS!", {
+                // bottomText = game.add.text(0, 0, "BONUS!", {
                 font: '35px "Arial"',
                 fill: "#fffd6f",
                 stroke: "#000000",
                 strokeThickness: 5,
-                fontWeight: 800,
-                boundsAlignH: "center"
+                fontWeight: 800
+                // boundsAlignH: "center"
             });
-            bottomText.setTextBounds(0, 585, 1024, 100);
-            // bottomText.anchor.setTo(0.5, 0.5);
+            // bottomText.setTextBounds(0, 585, 1024, 100);
+            bottomText.anchor.setTo(0.5, 0.5);
+
             spinsLeft = game.add.text(194 - 238, 38, freeSpinCount, {
                 font: '45px "ArialMT-CondensedBold"',
                 fill: "#ffffff"
