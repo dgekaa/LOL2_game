@@ -3110,7 +3110,7 @@ function game1() {
                 if (BALANCE + allWinOld < 1) {
                     hideButtons([[maxBetSpin, "maxBetSpin"]]);
                 } else {
-                    showButtons([[maxBetSpin, "maxBetSpin"]]);
+                    !spinStatus && showButtons([[maxBetSpin, "maxBetSpin"]]);
                 }
                 hideMobileBtn();
                 if (demo !== "demo") {
