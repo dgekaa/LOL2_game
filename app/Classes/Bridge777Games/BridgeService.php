@@ -177,7 +177,7 @@ class BridgeService
         if ($platformId === 1) {
             $url = "https://play777games.com/exit";
         } elseif ($platformId === 2) {
-            $url = "https://dev.play777games.com/exit";
+            $url = "https://sgdapi.play777games.com/exit";
         } elseif ($platformId === 3) {
             $url = "https://donateandplay.com/exit";
         } elseif ($platformId === 4) {
