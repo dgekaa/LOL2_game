@@ -675,7 +675,7 @@ function checkErrorFiles() {
     };
 
     preload.create = function() {
-        checkErrorFiles;
+        checkErrorFiles();
         if (
             Object.keys(errorImage).length ||
             Object.keys(errorAudio).length ||
