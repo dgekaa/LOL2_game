@@ -664,11 +664,17 @@ function checkErrorFiles() {
             loadResource();
         }
 
-        checkErrorFiles();
+        game.load.onFileComplete.add(fileComplete, this);
+        game.load.onLoadComplete.add(loadComplete, this);
+        function fileComplete(progr, cache, suc, totalLoaded, totalFiles) {
+            console.log(progr);
+        }
+        function loadComplete() {
+            checkErrorFiles();
+        }
     };
 
     preload.create = function() {
-        checkErrorFiles();
         if (
             Object.keys(errorImage).length ||
             Object.keys(errorAudio).length ||
@@ -695,7 +701,6 @@ function checkErrorFiles() {
             } else {
                 errorStatus = false;
                 requestInit(true);
-                // preloaderStatus = true;
             }
         }
     };
