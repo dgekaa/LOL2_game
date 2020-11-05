@@ -1185,8 +1185,7 @@ function requestInit(startGameFirst) {
         },
         error: function(xhr, ajaxOptions, thrownError) {
             if (startGameFirst) {
-                game.state.start("preload");
-                return;
+                requestInit(startGameFirst);
             }
             $(".preloader").addClass("error");
             errorStatus = true;
