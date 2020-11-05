@@ -675,24 +675,22 @@ function checkErrorFiles() {
     };
 
     preload.create = function() {
-        // checkErrorFiles();
         if (!firstRequest) {
             errorStatus = false;
             requestInit(true);
-        }
-
-        if (
-            Object.keys(errorImage).length ||
-            Object.keys(errorAudio).length ||
-            Object.keys(errorSpritesheet).length ||
-            Object.keys(errorTextureatlas).length
-        ) {
-            game.state.start("preload");
         } else {
-            game.sound.mute = false;
-            game.scale.fullScreenScaleMode = Phaser.ScaleManager.EXACT_FIT;
-            game.scale.scaleMode = Phaser.ScaleManager.EXACT_FIT;
-            if (firstRequest) {
+            if (
+                Object.keys(errorImage).length ||
+                Object.keys(errorAudio).length ||
+                Object.keys(errorSpritesheet).length ||
+                Object.keys(errorTextureatlas).length
+            ) {
+                game.state.start("preload");
+            } else {
+                game.sound.mute = false;
+                game.scale.fullScreenScaleMode = Phaser.ScaleManager.EXACT_FIT;
+                game.scale.scaleMode = Phaser.ScaleManager.EXACT_FIT;
+                // if (firstRequest) {
                 game.scale.refresh();
                 document.getElementById("preloader").style.display = "none";
                 addSounds();
@@ -704,9 +702,7 @@ function checkErrorFiles() {
                     game.state.start("game2");
                 }
                 checkWidth();
-            } else {
-                // errorStatus = false;
-                // requestInit(true);
+                // }
             }
         }
     };
