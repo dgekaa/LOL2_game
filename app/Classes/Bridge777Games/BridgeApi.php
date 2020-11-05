@@ -26,7 +26,7 @@ class BridgeApi
             $responseGetBalance = Curl::to("https://play777games.com/getBalance?token={$token}&userId={$userId}&gameId={$gameId}&platformId={$platformId}")
                ->post();
         } elseif ($platformId === 2 || $platformId === '2') {
-            $responseGetBalance = Curl::to("https://dev.play777games.com/getBalance?token={$token}&userId={$userId}&gameId={$gameId}&platformId={$platformId}")
+            $responseGetBalance = Curl::to("https://sgdapi.play777games.com/getBalance?token={$token}&userId={$userId}&gameId={$gameId}&platformId={$platformId}")
                ->post();
         } elseif ($platformId === 3 || $platformId === '3') {
             $responseGetBalance = Curl::to("https://donateandplay.com/getBalance?token={$token}&userId={$userId}&gameId={$gameId}&platformId={$platformId}")
@@ -57,7 +57,7 @@ class BridgeApi
     {
         $requestURL = "https://play777games.com/moveFunds?";
         if ($params['platformId'] === 2 || $params['platformId'] === '2') {
-            $requestURL = "https://dev.play777games.com/moveFunds?";
+            $requestURL = "https://sgdapi.play777games.com/moveFunds?";
         }
         if ($params['platformId'] === 3 || $params['platformId'] === '3') {
             $requestURL = "https://donateandplay.com/moveFunds?";
