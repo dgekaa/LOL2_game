@@ -665,17 +665,17 @@ function checkErrorFiles() {
         }
 
         // game.load.onFileComplete.add(fileComplete, this);
-        // game.load.onLoadComplete.add(loadComplete, this);
+        game.load.onLoadComplete.add(loadComplete, this);
         // function fileComplete(progr, cache, suc, totalLoaded, totalFiles) {
         //     console.log(progr);
         // }
-        // function loadComplete() {
-        // checkErrorFiles();
-        // }
+        function loadComplete() {
+            checkErrorFiles();
+        }
     };
 
     preload.create = function() {
-        checkErrorFiles();
+        // checkErrorFiles();
         if (
             Object.keys(errorImage).length ||
             Object.keys(errorAudio).length ||
