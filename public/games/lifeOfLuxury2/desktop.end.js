@@ -676,6 +676,11 @@ function checkErrorFiles() {
 
     preload.create = function() {
         // checkErrorFiles();
+        if (!firstRequest) {
+            errorStatus = false;
+            requestInit(true);
+        }
+
         if (
             Object.keys(errorImage).length ||
             Object.keys(errorAudio).length ||
@@ -700,8 +705,8 @@ function checkErrorFiles() {
                 }
                 checkWidth();
             } else {
-                errorStatus = false;
-                requestInit(true);
+                // errorStatus = false;
+                // requestInit(true);
             }
         }
     };
