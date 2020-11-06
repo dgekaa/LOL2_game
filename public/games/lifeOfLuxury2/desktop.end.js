@@ -664,23 +664,33 @@ function checkErrorFiles() {
             loadResource();
         }
 
+        // game.load.onFileComplete.add(fileComplete, this);
+        // game.load.onLoadComplete.add(loadComplete, this);
+        // function fileComplete(progr, cache, suc, totalLoaded, totalFiles) {
+        //     console.log(progr);
+        // }
+        // function loadComplete() {
         checkErrorFiles();
+        // }
     };
 
     preload.create = function() {
-        checkErrorFiles();
-        if (
-            Object.keys(errorImage).length ||
-            Object.keys(errorAudio).length ||
-            Object.keys(errorSpritesheet).length ||
-            Object.keys(errorTextureatlas).length
-        ) {
-            game.state.start("preload");
+        if (!firstRequest) {
+            errorStatus = false;
+            requestInit(true);
         } else {
-            game.sound.mute = false;
-            game.scale.fullScreenScaleMode = Phaser.ScaleManager.EXACT_FIT;
-            game.scale.scaleMode = Phaser.ScaleManager.EXACT_FIT;
-            if (firstRequest) {
+            if (
+                Object.keys(errorImage).length ||
+                Object.keys(errorAudio).length ||
+                Object.keys(errorSpritesheet).length ||
+                Object.keys(errorTextureatlas).length
+            ) {
+                game.state.start("preload");
+            } else {
+                game.sound.mute = false;
+                game.scale.fullScreenScaleMode = Phaser.ScaleManager.EXACT_FIT;
+                game.scale.scaleMode = Phaser.ScaleManager.EXACT_FIT;
+                // if (firstRequest) {
                 game.scale.refresh();
                 document.getElementById("preloader").style.display = "none";
                 addSounds();
@@ -692,10 +702,7 @@ function checkErrorFiles() {
                     game.state.start("game2");
                 }
                 checkWidth();
-            } else {
-                errorStatus = false;
-                requestInit(true);
-                // preloaderStatus = true;
+                // }
             }
         }
     };

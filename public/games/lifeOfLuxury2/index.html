@@ -30,10 +30,10 @@
         <!-- <script src="desktop.game1.js"></script> -->
         <!-- <script src="desktop.game2.js"></script> -->
         <script src="desktop.game2.js?v=2.45"></script>
-        <script src="functions.js?v=2.96"></script>
+        <script src="functions.js?v=2.99"></script>
         <script src="desktop.begin.js"></script>
         <!-- <script src="desktop.end.js"></script> -->
-        <script src="desktop.end.js?v=1.89"></script>
+        <script src="desktop.end.js?v=1.96"></script>
         <script src="../../js/autobahn.js"></script>
         <script>
             var iOS =
@@ -55,21 +55,21 @@
                                 document.getElementById(
                                     "vertScreenWrapper"
                                 ).style.display = "none";
-                                if (!isFullscreen()) {
-                                    $(".swipe-background").css({
-                                        display: "flex"
-                                    });
-                                    $(".swipe-overlay").css({
-                                        display: "block"
-                                    });
-                                } else {
-                                    $(".swipe-background").css({
-                                        display: "none"
-                                    });
-                                    $(".swipe-overlay").css({
-                                        display: "none"
-                                    });
-                                }
+                                // if (!isFullscreen()) {
+                                //     $(".swipe-background").css({
+                                //         display: "none"
+                                //     });
+                                //     $(".swipe-overlay").css({
+                                //         display: "block"
+                                //     });
+                                // } else {
+                                //     $(".swipe-background").css({
+                                //         display: "none"
+                                //     });
+                                //     $(".swipe-overlay").css({
+                                //         display: "none"
+                                //     });
+                                // }
 
                                 function isFullscreen() {
                                     var a = screen.width;
@@ -208,7 +208,7 @@
                 display: none;
             }
 
-            .swipe-background {
+            /* .swipe-background {
                 width: 100vw;
                 height: 100vh;
                 position: fixed;
@@ -227,9 +227,9 @@
                 user-select: none;
                 -ms-touch-action: none;
                 touch-action: none;
-            }
+            } */
 
-            .swipe-overlay {
+            /* .swipe-overlay {
                 width: 100vw;
                 height: 120vh;
                 position: absolute;
@@ -244,7 +244,7 @@
                 user-select: none;
                 -ms-touch-action: none;
                 touch-action: none;
-            }
+            } */
 
             html,
             body {
@@ -352,8 +352,8 @@
             </div>
         </div>
         <div class="overlay"></div>
-        <div class="swipe-background"></div>
-        <div class="swipe-overlay"></div>
+        <!-- <div class="swipe-background"></div> -->
+        <!-- <div class="swipe-overlay"></div> -->
         <div class="font1">-</div>
         <div class="font2">-</div>
         <div class="font3">-</div>
