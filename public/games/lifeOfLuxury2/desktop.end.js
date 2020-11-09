@@ -675,8 +675,7 @@ function checkErrorFiles() {
                 Object.keys(errorSpritesheet).length ||
                 Object.keys(errorTextureatlas).length
             ) {
-                preloadTimer && clearTimeout(preloadTimer);
-                const preloadTimer = setTimeout(() => {
+                setTimeout(() => {
                     game.state.start("preload");
                 }, 3000);
             } else {
