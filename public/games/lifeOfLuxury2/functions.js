@@ -1276,7 +1276,6 @@ function requestState(data, startGameFirst) {
     //     game.state.start("preload");
     //     return;
     // }
-    game.state.start("preload");
 
     game1();
     game2();
@@ -1285,6 +1284,7 @@ function requestState(data, startGameFirst) {
     lines = data.logicData.linesInGame;
     bet = lines * betline;
     firstRequest = true;
+
     BALANCE =
         data.balanceData.balance.toFixed() -
         data.balanceData.totalWinningsInFeatureGame;
@@ -1307,6 +1307,8 @@ function requestState(data, startGameFirst) {
     mulFreespinInit = data.logicData.multiplier;
     allWinOldInit = data.balanceData.totalWinningsInFeatureGame;
     allFreeSpinCountInit = data.logicData.countOfMovesInFeatureGame;
+
+    game.state.start("preload");
 }
 
 //функции отображения цифр
