@@ -50,7 +50,7 @@ class Handler extends ExceptionHandler
         if(!method_exists($exception,'getRefId')) {
             $log = new Log;
             $log->type = 'error';
-            $log->data = $exception->__toString();
+            $log->data = $exception->__toString() . ' URL:' . $request->fullUrl();
             $log->save();
 
             $refId = $log->id;
