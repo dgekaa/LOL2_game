@@ -1136,7 +1136,7 @@ urlPath2.forEach(function(item) {
     }
 });
 
-function requestInit(startGameFirst) {
+function requestInit() {
     var sessionID = location.href.substring(location.href.indexOf("/?") + 12);
     if (
         location.href.indexOf("game.play777games.com") !== -1 ||
@@ -1158,12 +1158,11 @@ function requestInit(startGameFirst) {
                 getNeedUrlPath() +
                     `/api-v2/action?game_id=${gameId}&user_id=${userId}&mode=${demo}&action=open_game&session_uuid=&token=${token}&platform_id=${platformId}`
             );
-            console.log("requestInit: " + data);
             if (IsJsonString(data)) {
                 data = JSON.parse(data);
                 if (data) {
                     var sessionName = data;
-                    requestState(data, startGameFirst);
+                    requestState(data);
                 } else {
                     $(".preloader").addClass("error");
                     errorStatus = true;
@@ -1175,11 +1174,7 @@ function requestInit(startGameFirst) {
             }
         },
         error: function(xhr, ajaxOptions, thrownError) {
-            // if (startGameFirst) {
-            setTimeout(() => {
-                requestInit(startGameFirst);
-            }, 3000);
-            // }
+            requestInit();
             $(".preloader").addClass("error");
             errorStatus = true;
         }
@@ -1270,13 +1265,7 @@ var featureGameStatus = false;
 var freeSpinCountInit, mulFreespinInit, allWinOldInit, allFreeSpinCountInit;
 var wlValuesFS;
 
-function requestState(data, startGameFirst) {
-    // if (startGameFirst) {
-    //     firstRequest = true;
-    //     game.state.start("preload");
-    //     return;
-    // }
-
+function requestState(data) {
     game1();
     game2();
 

@@ -664,21 +664,11 @@ function checkErrorFiles() {
             loadResource();
         }
 
-        // game.load.onFileComplete.add(fileComplete, this);
-        // game.load.onLoadComplete.add(loadComplete, this);
-        // function fileComplete(progr, cache, suc, totalLoaded, totalFiles) {
-        //     console.log(progr);
-        // }
-        // function loadComplete() {
         checkErrorFiles();
-        // }
     };
 
     preload.create = function() {
-        if (!firstRequest) {
-            errorStatus = false;
-            requestInit(true);
-        } else {
+        if (firstRequest) {
             if (
                 Object.keys(errorImage).length ||
                 Object.keys(errorAudio).length ||
@@ -690,7 +680,6 @@ function checkErrorFiles() {
                 game.sound.mute = false;
                 game.scale.fullScreenScaleMode = Phaser.ScaleManager.EXACT_FIT;
                 game.scale.scaleMode = Phaser.ScaleManager.EXACT_FIT;
-                // if (firstRequest) {
                 game.scale.refresh();
                 document.getElementById("preloader").style.display = "none";
                 addSounds();
@@ -702,7 +691,6 @@ function checkErrorFiles() {
                     game.state.start("game2");
                 }
                 checkWidth();
-                // }
             }
         }
     };
