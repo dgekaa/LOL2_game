@@ -675,7 +675,10 @@ function checkErrorFiles() {
                 Object.keys(errorSpritesheet).length ||
                 Object.keys(errorTextureatlas).length
             ) {
-                game.state.start("preload");
+                preloadTimer && clearTimeout(preloadTimer);
+                const preloadTimer = setTimeout(() => {
+                    game.state.start("preload");
+                }, 3000);
             } else {
                 game.sound.mute = false;
                 game.scale.fullScreenScaleMode = Phaser.ScaleManager.EXACT_FIT;
