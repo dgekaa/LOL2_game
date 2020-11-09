@@ -1125,26 +1125,18 @@ urlPath2.forEach(function(item) {
     if (item.indexOf("user_id=") + 1) {
         userId = item.replace("user_id=", "");
     }
-    // if (item.indexOf('nickname=') + 1) {
-    //     nickname = item.replace('nickname=', '');
-    // }
+
     if (item.indexOf("game_id=") + 1) {
         game_id = item.split("?");
         gameId = game_id[1].replace("game_id=", "");
     }
-    // if (item.indexOf('platformId=') + 1) {
-    //     platformId = item.replace('platformId=', '');
-    // }
+
     if (item.indexOf("token=") + 1) {
         token = item.replace("token=", "");
     }
-    // console.log(platformId)
-    // console.log(nickname)
 });
 
 function requestInit(startGameFirst) {
-    // if (!window.navigator.onLine) return;
-
     var sessionID = location.href.substring(location.href.indexOf("/?") + 12);
     if (
         location.href.indexOf("game.play777games.com") !== -1 ||
@@ -1162,7 +1154,6 @@ function requestInit(startGameFirst) {
             `/api-v2/action?game_id=${gameId}&user_id=${userId}&mode=${demo}&action=open_game&session_uuid=&token=${token}&platform_id=${platformId}`,
         dataType: "html",
         success: function(data) {
-            // data = "result=ok&state=0&SID=aeea5r0ai19oht0rvj3c5dd2p2&user=1271|user1271|1000.00";
             console.log(
                 getNeedUrlPath() +
                     `/api-v2/action?game_id=${gameId}&user_id=${userId}&mode=${demo}&action=open_game&session_uuid=&token=${token}&platform_id=${platformId}`
@@ -1184,9 +1175,11 @@ function requestInit(startGameFirst) {
             }
         },
         error: function(xhr, ajaxOptions, thrownError) {
-            if (startGameFirst) {
+            // if (startGameFirst) {
+            setTimeout(() => {
                 requestInit(startGameFirst);
-            }
+            }, 3000);
+            // }
             $(".preloader").addClass("error");
             errorStatus = true;
         }
@@ -1271,7 +1264,6 @@ function resetSession() {
 //state-запрос
 var jackpots;
 var firstRequest = false;
-var preloaderStatus = false;
 var dataArray;
 var sessionUuid;
 var featureGameStatus = false;
@@ -1279,19 +1271,16 @@ var freeSpinCountInit, mulFreespinInit, allWinOldInit, allFreeSpinCountInit;
 var wlValuesFS;
 
 function requestState(data, startGameFirst) {
-    if (startGameFirst) {
-        firstRequest = true;
-
-        game.state.start("preload");
-        return;
-    }
+    // if (startGameFirst) {
+    //     firstRequest = true;
+    //     game.state.start("preload");
+    //     return;
+    // }
+    game.state.start("preload");
 
     game1();
     game2();
-    if (preloaderStatus) {
-        document.getElementById("preloader").style.display = "none";
-        game.state.start("game1");
-    }
+
     betline = data.logicData.lineBet;
     lines = data.logicData.linesInGame;
     bet = lines * betline;
@@ -1301,11 +1290,11 @@ function requestState(data, startGameFirst) {
         data.balanceData.totalWinningsInFeatureGame;
     info = data.logicData.table;
     sessionUuid = data.sessionData.sessionUuid;
+
     const {
         sessionData: { mode }
     } = data;
-    if (mode === "demo") {
-    }
+
     if (data.stateData.screen === "featureGame") {
         featureGameStatus = true;
         BALANCE =

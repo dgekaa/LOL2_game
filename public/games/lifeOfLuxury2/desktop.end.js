@@ -617,68 +617,69 @@ function checkErrorFiles() {
     game.load.onFileError.add(onFileError, this);
 }
 
-(function() {
-    var preload = {};
+if (firstRequest) {
+    (function() {
+        var preload = {};
 
-    preload.preload = function() {
-        game.scale.fullScreenScaleMode = Phaser.ScaleManager.EXACT_FIT; //EXACT_FIT  SHOW_ALL
-        game.scale.scaleMode = Phaser.ScaleManager.EXACT_FIT;
-        game.scale.pageAlignVertically = true;
-        game.scale.scaleMode = 2;
-        game.scale.pageAlignHorizontally = true;
-        game.stage.disableVisibilityChange = true;
+        preload.preload = function() {
+            game.scale.fullScreenScaleMode = Phaser.ScaleManager.EXACT_FIT; //EXACT_FIT  SHOW_ALL
+            game.scale.scaleMode = Phaser.ScaleManager.EXACT_FIT;
+            game.scale.pageAlignVertically = true;
+            game.scale.scaleMode = 2;
+            game.scale.pageAlignHorizontally = true;
+            game.stage.disableVisibilityChange = true;
 
-        if (
-            Object.keys(errorSpritesheet).length ||
-            Object.keys(errorImage).length ||
-            Object.keys(errorAudio).length ||
-            Object.keys(errorTextureatlas).length
-        ) {
-            if (Object.keys(errorImage).length) {
-                for (let key in errorImage) {
-                    game.load.image(key, errorImage[key]);
+            if (
+                Object.keys(errorSpritesheet).length ||
+                Object.keys(errorImage).length ||
+                Object.keys(errorAudio).length ||
+                Object.keys(errorTextureatlas).length
+            ) {
+                if (Object.keys(errorImage).length) {
+                    for (let key in errorImage) {
+                        game.load.image(key, errorImage[key]);
+                    }
                 }
-            }
-            if (Object.keys(errorAudio).length) {
-                for (let key in errorAudio) {
-                    game.load.audio(key, errorAudio[key]);
+                if (Object.keys(errorAudio).length) {
+                    for (let key in errorAudio) {
+                        game.load.audio(key, errorAudio[key]);
+                    }
                 }
-            }
-            if (Object.keys(errorSpritesheet).length) {
-                for (let key in errorSpritesheet) {
-                    game.load.spritesheet(
-                        key,
-                        errorSpritesheet[key],
-                        392,
-                        372,
-                        4
-                    );
+                if (Object.keys(errorSpritesheet).length) {
+                    for (let key in errorSpritesheet) {
+                        game.load.spritesheet(
+                            key,
+                            errorSpritesheet[key],
+                            392,
+                            372,
+                            4
+                        );
+                    }
                 }
-            }
-            if (Object.keys(errorTextureatlas).length) {
-                for (let key in errorTextureatlas) {
-                    game.load.atlasJSONHash(key, errorTextureatlas[key]);
+                if (Object.keys(errorTextureatlas).length) {
+                    for (let key in errorTextureatlas) {
+                        game.load.atlasJSONHash(key, errorTextureatlas[key]);
+                    }
                 }
+            } else {
+                loadResource();
             }
-        } else {
-            loadResource();
-        }
 
-        // game.load.onFileComplete.add(fileComplete, this);
-        // game.load.onLoadComplete.add(loadComplete, this);
-        // function fileComplete(progr, cache, suc, totalLoaded, totalFiles) {
-        //     console.log(progr);
-        // }
-        // function loadComplete() {
-        checkErrorFiles();
-        // }
-    };
+            // game.load.onFileComplete.add(fileComplete, this);
+            // game.load.onLoadComplete.add(loadComplete, this);
+            // function fileComplete(progr, cache, suc, totalLoaded, totalFiles) {
+            //     console.log(progr);
+            // }
+            // function loadComplete() {
+            checkErrorFiles();
+            // }
+        };
 
-    preload.create = function() {
-        if (!firstRequest) {
-            errorStatus = false;
-            requestInit(true);
-        } else {
+        preload.create = function() {
+            // if (!firstRequest) {
+            //     errorStatus = false;
+            //     requestInit(true);
+            // } else {
             if (
                 Object.keys(errorImage).length ||
                 Object.keys(errorAudio).length ||
@@ -704,10 +705,11 @@ function checkErrorFiles() {
                 checkWidth();
                 // }
             }
-        }
-    };
+            // }
+        };
 
-    game.state.add("preload", preload);
-})();
+        game.state.add("preload", preload);
+    })();
+}
 
 game.state.start("preload");
